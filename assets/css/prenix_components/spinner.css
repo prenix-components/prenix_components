@@ -1,0 +1,36 @@
+@layer components {
+  .spinner {
+    @apply animate-spin inline-block border-[3px] border-current;
+    @apply rounded-full border-t-transparent text-variant;
+  }
+  .spinner-sm {
+    @apply w-4 h-4;
+  }
+  .spinner-md {
+    @apply w-6 h-6;
+  }
+  .spinner-lg {
+    @apply w-8 h-8;
+  }
+  .spinner-default {
+    @apply text-current;
+  }
+  .spinner-primary {
+    --variant: var(--primary);
+  }
+  .spinner-secondary {
+    --variant: var(--secondary);
+  }
+  .spinner-success {
+    --variant: var(--success);
+  }
+  .spinner-error {
+    --variant: var(--error);
+  }
+  .spinner-warning {
+    --variant: var(--warning);
+  }
+  .spinner-neutral {
+    @apply text-[--neutral-solid];
+  }
+}

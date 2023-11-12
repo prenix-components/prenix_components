@@ -1,0 +1,35 @@
+@layer components {
+  .icon {
+    @apply inline-block align-middle text-variant;
+  }
+  .icon-sm {
+    @apply w-4 h-4;
+  }
+  .icon-md {
+    @apply w-6 h-6;
+  }
+  .icon-lg {
+    @apply w-8 h-8;
+  }
+  .icon-default {
+    @apply text-current;
+  }
+  .icon-primary {
+    --variant: var(--primary);
+  }
+  .icon-secondary {
+    --variant: var(--secondary);
+  }
+  .icon-success {
+    --variant: var(--success);
+  }
+  .icon-error {
+    --variant: var(--error);
+  }
+  .icon-warning {
+    --variant: var(--warning);
+  }
+  .icon-neutral {
+    @apply text-[--neutral-solid];
+  }
+}

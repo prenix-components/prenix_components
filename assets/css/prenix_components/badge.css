@@ -1,0 +1,46 @@
+@layer components {
+  .badge {
+    @apply inline-flex items-center rounded-md;
+    @apply px-2 py-1 gap-1.5 text-xs font-medium text-[--variant-foreground] bg-variant;
+    @apply border border-transparent;
+  }
+  .badge-soft {
+    @apply text-variant bg-variant/20;
+  }
+  .badge-outline {
+    @apply border-variant bg-transparent text-variant;
+  }
+  .badge-primary {
+    --variant: var(--primary);
+    --variant-foreground: var(--primary-foreground);
+  }
+  .badge-secondary {
+    --variant: var(--secondary);
+    --variant-foreground: var(--secondary-foreground);
+  }
+  .badge-success {
+    --variant: var(--success);
+    --variant-foreground: var(--success-foreground);
+  }
+  .badge-error {
+    --variant: var(--error);
+    --variant-foreground: var(--error-foreground);
+  }
+  .badge-warning {
+    --variant: var(--warning);
+    --variant-foreground: var(--warning-foreground);
+  }
+  .badge-rounded {
+    @apply rounded-full;
+  }
+  .badge-neutral {
+    @apply text-[--neutral-foreground] bg-[--neutral-solid];
+  }
+  .badge-neutral.badge-soft {
+    @apply text-[--neutral-foreground] bg-[--neutral-soft];
+  }
+  .badge-neutral.badge-outline {
+    @apply text-[--neutral-foreground] bg-transparent;
+    @apply border-[--neutral-solid];
+  }
+}

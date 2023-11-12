@@ -1,18 +1,13 @@
 defmodule PrenixComponents do
-  @moduledoc """
-  Documentation for `PrenixComponents`.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> PrenixComponents.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  defmacro __using__(_) do
+    quote do
+      import PrenixComponents.{
+        Badge,
+        Button,
+        Dropdown,
+        Icon,
+        Spinner
+      }
+    end
   end
 end
