@@ -1,5 +1,166 @@
 @layer components {
+  .tap-highlight-transparent {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .transition-transform-colors-opacity {
+    transition-property: transform, color, background, background-color,
+      border-color, text-decoration-color, fill, stroke, opacity;
+    transition-timing-function: ease;
+    transition-duration: 0.25s;
+  }
+
+  .ripple {
+    position: absolute;
+    background: var(--ripple);
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    animation: ripple-effect 0.88s 1;
+    opacity: 0;
+  }
+  @keyframes ripple-effect {
+    0% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(100);
+      opacity: 0;
+    }
+  }
+
   .btn {
+    @apply z-0 relative inline-flex items-center justify-center box-border appearance-none;
+    @apply select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden;
+    @apply tap-highlight-transparent outline-none;
+    @apply focus-visible:outline-offset-2 focus-visible:outline-2;
+    @apply rounded-xl transition-transform-colors-opacity motion-reduce:transition-none;
+    @apply hover:opacity-80; /* active:brightness-95 */
+  }
+
+  .btn-content {
+    @apply inline-flex items-center justify-center;
+  }
+
+  .btn-sm > .btn-content {
+    @apply gap-2;
+  }
+
+  .btn-md > .btn-content {
+    @apply gap-2;
+  }
+
+  .btn-lg > .btn-content {
+    @apply gap-3;
+  }
+
+  .btn-sm {
+    @apply px-3 text-xs min-w-[4rem] h-8;
+  }
+  .btn-md {
+    @apply px-4 text-sm min-w-[5rem] h-10;
+  }
+  .btn-lg {
+    @apply px-6 text-base min-w-[6rem] h-12;
+  }
+
+  .btn-solid {
+    @apply bg-[--button] text-[--button-foreground] focus-visible:outline-[--button];
+  }
+
+  .btn-soft {
+    @apply bg-[--button-soft] text-[--button-soft-foreground];
+    @apply focus-visible:outline-[--button-soft-foreground];
+  }
+
+  .btn-outline {
+    @apply bg-transparent border-[--button] text-[--button-soft-foreground] border-2;
+    @apply focus-visible:outline-[--button];
+  }
+
+  .btn-ghost {
+    @apply bg-transparent hover:opacity-100 hover:bg-[--button-soft];
+    @apply text-[--button-soft-foreground];
+    @apply focus-visible:outline-[--button-soft-foreground];
+  }
+
+  .btn-loading > .btn-content {
+    @apply invisible;
+  }
+
+  .btn-spinner {
+    @apply absolute left-0 top-0 bottom-0 right-0;
+    @apply place-content-center grid;
+  }
+
+  .btn-disabled,
+  .btn-loading {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  .btn-rounded {
+    @apply rounded-full;
+  }
+
+  .btn-icon {
+    @apply p-0;
+  }
+
+  .btn-icon.btn-sm {
+    @apply w-8 h-8 min-w-[2rem];
+  }
+
+  .btn-icon.btn-md {
+    @apply w-10 h-10 min-w-[2.5rem];
+  }
+
+  .btn-icon.btn-lg {
+    @apply w-12 h-12 min-w-[3rem];
+  }
+
+  .btn-default {
+    --button: hsl(var(--default));
+    --button-foreground: hsl(var(--default-foreground));
+    --button-soft: hsl(var(--default) / 0.4);
+    --button-soft-foreground: hsl(var(--default-foreground));
+  }
+
+  .btn-primary {
+    --button: hsl(var(--primary));
+    --button-foreground: hsl(var(--primary-foreground));
+    --button-soft: hsl(var(--primary) / 0.2);
+    --button-soft-foreground: hsl(var(--primary));
+  }
+
+  .btn-secondary {
+    --button: hsl(var(--secondary));
+    --button-foreground: hsl(var(--secondary-foreground));
+    --button-soft: hsl(var(--secondary) / 0.2);
+    --button-soft-foreground: hsl(var(--secondary));
+  }
+
+  .btn-success {
+    --button: hsl(var(--success));
+    --button-foreground: hsl(var(--success-foreground));
+    --button-soft: hsl(var(--success) / 0.2);
+    --button-soft-foreground: hsl(var(--success));
+  }
+
+  .btn-warning {
+    --button: hsl(var(--warning));
+    --button-foreground: hsl(var(--warning-foreground));
+    --button-soft: hsl(var(--warning) / 0.2);
+    --button-soft-foreground: hsl(var(--warning));
+  }
+
+  .btn-danger {
+    --button: hsl(var(--danger));
+    --button-foreground: hsl(var(--danger-foreground));
+    --button-soft: hsl(var(--danger) / 0.2);
+    --button-soft-foreground: hsl(var(--danger));
+  }
+  /* .btn {
     @apply rounded-lg focus-visible:outline-none;
     @apply focus-visible:ring-offset-2 focus-visible:ring-2;
     @apply active:brightness-90 relative;
@@ -91,5 +252,5 @@
   .btn-neutral.btn-ghost {
     @apply bg-transparent text-[--neutral-foreground];
     @apply hover:bg-[--neutral-soft];
-  }
+  } */
 }

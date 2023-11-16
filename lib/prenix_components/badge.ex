@@ -2,40 +2,55 @@ defmodule PrenixComponents.Badge do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  @variants [
+  @colors [
+    "default",
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "neutral"
+    "danger"
   ]
 
-  attr(:class, :string, default: nil, doc: "Additional CSS class")
-  attr(:soft, :boolean, default: false, doc: "Indicates soft variant")
-  attr(:outline, :boolean, default: false, doc: "Indicates outline variant")
-  attr(:rounded, :boolean, default: false, doc: "Indicates rounded badge")
-  attr(:variant, :string, default: "primary", values: @variants)
-  slot(:inner_block)
+  @variants [
+    "solid",
+    "soft",
+    "outline"
+  ]
+
+  @sizes [
+    "sm",
+    "md",
+    "lg"
+  ]
+
+  attr :class, :string, default: nil
+  attr :color, :string, default: "default", values: @colors
+  attr :variant, :string, default: "solid", values: @variants
+  attr :size, :string, default: "md", values: @sizes
+  slot :inner_block
 
   def badge(assigns) do
-    assigns = assign(assigns, :class, class(assigns))
+    assigns = set_assigns(assigns)
 
     ~H"""
-    <span class={@class}>
-      <%= render_slot(@inner_block) %>
-    </span>
+    <div class={@class}>
+      <span class="badge-content">
+        <%= render_slot(@inner_block) %>
+      </span>
+    </div>
     """
   end
 
-  defp class(assigns) do
-    combine_class([
-      "badge",
-      "badge-#{assigns.variant}",
-      if(assigns.soft, do: "badge-soft", else: nil),
-      if(assigns.rounded, do: "badge-rounded", else: nil),
-      if(assigns.outline, do: "badge-outline", else: nil),
-      "#{assigns.class}"
-    ])
+  defp set_assigns(assigns) do
+    class =
+      combine_class([
+        "badge",
+        "badge-#{assigns.color}",
+        "badge-#{assigns.variant}",
+        "badge-#{assigns.size}",
+        "#{assigns.class}"
+      ])
+
+    assign(assigns, :class, class)
   end
 end

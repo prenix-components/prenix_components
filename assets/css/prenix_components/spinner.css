@@ -1,36 +1,84 @@
 @layer components {
+  .animate-spinner-ease-spin {
+    animation: spinner-spin 0.8s ease infinite;
+  }
+
+  @keyframes spinner-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .animate-spinner-linear-spin {
+    animation: spinner-spin 0.8s linear infinite;
+  }
+
   .spinner {
-    @apply animate-spin inline-block border-[3px] border-current;
-    @apply rounded-full border-t-transparent text-variant;
+    @apply relative inline-flex flex-col gap-2 items-center justify-center;
   }
-  .spinner-sm {
-    @apply w-4 h-4;
+
+  .spinner-content {
+    @apply relative flex;
   }
-  .spinner-md {
-    @apply w-6 h-6;
+
+  .spinner-icon-solid {
+    @apply absolute w-full h-full rounded-full animate-spinner-ease-spin border-solid;
+    @apply border-t-transparent border-l-transparent border-r-transparent border-[3px] border-b-[--spinner];
   }
-  .spinner-lg {
+
+  .spinner-icon-dotted {
+    @apply absolute w-full h-full rounded-full opacity-75 animate-spinner-linear-spin;
+    @apply border-dotted border-t-transparent border-l-transparent border-r-transparent border-[3px] border-b-[--spinner];
+  }
+
+  .spinner-sm > .spinner-content {
+    @apply w-5 h-5;
+  }
+
+  .spinner-md > .spinner-content {
     @apply w-8 h-8;
   }
-  .spinner-default {
-    @apply text-current;
+
+  .spinner-lg > .spinner-content {
+    @apply w-10 h-10;
   }
-  .spinner-primary {
-    --variant: var(--primary);
+
+  .spinner-default > .spinner-content > .spinner-icon-solid,
+  .spinner-default > .spinner-content > .spinner-icon-dotted {
+    --spinner: hsl(var(--default));
   }
-  .spinner-secondary {
-    --variant: var(--secondary);
+
+  .spinner-primary > .spinner-content > .spinner-icon-solid,
+  .spinner-primary > .spinner-content > .spinner-icon-dotted {
+    --spinner: hsl(var(--primary));
   }
-  .spinner-success {
-    --variant: var(--success);
+
+  .spinner-secondary > .spinner-content > .spinner-icon-solid,
+  .spinner-secondary > .spinner-content > .spinner-icon-dotted {
+    --spinner: hsl(var(--secondary));
   }
-  .spinner-error {
-    --variant: var(--error);
+
+  .spinner-success > .spinner-content > .spinner-icon-solid,
+  .spinner-success > .spinner-content > .spinner-icon-dotted {
+    --spinner: hsl(var(--success));
   }
-  .spinner-warning {
-    --variant: var(--warning);
+
+  .spinner-warning > .spinner-content > .spinner-icon-solid,
+  .spinner-warning > .spinner-content > .spinner-icon-dotted {
+    --spinner: hsl(var(--warning));
   }
-  .spinner-neutral {
-    @apply text-[--neutral-solid];
+
+  .spinner-danger > .spinner-content > .spinner-icon-solid,
+  .spinner-danger > .spinner-content > .spinner-icon-dotted {
+    --spinner: hsl(var(--danger));
+  }
+
+  .spinner-current > .spinner-content > .spinner-icon-solid,
+  .spinner-current > .spinner-content > .spinner-icon-dotted {
+    --spinner: currentColor;
   }
 }

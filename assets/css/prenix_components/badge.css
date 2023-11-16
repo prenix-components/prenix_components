@@ -1,46 +1,89 @@
 @layer components {
   .badge {
-    @apply inline-flex items-center rounded-md;
-    @apply px-2 py-1 gap-1.5 text-xs font-medium text-[--variant-foreground] bg-variant;
-    @apply border border-transparent;
+    @apply relative max-w-fit inline-flex items-center justify-between;
+    @apply whitespace-nowrap rounded-full box-border;
   }
-  .badge-soft {
-    @apply text-variant bg-variant/20;
+
+  .badge-content {
+    @apply flex-1 text-inherit font-normal px-2;
   }
+
+  .badge-sm {
+    @apply px-1 h-6 text-xs;
+  }
+
+  .badge-sm > .badge-content {
+    @apply px-1;
+  }
+
+  .badge-md {
+    @apply px-1 h-7 text-sm;
+  }
+
+  .badge-md > .badge-content {
+    @apply px-2;
+  }
+
+  .badge-lg {
+    @apply px-2 h-8 text-base;
+  }
+
+  .badge-lg > .badge-content {
+    @apply px-2;
+  }
+
+  .badge-solid {
+    @apply bg-[--badge];
+    @apply text-[--badge-foreground];
+  }
+
   .badge-outline {
-    @apply border-variant bg-transparent text-variant;
+    @apply bg-transparent border-[--badge] text-[--badge-soft-foreground] border-2;
   }
+
+  .badge-soft {
+    @apply text-[--badge-soft-foreground] bg-[--badge-soft];
+  }
+
+  .badge-default {
+    --badge: hsl(var(--default));
+    --badge-foreground: hsl(var(--default-foreground));
+    --badge-soft: hsl(var(--default) / 0.4);
+    --badge-soft-foreground: hsl(var(--default-foreground));
+  }
+
   .badge-primary {
-    --variant: var(--primary);
-    --variant-foreground: var(--primary-foreground);
+    --badge: hsl(var(--primary));
+    --badge-foreground: hsl(var(--primary-foreground));
+    --badge-soft: hsl(var(--primary) / 0.2);
+    --badge-soft-foreground: hsl(var(--primary));
   }
+
   .badge-secondary {
-    --variant: var(--secondary);
-    --variant-foreground: var(--secondary-foreground);
+    --badge: hsl(var(--secondary));
+    --badge-foreground: hsl(var(--secondary-foreground));
+    --badge-soft: hsl(var(--secondary) / 0.2);
+    --badge-soft-foreground: hsl(var(--secondary));
   }
+
   .badge-success {
-    --variant: var(--success);
-    --variant-foreground: var(--success-foreground);
+    --badge: hsl(var(--success));
+    --badge-foreground: hsl(var(--success-foreground));
+    --badge-soft: hsl(var(--success) / 0.2);
+    --badge-soft-foreground: hsl(var(--success));
   }
-  .badge-error {
-    --variant: var(--error);
-    --variant-foreground: var(--error-foreground);
-  }
+
   .badge-warning {
-    --variant: var(--warning);
-    --variant-foreground: var(--warning-foreground);
+    --badge: hsl(var(--warning));
+    --badge-foreground: hsl(var(--warning-foreground));
+    --badge-soft: hsl(var(--warning) / 0.2);
+    --badge-soft-foreground: hsl(var(--warning));
   }
-  .badge-rounded {
-    @apply rounded-full;
-  }
-  .badge-neutral {
-    @apply text-[--neutral-foreground] bg-[--neutral-solid];
-  }
-  .badge-neutral.badge-soft {
-    @apply text-[--neutral-foreground] bg-[--neutral-soft];
-  }
-  .badge-neutral.badge-outline {
-    @apply text-[--neutral-foreground] bg-transparent;
-    @apply border-[--neutral-solid];
+
+  .badge-danger {
+    --badge: hsl(var(--danger));
+    --badge-foreground: hsl(var(--danger-foreground));
+    --badge-soft: hsl(var(--danger) / 0.2);
+    --badge-soft-foreground: hsl(var(--danger));
   }
 }

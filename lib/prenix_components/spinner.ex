@@ -3,37 +3,45 @@ defmodule PrenixComponents.Spinner do
   import PrenixComponents.Helpers
 
   @sizes ["sm", "md", "lg"]
-  @variants [
+
+  @colors [
     "default",
     "primary",
     "secondary",
     "success",
-    "error",
     "warning",
-    "neutral"
+    "error",
+    "current"
   ]
 
-  attr(:class, :string, default: nil, doc: "Additional CSS class")
-  attr(:size, :string, default: "md", values: @sizes)
-  attr(:variant, :string, default: "default", values: @variants)
-  slot(:inner_block)
+  attr :class, :string, default: nil
+  attr :icon_class, :string, default: nil
+  attr :size, :string, default: "md", values: @sizes
+  attr :color, :string, default: "default", values: @colors
 
   def spinner(assigns) do
-    assigns = assign(assigns, :class, class(assigns))
+    assigns = set_assigns(assigns)
 
     ~H"""
-    <span class={@class} role="progressbar" aria-label="Loading">
-      <span class="sr-only">Loading...</span>
-    </span>
+    <div aria-label="Loading" class={@class}>
+      <div class="spinner-content">
+        <span class="sr-only">Loading...</span>
+        <i class="spinner-icon-solid" />
+        <i class="spinner-icon-dotted" />
+      </div>
+    </div>
     """
   end
 
-  defp class(assigns) do
-    combine_class([
-      "spinner",
-      "spinner-#{assigns.variant}",
-      "spinner-#{assigns.size}",
-      "#{assigns.class}"
-    ])
+  defp set_assigns(assigns) do
+    class =
+      combine_class([
+        "spinner",
+        "spinner-#{assigns.color}",
+        "spinner-#{assigns.size}",
+        "#{assigns.class}"
+      ])
+
+    assign(assigns, :class, class)
   end
 end
