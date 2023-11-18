@@ -1,0 +1,111 @@
+@layer components {
+  .dropdown {
+    @apply relative inline-block w-fit h-fit;
+  }
+
+  .dropdown-toggle {
+    @apply grid place-content-center;
+  }
+
+  .dropdown-menu-container {
+    @apply transition-[opacity,margin] opacity-0 hidden z-10;
+  }
+
+  .dropdown-menu {
+    @apply z-10 inline-flex flex-col items-center justify-center subpixel-antialiased outline-none box-border text-sm;
+    @apply min-w-[200px] rounded-xl shadow-lg p-2 bg-[hsl(var(--background))];
+    @apply transition ease-out opacity-0 scale-95 origin-top-left;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.03) 0px 0px 15px 0px,
+      rgba(0, 0, 0, 0.08) 0px 2px 30px 0px, rgba(0, 0, 0, 0.3) 0px 0px 1px 0px;
+  }
+
+  .dropdown.open .dropdown-menu-container {
+    @apply opacity-100;
+  }
+
+  .dropdown.open .dropdown-menu {
+    @apply ease-in opacity-100 scale-100;
+  }
+
+  .dropdown .divider {
+    @apply m-1.5;
+  }
+
+  .dropdown-rotate {
+    @apply transition-transform inline-flex;
+  }
+
+  .dropdown.open .dropdown-rotate {
+    @apply rotate-180;
+  }
+
+  .dropdown-item {
+    @apply flex gap-2 items-center justify-between relative px-2 py-1.5 w-full h-full box-border rounded-lg;
+    @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none focus-visible:z-10;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2;
+    @apply hover:transition-colors;
+  }
+
+  .dropdown-solid .dropdown-item {
+    @apply hover:bg-[--dropdown-item] hover:text-[--dropdown-item-foreground];
+    @apply hover:text-[--dropdown-item-foreground];
+    @apply focus:bg-[--dropdown-item];
+  }
+
+  .dropdown-solid .dropdown-item:hover * {
+    color: var(--dropdown-item-foreground);
+  }
+
+  .dropdown-soft .dropdown-item {
+    @apply hover:bg-[--dropdown-item-soft] hover:text-[--dropdown-item-soft-foreground];
+    @apply focus-visible:outline-[--dropdown-item-soft];
+    @apply focus:bg-[--dropdown-item-soft];
+  }
+
+  .dropdown-soft .dropdown-item:hover > * {
+    color: var(--dropdown-item-soft-foreground);
+  }
+
+  .dropdown-item-default {
+    --dropdown-item: hsl(var(--default));
+    --dropdown-item-foreground: hsl(var(--default-foreground));
+    --dropdown-item-soft: hsl(var(--default) / 0.4);
+    --dropdown-item-soft-foreground: hsl(var(--default-foreground));
+  }
+
+  .dropdown-item-primary {
+    --dropdown-item: hsl(var(--primary));
+    --dropdown-item-foreground: hsl(var(--primary-foreground));
+    --dropdown-item-soft: hsl(var(--primary) / 0.2);
+    --dropdown-item-soft-foreground: hsl(var(--primary));
+  }
+
+  .dropdown-item-secondary {
+    --dropdown-item: hsl(var(--secondary));
+    --dropdown-item-foreground: hsl(var(--secondary-foreground));
+    --dropdown-item-soft: hsl(var(--secondary) / 0.2);
+    --dropdown-item-soft-foreground: hsl(var(--secondary));
+  }
+
+  .dropdown-item-success {
+    --dropdown-item: hsl(var(--success));
+    --dropdown-item-foreground: hsl(var(--success-foreground));
+    --dropdown-item-soft: hsl(var(--success) / 0.2);
+    --dropdown-item-soft-foreground: hsl(var(--success));
+  }
+
+  .dropdown-item-warning {
+    --dropdown-item: hsl(var(--warning));
+    --dropdown-item-foreground: hsl(var(--warning-foreground));
+    --dropdown-item-soft: hsl(var(--warning) / 0.2);
+    --dropdown-item-soft-foreground: hsl(var(--warning));
+  }
+
+  .dropdown-item-danger {
+    --dropdown-item: hsl(var(--danger));
+    --dropdown-item-foreground: hsl(var(--danger-foreground));
+    --dropdown-item-soft: hsl(var(--danger) / 0.2);
+    --dropdown-item-soft-foreground: hsl(var(--danger));
+  }
+}

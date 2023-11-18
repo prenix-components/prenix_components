@@ -56,7 +56,7 @@ defmodule PrenixComponents.Button do
         </span>
 
         <span :if={@loading} class="btn-spinner">
-          <.spinner color="current" size="sm" />
+          <.spinner size="sm" />
         </span>
       </.link>
     <% else %>
@@ -72,7 +72,7 @@ defmodule PrenixComponents.Button do
         </span>
 
         <span :if={@loading} class="btn-spinner">
-          <.spinner color="current" size="sm" />
+          <.spinner size="sm" />
         </span>
       </button>
     <% end %>

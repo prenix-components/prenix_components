@@ -1,15 +1,4 @@
 @layer components {
-  .tap-highlight-transparent {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .transition-transform-colors-opacity {
-    transition-property: transform, color, background, background-color,
-      border-color, text-decoration-color, fill, stroke, opacity;
-    transition-timing-function: ease;
-    transition-duration: 0.25s;
-  }
-
   .ripple {
     position: absolute;
     background: var(--ripple);
@@ -19,6 +8,7 @@
     animation: ripple-effect 0.88s 1;
     opacity: 0;
   }
+
   @keyframes ripple-effect {
     0% {
       transform: scale(1);
@@ -58,9 +48,11 @@
   .btn-sm {
     @apply px-3 text-xs min-w-[4rem] h-8;
   }
+
   .btn-md {
     @apply px-4 text-sm min-w-[5rem] h-10;
   }
+
   .btn-lg {
     @apply px-6 text-base min-w-[6rem] h-12;
   }
@@ -160,97 +152,16 @@
     --button-soft: hsl(var(--danger) / 0.2);
     --button-soft-foreground: hsl(var(--danger));
   }
-  /* .btn {
-    @apply rounded-lg focus-visible:outline-none;
-    @apply focus-visible:ring-offset-2 focus-visible:ring-2;
-    @apply active:brightness-90 relative;
-    @apply w-fit h-fit inline-flex items-center;
-    @apply rounded-lg cursor-pointer font-semibold transition-colors;
-    @apply border-transparent border-2 focus-visible:ring-variant;
-    @apply bg-variant text-[--variant-foreground] hover:bg-variant/90;
+
+  .btn-icon.btn-sm .btn-content .icon {
+    @apply h-5 w-5;
   }
-  .btn-inner {
-    @apply inline-flex items-center justify-center gap-2;
+
+  .btn-icon.btn-md .btn-content .icon {
+    @apply h-7 w-7;
   }
-  .btn-sm {
-    @apply text-xs py-1.5 px-3;
+
+  .btn-icon.btn-lg .btn-content .icon {
+    @apply h-9 w-9;
   }
-  .btn-md {
-    @apply text-base py-2 px-4;
-  }
-  .btn-lg {
-    @apply text-xl py-3 px-6;
-  }
-  .btn-soft {
-    @apply text-variant bg-variant/20;
-    @apply hover:bg-variant/30;
-  }
-  .btn-outline {
-    @apply border-variant text-variant bg-transparent;
-    @apply hover:bg-variant hover:text-[--variant-foreground];
-  }
-  .btn-ghost {
-    @apply text-variant bg-transparent;
-    @apply hover:bg-variant/20;
-  }
-  .btn-icon.btn-sm {
-    @apply p-0.5;
-  }
-  .btn-icon.btn-md {
-    @apply p-1;
-  }
-  .btn-icon.btn-lg {
-    @apply p-1.5;
-  }
-  .btn-rounded {
-    @apply rounded-full;
-  }
-  .btn-disabled,
-  .btn-loading {
-    @apply opacity-60 pointer-events-none;
-  }
-  .btn-spinner {
-    @apply absolute left-0 top-0 bottom-0 right-0;
-    @apply place-content-center grid;
-  }
-  .btn-loading > .btn-inner {
-    @apply invisible;
-  }
-  .btn-primary {
-    --variant: var(--primary);
-    --variant-foreground: var(--primary-foreground);
-  }
-  .btn-secondary {
-    --variant: var(--secondary);
-    --variant-foreground: var(--secondary-foreground);
-  }
-  .btn-success {
-    --variant: var(--success);
-    --variant-foreground: var(--success-foreground);
-  }
-  .btn-error {
-    --variant: var(--error);
-    --variant-foreground: var(--error-foreground);
-  }
-  .btn-warning {
-    --variant: var(--warning);
-    --variant-foreground: var(--warning-foreground);
-  }
-  .btn-neutral {
-    @apply focus-visible:ring-[--neutral-solid];
-    @apply bg-[--neutral-solid] text-[--neutral-foreground];
-    @apply hover:bg-[--neutral-soft];
-  }
-  .btn-neutral.btn-soft {
-    @apply bg-[--neutral-soft] text-[--neutral-foreground];
-    @apply hover:bg-[--neutral-solid];
-  }
-  .btn-neutral.btn-outline {
-    @apply border-[--neutral-solid] bg-transparent text-[--neutral-foreground];
-    @apply hover:bg-[--neutral-solid];
-  }
-  .btn-neutral.btn-ghost {
-    @apply bg-transparent text-[--neutral-foreground];
-    @apply hover:bg-[--neutral-soft];
-  } */
 }

@@ -1,35 +1,45 @@
 @layer components {
   .icon {
-    @apply inline-block align-middle text-variant;
+    @apply inline-block align-middle text-[--icon];
   }
+
   .icon-sm {
     @apply w-4 h-4;
   }
+
   .icon-md {
+    @apply w-5 h-5;
+  }
+
+  .icon-lg {
     @apply w-6 h-6;
   }
-  .icon-lg {
-    @apply w-8 h-8;
+
+  .icon-current {
+    --icon: currentColor;
   }
+
   .icon-default {
-    @apply text-current;
+    --icon: hsl(var(--default));
   }
+
   .icon-primary {
-    --variant: var(--primary);
+    --icon: hsl(var(--primary));
   }
+
   .icon-secondary {
-    --variant: var(--secondary);
+    --icon: hsl(var(--secondary));
   }
+
   .icon-success {
-    --variant: var(--success);
+    --icon: hsl(var(--success));
   }
-  .icon-error {
-    --variant: var(--error);
-  }
+
   .icon-warning {
-    --variant: var(--warning);
+    --icon: hsl(var(--warning));
   }
-  .icon-neutral {
-    @apply text-[--neutral-solid];
+
+  .icon-danger {
+    --icon: hsl(var(--danger));
   }
 }

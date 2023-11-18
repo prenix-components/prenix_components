@@ -4,6 +4,7 @@ defmodule PrenixComponents do
       import PrenixComponents.{
         Badge,
         Button,
+        Divider,
         Dropdown,
         Icon,
         Spinner

@@ -3,24 +3,25 @@ defmodule PrenixComponents.Icon do
   import PrenixComponents.Helpers
 
   @sizes ["sm", "md", "lg"]
-  @variants [
+
+  @colors [
+    "current",
     "default",
     "primary",
     "secondary",
     "success",
     "error",
-    "warning",
-    "neutral"
+    "warning"
   ]
 
-  attr(:name, :string, default: nil, doc: "Heroicon name")
-  attr(:class, :string, default: nil, doc: "Additional CSS class")
-  attr(:size, :string, default: "md", values: @sizes)
-  attr(:variant, :string, default: "default", values: @variants)
-  slot(:inner_block, doc: "Custom icon")
+  attr :name, :string, default: nil, doc: "Heroicon name"
+  attr :class, :string, default: nil
+  attr :size, :string, default: "md", values: @sizes
+  attr :color, :string, default: "current", values: @colors
+  slot :inner_block, doc: "Custom icon"
 
   def icon(assigns) do
-    assigns = assign(assigns, :class, class(assigns))
+    assigns = set_assigns(assigns)
 
     ~H"""
     <%= if @name do %>
@@ -45,12 +46,15 @@ defmodule PrenixComponents.Icon do
     """
   end
 
-  defp class(assigns) do
-    combine_class([
-      "icon",
-      "icon-#{assigns.variant}",
-      "icon-#{assigns.size}",
-      "#{assigns.class}"
-    ])
+  defp set_assigns(assigns) do
+    class =
+      combine_class([
+        "icon",
+        "icon-#{assigns.color}",
+        "icon-#{assigns.size}",
+        "#{assigns.class}"
+      ])
+
+    assign(assigns, :class, class)
   end
 end

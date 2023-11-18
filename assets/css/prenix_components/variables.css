@@ -1,4 +1,5 @@
 :root {
+  --background: 0 0% 100%;
   --default: 240 5% 84%;
   --default-foreground: 0 0% 0%;
   --primary: 212 100% 47%;
@@ -12,9 +13,11 @@
   --danger: 339 90% 51%;
   --danger-foreground: 0 0% 100%;
   --ripple: rgba(0, 0, 0, 0.7);
+  --divider: 0 0% 7%;
 }
 
 .dark {
+  --background: 0 0% 0%;
   --default: 240 5% 26%;
   --default-foreground: 0 0% 100%;
   --primary: 212 100% 47%;
@@ -28,4 +31,5 @@
   --danger: 339 90% 51%;
   --danger-foreground: 0 0% 100%;
   --ripple: rgba(255, 255, 255, 0.7);
+  --divider: 0 0% 100%;
 }

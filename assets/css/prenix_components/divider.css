@@ -1,0 +1,6 @@
+@layer components {
+  hr.divider {
+    background-color: hsl(var(--divider) / 0.15);
+    @apply shrink-0  border-none w-full h-px;
+  }
+}

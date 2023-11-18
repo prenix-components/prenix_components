@@ -5,19 +5,19 @@ defmodule PrenixComponents.Spinner do
   @sizes ["sm", "md", "lg"]
 
   @colors [
+    "current",
     "default",
     "primary",
     "secondary",
     "success",
     "warning",
-    "error",
-    "current"
+    "error"
   ]
 
   attr :class, :string, default: nil
   attr :icon_class, :string, default: nil
   attr :size, :string, default: "md", values: @sizes
-  attr :color, :string, default: "default", values: @colors
+  attr :color, :string, default: "current", values: @colors
 
   def spinner(assigns) do
     assigns = set_assigns(assigns)
