@@ -24,7 +24,7 @@ defmodule PrenixComponents.Dropdown do
         <%= render_slot(@toggle) %>
       </div>
 
-      <div class="hs-dropdown-menu dropdown-menu-container">
+      <div class="hs-dropdown-menu dropdown-menu-wrapper">
         <div class={@menu_class} aria-labelledby={@id} data-hs-transition role="menu">
           <%= render_slot(@menu) %>
         </div>
@@ -39,25 +39,24 @@ defmodule PrenixComponents.Dropdown do
     "secondary",
     "success",
     "warning",
-    "error"
+    "danger"
   ]
 
   attr :type, :string, default: "link", values: ["link", "button"]
   attr :color, :string, default: "default", values: @colors
   attr :class, :string, default: nil
+  attr :disabled, :boolean, default: false
   attr :rest, :global
   slot :start_content
   slot :end_content
   slot :inner_block
 
   def dropdown_item(assigns) do
-    IO.inspect(assigns, label: "dropdown rotate")
-
     class =
       combine_class([
-        "dropdown-item",
+        "dropdown-item group",
         "dropdown-item-#{assigns.color}",
-        "group",
+        if(assigns.disabled, do: "dropdown-item-disabled disabled", else: nil),
         assigns.class
       ])
 
@@ -65,25 +64,23 @@ defmodule PrenixComponents.Dropdown do
 
     ~H"""
     <%= if @type == "link" do %>
-      <.link class={@class} role="menuitem" {@rest}>
-        <%= if length(@start_content) > 0 do %>
-          <span class="flex-shrink-0">
-            <%= render_slot(@start_content) %>
-          </span>
-        <% end %>
+      <.link
+        class={@class}
+        role="menuitem"
+        aria-disabled={@disabled}
+        tabindex={if(@disabled, do: -1, else: false)}
+        {@rest}
+      >
+        <%= render_slot(@start_content) %>
 
         <span class="flex-1 truncate text-left">
           <%= render_slot(@inner_block) %>
         </span>
 
-        <%!-- <%= if length(@end_content) > 0 do %> --%>
-        <span>
-          <%= render_slot(@end_content) %>
-        </span>
-        <%!-- <% end %> --%>
+        <%= render_slot(@end_content) %>
       </.link>
     <% else %>
-      <button class={@class} role="menuitem" {@rest}>
+      <button class={@class} role="menuitem" aria-disabled={@disabled} disabled={@disabled} {@rest}>
         <%= render_slot(@start_content) %>
 
         <span class="flex-1 truncate text-left">
@@ -122,7 +119,7 @@ defmodule PrenixComponents.Dropdown do
   defp set_assigns(assigns) do
     class =
       combine_class([
-        "hs-dropdown dropdown",
+        "hs-dropdown dropdown [--auto-close:inside]",
         assigns.class,
         "dropdown-#{assigns.variant}"
       ])

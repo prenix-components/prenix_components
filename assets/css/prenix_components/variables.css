@@ -14,6 +14,9 @@
   --danger-foreground: 0 0% 100%;
   --ripple: rgba(0, 0, 0, 0.7);
   --divider: 0 0% 7%;
+
+  --th-foreground: 240 4% 46%;
+  --muted-foreground: 240 5% 65%;
 }
 
 .dark {
@@ -32,4 +35,7 @@
   --danger-foreground: 0 0% 100%;
   --ripple: rgba(255, 255, 255, 0.7);
   --divider: 0 0% 100%;
+
+  --th-foreground: 240 5% 65%;
+  --muted-foreground: 240 4% 46%;
 }

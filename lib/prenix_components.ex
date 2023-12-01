@@ -7,7 +7,9 @@ defmodule PrenixComponents do
         Divider,
         Dropdown,
         Icon,
-        Spinner
+        Spinner,
+        Table,
+        Tooltip
       }
     end
   end

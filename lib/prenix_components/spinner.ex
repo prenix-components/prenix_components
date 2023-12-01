@@ -11,7 +11,7 @@ defmodule PrenixComponents.Spinner do
     "secondary",
     "success",
     "warning",
-    "error"
+    "danger"
   ]
 
   attr :class, :string, default: nil

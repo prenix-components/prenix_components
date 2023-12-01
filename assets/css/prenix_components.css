@@ -8,4 +8,6 @@
 @import './prenix_components/helpers.css';
 @import './prenix_components/icon.css';
 @import './prenix_components/spinner.css';
+@import './prenix_components/table.css';
+@import './prenix_components/tooltip.css';
 @import './prenix_components/typography.css';

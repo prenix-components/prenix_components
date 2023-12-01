@@ -1,0 +1,88 @@
+@layer components {
+  .tooltip {
+    @apply inline-block;
+  }
+
+  .tooltip-toggle {
+    @apply grid place-content-center;
+  }
+
+  .tooltip.show .tooltip-content-wrapper {
+    @apply opacity-100 visible;
+  }
+
+  .tooltip-content-wrapper {
+    @apply opacity-0 transition-opacity invisible z-10 absolute;
+  }
+
+  .tooltip-content {
+    @apply px-2.5 py-1 w-full text-sm rounded-xl box-border;
+    @apply text-[--tooltip-foreground] bg-[--tooltip] relative;
+    @apply inline-flex flex-col items-center justify-center subpixel-antialiased;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.02) 0px 0px 5px 0px,
+      rgba(0, 0, 0, 0.06) 0px 2px 10px 0px, rgba(0, 0, 0, 0.3) 0px 0px 1px 0px;
+  }
+
+  .tooltip-content:before {
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.02) 0px 0px 5px 0px,
+      rgba(0, 0, 0, 0.06) 0px 2px 10px 0px, rgba(0, 0, 0, 0.3) 0px 0px 1px 0px;
+    @apply h-[10px] w-[10px] -z-[1] absolute bg-inherit content-[""] rotate-45;
+  }
+
+  .tooltip-content-wrapper[data-popper-placement='top']
+    > .tooltip-content:before {
+    bottom: -3.5px;
+  }
+
+  .tooltip-content-wrapper[data-popper-placement='bottom']
+    > .tooltip-content:before {
+    top: -3.5px;
+  }
+
+  .tooltip-content-wrapper[data-popper-placement='left']
+    > .tooltip-content:before {
+    right: -3px;
+  }
+
+  .tooltip-content-wrapper[data-popper-placement='right']
+    > .tooltip-content:before {
+    left: -3px;
+  }
+
+  .tooltip-default > .tooltip-content-wrapper > .tooltip-content:before {
+    @apply border-[--tooltip-foreground];
+  }
+
+  .tooltip-default {
+    --tooltip: hsl(var(--background));
+    --tooltip-foreground: hsl(var(--foreground));
+  }
+
+  .tooltip-primary {
+    --tooltip: hsl(var(--primary));
+    --tooltip-foreground: hsl(var(--primary-foreground));
+  }
+
+  .tooltip-secondary {
+    --tooltip: hsl(var(--secondary));
+    --tooltip-foreground: hsl(var(--secondary-foreground));
+  }
+
+  .tooltip-success {
+    --tooltip: hsl(var(--success));
+    --tooltip-foreground: hsl(var(--success-foreground));
+  }
+
+  .tooltip-warning {
+    --tooltip: hsl(var(--warning));
+    --tooltip-foreground: hsl(var(--warning-foreground));
+  }
+
+  .tooltip-danger {
+    --tooltip: hsl(var(--danger));
+    --tooltip-foreground: hsl(var(--danger-foreground));
+  }
+}

@@ -10,7 +10,7 @@ defmodule PrenixComponents.Icon do
     "primary",
     "secondary",
     "success",
-    "error",
+    "danger",
     "warning"
   ]
 
