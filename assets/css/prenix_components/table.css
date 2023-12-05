@@ -1,6 +1,6 @@
 @layer components {
   .table-wrapper {
-    @apply p-4 z-0 flex flex-col relative justify-between gap-4 bg-[--background];
+    @apply p-4 flex flex-col relative justify-between gap-4 bg-[--background];
     @apply overflow-auto rounded-xl w-full;
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
       rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.02) 0px 0px 5px 0px,
@@ -12,7 +12,7 @@
   }
 
   .table .thead .tr .th {
-    @apply px-3 h-10 text-left align-middle bg-default/40 whitespace-nowrap text-[hsl(var(--th-foreground))];
+    @apply px-3 h-10 text-left align-middle bg-default/40 whitespace-nowrap text-[hsl(var(--muted-foreground-2))];
     @apply first:rounded-l-lg last:rounded-r-lg outline-none text-sm font-semibold;
   }
 

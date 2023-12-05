@@ -1,73 +1,64 @@
 @layer components {
   .dropdown {
-    @apply relative inline-block w-fit h-fit;
+    @apply relative h-fit w-fit inline-block;
   }
 
-  .dropdown-toggle {
-    @apply grid place-content-center;
+  .dropdown > .dropdown-menu {
+    box-shadow: var(--shadow-lg);
+    @apply absolute min-w-[200px] rounded-xl p-2;
+    @apply text-sm subpixel-antialiased outline-none box-border;
+    @apply bg-[hsl(var(--background))] z-[1000] opacity-0;
   }
 
-  .dropdown-menu-wrapper {
-    @apply transition-[opacity,margin] opacity-0 hidden z-10;
+  .dropdown > .dropdown-menu.show {
+    @apply opacity-100 duration-150 transition-opacity block;
   }
 
-  .dropdown-menu {
-    @apply z-10 inline-flex flex-col items-center justify-center subpixel-antialiased outline-none box-border text-sm;
-    @apply min-w-[200px] rounded-xl shadow-lg p-2 bg-[hsl(var(--background))];
-    @apply transition ease-out opacity-0 scale-95 origin-top-left;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.03) 0px 0px 15px 0px,
-      rgba(0, 0, 0, 0.08) 0px 2px 30px 0px, rgba(0, 0, 0, 0.3) 0px 0px 1px 0px;
+  .dropdown > .dropdown-menu > .dropdown-divider {
+    @apply my-2;
+    @apply px-2;
   }
 
-  .dropdown.open .dropdown-menu-wrapper {
-    @apply opacity-100;
-  }
-
-  .dropdown.open .dropdown-menu {
-    @apply ease-in opacity-100 scale-100;
-  }
-
-  .dropdown .divider {
-    @apply m-1.5;
-  }
-
-  .dropdown-rotate {
+  .dropdown > .dropdown-toggle .dropdown-rotate {
     @apply transition-transform inline-flex;
   }
 
-  .dropdown.open .dropdown-rotate {
+  .dropdown > .dropdown-toggle {
+    @apply h-fit w-fit inline-block;
+  }
+
+  .dropdown > .dropdown-toggle.show .dropdown-rotate {
     @apply rotate-180;
   }
 
-  .dropdown-item {
+  .dropdown > .dropdown-menu > .dropdown-item {
     @apply flex gap-2 items-center justify-between relative px-2 py-1.5 w-full h-full box-border rounded-lg;
-    @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none focus-visible:z-10;
+    @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none;
     @apply focus-visible:outline-2 focus-visible:outline-offset-2;
     @apply hover:transition-colors;
   }
 
-  .dropdown-solid .dropdown-item {
+  .dropdown-solid > .dropdown-menu > .dropdown-item {
     @apply hover:bg-[--dropdown-item] hover:text-[--dropdown-item-foreground];
     @apply hover:text-[--dropdown-item-foreground];
     @apply focus:bg-[--dropdown-item];
   }
 
-  .dropdown-solid .dropdown-item:hover * {
+  .dropdown-solid > .dropdown-menu > .dropdown-item:hover * {
     color: var(--dropdown-item-foreground);
   }
 
-  .dropdown-soft .dropdown-item {
+  .dropdown-soft > .dropdown-menu > .dropdown-item {
     @apply hover:bg-[--dropdown-item-soft] hover:text-[--dropdown-item-soft-foreground];
     @apply focus-visible:outline-[--dropdown-item-soft];
     @apply focus:bg-[--dropdown-item-soft];
   }
 
-  .dropdown-soft .dropdown-item:hover > * {
+  .dropdown-soft > .dropdown-menu > .dropdown-item:hover > * {
     color: var(--dropdown-item-soft-foreground);
   }
 
-  .dropdown-item-disabled {
+  .dropdown > .dropdown-menu > .dropdown-item-disabled {
     @apply opacity-50 pointer-events-none;
   }
 

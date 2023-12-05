@@ -1,0 +1,73 @@
+@layer components {
+  .field-wrapper {
+    box-shadow: var(--shadow-sm);
+    @apply relative w-full inline-flex h-14 tap-highlight-transparent;
+    @apply rounded-xl outline-none py-2 px-3 min-h-[2.5rem];
+    @apply flex-col items-start justify-center gap-0 cursor-text;
+    @apply transition-colors motion-reduce:transition-none;
+    @apply border-2 border-default/50;
+  }
+
+  .field-wrapper:hover {
+    @apply border-default;
+  }
+
+  .field[data-focus='true'] > .field-wrapper {
+    @apply border-[hsl(var(--foreground))];
+  }
+
+  .field-input-wrapper {
+    @apply inline-flex w-full items-center h-full box-border pb-0.5 relative;
+  }
+
+  .field[data-has-label='true'] > .field-wrapper > .field-input-wrapper {
+    @apply items-end;
+  }
+
+  .field-wrapper > .field-label {
+    @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[hsl(var(--muted-foreground-2))];
+    @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
+    @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1;
+  }
+
+  .field[data-focus='true'] > .field-wrapper > .field-label,
+  .field[data-has-placeholder='true'] > .field-wrapper > .field-label,
+  .field[data-has-value='true'] > .field-wrapper > .field-label {
+    @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
+  }
+
+  .field[data-focus='true'] > .field-wrapper > .field-label {
+    @apply text-[hsl(var(--foreground))];
+  }
+
+  /* data-[has-start-content=true]:ps-1.5 data-[has-end-content=true]:pe-1.5  */
+  .field-wrapper > .field-input-wrapper > .field-input {
+    @apply w-full font-normal bg-transparent !outline-none placeholder:text-[hsl(var(--muted-foreground))];
+    @apply text-sm text-[hsl(var(--foreground))] focus-visible:outline-none;
+  }
+
+  .field > .field-helper-wrapper {
+    @apply flex p-1 flex-col gap-1.5;
+  }
+
+  .field > .field-helper-wrapper > .field-helper {
+    @apply text-xs text-[hsl(var(--muted-foreground))];
+    @apply inline-flex items-center gap-1;
+  }
+
+  .field[data-invalid] > .field-wrapper {
+    @apply border-danger;
+  }
+
+  .field[data-invalid] > .field-wrapper > .field-label {
+    @apply text-danger;
+  }
+
+  .field[data-invalid] > .field-helper-wrapper > .field-helper {
+    @apply text-danger;
+  }
+
+  .field[data-disabled] > .field-wrapper {
+    @apply pointer-events-none opacity-50;
+  }
+}

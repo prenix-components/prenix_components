@@ -1,0 +1,108 @@
+@layer components {
+  .ts-wrapper {
+    @apply w-full;
+  }
+
+  .ts-wrapper.single .ts-control,
+  .ts-wrapper.single .ts-control input {
+    @apply !cursor-text;
+  }
+
+  .ts-control,
+  .ts-wrapper.single.input-active .ts-control {
+    @apply !bg-transparent;
+  }
+
+  .ts-dropdown,
+  .ts-control,
+  .ts-control input {
+    @apply !text-[hsl(var(--foreground))] !text-sm;
+  }
+
+  .ts-control {
+    @apply !border-none !p-0 !m-0 !rounded-none;
+  }
+
+  .ts-control input::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .ts-dropdown {
+    box-shadow: var(--shadow-lg) !important;
+    @apply !rounded-xl !border-none;
+    @apply !text-sm subpixel-antialiased outline-none !box-border;
+    @apply !bg-[hsl(var(--background))];
+    @apply !mt-4;
+  }
+
+  .ts-dropdown-content {
+    @apply !p-2;
+  }
+
+  .ts-dropdown-content .option {
+    @apply relative !px-2 !py-1.5 w-full h-full box-border rounded-lg;
+    @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2;
+    @apply transition-colors;
+  }
+
+  .ts-dropdown .option.active {
+    @apply !bg-[hsl(var(--default))] !text-[hsl(var(--default-foreground))];
+  }
+
+  .ts-dropdown .option,
+  .ts-dropdown .optgroup-header,
+  .ts-dropdown .no-results,
+  .ts-dropdown .create {
+    @apply !pl-2 !py-1.5;
+  }
+
+  .ts-dropdown .option {
+    @apply !pr-8 break-words;
+  }
+
+  .ts-dropdown .option .highlight {
+    background: hsl(var(--primary) / 0.2) !important;
+    @apply !border-none;
+  }
+
+  .field[data-autocomplete] > .field-wrapper > .field-input-wrapper:after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
+    @apply content-[""] right-0 top-2 absolute;
+    @apply w-5 h-5 transition-transform;
+  }
+
+  .field[data-autocomplete][data-focus='true']
+    > .field-wrapper
+    > .field-input-wrapper:after {
+    @apply rotate-180;
+  }
+
+  .ts-dropdown .option.selected:after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
+    @apply w-4 h-4 content-[""] absolute right-2;
+    @apply top-[50%] -translate-y-[50%];
+  }
+
+  .ts-control {
+    @apply !pr-6;
+  }
+
+  .ts-control .item {
+    @apply h-[20px] truncate;
+  }
+
+  .ts-wrapper.dropdown-active .item,
+  .ts-wrapper.input-active .item {
+    @apply max-w-[0%];
+  }
+
+  .ts-wrapper {
+    /* @apply h-14 min-h-[2.5rem]; */
+  }
+
+  .ts-control input {
+    min-width: initial !important;
+    @apply !m-0 !p-0;
+  }
+}

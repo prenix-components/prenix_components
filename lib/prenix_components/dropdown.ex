@@ -14,20 +14,24 @@ defmodule PrenixComponents.Dropdown do
   attr :variant, :string, default: "solid", values: @variants
   slot :toggle, required: true
   slot :menu, required: true
+  slot :inner_block
 
   def dropdown(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
     <div class={@class}>
-      <div class={@toggle_class} id={@id}>
+      <div
+        class="dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        data-bs-offset="0, 8"
+      >
         <%= render_slot(@toggle) %>
       </div>
 
-      <div class="hs-dropdown-menu dropdown-menu-wrapper">
-        <div class={@menu_class} aria-labelledby={@id} data-hs-transition role="menu">
-          <%= render_slot(@menu) %>
-        </div>
+      <div class="dropdown-menu">
+        <%= render_slot(@menu) %>
       </div>
     </div>
     """
@@ -112,14 +116,16 @@ defmodule PrenixComponents.Dropdown do
 
   def dropdown_divider(assigns) do
     ~H"""
-    <hr class={["dropdown-divider", @class]} />
+    <div class="dropdown-divider">
+      <hr class={@class} />
+    </div>
     """
   end
 
   defp set_assigns(assigns) do
     class =
       combine_class([
-        "hs-dropdown dropdown [--auto-close:inside]",
+        "dropdown",
         assigns.class,
         "dropdown-#{assigns.variant}"
       ])
@@ -132,12 +138,11 @@ defmodule PrenixComponents.Dropdown do
 
     menu_class =
       combine_class([
-        "dropdown-menu",
+        "dropdown-menu hidden",
         assigns.menu_class
       ])
 
     assigns
-    |> assign(:id, "dropdown-#{random_string()}")
     |> assign(:class, class)
     |> assign(:toggle_class, toggle_class)
     |> assign(:menu_class, menu_class)
