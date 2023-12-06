@@ -1,0 +1,25 @@
+@layer components {
+  .checkbox-group {
+    @apply relative flex flex-col gap-2;
+  }
+
+  .checkbox-group > .checkbox-group-label {
+    @apply relative text-base text-[hsl(var(--muted-foreground-2))];
+    @apply inline-flex items-center gap-1;
+  }
+
+  .checkbox-group > .checkbox-group-checkboxes {
+    @apply flex flex-col flex-wrap gap-2;
+  }
+
+  .checkbox-group > .checkbox-group-helper-wrapper > .checkbox-group-helper {
+    @apply text-sm text-[hsl(var(--muted-foreground-2))];
+    @apply inline-flex items-center gap-1;
+  }
+
+  .checkbox-group[data-invalid]
+    > .checkbox-group-helper-wrapper
+    > .checkbox-group-helper {
+    @apply text-danger;
+  }
+}

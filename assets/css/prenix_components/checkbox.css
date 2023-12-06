@@ -1,0 +1,63 @@
+@layer components {
+  .checkbox {
+    @apply relative max-w-fit inline-flex items-center justify-start cursor-pointer;
+    @apply tap-highlight-transparent p-2 -m-2 select-none;
+  }
+
+  .checkbox > .checkbox-label {
+    @apply relative text-[hsl(var(--foreground))] select-none text-base;
+    @apply transition-colors-opacity before:transition-width motion-reduce:transition-none;
+    @apply inline-flex items-center justify-center gap-1 -ml-1;
+  }
+
+  .checkbox > .checkbox-input-wrapper {
+    clip: rect(0px, 0px, 0px, 0px);
+    clip-path: inset(50%);
+    @apply border-none border-0  h-[1px] -m-[1px] overflow-hidden p-0 absolute w-[1px] whitespace-nowrap;
+  }
+
+  .checkbox > .checkbox-checkmark-wrapper {
+    @apply relative inline-flex items-center justify-center flex-shrink-0 overflow-hidden;
+    @apply outline-none after:bg-primary w-5 h-5 mr-2;
+    @apply rounded-[calc(12px*0.6)] motion-reduce:transition-none;
+    @apply transition-transform text-[hsl(var(--primary-foreground))];
+
+    @apply before:content-[''] before:absolute before:inset-0 before:border-solid before:border-2;
+    @apply before:rounded-[calc(12px*0.6)] before:box-border before:border-default;
+    @apply before:transition-colors;
+
+    @apply after:content-[''] after:absolute after:inset-0 after:scale-50  after:opacity-0 after:origin-center;
+    @apply after:!ease-linear after:!duration-200 after:transition-transform-opacity after:rounded-[calc(12px*0.6)];
+    @apply after:text-[hsl(var(--primary-foreground))];
+  }
+
+  .checkbox[data-focus='true'] > .checkbox-checkmark-wrapper {
+    @apply ring-2 ring-offset-2 ring-primary;
+  }
+
+  .checkbox[data-selected='true'] > .checkbox-checkmark-wrapper {
+    @apply after:scale-100 after:opacity-100;
+  }
+
+  .checkbox[data-pressed='true'] > .checkbox-checkmark-wrapper {
+    @apply scale-95;
+  }
+
+  .checkbox > .checkbox-checkmark-wrapper > .checkbox-checkmark {
+    @apply z-10 opacity-0 w-4 h-3 transition-opacity motion-reduce:transition-none;
+  }
+
+  .checkbox[data-selected='true']
+    > .checkbox-checkmark-wrapper
+    > .checkbox-checkmark {
+    @apply opacity-100;
+  }
+
+  .checkbox[data-invalid] > .checkbox-checkmark-wrapper {
+    @apply before:border-danger;
+  }
+
+  .checkbox[data-disabled] {
+    @apply opacity-50 pointer-events-none;
+  }
+}

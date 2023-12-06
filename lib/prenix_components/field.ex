@@ -2,8 +2,8 @@ defmodule PrenixComponents.Field do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  attr :id, :string, required: true
   attr :name, :string, required: true
+  attr :id, :string
   attr :value, :any, default: nil
   attr :label_text, :string, default: nil
   attr :helper_text, :string, default: nil
@@ -29,11 +29,11 @@ defmodule PrenixComponents.Field do
     <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-field>
       <div class="field-wrapper">
         <%= if @label_text do %>
-          <label class="field-label" for={@id}><%= @label_text %></label>
+          <label class="field-label" for={@id} id={"#{@id}-label"}><%= @label_text %></label>
         <% end %>
 
         <%= if length(@label) > 0 do %>
-          <label class="field-label" for={@id}><%= render_slot(@label) %></label>
+          <label class="field-label" for={@id} id={"#{@id}-label"}><%= render_slot(@label) %></label>
         <% end %>
 
         <div class="field-input-wrapper">
@@ -51,6 +51,9 @@ defmodule PrenixComponents.Field do
             placeholder={@placeholder}
             disabled={@disabled}
             value={@value}
+            aria-invalid={@invalid}
+            aria-labelledby={"#{@id}-label"}
+            aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
           />
 
           <%= if length(@end_content) > 0 do %>
@@ -63,13 +66,13 @@ defmodule PrenixComponents.Field do
 
       <%= if @helper_text do %>
         <div class="field-helper-wrapper">
-          <p class="field-helper"><%= @helper_text %></p>
+          <p class="field-helper" id={"#{@id}-helper"}><%= @helper_text %></p>
         </div>
       <% end %>
 
       <%= if length(@helper) > 0 do %>
         <div class="field-helper-wrapper">
-          <p class="field-helper"><%= render_slot(@helper) %></p>
+          <p class="field-helper" id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
         </div>
       <% end %>
     </div>
@@ -83,6 +86,12 @@ defmodule PrenixComponents.Field do
         assigns.class
       ])
 
-    assigns |> assign(:class, class)
+    id =
+      cond do
+        Map.get(assigns, :id) -> assigns.id
+        true -> "field-#{random_string()}"
+      end
+
+    assigns |> assign(:class, class) |> assign(id: id)
   end
 end

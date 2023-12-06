@@ -9,4 +9,25 @@
     transition-timing-function: ease;
     transition-duration: 0.25s;
   }
+
+  .transition-colors-opacity {
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke, opacity;
+    transition-timing-function: ease;
+    transition-duration: 0.25s;
+  }
+
+  .transition-width {
+    content: '';
+    transition-property: width;
+    transition-timing-function: ease;
+    transition-duration: 0.25s;
+  }
+
+  .transition-transform-opacity {
+    content: '';
+    transition-property: transform, opacity;
+    transition-timing-function: ease;
+    transition-duration: 0.25s;
+  }
 }

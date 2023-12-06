@@ -27,7 +27,7 @@
   .field-wrapper > .field-label {
     @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[hsl(var(--muted-foreground-2))];
     @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
-    @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1;
+    @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1 text-base;
   }
 
   .field[data-focus='true'] > .field-wrapper > .field-label,
@@ -51,7 +51,7 @@
   }
 
   .field > .field-helper-wrapper > .field-helper {
-    @apply text-xs text-[hsl(var(--muted-foreground))];
+    @apply text-xs text-[hsl(var(--muted-foreground-2))];
     @apply inline-flex items-center gap-1;
   }
 

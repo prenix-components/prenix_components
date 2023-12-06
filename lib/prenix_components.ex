@@ -5,6 +5,8 @@ defmodule PrenixComponents do
         Autocomplete,
         Badge,
         Button,
+        CheckboxGroup,
+        Checkbox,
         Divider,
         Dropdown,
         Field,

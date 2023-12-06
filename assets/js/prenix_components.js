@@ -12,12 +12,18 @@ const setHasValue = ({ value, wrapper }) => {
 
 const initField = () => {
   document.querySelectorAll('[data-field]').forEach(($f) => {
-    const hasLabel = $f.querySelector('label.field-label')
-    if (hasLabel) $f.dataset.hasLabel = true
-
+    const $label = $f.querySelector('label.field-label')
     const $input = $f.querySelector('input.field-input')
-    if ($input.placeholder && $input.placeholder.length > 0)
+
+    if ($input.placeholder && $input.placeholder.length > 0) {
       $f.dataset.hasPlaceholder = true
+    }
+
+    if ($label) {
+      $f.dataset.hasLabel = true
+      const labelText = $label.textContent.trim()
+      $input.setAttribute('aria-label', labelText)
+    }
 
     setHasValue({ value: $input.value, wrapper: $f })
 
@@ -75,14 +81,7 @@ const initAutocomplete = () => {
       },
     })
 
-    console.log('instance', instance)
-
-    instance.on('item_select', () => {
-      console.log('item select')
-    })
-
     instance.on('change', () => {
-      console.log('change')
       instance.blur()
     })
 
@@ -90,13 +89,9 @@ const initAutocomplete = () => {
 
     if ($controlInput.placeholder && $controlInput.placeholder.length > 0)
       $a.dataset.hasPlaceholder = true
-  })
 
-  document
-    .querySelectorAll('.ts-control input[role="combobox"]')
-    .forEach(($i) => {
-      $i.setAttribute('data-1p-ignore', '')
-    })
+    $controlInput.setAttribute('data-1p-ignore', '')
+  })
 }
 
 const initTooltip = () => {
@@ -112,16 +107,16 @@ document.querySelectorAll('.dropdown-toggle').forEach(($dt) => {
     },
   })
 
-  dr._parent.addEventListener('show.bs.dropdown', (event) => {
-    const $target = event.target
+  dr._parent.addEventListener('show.bs.dropdown', (e) => {
+    const $target = e.target
     $target
       .closest('.dropdown')
       .querySelector('.dropdown-menu')
       .classList.remove('hidden')
   })
 
-  dr._parent.addEventListener('hide.bs.dropdown', (event) => {
-    const $target = event.target
+  dr._parent.addEventListener('hide.bs.dropdown', (e) => {
+    const $target = e.target
     $target
       .closest('.dropdown')
       .querySelector('.dropdown-menu')
@@ -129,15 +124,68 @@ document.querySelectorAll('.dropdown-toggle').forEach(($dt) => {
   })
 })
 
-initAutocomplete()
-initField()
-initTooltip()
-
-const autoInit = {
-  initAutocomplete,
-  initField,
-  initTooltip,
+const setSelected = ({ boolean, wrapper, polyline }) => {
+  if (boolean) {
+    wrapper.dataset.selected = true
+    polyline.setAttribute('stroke-dashoffset', 44)
+  } else {
+    polyline.setAttribute('stroke-dashoffset', 66)
+    wrapper.dataset.selected = false
+  }
 }
+
+const initCheckbox = () => {
+  document.querySelectorAll('[data-checkbox]').forEach(($c) => {
+    const $input = $c.querySelector('input[type="checkbox"]')
+    const $polyline = $c.querySelector('polyline')
+    const $label = $c.querySelector('.checkbox-label')
+
+    if ($label) {
+      const labelText = $label.textContent.trim()
+      $input.setAttribute('aria-label', labelText)
+    }
+
+    setSelected({ boolean: $input.checked, wrapper: $c, polyline: $polyline })
+
+    $input.addEventListener('change', (e) => {
+      const $c = e.target.closest('[data-checkbox]')
+      const $polyline = $c.querySelector('polyline')
+      setSelected({
+        boolean: e.target.checked,
+        wrapper: $c,
+        polyline: $polyline,
+      })
+    })
+
+    $input.addEventListener('focus', (e) => {
+      const $c = e.target.closest('[data-checkbox]')
+      $c.dataset.focus = true
+    })
+
+    $input.addEventListener('blur', (e) => {
+      const $c = e.target.closest('[data-checkbox]')
+      $c.dataset.focus = false
+    })
+  })
+
+  document.querySelectorAll('[data-checkbox-group]').forEach(($cg) => {
+    const $label = $cg.querySelector('.checkbox-group-label')
+
+    if ($label) {
+      const labelText = $label.textContent.trim()
+      $cg.setAttribute('aria-label', labelText)
+    }
+  })
+}
+
+const autoInit = () => {
+  initAutocomplete()
+  initCheckbox()
+  initField()
+  initTooltip()
+}
+
+autoInit()
 
 export { TomSelect, bootstrap, autoInit }
 

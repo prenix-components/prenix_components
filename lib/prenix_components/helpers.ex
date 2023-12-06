@@ -13,7 +13,7 @@ defmodule PrenixComponents.Helpers do
     string |> String.downcase() |> dasherize
   end
 
-  def random_string(length \\ 5) do
+  def random_string(length \\ 10) do
     str =
       :crypto.strong_rand_bytes(length)
       |> Base.encode64()
