@@ -72,12 +72,18 @@ const initAutocomplete = () => {
       onDropdownOpen: ($dropdownEl) => {
         const $a = $dropdownEl.closest('[data-autocomplete]')
         $a.dataset.focus = true
+
+        const $dropdownContent = $a.querySelector('.ts-dropdown-content')
+        setTimeout(() => $dropdownContent.classList.add('open'))
       },
       onDropdownClose: ($dropdownEl) => {
         const $a = $dropdownEl.closest('[data-autocomplete]')
         $a.dataset.focus = false
         const $select = $fw.querySelector('select')
         setHasValue({ value: $select.value, wrapper: $a })
+
+        const $dropdownContent = $a.querySelector('.ts-dropdown-content')
+        setTimeout(() => $dropdownContent.classList.remove('open'))
       },
     })
 
@@ -109,18 +115,20 @@ document.querySelectorAll('.dropdown-toggle').forEach(($dt) => {
 
   dr._parent.addEventListener('show.bs.dropdown', (e) => {
     const $target = e.target
-    $target
+    const $menuInner = $target
       .closest('.dropdown')
-      .querySelector('.dropdown-menu')
-      .classList.remove('hidden')
+      .querySelector('.dropdown-menu-inner')
+
+    setTimeout(() => $menuInner.classList.add('open'))
   })
 
   dr._parent.addEventListener('hide.bs.dropdown', (e) => {
     const $target = e.target
-    $target
+    const $menuInner = $target
       .closest('.dropdown')
-      .querySelector('.dropdown-menu')
-      .classList.add('hidden')
+      .querySelector('.dropdown-menu-inner')
+
+    $menuInner.classList.remove('open')
   })
 })
 

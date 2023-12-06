@@ -30,4 +30,8 @@
     transition-timing-function: ease;
     transition-duration: 0.25s;
   }
+
+  .transition-opacity-margin {
+    transition-property: margin, opacity;
+  }
 }

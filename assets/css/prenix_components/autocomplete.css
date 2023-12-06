@@ -29,7 +29,7 @@
 
   .ts-dropdown {
     box-shadow: var(--shadow-lg) !important;
-    @apply !rounded-xl !border-none;
+    @apply !rounded-xl !border-none !border-0;
     @apply !text-sm subpixel-antialiased outline-none !box-border;
     @apply !bg-[hsl(var(--background))];
     @apply !mt-4;
@@ -104,5 +104,13 @@
   .ts-control input {
     min-width: initial !important;
     @apply !m-0 !p-0;
+  }
+
+  .ts-dropdown-content {
+    @apply opacity-0 scale-95 transition-transform-opacity duration-150 origin-[left_top] ease-out;
+  }
+
+  .ts-dropdown-content.open {
+    @apply opacity-100 scale-100 ease-in;
   }
 }

@@ -2,6 +2,7 @@ defmodule PrenixComponents.Dropdown do
   use Phoenix.Component
   import PrenixComponents.Helpers
   import PrenixComponents.Icon
+  import PrenixComponents.Divider
 
   @variants [
     "solid",
@@ -21,17 +22,14 @@ defmodule PrenixComponents.Dropdown do
 
     ~H"""
     <div class={@class}>
-      <div
-        class="dropdown-toggle"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        data-bs-offset="0, 8"
-      >
+      <div class={@toggle_class} data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0, 8">
         <%= render_slot(@toggle) %>
       </div>
 
       <div class="dropdown-menu">
-        <%= render_slot(@menu) %>
+        <div class={@menu_class}>
+          <%= render_slot(@menu) %>
+        </div>
       </div>
     </div>
     """
@@ -117,7 +115,7 @@ defmodule PrenixComponents.Dropdown do
   def dropdown_divider(assigns) do
     ~H"""
     <div class="dropdown-divider">
-      <hr class={@class} />
+      <.divider />
     </div>
     """
   end
@@ -132,13 +130,13 @@ defmodule PrenixComponents.Dropdown do
 
     toggle_class =
       combine_class([
-        "hs-dropdown-toggle dropdown-toggle",
+        "dropdown-toggle",
         assigns.toggle_class
       ])
 
     menu_class =
       combine_class([
-        "dropdown-menu hidden",
+        "dropdown-menu-inner",
         assigns.menu_class
       ])
 
