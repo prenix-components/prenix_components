@@ -1,32 +1,11 @@
 @layer components {
-  .ripple {
-    position: absolute;
-    background: var(--ripple);
-    border-radius: 50%;
-    width: 5px;
-    height: 5px;
-    animation: ripple-effect 0.88s 1;
-    opacity: 0;
-  }
-
-  @keyframes ripple-effect {
-    0% {
-      transform: scale(1);
-      opacity: 0.4;
-    }
-    100% {
-      transform: scale(100);
-      opacity: 0;
-    }
-  }
-
   .btn {
     @apply z-0 relative inline-flex items-center justify-center box-border appearance-none;
     @apply select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden;
     @apply tap-highlight-transparent outline-none;
     @apply focus-visible:outline-offset-2 focus-visible:outline-2;
     @apply rounded-xl transition-transform-colors-opacity motion-reduce:transition-none;
-    @apply hover:opacity-80; /* active:brightness-95 */
+    @apply hover:opacity-80;
   }
 
   .btn-content {
@@ -88,7 +67,7 @@
 
   .btn-disabled,
   .btn-loading {
-    @apply opacity-50 pointer-events-none;
+    @apply opacity-[--disabled-opacity] pointer-events-none;
   }
 
   .btn-rounded {

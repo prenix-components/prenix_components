@@ -1,116 +1,147 @@
 @layer components {
+  .autocomplete {
+    --autocomplete-option-active: hsl(var(--default));
+    --autocomplete-option-active-foreground: hsl(var(--default-foreground));
+    --autocomplete-option-highlight: hsl(var(--primary) / 0.4);
+    --autocomplete-dropdown-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
+    --autocomplete-dropdown-caret-color: hsl(var(--content1-foreground));
+    --autocomplete-option-active-checkmark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
+    --autocomplete-option-active-checkmark-color: hsl(
+      var(--content1-foreground)
+    );
+    --autocomplete-dropdown: hsl(var(--content1));
+    --autocomplete-dropdown-foreground: hsl(var(--content1-foreground));
+  }
+
+  .field.autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .autocomplete-select {
+    @apply bg-transparent w-full;
+  }
+
   .ts-wrapper {
-    @apply w-full;
-  }
-
-  .ts-wrapper.single .ts-control,
-  .ts-wrapper.single .ts-control input {
-    @apply !cursor-text;
-  }
-
-  .ts-control,
-  .ts-wrapper.single.input-active .ts-control {
-    @apply !bg-transparent;
-  }
-
-  .ts-dropdown,
-  .ts-control,
-  .ts-control input {
-    @apply !text-[hsl(var(--foreground))] !text-sm;
+    @apply w-full pr-5 text-sm;
   }
 
   .ts-control {
-    @apply !border-none !p-0 !m-0 !rounded-none;
+    @apply w-full overflow-hidden relative box-border flex;
+    @apply text-sm text-[--field-input];
   }
 
-  .ts-control input::placeholder {
-    color: hsl(var(--muted-foreground));
+  .ts-control > .item {
+    @apply truncate w-full;
+  }
+
+  .ts-control > input[role='combobox'] {
+    @apply w-full bg-transparent  placeholder:text-[--field-placeholder];
   }
 
   .ts-dropdown {
-    box-shadow: var(--shadow-lg) !important;
-    @apply !rounded-xl !border-none !border-0;
-    @apply !text-sm subpixel-antialiased outline-none !box-border;
-    @apply !bg-[hsl(var(--background))];
-    @apply !mt-4;
+    @apply absolute top-[100%] left-0 w-full z-[1000] mt-6;
   }
 
-  .ts-dropdown-content {
-    @apply !p-2;
+  .ts-dropdown > .ts-dropdown-content {
+    box-shadow: var(--shadow-md);
+    @apply bg-[--autocomplete-dropdown] text-[--autocomplete-dropdown-foreground];
+    @apply p-2 rounded-xl text-sm subpixel-antialiased outline-none box-border;
   }
 
-  .ts-dropdown-content .option {
-    @apply relative !px-2 !py-1.5 w-full h-full box-border rounded-lg;
-    @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none;
-    @apply focus-visible:outline-2 focus-visible:outline-offset-2;
-    @apply transition-colors;
+  .ts-dropdown > .ts-dropdown-content > .option {
+    @apply relative pl-2 pr-8 py-1.5 break-words;
+    @apply cursor-pointer rounded-lg subpixel-antialiased;
+    @apply tap-highlight-transparent outline-none;
   }
 
-  .ts-dropdown .option.active {
-    @apply !bg-[hsl(var(--default))] !text-[hsl(var(--default-foreground))];
+  .ts-dropdown > .ts-dropdown-content > .option.active {
+    @apply bg-[--autocomplete-option-active] text-[--autocomplete-option-active-foreground];
   }
 
-  .ts-dropdown .option,
-  .ts-dropdown .optgroup-header,
-  .ts-dropdown .no-results,
-  .ts-dropdown .create {
-    @apply !pl-2 !py-1.5;
+  .ts-dropdown > .ts-dropdown-content > .option[aria-disabled='true'] {
+    @apply opacity-[--disabled-opacity] cursor-default;
   }
 
-  .ts-dropdown .option {
-    @apply !pr-8 break-words;
+  .ts-dropdown > .ts-dropdown-content > .option[data-selectable] > .highlight {
+    @apply bg-[--autocomplete-option-highlight];
   }
 
-  .ts-dropdown .option .highlight {
-    background: hsl(var(--primary) / 0.2) !important;
-    @apply !border-none;
-  }
-
-  .field[data-autocomplete] > .field-wrapper > .field-input-wrapper:after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
+  .field.autocomplete > .field-wrapper > .field-input-wrapper:after {
+    -webkit-mask-image: var(--autocomplete-dropdown-caret);
+    mask-image: var(--autocomplete-dropdown-caret);
+    background: var(--autocomplete-dropdown-caret-color);
     @apply content-[""] right-0 top-2 absolute;
     @apply w-5 h-5 transition-transform;
   }
 
-  .field[data-autocomplete][data-focus='true']
+  .field.autocomplete[data-focus='true']
     > .field-wrapper
     > .field-input-wrapper:after {
     @apply rotate-180;
   }
 
-  .ts-dropdown .option.selected:after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
+  .field.autocomplete[data-has-label='true'] .ts-dropdown {
+    @apply mt-4;
+  }
+
+  .ts-dropdown > .ts-dropdown-content > .option.selected:after {
+    -webkit-mask-image: var(--autocomplete-option-active-checkmark);
+    mask-image: var(--autocomplete-option-active-checkmark);
+    background: var(--autocomplete-option-active-checkmark-color);
     @apply w-4 h-4 content-[""] absolute right-2;
     @apply top-[50%] -translate-y-[50%];
   }
 
-  .ts-control {
-    @apply !pr-6;
-  }
-
-  .ts-control .item {
-    @apply h-[20px] truncate;
-  }
-
-  .ts-wrapper.dropdown-active .item,
-  .ts-wrapper.input-active .item {
+  .ts-wrapper.dropdown-active > .ts-control > .item,
+  .ts-wrapper.input-active > .ts-control > .item {
     @apply max-w-[0%];
   }
 
-  .ts-wrapper {
-    /* @apply h-14 min-h-[2.5rem]; */
-  }
-
-  .ts-control input {
-    min-width: initial !important;
-    @apply !m-0 !p-0;
-  }
-
-  .ts-dropdown-content {
+  .ts-dropdown > .ts-dropdown-content {
     @apply opacity-0 scale-95 transition-transform-opacity duration-150 origin-[left_top] ease-out;
   }
 
-  .ts-dropdown-content.open {
+  .ts-dropdown > .ts-dropdown-content.open {
     @apply opacity-100 scale-100 ease-in;
+  }
+
+  /* Blank option */
+  .ts-dropdown > .ts-dropdown-content > .option.selected[data-value='']:after {
+    display: none;
+  }
+
+  .ts-dropdown > .ts-dropdown-content > .option[data-value=''] {
+    @apply min-h-[2rem];
+  }
+
+  .ts-control > .item[data-value=''] {
+    @apply text-[--field-placeholder];
+  }
+
+  /* Multiple */
+  .ts-wrapper.multi > .ts-control > .item:not(.autocomplete-multi-item) {
+    @apply hidden;
+  }
+
+  .ts-wrapper.multi:not(.input-active) > .ts-control > input[role='combobox'] {
+    @apply opacity-0 absolute left-[-10000px];
+  }
+
+  .ts-dropdown.multi > .ts-dropdown-content > .option.selected:after {
+    @apply hidden;
+  }
+
+  .ts-dropdown.multi > .ts-dropdown-content > .option {
+    @apply pr-2 flex;
+  }
+
+  .ts-dropdown.multi > .ts-dropdown-content > .option > .checkbox {
+    --checkbox-border: hsl(var(--foreground));
+  }
+
+  .ts-dropdown.multi
+    > .ts-dropdown-content
+    > .option
+    > .autocomplete-multi-label {
+    @apply break-words flex-1 min-w-0;
   }
 }

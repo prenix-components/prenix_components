@@ -12,6 +12,7 @@ defmodule PrenixComponents.Dropdown do
   attr :class, :string, default: nil
   attr :toggle_class, :string, default: nil
   attr :menu_class, :string, default: nil
+  attr :submenu, :boolean, default: false
   attr :variant, :string, default: "solid", values: @variants
   slot :toggle, required: true
   slot :menu, required: true
@@ -21,9 +22,19 @@ defmodule PrenixComponents.Dropdown do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class}>
-      <div class={@toggle_class} data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0, 8">
+    <div class={@class} data-submenu={@submenu}>
+      <div
+        class={@toggle_class}
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        data-bs-offset={if(@submenu, do: "4, 4", else: "0, 8")}
+        data-bs-auto-close="outside"
+      >
         <%= render_slot(@toggle) %>
+
+        <%= if @submenu do %>
+          <.icon name="hero-chevron-right-mini" />
+        <% end %>
       </div>
 
       <div class="dropdown-menu">
@@ -44,7 +55,7 @@ defmodule PrenixComponents.Dropdown do
     "danger"
   ]
 
-  attr :type, :string, default: "link", values: ["link", "button"]
+  attr :type, :string, default: "link", values: ["link", "button", "submenu"]
   attr :color, :string, default: "default", values: @colors
   attr :class, :string, default: nil
   attr :disabled, :boolean, default: false
@@ -53,16 +64,18 @@ defmodule PrenixComponents.Dropdown do
   slot :end_content
   slot :inner_block
 
-  def dropdown_item(assigns) do
-    class =
-      combine_class([
-        "dropdown-item group",
-        "dropdown-item-#{assigns.color}",
-        if(assigns.disabled, do: "dropdown-item-disabled disabled", else: nil),
-        assigns.class
-      ])
+  def dropdown_item(%{type: "submenu"} = assigns) do
+    assigns = set_dropdown_item_assigns(assigns)
 
-    assigns = assign(assigns, :class, class)
+    ~H"""
+    <div class={@class} role="menuitem" aria-disabled={@disabled}>
+      <%= render_dropdown_item(assigns) %>
+    </div>
+    """
+  end
+
+  def dropdown_item(assigns) do
+    assigns = set_dropdown_item_assigns(assigns)
 
     ~H"""
     <%= if @type == "link" do %>
@@ -71,32 +84,29 @@ defmodule PrenixComponents.Dropdown do
         role="menuitem"
         aria-disabled={@disabled}
         tabindex={if(@disabled, do: -1, else: false)}
+        data-hover="false"
         {@rest}
       >
-        <%= render_slot(@start_content) %>
-
-        <span class="flex-1 truncate text-left">
-          <%= render_slot(@inner_block) %>
-        </span>
-
-        <%= render_slot(@end_content) %>
+        <%= render_dropdown_item(assigns) %>
       </.link>
     <% else %>
-      <button class={@class} role="menuitem" aria-disabled={@disabled} disabled={@disabled} {@rest}>
-        <%= render_slot(@start_content) %>
-
-        <span class="flex-1 truncate text-left">
-          <%= render_slot(@inner_block) %>
-        </span>
-
-        <%= render_slot(@end_content) %>
+      <button
+        class={@class}
+        role="menuitem"
+        aria-disabled={@disabled}
+        disabled={@disabled}
+        type="button"
+        data-hover="false"
+        {@rest}
+      >
+        <%= render_dropdown_item(assigns) %>
       </button>
     <% end %>
     """
   end
 
-  attr(:class, :string, default: nil, doc: "Additional CSS class")
-  slot(:inner_block)
+  attr :class, :string, default: nil
+  slot :inner_block
 
   def dropdown_rotate(assigns) do
     ~H"""
@@ -110,7 +120,7 @@ defmodule PrenixComponents.Dropdown do
     """
   end
 
-  attr(:class, :string, default: nil, doc: "Additional CSS class")
+  attr :class, :string, default: nil
 
   def dropdown_divider(assigns) do
     ~H"""
@@ -125,7 +135,8 @@ defmodule PrenixComponents.Dropdown do
       combine_class([
         "dropdown",
         assigns.class,
-        "dropdown-#{assigns.variant}"
+        "dropdown-#{assigns.variant}",
+        if(assigns.submenu, do: "dropend", else: nil)
       ])
 
     toggle_class =
@@ -144,5 +155,30 @@ defmodule PrenixComponents.Dropdown do
     |> assign(:class, class)
     |> assign(:toggle_class, toggle_class)
     |> assign(:menu_class, menu_class)
+  end
+
+  defp set_dropdown_item_assigns(assigns) do
+    class =
+      combine_class([
+        "dropdown-item group",
+        "dropdown-item-#{assigns.color}",
+        if(assigns.disabled, do: "dropdown-item-disabled disabled", else: nil),
+        if(assigns.type == "submenu", do: "dropdown-item-submenu", else: nil),
+        assigns.class
+      ])
+
+    assign(assigns, :class, class)
+  end
+
+  defp render_dropdown_item(assigns) do
+    ~H"""
+    <%= render_slot(@start_content) %>
+
+    <div class="flex-1 truncate text-left">
+      <%= render_slot(@inner_block) %>
+    </div>
+
+    <%= render_slot(@end_content) %>
+    """
   end
 end

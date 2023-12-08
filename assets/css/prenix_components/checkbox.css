@@ -1,5 +1,6 @@
 @layer components {
   .checkbox {
+    --checkbox-border: hsl(var(--default));
     @apply relative max-w-fit inline-flex items-center justify-start cursor-pointer;
     @apply tap-highlight-transparent p-2 -m-2 select-none;
   }
@@ -13,7 +14,7 @@
   .checkbox > .checkbox-input-wrapper {
     clip: rect(0px, 0px, 0px, 0px);
     clip-path: inset(50%);
-    @apply border-none border-0  h-[1px] -m-[1px] overflow-hidden p-0 absolute w-[1px] whitespace-nowrap;
+    @apply border-none border-0 h-[1px] -m-[1px] overflow-hidden p-0 absolute w-[1px] whitespace-nowrap;
   }
 
   .checkbox > .checkbox-checkmark-wrapper {
@@ -23,16 +24,16 @@
     @apply transition-transform text-[hsl(var(--primary-foreground))];
 
     @apply before:content-[''] before:absolute before:inset-0 before:border-solid before:border-2;
-    @apply before:rounded-[calc(12px*0.6)] before:box-border before:border-default;
+    @apply before:rounded-[calc(12px*0.6)] before:box-border before:border-[--checkbox-border];
     @apply before:transition-colors;
 
-    @apply after:content-[''] after:absolute after:inset-0 after:scale-50  after:opacity-0 after:origin-center;
+    @apply after:content-[''] after:absolute after:inset-0 after:scale-50 after:opacity-0 after:origin-center;
     @apply after:!ease-linear after:!duration-200 after:transition-transform-opacity after:rounded-[calc(12px*0.6)];
     @apply after:text-[hsl(var(--primary-foreground))];
   }
 
   .checkbox[data-focus='true'] > .checkbox-checkmark-wrapper {
-    @apply ring-2 ring-offset-2 ring-primary;
+    @apply ring-2 ring-offset-2 ring-primary ring-offset-background;
   }
 
   .checkbox[data-selected='true'] > .checkbox-checkmark-wrapper {
@@ -51,6 +52,10 @@
     > .checkbox-checkmark-wrapper
     > .checkbox-checkmark {
     @apply opacity-100;
+  }
+
+  .checkbox[data-selected='true'] > .checkbox-checkmark-wrapper {
+    @apply before:border-transparent;
   }
 
   .checkbox[data-invalid] > .checkbox-checkmark-wrapper {

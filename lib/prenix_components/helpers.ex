@@ -1,4 +1,6 @@
 defmodule PrenixComponents.Helpers do
+  import Phoenix.HTML
+
   def combine_class(list) do
     list
     |> Enum.filter(fn x -> x && String.length(x) > 0 end)
@@ -20,5 +22,9 @@ defmodule PrenixComponents.Helpers do
       |> binary_part(0, length)
 
     String.replace(str, ["/", "+"], "-")
+  end
+
+  def html_safe_escape(string) do
+    string |> html_escape() |> safe_to_string()
   end
 end

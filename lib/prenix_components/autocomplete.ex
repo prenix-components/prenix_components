@@ -2,14 +2,16 @@ defmodule PrenixComponents.Autocomplete do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  attr :id, :string, required: true
   attr :name, :string, required: true
-  attr :value, :any, default: nil
   attr :options, :list, required: true
+  attr :id, :string
+  attr :value, :any, default: nil
   attr :label_text, :string, default: nil
   attr :helper_text, :string, default: nil
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
+  attr :allow_blank, :boolean, default: false
+  attr :multiple, :boolean, default: false
   attr :class, :string, default: nil
   attr :placeholder, :string, default: nil
   slot :label
@@ -21,7 +23,14 @@ defmodule PrenixComponents.Autocomplete do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-autocomplete>
+    <div
+      class={@class}
+      data-invalid={@invalid}
+      data-disabled={@disabled}
+      data-autocomplete
+      data-allow-blank={@allow_blank}
+      data-multiple={@multiple}
+    >
       <div class="field-wrapper">
         <%= if @label_text do %>
           <label class="field-label" for={@id}><%= @label_text %></label>
@@ -38,10 +47,28 @@ defmodule PrenixComponents.Autocomplete do
             </div>
           <% end %>
 
-          <select id={@id} autocomplete="off" placeholder={@placeholder} disabled={@disabled}>
+          <select
+            class="autocomplete-select"
+            id={@id}
+            autocomplete="off"
+            placeholder={@placeholder}
+            disabled={@disabled}
+            multiple={@multiple}
+          >
             <option value=""><%= @placeholder %></option>
 
-            <option :for={option <- @options} value={option.value} selected={option.value == @value}>
+            <option
+              :for={option <- @options}
+              value={option.value}
+              selected={
+                if(@multiple && is_list(@value),
+                  do: Enum.member?(@value, option.value),
+                  else: option.value == @value
+                )
+              }
+              disabled={Map.get(option, :disabled)}
+              data-template={Map.get(option, :template)}
+            >
               <%= option.name %>
             </option>
           </select>
@@ -77,6 +104,12 @@ defmodule PrenixComponents.Autocomplete do
         "#{assigns.class}"
       ])
 
-    assign(assigns, :class, class)
+    id =
+      cond do
+        Map.get(assigns, :id) -> assigns.id
+        true -> "autocomplete-#{random_string()}"
+      end
+
+    assigns |> assign(:class, class) |> assign(id: id)
   end
 end

@@ -1,4 +1,25 @@
 @layer components {
+  .ripple {
+    position: absolute;
+    background: var(--ripple);
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    animation: ripple-effect 0.88s 1;
+    opacity: 0;
+  }
+
+  @keyframes ripple-effect {
+    0% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(100);
+      opacity: 0;
+    }
+  }
+
   .tap-highlight-transparent {
     -webkit-tap-highlight-color: transparent;
   }
@@ -33,5 +54,9 @@
 
   .transition-opacity-margin {
     transition-property: margin, opacity;
+  }
+
+  .ring-offset-background {
+    --tw-ring-offset-color: hsl(var(--background));
   }
 }
