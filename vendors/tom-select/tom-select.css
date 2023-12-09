@@ -416,7 +416,7 @@
   /* cursor: text; */
 }
 
-.ts-hidden-accessible {
+/* .ts-hidden-accessible {
   border: 0 !important;
   clip: rect(0 0 0 0) !important;
   -webkit-clip-path: inset(50%) !important;
@@ -426,5 +426,5 @@
   position: absolute !important;
   width: 1px !important;
   white-space: nowrap !important;
-}
+} */
 /*# sourceMappingURL=tom-select.css.map */

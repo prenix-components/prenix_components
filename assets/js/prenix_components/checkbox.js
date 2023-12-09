@@ -18,10 +18,14 @@ const initCheckbox = (
     $input.addEventListener('change', (e) => {
       const $c = e.target.closest('[data-checkbox]')
       const $polyline = $c.querySelector('polyline')
-      setSelected({
-        boolean: e.target.checked,
-        wrapper: $c,
-        polyline: $polyline,
+      const $input = $c.querySelector('input[type="checkbox"]')
+
+      setTimeout(() => {
+        setSelected({
+          boolean: $input.checked,
+          wrapper: $c,
+          polyline: $polyline,
+        })
       })
     })
 

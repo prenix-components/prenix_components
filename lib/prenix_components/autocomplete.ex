@@ -6,12 +6,12 @@ defmodule PrenixComponents.Autocomplete do
   attr :options, :list, required: true
   attr :id, :string
   attr :value, :any, default: nil
+  attr :type, :string, default: "single", values: ~w(single multiple tags)
   attr :label_text, :string, default: nil
   attr :helper_text, :string, default: nil
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
   attr :allow_blank, :boolean, default: false
-  attr :multiple, :boolean, default: false
   attr :class, :string, default: nil
   attr :placeholder, :string, default: nil
   slot :label
@@ -29,7 +29,7 @@ defmodule PrenixComponents.Autocomplete do
       data-disabled={@disabled}
       data-autocomplete
       data-allow-blank={@allow_blank}
-      data-multiple={@multiple}
+      data-type={@type}
     >
       <div class="field-wrapper">
         <%= if @label_text do %>
@@ -47,31 +47,45 @@ defmodule PrenixComponents.Autocomplete do
             </div>
           <% end %>
 
-          <select
-            class="autocomplete-select"
-            id={@id}
-            autocomplete="off"
-            placeholder={@placeholder}
-            disabled={@disabled}
-            multiple={@multiple}
-          >
-            <option value=""><%= @placeholder %></option>
-
-            <option
-              :for={option <- @options}
-              value={option.value}
-              selected={
-                if(@multiple && is_list(@value),
-                  do: Enum.member?(@value, option.value),
-                  else: option.value == @value
-                )
-              }
-              disabled={Map.get(option, :disabled)}
-              data-template={Map.get(option, :template)}
+          <%= if @type == "tags" do %>
+            <input
+              type="text"
+              class="autocomplete-original-input"
+              id={@id}
+              autocomplete="off"
+              placeholder={@placeholder}
+              disabled={@disabled}
+              value={if(is_list(@value), do: Enum.join(@value, ","), else: @value)}
+              data-original-input
+            />
+          <% else %>
+            <select
+              class="autocomplete-original-input"
+              id={@id}
+              autocomplete="off"
+              placeholder={@placeholder}
+              disabled={@disabled}
+              multiple={@type === "multiple"}
+              data-original-input
             >
-              <%= option.name %>
-            </option>
-          </select>
+              <option value=""><%= @placeholder %></option>
+
+              <option
+                :for={option <- @options}
+                value={option.value}
+                selected={
+                  if(@type == "multiple" && is_list(@value),
+                    do: Enum.member?(@value, option.value),
+                    else: option.value == @value
+                  )
+                }
+                disabled={Map.get(option, :disabled)}
+                data-template={Map.get(option, :template)}
+              >
+                <%= option.name %>
+              </option>
+            </select>
+          <% end %>
 
           <%= if length(@end_content) > 0 do %>
             <div class="field-input-end-content">
@@ -99,8 +113,8 @@ defmodule PrenixComponents.Autocomplete do
   defp set_assigns(assigns) do
     class =
       combine_class([
-        "field",
-        "autocomplete",
+        "field autocomplete",
+        "autocomplete-#{assigns.type}",
         "#{assigns.class}"
       ])
 

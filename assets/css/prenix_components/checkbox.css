@@ -40,10 +40,6 @@
     @apply after:scale-100 after:opacity-100;
   }
 
-  .checkbox[data-pressed='true'] > .checkbox-checkmark-wrapper {
-    @apply scale-95;
-  }
-
   .checkbox > .checkbox-checkmark-wrapper > .checkbox-checkmark {
     @apply z-10 opacity-0 w-4 h-3 transition-opacity motion-reduce:transition-none;
   }

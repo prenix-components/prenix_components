@@ -1,13 +1,16 @@
+// import TomSelect from '../../../vendors/tom-select/tom-select.base'
 import TomSelect from '../../../vendors/tom-select/tom-select.base.min'
 import no_active_items from '../../../vendors/tom-select/no_active_items'
 import no_backspace_delete from '../../../vendors/tom-select/no_backspace_delete'
-
 import autocomplete_multiple from './autocomplete_multiple_plugin'
+
 import { setHasValue } from './utils'
 
 TomSelect.define('autocomplete_multiple', autocomplete_multiple)
 TomSelect.define('no_active_items', no_active_items)
 TomSelect.define('no_backspace_delete', no_backspace_delete)
+
+const selectOrInputSelector = '[data-original-input]'
 
 const buildDisplayText = (select) => {
   const textArr = []
@@ -27,92 +30,94 @@ const buildDisplayText = (select) => {
   return text
 }
 
-const initAutocomplete = () => {
-  document.querySelectorAll('[data-autocomplete]').forEach(($a) => {
-    const hasLabel = $a.querySelector('label.field-label')
-    if (hasLabel) $a.dataset.hasLabel = true
+const tomSelectOptions = ({ type, allowBlank, selectOrInput, wrapper }) => {
+  const isMultiple = type === 'multiple'
+  const isTags = type === 'tags'
 
-    const $fw = $a.querySelector('.field-wrapper')
-
-    $fw.addEventListener('click', () => {
-      const $select = $fw.querySelector('select')
-      if ($select) {
-        const control = $select.tomselect
-        control.open()
-      }
-    })
-
-    const $select = $a.querySelector('select')
-
-    setHasValue({
-      value: $select.value,
-      wrapper: $a,
-    })
-
-    const allowBlank = 'allowBlank' in $a.dataset
-    const isMultiple = 'multiple' in $a.dataset
-
-    const instance = new TomSelect($select, {
-      allowEmptyOption: allowBlank,
-      plugins: {
+  if (isTags) {
+    return {
+      create: true,
+    }
+  } else {
+    let plugins = { no_backspace_delete: {} }
+    if (isMultiple) {
+      plugins = {
+        autocomplete_multiple: {},
+        no_active_items: {},
         no_backspace_delete: {},
-      },
-      ...(isMultiple && {
-        plugins: {
-          autocomplete_multiple: {},
-          no_active_items: {},
-          no_backspace_delete: {},
-        },
-      }),
+      }
+    }
+
+    return {
+      allowEmptyOption: allowBlank,
+      plugins,
       onInitialize: () => {
         if (isMultiple) {
-          const $multiItemDisplay = document.createElement('div')
-          $multiItemDisplay.classList.add('autocomplete-multi-item', 'item')
-          $multiItemDisplay.innerHTML = buildDisplayText($select)
-          const $tsControl = $a.querySelector('.ts-control')
+          const $selectedItemDisplay = document.createElement('div')
+          $selectedItemDisplay.classList.add(
+            'autocomplete-selected-items',
+            'item',
+          )
+          $selectedItemDisplay.innerHTML = buildDisplayText(selectOrInput)
+          const $tsControl = wrapper.querySelector('.ts-control')
 
           // Do not prepend because it messes with the $('.item') index
-          // within $('.ts-control') when removing an item
-          $tsControl.append($multiItemDisplay)
+          // within $('.ts-control') when removing an item.
+          $tsControl.append($selectedItemDisplay)
         }
+
+        const $controlInput = wrapper.querySelector(
+          '.ts-control input[role="combobox"]',
+        )
+
+        if ($controlInput.placeholder && $controlInput.placeholder.length > 0)
+          wrapper.dataset.hasPlaceholder = true
+
+        $controlInput.setAttribute('data-1p-ignore', '')
       },
-      onDropdownOpen: ($dropdownEl) => {
-        const $a = $dropdownEl.closest('[data-autocomplete]')
+      onDropdownOpen: ($tsDropdown) => {
+        const $a = $tsDropdown.closest('[data-autocomplete]')
         $a.dataset.focus = true
 
-        const $select = $fw.querySelector('select')
-        const $dropdownContent = $a.querySelector('.ts-dropdown-content')
-        const $input = $a.querySelector('.ts-control input[role="combobox"]')
+        const $selectOrInput = $a.querySelector(selectOrInputSelector)
+        const $tsDropdownContent = $a.querySelector('.ts-dropdown-content')
+        const $controlInput = $a.querySelector(
+          '.ts-control input[role="combobox"]',
+        )
 
         setTimeout(() => {
-          $dropdownContent.classList.add('open')
-          $input.placeholder = buildDisplayText($select)
+          $tsDropdownContent.classList.add('open')
+          $controlInput.placeholder = buildDisplayText($selectOrInput)
         })
       },
-      onDropdownClose: ($dropdownEl) => {
-        const $a = $dropdownEl.closest('[data-autocomplete]')
+      onDropdownClose: ($tsDropdown) => {
+        const $a = $tsDropdown.closest('[data-autocomplete]')
         $a.dataset.focus = false
-        const $select = $fw.querySelector('select')
-        $select.tomselect.blur()
-        setHasValue({ value: $select.value, wrapper: $a })
 
-        const $dropdownContent = $a.querySelector('.ts-dropdown-content')
-        $dropdownContent.classList.remove('open')
+        const $selectOrInput = $a.querySelector(selectOrInputSelector)
+
+        $selectOrInput.tomselect.blur()
+        setHasValue({ value: $selectOrInput.value, wrapper: $a })
+
+        const $tsDropdownContent = $a.querySelector('.ts-dropdown-content')
+        $tsDropdownContent.classList.remove('open')
       },
       onChange: (_value) => {
-        console.log('on change', _value)
-
         if (isMultiple) {
-          const $select = $a.querySelector('select')
-          const $multiItemDisplay = $a.querySelector('.autocomplete-multi-item')
-          const displayText = buildDisplayText($select)
+          const $selectOrInput = wrapper.querySelector(selectOrInputSelector)
+          const $selectedItemDisplay = wrapper.querySelector(
+            '.autocomplete-selected-items',
+          )
+          const displayText = buildDisplayText($selectOrInput)
 
-          $multiItemDisplay.innerHTML = displayText
+          $selectedItemDisplay.innerHTML = displayText
 
-          const $input = $a.querySelector('.ts-control input[role="combobox"]')
+          const $controlInput = wrapper.querySelector(
+            '.ts-control input[role="combobox"]',
+          )
 
           setTimeout(() => {
-            $input.placeholder = displayText
+            $controlInput.placeholder = displayText
           })
         }
       },
@@ -121,11 +126,9 @@ const initAutocomplete = () => {
           const $option = data.$option
 
           if ($option.dataset.template) {
-            return $option.dataset.template
-          } else if (isMultiple) {
-            return `<div><div class="autocomplete-multi-label">${$option.text}</div></div>`
+            return `<div class="autocomplete-option"><div class="autocomplete-option-label">${$option.dataset.template}</div></div>`
           } else {
-            return `<div>${$option.text}</div>`
+            return `<div class="autocomplete-option"><div class="autocomplete-option-label">${$option.text}</div></div>`
           }
         },
         item: function (data, _escape) {
@@ -136,19 +139,43 @@ const initAutocomplete = () => {
           }
         },
       },
+    }
+  }
+}
+
+const initAutocomplete = () => {
+  document.querySelectorAll('[data-autocomplete]').forEach(($a) => {
+    const $label = $a.querySelector('label.field-label')
+    const allowBlank = 'allowBlank' in $a.dataset
+    const type = $a.dataset.type
+
+    if ($label) $a.dataset.hasLabel = true
+
+    const $fw = $a.querySelector('.field-wrapper')
+
+    $fw.addEventListener('click', (e) => {
+      const $input = $fw.querySelector(selectOrInputSelector)
+      const tomSelectInstance = $input.tomselect
+      tomSelectInstance.open()
     })
 
-    const $controlInput = $a.querySelector('.ts-control input[role="combobox"]')
+    const $selectOrInput = $fw.querySelector(selectOrInputSelector)
 
-    // instance.on('change', (value) => {
-    //   console.log('INSTANCE on change ', value)
-    // })
+    setHasValue({
+      value: $selectOrInput.value,
+      wrapper: $a,
+    })
 
-    if ($controlInput.placeholder && $controlInput.placeholder.length > 0)
-      $a.dataset.hasPlaceholder = true
-
-    $controlInput.setAttribute('data-1p-ignore', '')
+    new TomSelect(
+      $selectOrInput,
+      tomSelectOptions({
+        allowBlank,
+        selectOrInput: $selectOrInput,
+        wrapper: $a,
+        type,
+      }),
+    )
   })
 }
 
-export { initAutocomplete }
+export { initAutocomplete, TomSelect }

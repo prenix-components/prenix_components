@@ -1,14 +1,13 @@
 import './ripple'
-import TomSelect from '../../vendors/tom-select/tom-select.base'
+// import TomSelect from '../../vendors/tom-select/tom-select.base'
 
 // import TomSelect from '../../vendors/tom-select/tom-select.base.min'
 // import TomSelect from '../../vendors/tom-select/tom-select.complete.min'
 
 import * as Popper from '../../vendors/popperjs/popper.min'
 import bootstrap from '../../vendors/bootstrap/bootstrap.min'
-import * as tempusdominus from '../../vendors/tempus-dominus/tempus-dominus.min'
 
-import { initAutocomplete } from './prenix_components/autocomplete'
+import { initAutocomplete, TomSelect } from './prenix_components/autocomplete'
 import { initCheckbox } from './prenix_components/checkbox'
 import { initCheckboxGroup } from './prenix_components/checkbox_group'
 
@@ -16,7 +15,6 @@ const prenixModules = {
   TomSelect,
   Popper,
   bootstrap,
-  tempusdominus,
 }
 
 const setHasValue = ({ value, wrapper }) => {
@@ -108,20 +106,6 @@ document.querySelectorAll('.dropdown-toggle').forEach(($dt) => {
     setTimeout(() => $menuInner.classList.add('open'))
   })
 
-  dr._parent.addEventListener('shown.bs.dropdown', async (e) => {
-    // const $target = e.target
-    // const dropdownInstance = bootstrap.Dropdown.getInstance($target)
-    // console.log('popper', dropdownInstance._popper)
-    // await dropdownInstance._popper.update()
-    // console.log('update popper')
-    // if (dropdownInstance) {
-    //   const popper = dropdownInstance._popper
-    //   if (popper) {
-    //     await popper.update()
-    //   }
-    // }
-  })
-
   dr._parent.addEventListener('hide.bs.dropdown', (e) => {
     const $target = e.target
     const $menuInner = $target
@@ -146,13 +130,6 @@ document.querySelectorAll('.dropdown-item').forEach(($di) => {
     e.stopPropagation()
 
     $di.dataset.hover = false
-  })
-})
-
-document.querySelectorAll('[data-datepicker]').forEach(($d) => {
-  const picker = new tempusdominus.TempusDominus($d, {
-    dateRange: true,
-    display: { sideBySide: true, viewMode: 'months' },
   })
 })
 

@@ -11,61 +11,123 @@
     );
     --autocomplete-dropdown: hsl(var(--content1));
     --autocomplete-dropdown-foreground: hsl(var(--content1-foreground));
+    --autocomplete-option-disabled: hsl(var(--neutral2-foreground));
   }
 
-  .field.autocomplete
+  .autocomplete
     > .field-wrapper
     > .field-input-wrapper
-    > .autocomplete-select {
-    @apply bg-transparent w-full;
+    > .autocomplete-original-input[data-original-input] {
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    @apply border-0 overflow-hidden p-0 absolute w-[1px] whitespace-nowrap bg-transparent;
   }
 
-  .ts-wrapper {
+  .autocomplete > .field-wrapper > .field-input-wrapper > .ts-wrapper {
     @apply w-full pr-5 text-sm;
   }
 
-  .ts-control {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-control {
     @apply w-full overflow-hidden relative box-border flex;
     @apply text-sm text-[--field-input];
   }
 
-  .ts-control > .item {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-control
+    > .item {
     @apply truncate w-full;
   }
 
-  .ts-control > input[role='combobox'] {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-control
+    > input[role='combobox'] {
     @apply w-full bg-transparent  placeholder:text-[--field-placeholder];
   }
 
-  .ts-dropdown {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown {
     @apply absolute top-[100%] left-0 w-full z-[1000] mt-6;
   }
 
-  .ts-dropdown > .ts-dropdown-content {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content {
     box-shadow: var(--shadow-md);
     @apply bg-[--autocomplete-dropdown] text-[--autocomplete-dropdown-foreground];
     @apply p-2 rounded-xl text-sm subpixel-antialiased outline-none box-border;
   }
 
-  .ts-dropdown > .ts-dropdown-content > .option {
+  .field
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option {
     @apply relative pl-2 pr-8 py-1.5 break-words;
     @apply cursor-pointer rounded-lg subpixel-antialiased;
     @apply tap-highlight-transparent outline-none;
   }
 
-  .ts-dropdown > .ts-dropdown-content > .option.active {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option.active {
     @apply bg-[--autocomplete-option-active] text-[--autocomplete-option-active-foreground];
   }
 
-  .ts-dropdown > .ts-dropdown-content > .option[aria-disabled='true'] {
-    @apply opacity-[--disabled-opacity] cursor-default;
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option[aria-disabled='true'] {
+    @apply opacity-[--disabled-opacity] cursor-default text-[--autocomplete-option-disabled];
   }
 
-  .ts-dropdown > .ts-dropdown-content > .option[data-selectable] > .highlight {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option.active[aria-disabled='true'] {
+    @apply bg-transparent;
+  }
+
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option[data-selectable]
+    > .highlight {
     @apply bg-[--autocomplete-option-highlight];
   }
 
-  .field.autocomplete > .field-wrapper > .field-input-wrapper:after {
+  .autocomplete > .field-wrapper > .field-input-wrapper:after {
     -webkit-mask-image: var(--autocomplete-dropdown-caret);
     mask-image: var(--autocomplete-dropdown-caret);
     background: var(--autocomplete-dropdown-caret-color);
@@ -73,17 +135,27 @@
     @apply w-5 h-5 transition-transform;
   }
 
-  .field.autocomplete[data-focus='true']
+  .autocomplete[data-focus='true']
     > .field-wrapper
     > .field-input-wrapper:after {
     @apply rotate-180;
   }
 
-  .field.autocomplete[data-has-label='true'] .ts-dropdown {
+  .autocomplete[data-has-label='true']
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown {
     @apply mt-4;
   }
 
-  .ts-dropdown > .ts-dropdown-content > .option.selected:after {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option.selected:after {
     -webkit-mask-image: var(--autocomplete-option-active-checkmark);
     mask-image: var(--autocomplete-option-active-checkmark);
     background: var(--autocomplete-option-active-checkmark-color);
@@ -91,57 +163,139 @@
     @apply top-[50%] -translate-y-[50%];
   }
 
-  .ts-wrapper.dropdown-active > .ts-control > .item,
-  .ts-wrapper.input-active > .ts-control > .item {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.dropdown-active
+    > .ts-control
+    > .item,
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.input-active
+    > .ts-control
+    > .item {
     @apply max-w-[0%];
   }
 
-  .ts-dropdown > .ts-dropdown-content {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content {
     @apply opacity-0 scale-95 transition-transform-opacity duration-150 origin-[left_top] ease-out;
   }
 
-  .ts-dropdown > .ts-dropdown-content.open {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content.open {
     @apply opacity-100 scale-100 ease-in;
   }
 
   /* Blank option */
-  .ts-dropdown > .ts-dropdown-content > .option.selected[data-value='']:after {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option.selected[data-value='']:after {
     display: none;
   }
 
-  .ts-dropdown > .ts-dropdown-content > .option[data-value=''] {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option[data-value=''] {
     @apply min-h-[2rem];
   }
 
-  .ts-control > .item[data-value=''] {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper
+    > .ts-control
+    > .item[data-value=''] {
     @apply text-[--field-placeholder];
   }
 
   /* Multiple */
-  .ts-wrapper.multi > .ts-control > .item:not(.autocomplete-multi-item) {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.multi
+    > .ts-control
+    > .item:not(.autocomplete-selected-items) {
     @apply hidden;
   }
 
-  .ts-wrapper.multi:not(.input-active) > .ts-control > input[role='combobox'] {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.multi:not(.input-active)
+    > .ts-control
+    > input[role='combobox'] {
     @apply opacity-0 absolute left-[-10000px];
   }
 
-  .ts-dropdown.multi > .ts-dropdown-content > .option.selected:after {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.multi
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option.selected:after {
     @apply hidden;
   }
 
-  .ts-dropdown.multi > .ts-dropdown-content > .option {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.multi
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option {
     @apply pr-2 flex;
   }
 
-  .ts-dropdown.multi > .ts-dropdown-content > .option > .checkbox {
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.multi
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option
+    > .checkbox {
     --checkbox-border: hsl(var(--foreground));
   }
 
-  .ts-dropdown.multi
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.multi
+    > .ts-dropdown
+    > .ts-dropdown-content
+    > .option[aria-disabled='true']
+    > .checkbox {
+    --checkbox-border: var(--autocomplete-option-disabled);
+    @apply pointer-events-none;
+  }
+
+  .autocomplete
+    > .field-wrapper
+    > .field-input-wrapper
+    > .ts-wrapper.multi
+    > .ts-dropdown
     > .ts-dropdown-content
     > .option
-    > .autocomplete-multi-label {
+    > .autocomplete-option-label {
     @apply break-words flex-1 min-w-0;
   }
 }

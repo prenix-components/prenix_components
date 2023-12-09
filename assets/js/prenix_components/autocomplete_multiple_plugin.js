@@ -71,23 +71,11 @@ const checkboxTemplate = (id, label) => {
   </span>`
 }
 
-export default function (userOptions) {
+export default function (_userOptions) {
   var self = this
   var orig_onOptionSelect = self.onOptionSelect
 
   self.settings.hideSelected = false
-
-  const cbOptions = Object.assign(
-    {
-      // so that the user may add different ones as well
-      className: 'autocomplete-multi-checkbox',
-
-      // the following default to the historic plugin's values
-      checkedClassNames: undefined,
-      uncheckedClassNames: undefined,
-    },
-    userOptions,
-  )
 
   var UpdateCheckbox = function (checkbox, toCheck) {
     if (toCheck) {
@@ -97,6 +85,8 @@ export default function (userOptions) {
     }
 
     const event = new Event('change')
+
+    console.log('checkbox IN UPDATECHECKBOX', checkbox)
     checkbox.dispatchEvent(event)
   }
 
@@ -113,21 +103,16 @@ export default function (userOptions) {
       const id = `autocomplete-checkbox-${randomString()}-${timestamp}`
       $checkbox.setAttribute('data-checkbox', '')
       $checkbox.setAttribute('for', id)
-      $checkbox.classList.add('checkbox', cbOptions.className)
+      $checkbox.classList.add('checkbox')
       $checkbox.innerHTML = checkboxTemplate(id, label)
 
       const hashed = hash_key(data[self.settings.valueField])
       const isSelected = !!(hashed && self.items.indexOf(hashed) > -1)
 
       const $checkboxEl = $checkbox.querySelector(checkboxQuery)
-
       UpdateCheckbox($checkboxEl, isSelected)
-
-      $checkboxEl.addEventListener('click', function (evt) {
-        preventDefault(evt)
-      })
-
       initCheckbox([$checkbox])
+
       rendered.prepend($checkbox)
       return rendered
     }
