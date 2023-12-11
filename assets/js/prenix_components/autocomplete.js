@@ -151,8 +151,8 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       },
       item: (data, _escape) => {
         if (isTags) {
-          return `<div class="badge badge-default badge-solid badge-md">
-          <span class="badge-content">
+          return `<div class="chip chip-default chip-radius-md chip-solid chip-md">
+          <span class="chip-content">
             ${data.text}
           </span>
         </div>`
@@ -165,6 +165,17 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       },
       dropdown: () => {
         return '<div class="autocomplete-dropdown"></div>'
+      },
+      option_create: function (data, escape) {
+        return `
+          <div class="autocomplete-create create">
+            Add
+            <div class="chip chip-default chip-radius-md chip-solid chip-sm">
+              <span class="chip-content">
+                ${escape(data.input)}
+              </span>
+            </div>
+        </div>`
       },
     },
   }

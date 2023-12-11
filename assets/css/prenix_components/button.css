@@ -1,10 +1,52 @@
 @layer components {
+  .btn-default {
+    --button: hsl(var(--default));
+    --button-foreground: hsl(var(--default-foreground));
+    --button-soft: hsl(var(--default) / 0.4);
+    --button-soft-foreground: hsl(var(--default-foreground));
+  }
+
+  .btn-primary {
+    --button: hsl(var(--primary));
+    --button-foreground: hsl(var(--primary-foreground));
+    --button-soft: hsl(var(--primary) / 0.2);
+    --button-soft-foreground: hsl(var(--primary));
+  }
+
+  .btn-secondary {
+    --button: hsl(var(--secondary));
+    --button-foreground: hsl(var(--secondary-foreground));
+    --button-soft: hsl(var(--secondary) / 0.2);
+    --button-soft-foreground: hsl(var(--secondary));
+  }
+
+  .btn-success {
+    --button: hsl(var(--success));
+    --button-foreground: hsl(var(--success-foreground));
+    --button-soft: hsl(var(--success) / 0.2);
+    --button-soft-foreground: hsl(var(--success));
+  }
+
+  .btn-warning {
+    --button: hsl(var(--warning));
+    --button-foreground: hsl(var(--warning-foreground));
+    --button-soft: hsl(var(--warning) / 0.2);
+    --button-soft-foreground: hsl(var(--warning));
+  }
+
+  .btn-danger {
+    --button: hsl(var(--danger));
+    --button-foreground: hsl(var(--danger-foreground));
+    --button-soft: hsl(var(--danger) / 0.2);
+    --button-soft-foreground: hsl(var(--danger));
+  }
+
   .btn {
     @apply z-0 relative inline-flex items-center justify-center box-border appearance-none;
     @apply select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden;
     @apply tap-highlight-transparent outline-none;
     @apply focus-visible:outline-offset-2 focus-visible:outline-2;
-    @apply rounded-xl transition-transform-colors-opacity motion-reduce:transition-none;
+    @apply transition-transform-colors-opacity motion-reduce:transition-none;
     @apply hover:opacity-80;
   }
 
@@ -70,7 +112,19 @@
     @apply opacity-[--disabled-opacity] pointer-events-none;
   }
 
-  .btn-rounded {
+  .btn-radius-sm {
+    @apply rounded-md;
+  }
+
+  .btn-radius-md {
+    @apply rounded-lg;
+  }
+
+  .btn-radius-lg {
+    @apply rounded-xl;
+  }
+
+  .btn-radius-full {
     @apply rounded-full;
   }
 
@@ -88,48 +142,6 @@
 
   .btn-icon.btn-lg {
     @apply w-12 h-12 min-w-[3rem];
-  }
-
-  .btn-default {
-    --button: hsl(var(--default));
-    --button-foreground: hsl(var(--default-foreground));
-    --button-soft: hsl(var(--default) / 0.4);
-    --button-soft-foreground: hsl(var(--default-foreground));
-  }
-
-  .btn-primary {
-    --button: hsl(var(--primary));
-    --button-foreground: hsl(var(--primary-foreground));
-    --button-soft: hsl(var(--primary) / 0.2);
-    --button-soft-foreground: hsl(var(--primary));
-  }
-
-  .btn-secondary {
-    --button: hsl(var(--secondary));
-    --button-foreground: hsl(var(--secondary-foreground));
-    --button-soft: hsl(var(--secondary) / 0.2);
-    --button-soft-foreground: hsl(var(--secondary));
-  }
-
-  .btn-success {
-    --button: hsl(var(--success));
-    --button-foreground: hsl(var(--success-foreground));
-    --button-soft: hsl(var(--success) / 0.2);
-    --button-soft-foreground: hsl(var(--success));
-  }
-
-  .btn-warning {
-    --button: hsl(var(--warning));
-    --button-foreground: hsl(var(--warning-foreground));
-    --button-soft: hsl(var(--warning) / 0.2);
-    --button-soft-foreground: hsl(var(--warning));
-  }
-
-  .btn-danger {
-    --button: hsl(var(--danger));
-    --button-foreground: hsl(var(--danger-foreground));
-    --button-soft: hsl(var(--danger) / 0.2);
-    --button-soft-foreground: hsl(var(--danger));
   }
 
   .btn-icon.btn-sm .btn-content .icon {

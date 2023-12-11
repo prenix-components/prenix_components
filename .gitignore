@@ -24,3 +24,5 @@ prenix_components-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+/assets/node_modules/

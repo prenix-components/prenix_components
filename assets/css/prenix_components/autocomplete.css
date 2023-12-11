@@ -1,13 +1,14 @@
 @layer components {
   .autocomplete-base {
-    --autocomplete-placeholder: hsl(var(--muted-foreground));
+    --autocomplete-placeholder: hsl(var(--neutral1-foreground));
     --autocomplete-input: hsl(var(--foreground));
-    --autocomplete-label: hsl(var(--muted-foreground-2));
+    --autocomplete-label: hsl(var(--neutral2-foreground));
     --autocomplete-label-focus: hsl(var(--foreground));
-    --autocomplete-helper: hsl(var(--muted-foreground-2));
+    --autocomplete-helper: hsl(var(--neutral2-foreground));
     --autocomplete-wrapper-border: hsl(var(--default) / 0.5);
     --autocomplete-wrapper-border-hover: hsl(var(--default));
     --autocomplete-wrapper-border-focus: hsl(var(--foreground));
+    --autocomplete-no-results: hsl(var(--neutral2-foreground));
     --autocomplete-option-active: hsl(var(--default));
     --autocomplete-option-active-foreground: hsl(var(--default-foreground));
     --autocomplete-option-highlight: hsl(var(--primary) / 0.4);
@@ -23,14 +24,11 @@
   }
 
   .ts-wrapper {
-    @apply relative w-full min-h-[20px];
+    @apply relative w-full;
   }
 
   [data-original-input] {
-    clip: rect(0 0 0 0) !important;
-    -webkit-clip-path: inset(50%) !important;
-    clip-path: inset(50%) !important;
-    @apply border-0 overflow-hidden p-0 absolute w-[1px] whitespace-nowrap bg-transparent;
+    @apply bg-transparent visually-hidden;
   }
 
   .autocomplete-wrapper {
@@ -129,12 +127,12 @@
   }
 
   .autocomplete-base .no-results {
-    @apply px-2 py-1.5;
+    @apply px-2 py-1.5 text-[--autocomplete-no-results];
   }
 
   .autocomplete-base .autocomplete-option,
-  .autocomplete-base .create {
-    @apply relative px-2 py-1.5 break-words;
+  .autocomplete-base .autocomplete-create {
+    @apply relative flex px-2 py-1.5 break-words;
     @apply cursor-pointer rounded-lg subpixel-antialiased;
     @apply tap-highlight-transparent outline-none;
   }
@@ -217,10 +215,6 @@
     @apply hidden;
   }
 
-  .autocomplete-item[data-value=''] {
-    @apply hidden;
-  }
-
   .autocomplete-option[data-value=''] {
     @apply min-h-[2rem] pr-2;
   }
@@ -258,8 +252,8 @@
   }
 
   .autocomplete-base[data-type='tags'] .autocomplete-label {
-    @apply pointer-events-auto scale-[0.85] self-start static;
-    @apply mt-2;
+    @apply self-start static mt-2;
+    @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
   }
 
   .autocomplete-base[data-type='tags'] .autocomplete-inner-wrapper {
@@ -270,7 +264,19 @@
     @apply h-5 w-5 min-w-[auto] -ml-1;
   }
 
-  .autocomplete-base[data-type='tags'] .create.active {
-    @apply bg-[--autocomplete-option-active] text-[--autocomplete-option-active-foreground];
+  .autocomplete-base[data-type='tags'] .autocomplete-create {
+    @apply flex items-center gap-2;
+  }
+
+  .autocomplete-base[data-type='tags'] .autocomplete-create .chip {
+    @apply flex-1 min-w-[1px];
+  }
+
+  .autocomplete-base[data-type='tags'] .chip {
+    @apply w-full;
+  }
+
+  .autocomplete-base[data-type='tags'] .chip-content {
+    @apply truncate;
   }
 }

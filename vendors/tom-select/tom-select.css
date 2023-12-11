@@ -159,12 +159,12 @@
   background-color: #f5fafd;
   color: #495c68;
 } */
-.ts-dropdown .active.create {
+/* .ts-dropdown .active.create {
   color: #495c68;
 }
 .ts-dropdown .create {
   color: rgba(48, 48, 48, 0.5);
-}
+} */
 .ts-dropdown .spinner {
   display: inline-block;
   width: 30px;

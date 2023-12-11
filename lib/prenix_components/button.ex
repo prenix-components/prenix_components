@@ -31,9 +31,8 @@ defmodule PrenixComponents.Button do
   attr :color, :string, default: "default", values: @colors
   attr :variant, :string, default: "solid", values: @variants
   attr :size, :string, default: "md", values: @sizes
-
   attr :icon, :boolean, default: false
-  attr :rounded, :boolean, default: false
+  attr :radius, :string, default: "lg", values: ~w(sm md lg full)
   attr :loading, :boolean, default: false
   attr :disabled, :boolean, default: false
   attr :class, :string, default: nil
@@ -86,8 +85,8 @@ defmodule PrenixComponents.Button do
         "btn-#{assigns.color}",
         "btn-#{assigns.variant}",
         "btn-#{assigns.size}",
+        "btn-radius-#{assigns.radius}",
         if(assigns.icon, do: "btn-icon", else: nil),
-        if(assigns.rounded, do: "btn-rounded", else: nil),
         if(assigns.disabled, do: "btn-disabled", else: nil),
         if(assigns.loading, do: "btn-loading", else: nil),
         assigns.class

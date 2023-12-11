@@ -3,10 +3,10 @@ defmodule PrenixComponents do
     quote do
       import PrenixComponents.{
         Autocomplete,
-        Badge,
         Button,
         CheckboxGroup,
         Checkbox,
+        Chip,
         Divider,
         Dropdown,
         Icon,

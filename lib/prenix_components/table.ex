@@ -3,17 +3,19 @@ defmodule PrenixComponents.Table do
   import PrenixComponents.Helpers
 
   attr :rows, :list, required: true
-  attr :class, :string, default: nil
-  attr :wrapper_class, :string, default: nil
+  attr :base_class, :string, default: nil
+  attr :table_class, :string, default: nil
+  attr :th_class, :string, default: nil
+  attr :td_class, :string, default: nil
   attr :empty_state_message, :string, default: nil
 
   slot :header do
-    attr :class, :string, doc: "Additional CSS class"
+    attr :class, :string
   end
 
   slot :col, required: true do
     attr :label, :string
-    attr :class, :string, doc: "Additional CSS class"
+    attr :class, :string
   end
 
   def table(assigns) do
@@ -21,14 +23,14 @@ defmodule PrenixComponents.Table do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@wrapper_class}>
-      <table class={@class}>
+    <div class={@base_class}>
+      <table class={@table_class}>
         <%!-- <caption :if={length(@caption) > 0} class="table-caption">
         <%= render_slot(@caption) %>
       </caption> --%>
         <thead :if={@header} class="thead [&>tr]:first:rounded-lg">
           <tr class="tr">
-            <th :for={header <- @header} class={["th group", Map.get(header, :class)]}>
+            <th :for={header <- @header} class={[@th_class, Map.get(header, :class)]}>
               <%= render_slot(header) %>
             </th>
           </tr>
@@ -36,7 +38,7 @@ defmodule PrenixComponents.Table do
         <tbody class="tbody">
           <%= if length(@rows) > 0 do %>
             <tr :for={row <- @rows} class="tr">
-              <td :for={{col, _i} <- Enum.with_index(@col)} class="td">
+              <td :for={{col, _i} <- Enum.with_index(@col)} class={[@td_class, Map.get(col, :class)]}>
                 <%= render_slot(col, row) %>
               </td>
             </tr>
@@ -58,17 +60,22 @@ defmodule PrenixComponents.Table do
   end
 
   defp set_assigns(assigns) do
-    wrapper_class =
-      combine_class(["table-wrapper", assigns.wrapper_class])
+    base_class =
+      combine_class(["table-base", assigns.base_class])
 
-    class =
-      combine_class([
-        "table",
-        assigns.class
-      ])
+    table_class =
+      combine_class(["table", assigns.table_class])
+
+    th_class =
+      combine_class(["th group", assigns.th_class])
+
+    td_class =
+      combine_class(["td", assigns.td_class])
 
     assigns
-    |> assign(:wrapper_class, wrapper_class)
-    |> assign(:class, class)
+    |> assign(:base_class, base_class)
+    |> assign(:table_class, table_class)
+    |> assign(:th_class, th_class)
+    |> assign(:td_class, td_class)
   end
 end

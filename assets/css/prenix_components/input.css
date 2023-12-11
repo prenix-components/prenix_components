@@ -1,10 +1,10 @@
 @layer components {
   .input-base {
-    --input-placeholder: hsl(var(--muted-foreground));
+    --input-placeholder: hsl(var(--neutral1-foreground));
     --input: hsl(var(--foreground));
-    --input-label: hsl(var(--muted-foreground-2));
+    --input-label: hsl(var(--neutral2-foreground));
     --input-label-focus: hsl(var(--foreground));
-    --input-helper: hsl(var(--muted-foreground-2));
+    --input-helper: hsl(var(--neutral2-foreground));
     --input-wrapper-border: hsl(var(--default) / 0.5);
     --input-wrapper-border-hover: hsl(var(--default));
     --input-wrapper-border-focus: hsl(var(--foreground));

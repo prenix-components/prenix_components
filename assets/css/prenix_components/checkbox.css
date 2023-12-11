@@ -1,27 +1,24 @@
 @layer components {
-  .checkbox {
+  .checkbox-base {
     --checkbox-border: hsl(var(--default));
+    --checkbox-label: hsl(var(--foreground));
+    --checkbox-checkmark-foreground: hsl(var(--primary-foreground));
+    --checkbox-checkmark: hsl(var(--primary));
     @apply relative max-w-fit inline-flex items-center justify-start cursor-pointer;
     @apply tap-highlight-transparent p-2 -m-2 select-none;
   }
 
-  .checkbox > .checkbox-label {
-    @apply relative text-[hsl(var(--foreground))] select-none text-base;
+  .checkbox-label {
+    @apply relative text-[--checkbox-label] select-none text-base;
     @apply transition-colors-opacity before:transition-width motion-reduce:transition-none;
     @apply inline-flex items-center justify-center gap-1 -ml-1;
   }
 
-  .checkbox > .checkbox-input-wrapper {
-    clip: rect(0px, 0px, 0px, 0px);
-    clip-path: inset(50%);
-    @apply border-none border-0 h-[1px] -m-[1px] overflow-hidden p-0 absolute w-[1px] whitespace-nowrap;
-  }
-
-  .checkbox > .checkbox-checkmark-wrapper {
+  .checkbox {
     @apply relative inline-flex items-center justify-center flex-shrink-0 overflow-hidden;
-    @apply outline-none after:bg-primary w-5 h-5 mr-2;
+    @apply outline-none after:bg-[--checkbox-checkmark] w-5 h-5 mr-2;
     @apply rounded-[calc(12px*0.6)] motion-reduce:transition-none;
-    @apply transition-transform text-[hsl(var(--primary-foreground))];
+    @apply transition-transform text-[--checkbox-checkmark-foreground];
 
     @apply before:content-[''] before:absolute before:inset-0 before:border-solid before:border-2;
     @apply before:rounded-[calc(12px*0.6)] before:box-border before:border-[--checkbox-border];
@@ -29,36 +26,34 @@
 
     @apply after:content-[''] after:absolute after:inset-0 after:scale-50 after:opacity-0 after:origin-center;
     @apply after:!ease-linear after:!duration-200 after:transition-transform-opacity after:rounded-[calc(12px*0.6)];
-    @apply after:text-[hsl(var(--primary-foreground))];
+    @apply after:text-[--checkbox-checkmark-foreground];
   }
 
-  .checkbox[data-focus='true'] > .checkbox-checkmark-wrapper {
-    @apply ring-2 ring-offset-2 ring-primary ring-offset-background;
+  .checkbox-base[data-focus='true'] .checkbox {
+    @apply ring-2 ring-offset-2 ring-[--checkbox-checkmark] ring-offset-background;
   }
 
-  .checkbox[data-selected='true'] > .checkbox-checkmark-wrapper {
+  .checkbox-base[data-selected='true'] .checkbox {
     @apply after:scale-100 after:opacity-100;
   }
 
-  .checkbox > .checkbox-checkmark-wrapper > .checkbox-checkmark {
+  .checkbox-checkmark {
     @apply z-10 opacity-0 w-4 h-3 transition-opacity motion-reduce:transition-none;
   }
 
-  .checkbox[data-selected='true']
-    > .checkbox-checkmark-wrapper
-    > .checkbox-checkmark {
+  .checkbox-base[data-selected='true'] .checkbox-checkmark {
     @apply opacity-100;
   }
 
-  .checkbox[data-selected='true'] > .checkbox-checkmark-wrapper {
+  .checkbox-base[data-selected='true'] .checkbox {
     @apply before:border-transparent;
   }
 
-  .checkbox[data-invalid] > .checkbox-checkmark-wrapper {
+  .checkbox-base[data-invalid] .checkbox {
     @apply before:border-danger;
   }
 
-  .checkbox[data-disabled] {
+  .checkbox-base[data-disabled] {
     @apply opacity-50 pointer-events-none;
   }
 }

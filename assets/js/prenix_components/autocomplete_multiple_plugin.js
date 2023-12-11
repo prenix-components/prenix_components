@@ -43,7 +43,7 @@ const get_hash = (value) => {
 const checkboxQuery = 'input[type="checkbox"]'
 
 const checkboxTemplate = (id, label) => {
-  return `<div class="checkbox-input-wrapper">
+  return `<div class="visually-hidden">
     <input
       id=${id}
       aria-labelledby="${id}-label"
@@ -51,7 +51,7 @@ const checkboxTemplate = (id, label) => {
       aria-label="${label}"
     />
   </div>
-  <span aria-hidden="true" class="checkbox-checkmark-wrapper">
+  <span aria-hidden="true" class="checkbox">
     <svg aria-hidden="true" role="presentation" viewBox="0 0 17 18" class="checkbox-checkmark">
       <polyline
         fill="none"
@@ -101,7 +101,7 @@ export default function (_userOptions) {
       const id = `autocomplete-checkbox-${randomString()}-${timestamp}`
       $checkbox.setAttribute('data-checkbox', '')
       $checkbox.setAttribute('for', id)
-      $checkbox.classList.add('checkbox', 'autocomplete-option-checkbox')
+      $checkbox.classList.add('checkbox-base', 'autocomplete-option-checkbox')
       $checkbox.innerHTML = checkboxTemplate(id, label)
 
       const hashed = hash_key(data[self.settings.valueField])

@@ -1,0 +1,105 @@
+@layer components {
+  .chip-default {
+    --chip: hsl(var(--default));
+    --chip-foreground: hsl(var(--default-foreground));
+    --chip-soft: hsl(var(--default) / 0.4);
+    --chip-soft-foreground: hsl(var(--default-foreground));
+  }
+
+  .chip-primary {
+    --chip: hsl(var(--primary));
+    --chip-foreground: hsl(var(--primary-foreground));
+    --chip-soft: hsl(var(--primary) / 0.2);
+    --chip-soft-foreground: hsl(var(--primary));
+  }
+
+  .chip-secondary {
+    --chip: hsl(var(--secondary));
+    --chip-foreground: hsl(var(--secondary-foreground));
+    --chip-soft: hsl(var(--secondary) / 0.2);
+    --chip-soft-foreground: hsl(var(--secondary));
+  }
+
+  .chip-success {
+    --chip: hsl(var(--success));
+    --chip-foreground: hsl(var(--success-foreground));
+    --chip-soft: hsl(var(--success) / 0.2);
+    --chip-soft-foreground: hsl(var(--success));
+  }
+
+  .chip-warning {
+    --chip: hsl(var(--warning));
+    --chip-foreground: hsl(var(--warning-foreground));
+    --chip-soft: hsl(var(--warning) / 0.2);
+    --chip-soft-foreground: hsl(var(--warning));
+  }
+
+  .chip-danger {
+    --chip: hsl(var(--danger));
+    --chip-foreground: hsl(var(--danger-foreground));
+    --chip-soft: hsl(var(--danger) / 0.2);
+    --chip-soft-foreground: hsl(var(--danger));
+  }
+
+  .chip {
+    @apply relative max-w-fit inline-flex items-center justify-between;
+    @apply whitespace-nowrap box-border;
+  }
+
+  .chip-content {
+    @apply flex-1 text-inherit font-normal px-2;
+  }
+
+  .chip-sm {
+    @apply px-1 h-6 text-xs;
+  }
+
+  .chip-sm > .chip-content {
+    @apply px-1;
+  }
+
+  .chip-md {
+    @apply px-1 h-7 text-sm;
+  }
+
+  .chip-md > .chip-content {
+    @apply px-2;
+  }
+
+  .chip-lg {
+    @apply px-2 h-8 text-base;
+  }
+
+  .chip-lg > .chip-content {
+    @apply px-2;
+  }
+
+  .chip-solid {
+    @apply bg-[--chip];
+    @apply text-[--chip-foreground];
+  }
+
+  .chip-outline {
+    @apply bg-transparent border-[--chip] text-[--chip-soft-foreground] border-2;
+  }
+
+  .chip-soft {
+    @apply text-[--chip-soft-foreground] bg-[--chip-soft];
+  }
+
+  .chip-radius-full {
+    @apply rounded-full;
+  }
+
+  .chip-radius-sm {
+    @apply rounded-md;
+  }
+
+  .chip-radius-md {
+    @apply rounded-lg;
+  }
+
+  .chip-radius-lg {
+    @apply rounded-xl;
+  }
+}

@@ -1,47 +1,51 @@
-import { setSelected } from './utils'
+const setSelected = ({ boolean, $wrapper, $polyline }) => {
+  console.log({ $wrapper })
+  console.log({ $polyline })
+
+  if (boolean) {
+    $wrapper.dataset.selected = true
+    $polyline.setAttribute('stroke-dashoffset', 44)
+  } else {
+    $polyline.setAttribute('stroke-dashoffset', 66)
+    $wrapper.dataset.selected = false
+  }
+}
 
 const initCheckbox = (
   collection = document.querySelectorAll('[data-checkbox]'),
 ) => {
-  collection.forEach(($c) => {
-    const $input = $c.querySelector('input[type="checkbox"]')
-    const $polyline = $c.querySelector('polyline')
-    const $label = $c.querySelector('.checkbox-label')
+  collection.forEach(($baseEl) => {
+    const $input = $baseEl.querySelector('input[type="checkbox"]')
+    const $polyline = $baseEl.querySelector('polyline')
+    const $label = $baseEl.querySelector('.checkbox-label')
 
     if ($label) {
       const labelText = $label.textContent.trim()
       $input.setAttribute('aria-label', labelText)
     }
 
-    setSelected({ boolean: $input.checked, wrapper: $c, polyline: $polyline })
+    setSelected({ boolean: $input.checked, $wrapper: $baseEl, $polyline })
 
-    $input.addEventListener('change', (e) => {
-      const $c = e.target.closest('[data-checkbox]')
-      const $polyline = $c.querySelector('polyline')
-      const $input = $c.querySelector('input[type="checkbox"]')
-
+    $input.addEventListener('change', () => {
       setTimeout(() => {
         setSelected({
           boolean: $input.checked,
-          wrapper: $c,
-          polyline: $polyline,
+          $wrapper: $baseEl,
+          $polyline,
         })
       })
     })
 
-    $input.addEventListener('click', (e) => {
-      const $c = e.target.closest('[data-checkbox]')
-      $c.dataset.focus = false
+    $input.addEventListener('click', () => {
+      $baseEl.dataset.focus = false
     })
 
-    $input.addEventListener('focus', (e) => {
-      const $c = e.target.closest('[data-checkbox]')
-      $c.dataset.focus = true
+    $input.addEventListener('focus', () => {
+      $baseEl.dataset.focus = true
     })
 
-    $input.addEventListener('blur', (e) => {
-      const $c = e.target.closest('[data-checkbox]')
-      $c.dataset.focus = false
+    $input.addEventListener('blur', () => {
+      $baseEl.dataset.focus = false
     })
   })
 }

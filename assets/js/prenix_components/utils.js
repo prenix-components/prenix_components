@@ -6,16 +6,6 @@ const setHasValue = ({ value, $wrapper }) => {
   }
 }
 
-const setSelected = ({ boolean, wrapper, polyline }) => {
-  if (boolean) {
-    wrapper.dataset.selected = true
-    polyline.setAttribute('stroke-dashoffset', 44)
-  } else {
-    polyline.setAttribute('stroke-dashoffset', 66)
-    wrapper.dataset.selected = false
-  }
-}
-
 const CHARACTERS =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
@@ -29,4 +19,4 @@ const randomString = (length = 10) => {
   return result
 }
 
-export { setHasValue, setSelected, randomString }
+export { setHasValue, randomString }

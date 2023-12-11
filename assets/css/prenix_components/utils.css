@@ -59,4 +59,11 @@
   .ring-offset-background {
     --tw-ring-offset-color: hsl(var(--background));
   }
+
+  .visually-hidden {
+    clip-path: inset(50%);
+    clip: rect(0, 0, 0, 0);
+    @apply absolute w-[1px] h-[1px] p-0 -m-[1px];
+    @apply overflow-hidden whitespace-nowrap border-0;
+  }
 }

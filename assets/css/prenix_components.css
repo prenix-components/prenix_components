@@ -3,10 +3,10 @@
 
 @import './prenix_components/variables.css';
 @import './prenix_components/autocomplete.css';
-@import './prenix_components/badge.css';
 @import './prenix_components/button.css';
 @import './prenix_components/checkbox_group.css';
 @import './prenix_components/checkbox.css';
+@import './prenix_components/chip.css';
 @import './prenix_components/container.css';
 @import './prenix_components/datepicker.css';
 @import './prenix_components/divider.css';

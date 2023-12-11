@@ -1,4 +1,4 @@
-defmodule PrenixComponents.Badge do
+defmodule PrenixComponents.Chip do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
@@ -26,15 +26,16 @@ defmodule PrenixComponents.Badge do
   attr :class, :string, default: nil
   attr :color, :string, default: "default", values: @colors
   attr :variant, :string, default: "solid", values: @variants
+  attr :radius, :string, default: "full", values: ~w(sm md lg full)
   attr :size, :string, default: "md", values: @sizes
   slot :inner_block
 
-  def badge(assigns) do
+  def chip(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
     <div class={@class}>
-      <span class="badge-content">
+      <span class="chip-content">
         <%= render_slot(@inner_block) %>
       </span>
     </div>
@@ -44,10 +45,11 @@ defmodule PrenixComponents.Badge do
   defp set_assigns(assigns) do
     class =
       combine_class([
-        "badge",
-        "badge-#{assigns.color}",
-        "badge-#{assigns.variant}",
-        "badge-#{assigns.size}",
+        "chip",
+        "chip-#{assigns.color}",
+        "chip-#{assigns.variant}",
+        "chip-#{assigns.size}",
+        "chip-radius-#{assigns.radius}",
         "#{assigns.class}"
       ])
 

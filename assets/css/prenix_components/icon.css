@@ -1,20 +1,4 @@
 @layer components {
-  .icon {
-    @apply inline-block align-middle text-[--icon];
-  }
-
-  .icon-sm {
-    @apply w-4 h-4;
-  }
-
-  .icon-md {
-    @apply w-5 h-5;
-  }
-
-  .icon-lg {
-    @apply w-6 h-6;
-  }
-
   .icon-current {
     --icon: currentColor;
   }
@@ -41,5 +25,21 @@
 
   .icon-danger {
     --icon: hsl(var(--danger));
+  }
+
+  .icon {
+    @apply inline-block align-middle text-[--icon];
+  }
+
+  .icon-sm {
+    @apply w-4 h-4;
+  }
+
+  .icon-md {
+    @apply w-5 h-5;
+  }
+
+  .icon-lg {
+    @apply w-6 h-6;
   }
 }

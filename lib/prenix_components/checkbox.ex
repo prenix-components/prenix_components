@@ -9,15 +9,23 @@ defmodule PrenixComponents.Checkbox do
   attr :label_text, :string, default: nil
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :base_class, :string, default: nil
+  attr :label_class, :string, default: nil
+  attr :checkbox_class, :string, default: nil
   slot :label
 
   def checkbox(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <label class={@class} for={@id} data-checkbox data-disabled={@disabled} data-invalid={@invalid}>
-      <div class="checkbox-input-wrapper">
+    <label
+      class={@base_class}
+      for={@id}
+      data-checkbox
+      data-disabled={@disabled}
+      data-invalid={@invalid}
+    >
+      <div class="visually-hidden">
         <input
           id={@id}
           name={@name}
@@ -29,7 +37,7 @@ defmodule PrenixComponents.Checkbox do
           checked={@checked}
         />
       </div>
-      <span aria-hidden="true" class="checkbox-checkmark-wrapper">
+      <span aria-hidden="true" class={@checkbox_class}>
         <svg aria-hidden="true" role="presentation" viewBox="0 0 17 18" class="checkbox-checkmark">
           <polyline
             fill="none"
@@ -45,7 +53,7 @@ defmodule PrenixComponents.Checkbox do
           </polyline>
         </svg>
       </span>
-      <span id={"#{@id}-label"} class="checkbox-label">
+      <span id={"#{@id}-label"} class={@label_class}>
         <%= if @label_text do %>
           <%= @label_text %>
         <% end %>
@@ -59,10 +67,22 @@ defmodule PrenixComponents.Checkbox do
   end
 
   defp set_assigns(assigns) do
-    class =
+    base_class =
+      combine_class([
+        "checkbox-base",
+        "#{assigns.base_class}"
+      ])
+
+    label_class =
+      combine_class([
+        "checkbox-label",
+        "#{assigns.label_class}"
+      ])
+
+    checkbox_class =
       combine_class([
         "checkbox",
-        "#{assigns.class}"
+        "#{assigns.checkbox_class}"
       ])
 
     id =
@@ -71,6 +91,10 @@ defmodule PrenixComponents.Checkbox do
         true -> "checkbox-#{random_string()}"
       end
 
-    assigns |> assign(:class, class) |> assign(:id, id)
+    assigns
+    |> assign(:base_class, base_class)
+    |> assign(:label_class, label_class)
+    |> assign(:checkbox_class, checkbox_class)
+    |> assign(:id, id)
   end
 end

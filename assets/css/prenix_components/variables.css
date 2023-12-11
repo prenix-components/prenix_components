@@ -19,6 +19,7 @@
   --muted-foreground: 240 5% 65%;
   --muted-foreground-2: 240 4% 46%;
 
+  --neutral1-foreground: 240 5% 65%;
   --neutral2-foreground: 240 4% 46%;
 
   --overlay: 0 0% 0%;
@@ -74,6 +75,7 @@
     0px 30px 60px 0px rgba(0, 0, 0, 0.26),
     inset 0px 0px 1px 0px hsla(0, 0%, 100%, 0.15);
 
+  --neutral1-foreground: 240 4% 46%;
   --neutral2-foreground: 240 5% 65%;
 
   --content1: 240 6% 10%;
