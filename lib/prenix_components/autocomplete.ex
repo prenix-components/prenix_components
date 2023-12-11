@@ -12,61 +12,68 @@ defmodule PrenixComponents.Autocomplete do
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
   attr :allow_blank, :boolean, default: false
-  attr :class, :string, default: nil
   attr :placeholder, :string, default: nil
+  attr :base_class, :string, default: nil
+  attr :input_wrapper_class, :string, default: nil
+  attr :label_class, :string, default: nil
+  attr :input_inner_wrapper_class, :string, default: nil
+  attr :input_class, :string, default: nil
+  attr :helper_class, :string, default: nil
+
   slot :label
   slot :helper
-  slot :start_content
-  slot :end_content
+  # slot :start_content
+  # slot :end_content
 
   def autocomplete(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
     <div
-      class={@class}
+      class={@base_class}
       data-invalid={@invalid}
       data-disabled={@disabled}
-      data-autocomplete
       data-allow-blank={@allow_blank}
       data-type={@type}
+      data-autocomplete
     >
-      <div class="field-wrapper">
+      <div class={@input_wrapper_class}>
         <%= if @label_text do %>
-          <label class="field-label" for={@id}><%= @label_text %></label>
+          <label class={@label_class} for={@id}><%= @label_text %></label>
         <% end %>
 
         <%= if length(@label) > 0 do %>
-          <label class="field-label" for={@id}><%= render_slot(@label) %></label>
+          <label class={@label_class} for={@id}><%= render_slot(@label) %></label>
         <% end %>
 
-        <div class="field-input-wrapper">
-          <%= if length(@start_content) > 0 do %>
-            <div class="field-input-start-content">
-              <%= render_slot(@start_content) %>
-            </div>
-          <% end %>
-
+        <div class={@input_inner_wrapper_class}>
           <%= if @type == "tags" do %>
             <input
               type="text"
-              class="autocomplete-original-input"
               id={@id}
               autocomplete="off"
               placeholder={@placeholder}
               disabled={@disabled}
-              value={if(is_list(@value), do: Enum.join(@value, ","), else: @value)}
               data-original-input
+              data-input-class={@input_class}
+              data-options={@delimited_options}
+              value={@delimited_value}
+              aria-describedby={
+                if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)
+              }
             />
           <% else %>
             <select
-              class="autocomplete-original-input"
               id={@id}
               autocomplete="off"
               placeholder={@placeholder}
               disabled={@disabled}
               multiple={@type === "multiple"}
               data-original-input
+              data-input-class={@input_class}
+              aria-describedby={
+                if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)
+              }
             >
               <option value=""><%= @placeholder %></option>
 
@@ -86,36 +93,49 @@ defmodule PrenixComponents.Autocomplete do
               </option>
             </select>
           <% end %>
-
-          <%= if length(@end_content) > 0 do %>
-            <div class="field-input-end-content">
-              <%= render_slot(@end_content) %>
-            </div>
-          <% end %>
         </div>
       </div>
 
       <%= if @helper_text do %>
-        <div class="field-helper-wrapper">
-          <p class="field-helper"><%= @helper_text %></p>
-        </div>
+        <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
       <% end %>
 
       <%= if length(@helper) > 0 do %>
-        <div class="field-helper-wrapper">
-          <p class="field-helper"><%= render_slot(@helper) %></p>
-        </div>
+        <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
       <% end %>
     </div>
     """
   end
 
   defp set_assigns(assigns) do
-    class =
+    base_class =
       combine_class([
-        "field autocomplete",
-        "autocomplete-#{assigns.type}",
-        "#{assigns.class}"
+        "autocomplete-base",
+        "#{assigns.base_class}"
+      ])
+
+    input_wrapper_class =
+      combine_class([
+        "autocomplete-wrapper",
+        assigns.input_wrapper_class
+      ])
+
+    label_class =
+      combine_class([
+        "autocomplete-label",
+        assigns.label_class
+      ])
+
+    input_inner_wrapper_class =
+      combine_class([
+        "autocomplete-inner-wrapper",
+        assigns.input_inner_wrapper_class
+      ])
+
+    helper_class =
+      combine_class([
+        "autocomplete-helper",
+        assigns.helper_class
       ])
 
     id =
@@ -124,6 +144,26 @@ defmodule PrenixComponents.Autocomplete do
         true -> "autocomplete-#{random_string()}"
       end
 
-    assigns |> assign(:class, class) |> assign(id: id)
+    delimited_options =
+      if(assigns.type == "tags" && assigns.options && is_list(assigns.options),
+        do: Enum.join(assigns.options, ","),
+        else: ""
+      )
+
+    delimited_value =
+      if(assigns.type == "tags" && assigns.value && is_list(assigns.value),
+        do: Enum.join(assigns.value, ","),
+        else: ""
+      )
+
+    assigns
+    |> assign(:base_class, base_class)
+    |> assign(:input_wrapper_class, input_wrapper_class)
+    |> assign(:label_class, label_class)
+    |> assign(:input_inner_wrapper_class, input_inner_wrapper_class)
+    |> assign(:helper_class, helper_class)
+    |> assign(id: id)
+    |> assign(:delimited_options, delimited_options)
+    |> assign(:delimited_value, delimited_value)
   end
 end

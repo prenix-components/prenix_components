@@ -1,68 +1,16 @@
 import './ripple'
-// import TomSelect from '../../vendors/tom-select/tom-select.base'
-
-// import TomSelect from '../../vendors/tom-select/tom-select.base.min'
-// import TomSelect from '../../vendors/tom-select/tom-select.complete.min'
-
 import * as Popper from '../../vendors/popperjs/popper.min'
 import bootstrap from '../../vendors/bootstrap/bootstrap.min'
 
 import { initAutocomplete, TomSelect } from './prenix_components/autocomplete'
 import { initCheckbox } from './prenix_components/checkbox'
 import { initCheckboxGroup } from './prenix_components/checkbox_group'
+import { initInput } from './prenix_components/input'
 
 const prenixModules = {
   TomSelect,
   Popper,
   bootstrap,
-}
-
-const setHasValue = ({ value, wrapper }) => {
-  if (value.length > 0) {
-    wrapper.dataset.hasValue = true
-  } else {
-    wrapper.dataset.hasValue = false
-  }
-}
-
-const initField = () => {
-  document.querySelectorAll('[data-field]').forEach(($f) => {
-    const $label = $f.querySelector('label.field-label')
-    const $input = $f.querySelector('input.field-input')
-
-    if ($input.placeholder && $input.placeholder.length > 0) {
-      $f.dataset.hasPlaceholder = true
-    }
-
-    if ($label) {
-      $f.dataset.hasLabel = true
-      const labelText = $label.textContent.trim()
-      $input.setAttribute('aria-label', labelText)
-    }
-
-    setHasValue({ value: $input.value, wrapper: $f })
-
-    $input.addEventListener('focus', () => {
-      const $fw = $input.closest('[data-field]')
-      $fw.dataset.focus = true
-    })
-
-    $input.addEventListener('blur', () => {
-      const $fw = $input.closest('[data-field]')
-      $fw.dataset.focus = false
-    })
-
-    $input.addEventListener('change', (e) => {
-      setHasValue({ value: e.target.value, wrapper: $f })
-    })
-
-    const $fw = $f.querySelector('.field-wrapper')
-
-    $fw.addEventListener('click', () => {
-      const $i = $fw.querySelector('.field-input')
-      if ($i) $i.focus()
-    })
-  })
 }
 
 const initTooltip = () => {
@@ -137,7 +85,7 @@ const autoInit = () => {
   initAutocomplete()
   initCheckbox()
   initCheckboxGroup()
-  initField()
+  initInput()
   initTooltip()
 }
 

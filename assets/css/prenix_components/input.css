@@ -1,0 +1,77 @@
+@layer components {
+  .input-base {
+    --input-placeholder: hsl(var(--muted-foreground));
+    --input: hsl(var(--foreground));
+    --input-label: hsl(var(--muted-foreground-2));
+    --input-label-focus: hsl(var(--foreground));
+    --input-helper: hsl(var(--muted-foreground-2));
+    --input-wrapper-border: hsl(var(--default) / 0.5);
+    --input-wrapper-border-hover: hsl(var(--default));
+    --input-wrapper-border-focus: hsl(var(--foreground));
+    @apply w-full;
+  }
+
+  .input-wrapper {
+    box-shadow: var(--shadow-sm);
+    @apply relative w-full inline-flex tap-highlight-transparent;
+    @apply rounded-xl outline-none py-2 px-3 h-14 min-h-[2.5rem];
+    @apply flex-col items-start justify-center gap-0 cursor-text;
+    @apply transition-colors motion-reduce:transition-none;
+    @apply border-2 border-[--input-wrapper-border];
+    @apply hover:border-[--input-wrapper-border-hover];
+  }
+
+  .input-base[data-focus='true'] .input-wrapper {
+    @apply border-[--input-wrapper-border-focus];
+  }
+
+  .input-inner-wrapper {
+    @apply inline-flex w-full items-center h-full box-border pb-0.5 relative;
+  }
+
+  .input-base[data-has-label='true'] .input-inner-wrapper {
+    @apply items-end;
+  }
+
+  .input-label {
+    @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[--input-label];
+    @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
+    @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1 text-base;
+  }
+
+  .input-base[data-focus='true'] .input-label,
+  .input-base[data-has-placeholder='true'] .input-label,
+  .input-base[data-has-value='true'] .input-label {
+    @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
+  }
+
+  .input-base[data-focus='true'] .input-label {
+    @apply text-[--input-label-focus];
+  }
+
+  .input {
+    @apply w-full font-normal bg-transparent outline-none placeholder:text-[--input-placeholder];
+    @apply text-sm text-[--input] focus-visible:outline-none;
+  }
+
+  .input-helper {
+    @apply p-1 text-xs text-[--input-helper];
+    @apply inline-flex items-center gap-1;
+  }
+
+  .input-base[data-invalid] .input-wrapper {
+    @apply border-danger;
+  }
+
+  .input-base[data-invalid] .input-label {
+    @apply text-danger;
+  }
+
+  .input-base[data-invalid] .input-helper {
+    @apply text-danger;
+  }
+
+  .input-base[data-disabled] .input-wrapper {
+    @apply pointer-events-none opacity-[--disabled-opacity];
+  }
+}

@@ -85,8 +85,6 @@ export default function (_userOptions) {
     }
 
     const event = new Event('change')
-
-    console.log('checkbox IN UPDATECHECKBOX', checkbox)
     checkbox.dispatchEvent(event)
   }
 
@@ -103,7 +101,7 @@ export default function (_userOptions) {
       const id = `autocomplete-checkbox-${randomString()}-${timestamp}`
       $checkbox.setAttribute('data-checkbox', '')
       $checkbox.setAttribute('for', id)
-      $checkbox.classList.add('checkbox')
+      $checkbox.classList.add('checkbox', 'autocomplete-option-checkbox')
       $checkbox.innerHTML = checkboxTemplate(id, label)
 
       const hashed = hash_key(data[self.settings.valueField])

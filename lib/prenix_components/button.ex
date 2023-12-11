@@ -82,7 +82,7 @@ defmodule PrenixComponents.Button do
   defp set_assigns(assigns) do
     class =
       combine_class([
-        "btn group btn-ripple",
+        "btn btn-ripple",
         "btn-#{assigns.color}",
         "btn-#{assigns.variant}",
         "btn-#{assigns.size}",

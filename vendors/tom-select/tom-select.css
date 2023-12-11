@@ -35,12 +35,12 @@
 .disabled .ts-control * {
   cursor: default !important;
 } */
-.focus .ts-control {
+/* .focus .ts-control {
   box-shadow: none;
-}
+} */
 .ts-control > * {
-  vertical-align: baseline;
-  display: inline-block;
+  /* vertical-align: baseline;
+  display: inline-block; */
 }
 .ts-wrapper.multi .ts-control > div {
   /* cursor: pointer; */
@@ -89,9 +89,9 @@
 /* .has-items .ts-control > input {
   margin: 0 4px !important;
 } */
-.ts-control.rtl {
+/* .ts-control.rtl {
   text-align: right;
-}
+} */
 .ts-control.rtl.single .ts-control:after {
   left: 15px;
   right: auto;
@@ -103,11 +103,11 @@
   opacity: 0.5;
   background-color: #fafafa;
 } */
-.input-hidden .ts-control > input {
+/* .input-hidden .ts-control > input {
   opacity: 0;
   position: absolute;
   left: -10000px;
-}
+} */
 
 .ts-dropdown {
   /* position: absolute;
@@ -137,7 +137,7 @@
 .ts-dropdown .create {
   padding: 5px 8px;
 } */
-.ts-dropdown .option,
+/* .ts-dropdown .option,
 .ts-dropdown [data-disabled],
 .ts-dropdown [data-disabled] [data-selectable].option {
   cursor: inherit;
@@ -146,7 +146,7 @@
 .ts-dropdown [data-selectable].option {
   opacity: 1;
   cursor: pointer;
-}
+} */
 .ts-dropdown .optgroup:first-child .optgroup-header {
   border-top: 0 none;
 }
@@ -191,11 +191,11 @@
   }
 }
 
-.ts-dropdown-content {
+/* .ts-dropdown-content {
   overflow: hidden auto;
   max-height: 200px;
   scroll-behavior: smooth;
-}
+} */
 
 .ts-wrapper.plugin-drag_drop .ts-dragging {
   color: transparent !important;
@@ -318,11 +318,11 @@
   border-top: 0 none;
 }
 
-.ts-wrapper.plugin-remove_button .item {
+/* .ts-wrapper.plugin-remove_button .item {
   display: inline-flex;
   align-items: center;
-}
-.ts-wrapper.plugin-remove_button .item .remove {
+} */
+/* .ts-wrapper.plugin-remove_button .item .remove {
   color: inherit;
   text-decoration: none;
   vertical-align: middle;
@@ -330,8 +330,8 @@
   padding: 0 6px;
   border-radius: 0 2px 2px 0;
   box-sizing: border-box;
-}
-.ts-wrapper.plugin-remove_button .item .remove:hover {
+} */
+/* .ts-wrapper.plugin-remove_button .item .remove:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 .ts-wrapper.plugin-remove_button.disabled .item .remove:hover {
@@ -342,9 +342,9 @@
   right: 0;
   top: 0;
   font-size: 23px;
-}
+} */
 
-.ts-wrapper.plugin-remove_button:not(.rtl) .item {
+/* .ts-wrapper.plugin-remove_button:not(.rtl) .item {
   padding-right: 0 !important;
 }
 .ts-wrapper.plugin-remove_button:not(.rtl) .item .remove {
@@ -370,7 +370,7 @@
 }
 .ts-wrapper.plugin-remove_button.rtl.disabled .item .remove {
   border-right-color: white;
-}
+} */
 
 :root {
   --ts-pr-clear-button: 0;
@@ -397,9 +397,9 @@
   ) !important;
 } */
 
-.ts-wrapper {
+/* .ts-wrapper {
   position: relative;
-}
+} */
 
 .ts-dropdown,
 .ts-control,

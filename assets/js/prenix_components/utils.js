@@ -1,8 +1,8 @@
-const setHasValue = ({ value, wrapper }) => {
+const setHasValue = ({ value, $wrapper }) => {
   if (value.length > 0) {
-    wrapper.dataset.hasValue = true
+    $wrapper.dataset.hasValue = true
   } else {
-    wrapper.dataset.hasValue = false
+    $wrapper.dataset.hasValue = false
   }
 }
 
