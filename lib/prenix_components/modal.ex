@@ -4,12 +4,6 @@ defmodule PrenixComponents.Modal do
   import PrenixComponents.Icon
   import PrenixComponents.Button
 
-  @sizes [
-    "sm",
-    "md",
-    "lg"
-  ]
-
   @scroll_behaviors [
     nil,
     "inside"
@@ -26,10 +20,15 @@ defmodule PrenixComponents.Modal do
   ]
 
   attr :id, :string, required: true
-  attr :size, :string, default: "md", values: @sizes
+  attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :scroll_behavior, :string, default: nil, values: @scroll_behaviors
   attr :fullscreen, :string, default: nil, values: @fullscreens
-
+  attr :base_class, :string, default: nil
+  attr :dialog_class, :string, default: nil
+  attr :content_class, :string, default: nil
+  attr :header_class, :string, default: nil
+  attr :body_class, :string, default: nil
+  attr :footer_class, :string, default: nil
   slot :header
   slot :body
   slot :footer
@@ -38,27 +37,40 @@ defmodule PrenixComponents.Modal do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class} id={@id} tabindex="-1" aria-labelledby={"#{@id}-label"} aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <.button size="sm" icon rounded variant="ghost" class="modal-close" data-bs-dismiss="modal">
+    <div
+      class={@base_class}
+      id={@id}
+      tabindex="-1"
+      aria-labelledby={"#{@id}-label"}
+      aria-hidden="true"
+    >
+      <div class={@dialog_class}>
+        <div class={@content_class}>
+          <.button
+            size="sm"
+            icon
+            radius="full"
+            variant="ghost"
+            base_class="modal-close"
+            data-bs-dismiss="modal"
+          >
             <.icon name="hero-x-mark-mini" />
           </.button>
 
           <%= if length(@header) > 0 do %>
-            <div class="modal-header" id={"#{@id}-label"}>
+            <div class={@header_class} id={"#{@id}-label"}>
               <%= render_slot(@header) %>
             </div>
           <% end %>
 
           <%= if length(@body) > 0 do %>
-            <div class="modal-body">
+            <div class={@body_class}>
               <%= render_slot(@body) %>
             </div>
           <% end %>
 
           <%= if length(@footer) > 0 do %>
-            <div class="modal-footer">
+            <div class={@footer_class}>
               <%= render_slot(@footer) %>
             </div>
           <% end %>
@@ -69,14 +81,50 @@ defmodule PrenixComponents.Modal do
   end
 
   def set_assigns(assigns) do
-    class =
+    base_class =
       combine_class([
-        "modal",
+        "modal modal-base",
         "modal-#{assigns.size}",
         if(assigns.scroll_behavior, do: "modal-scroll-#{assigns.scroll_behavior}", else: nil),
         if(assigns.fullscreen, do: "modal-fullscreen-#{assigns.fullscreen}", else: nil)
       ])
 
-    assigns |> assign(:class, class)
+    dialog_class =
+      combine_class([
+        "modal-dialog",
+        assigns.dialog_class
+      ])
+
+    content_class =
+      combine_class([
+        "modal-content",
+        assigns.content_class
+      ])
+
+    header_class =
+      combine_class([
+        "modal-header",
+        assigns.header_class
+      ])
+
+    body_class =
+      combine_class([
+        "modal-body",
+        assigns.body_class
+      ])
+
+    footer_class =
+      combine_class([
+        "modal-footer",
+        assigns.footer_class
+      ])
+
+    assigns
+    |> assign(:base_class, base_class)
+    |> assign(:dialog_class, dialog_class)
+    |> assign(:content_class, content_class)
+    |> assign(:header_class, header_class)
+    |> assign(:body_class, body_class)
+    |> assign(:footer_class, footer_class)
   end
 end

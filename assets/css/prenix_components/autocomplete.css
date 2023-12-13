@@ -23,15 +23,15 @@
     @apply w-full;
   }
 
-  .ts-wrapper {
+  .autocomplete-base .ts-wrapper {
     @apply relative w-full;
   }
 
-  [data-original-input] {
+  .autocomplete-base [data-original-input] {
     @apply bg-transparent visually-hidden;
   }
 
-  .autocomplete-wrapper {
+  .autocomplete-base .autocomplete-wrapper {
     box-shadow: var(--shadow-sm);
     @apply relative w-full inline-flex tap-highlight-transparent;
     @apply rounded-xl outline-none py-2 px-3 h-14 min-h-[2.5rem];
@@ -45,7 +45,7 @@
     @apply border-[--autocomplete-wrapper-border-focus];
   }
 
-  .autocomplete-inner-wrapper {
+  .autocomplete-base .autocomplete-inner-wrapper {
     @apply inline-flex w-full items-center h-full box-border pb-0.5 relative;
   }
 
@@ -53,7 +53,7 @@
     @apply items-end;
   }
 
-  .autocomplete-label {
+  .autocomplete-base .autocomplete-label {
     @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[--autocomplete-label];
     @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
     @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1 text-base;
@@ -69,17 +69,17 @@
     @apply text-[--autocomplete-label-focus];
   }
 
-  .autocomplete-input {
+  .autocomplete-base .autocomplete-input {
     @apply w-full font-normal bg-transparent outline-none placeholder:text-[--autocomplete-placeholder];
     @apply text-sm text-[--autocomplete-input] focus-visible:outline-none;
   }
 
-  .ts-wrapper.input-active .autocomplete-input,
-  .ts-wrapper.dropdown-active .autocomplete-input {
+  .autocomplete-base .ts-wrapper.input-active .autocomplete-input,
+  .autocomplete-base .ts-wrapper.dropdown-active .autocomplete-input {
     @apply block;
   }
 
-  .autocomplete-helper {
+  .autocomplete-base .autocomplete-helper {
     @apply p-1 text-xs text-[--autocomplete-helper];
     @apply inline-flex items-center gap-1;
   }
@@ -105,11 +105,11 @@
     @apply w-full pr-5 text-sm;
   }
 
-  .autocomplete-dropdown {
+  .autocomplete-base .autocomplete-dropdown {
     @apply absolute top-[100%] left-0 w-full z-[1000] mt-6;
   }
 
-  .autocomplete-dropdown .ts-dropdown-content {
+  .autocomplete-base .ts-dropdown-content {
     box-shadow: var(--shadow-md);
     overflow: hidden auto;
     @apply bg-[--autocomplete-dropdown] text-[--autocomplete-dropdown-foreground];
@@ -118,7 +118,7 @@
     @apply overflow-x-hidden overflow-y-auto max-h-[200px]  scroll-smooth;
   }
 
-  .autocomplete-dropdown .ts-dropdown-content.open {
+  .autocomplete-base .ts-dropdown-content.open {
     @apply opacity-100 scale-100 ease-in;
   }
 
@@ -137,7 +137,7 @@
     @apply tap-highlight-transparent outline-none;
   }
 
-  .autocomplete-option.active {
+  .autocomplete-base .autocomplete-option.active {
     @apply bg-[--autocomplete-option-active] text-[--autocomplete-option-active-foreground];
   }
 
@@ -145,16 +145,18 @@
     @apply pr-8 flex;
   }
 
-  .autocomplete-option[aria-disabled='true'] {
+  .autocomplete-base .autocomplete-option[aria-disabled='true'] {
     @apply opacity-[--disabled-opacity] text-[--autocomplete-option-disabled];
     @apply cursor-default  pointer-events-none;
   }
 
-  .autocomplete-option[aria-disabled='true'] .autocomplete-option-label {
+  .autocomplete-base
+    .autocomplete-option[aria-disabled='true']
+    .autocomplete-option-label {
     @apply cursor-default;
   }
 
-  .autocomplete-option[data-selectable] .highlight {
+  .autocomplete-base .autocomplete-option[data-selectable] .highlight {
     @apply bg-[--autocomplete-option-highlight];
   }
 
@@ -166,7 +168,7 @@
     @apply top-[50%] -translate-y-[50%];
   }
 
-  .autocomplete-option-label {
+  .autocomplete-base .autocomplete-option-label {
     @apply break-words flex-1 min-w-0;
   }
 
@@ -184,7 +186,7 @@
     @apply max-w-0 max-h-0;
   }
 
-  .autocomplete-item {
+  .autocomplete-base .autocomplete-item {
     @apply text-[--autocomplete-input];
   }
 
@@ -204,22 +206,22 @@
     @apply rotate-180;
   }
 
-  .input-hidden .ts-control .autocomplete-input {
+  .autocomplete-base .input-hidden .ts-control .autocomplete-input {
     opacity: 0;
     position: absolute;
     left: -10000px;
   }
 
   /* Blank */
-  .autocomplete-option.selected[data-value='']:after {
+  .autocomplete-base .autocomplete-option.selected[data-value='']:after {
     @apply hidden;
   }
 
-  .autocomplete-option[data-value=''] {
+  .autocomplete-base .autocomplete-option[data-value=''] {
     @apply min-h-[2rem] pr-2;
   }
 
-  .autocomplete-item[data-value=''] {
+  .autocomplete-base .autocomplete-item[data-value=''] {
     @apply text-[--autocomplete-placeholder];
   }
 

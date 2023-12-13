@@ -2,25 +2,15 @@ defmodule PrenixComponents.Tooltip do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  @colors [
-    "default",
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger"
-  ]
+  attr :base_class, :string, default: nil
+  attr :tooltip_class, :string, default: nil
 
-  @placements [
-    "top",
-    "bottom",
-    "right",
-    "left"
-  ]
+  attr :color, :string,
+    default: "default",
+    values: ~w(default primary secondary success warning danger)
 
-  attr :class, :string, default: nil
-  attr :color, :string, default: "default", values: @colors
-  attr :placement, :string, default: "top", values: @placements
+  attr :placement, :string, default: "top", values: ~w(top bottom left right)
+  attr :arrow, :boolean, default: true
   attr :title, :string, required: true
   slot :inner_block
 
@@ -29,9 +19,9 @@ defmodule PrenixComponents.Tooltip do
 
     ~H"""
     <span
-      class={@class}
+      class={@base_class}
       data-bs-toggle="tooltip"
-      data-bs-custom-class={@custom_class}
+      data-bs-custom-class={@tooltip_class}
       data-bs-title={@title}
       data-bs-placement={@placement}
       data-bs-offset="0, 8"
@@ -42,12 +32,21 @@ defmodule PrenixComponents.Tooltip do
   end
 
   defp set_assigns(assigns) do
-    class =
+    base_class =
       combine_class([
-        "tooltip-wrapper",
-        assigns.class
+        "tooltip-base",
+        assigns.base_class
       ])
 
-    assigns |> assign(:class, class) |> assign(:custom_class, "tooltip-#{assigns.color}")
+    tooltip_class =
+      combine_class([
+        "tooltip-#{assigns.color}",
+        assigns.tooltip_class,
+        if(assigns.arrow, do: "tooltip-arrow", else: nil)
+      ])
+
+    assigns
+    |> assign(:base_class, base_class)
+    |> assign(:tooltip_class, tooltip_class)
   end
 end

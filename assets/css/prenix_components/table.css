@@ -9,22 +9,22 @@
     @apply overflow-auto rounded-xl w-full;
   }
 
-  .table {
+  .table-base .table {
     @apply min-w-full h-auto table-auto w-full;
   }
 
-  .th {
+  .table-base .th {
     @apply px-3 h-10 text-left align-middle bg-default/40 whitespace-nowrap text-[--table-th];
     @apply first:rounded-l-lg last:rounded-r-lg outline-none text-sm font-semibold;
   }
 
-  .td {
+  .table-base .td {
     @apply py-2 px-3 relative align-middle whitespace-normal text-sm font-normal [&>*]:relative outline-none;
     @apply before:content-[''] before:absolute before:z-0 before:inset-0 before:opacity-0 before:bg-default/40;
     @apply first:before:rounded-l-lg last:before:rounded-r-lg;
   }
 
-  .td-empty-state {
+  .table-base .td-empty-state {
     @apply align-middle text-center h-20 text-[--table-empty-state];
   }
 }

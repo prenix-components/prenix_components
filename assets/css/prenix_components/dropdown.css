@@ -1,119 +1,4 @@
 @layer components {
-  .dropdown {
-    @apply relative h-fit w-fit inline-block;
-  }
-
-  .dropdown > .dropdown-menu {
-    @apply hidden absolute min-w-[200px] transition-opacity-margin opacity-0 z-[1000];
-  }
-
-  .dropdown > .dropdown-menu.show {
-    @apply block opacity-100;
-  }
-
-  .dropdown-menu-inner {
-    box-shadow: var(--shadow-md);
-    @apply min-w-[200px] p-2 rounded-xl;
-    @apply text-sm subpixel-antialiased outline-none box-border;
-    @apply bg-[hsl(var(--background))] opacity-0 scale-95 duration-150 transition-transform-opacity;
-    @apply origin-[left_top] ease-out;
-  }
-
-  .dropdown-menu-inner.open {
-    @apply opacity-100 scale-100 ease-in;
-  }
-
-  .dropdown .dropdown-divider {
-    @apply my-1 px-2;
-  }
-
-  .dropdown > .dropdown-toggle .dropdown-rotate {
-    @apply transition-transform inline-flex;
-  }
-
-  .dropdown > .dropdown-toggle {
-    @apply h-fit w-fit inline-block;
-  }
-
-  .dropdown > .dropdown-toggle.show .dropdown-rotate {
-    @apply rotate-180;
-  }
-
-  .dropdown > .dropdown-menu > .dropdown-menu-inner > .dropdown-item {
-    @apply flex gap-2 items-center justify-between relative px-2 py-1.5 w-full h-full box-border rounded-lg;
-    @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none;
-    @apply text-[hsl(var(--foreground))];
-  }
-
-  .dropdown-solid > .dropdown-menu > .dropdown-menu-inner > .dropdown-item {
-    @apply focus:bg-[--dropdown-item] focus:text-[--dropdown-item-foreground];
-  }
-
-  .dropdown-solid
-    > .dropdown-menu
-    > .dropdown-menu-inner
-    > .dropdown-item[data-hover='true'] {
-    @apply bg-[--dropdown-item] text-[--dropdown-item-foreground];
-  }
-
-  .dropdown-solid
-    > .dropdown-menu
-    > .dropdown-menu-inner
-    > .dropdown-item[data-hover='true']
-    * {
-    @apply text-[--dropdown-item-foreground];
-  }
-
-  .dropdown-soft > .dropdown-menu > .dropdown-menu-inner > .dropdown-item {
-    @apply focus:bg-[--dropdown-item-soft] focus:text-[--dropdown-item-soft-foreground];
-  }
-
-  .dropdown-soft > .dropdown-menu > .dropdown-menu-inner > .dropdown-item {
-    @apply focus:bg-[--dropdown-item-soft] focus:text-[--dropdown-item-soft-foreground];
-  }
-
-  .dropdown
-    > .dropdown-menu
-    > .dropdown-menu-inner
-    > .dropdown-item[data-hover='false']
-    > * {
-    @apply text-[hsl(var(--foreground))];
-  }
-
-  .dropdown-soft
-    > .dropdown-menu
-    > .dropdown-menu-inner
-    > .dropdown-item[data-hover='true'] {
-    @apply bg-[--dropdown-item-soft] text-[--dropdown-item-soft-foreground];
-  }
-
-  .dropdown-soft
-    > .dropdown-menu
-    > .dropdown-menu-inner
-    > .dropdown-item[data-hover='true']
-    > * {
-    @apply text-[--dropdown-item-soft-foreground];
-  }
-
-  .dropdown > .dropdown-menu > .dropdown-menu-inner > .dropdown-item-disabled {
-    @apply opacity-50 pointer-events-none;
-  }
-
-  .dropdown[data-submenu] {
-    @apply w-full h-full;
-  }
-
-  .dropdown[data-submenu] > .dropdown-toggle {
-    @apply w-full h-full inline-flex items-center gap-2 justify-between px-2 py-1.5;
-  }
-
-  .dropdown
-    > .dropdown-menu
-    > .dropdown-menu-inner
-    > .dropdown-item.dropdown-item-submenu {
-    @apply p-0;
-  }
-
   .dropdown-item-default {
     --dropdown-item: hsl(var(--default));
     --dropdown-item-foreground: hsl(var(--default-foreground));
@@ -154,5 +39,100 @@
     --dropdown-item-foreground: hsl(var(--danger-foreground));
     --dropdown-item-soft: hsl(var(--danger) / 0.2);
     --dropdown-item-soft-foreground: hsl(var(--danger));
+  }
+
+  .dropdown-base {
+    --dropdown: hsl(var(--content1));
+    --dropdown-foreground: hsl(var(--content1-foreground));
+    @apply inline-block;
+  }
+
+  .dropdown-base .dropdown-menu {
+    @apply hidden absolute min-w-[200px] z-[1000];
+  }
+
+  .dropdown-base .dropdown-menu.show {
+    @apply block;
+  }
+
+  .dropdown-base .dropdown-menu-inner {
+    box-shadow: var(--shadow-md);
+    @apply min-w-[200px] p-2 rounded-xl;
+    @apply text-sm subpixel-antialiased outline-none box-border;
+    @apply opacity-0 scale-95 duration-150 transition-transform-opacity;
+    @apply origin-[left_top] ease-out;
+    @apply bg-[--dropdown] text-[--dropdown-foreground];
+  }
+
+  .dropdown-base .dropdown-menu-inner.open {
+    @apply opacity-100 scale-100 ease-in;
+  }
+
+  .dropdown-base .dropdown-divider {
+    @apply my-1 px-2;
+  }
+
+  .dropdown-base .dropdown-rotate {
+    @apply transition-transform inline-flex;
+  }
+
+  .dropdown-base .dropdown-toggle.show .dropdown-rotate {
+    @apply rotate-180;
+  }
+
+  .dropdown-base .dropdown-item {
+    @apply flex gap-2 items-center justify-between relative px-2 py-1.5 w-full h-full box-border rounded-lg;
+    @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none;
+  }
+
+  .dropdown-base.dropdown-solid .dropdown-item {
+    @apply focus:bg-[--dropdown-item] focus:text-[--dropdown-item-foreground];
+  }
+
+  .dropdown-base.dropdown-solid .dropdown-item[data-hover='true'] {
+    @apply bg-[--dropdown-item] text-[--dropdown-item-foreground];
+  }
+
+  .dropdown-base.dropdown-soft .dropdown-item {
+    @apply focus:bg-[--dropdown-item-soft] focus:text-[--dropdown-item-soft-foreground];
+  }
+
+  .dropdown-base.dropdown-soft .dropdown-item[data-hover='true'] {
+    @apply bg-[--dropdown-item-soft] text-[--dropdown-item-soft-foreground];
+  }
+
+  .dropdown-base .dropdown-item-disabled {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  .dropdown-base.dropdown-submenu {
+    @apply w-full block;
+  }
+
+  .dropdown-base.dropdown-submenu .dropdown-toggle {
+    @apply block;
+  }
+
+  .dropdown-base.dropdown-submenu .dropdown-submenu-inner {
+    border-left-color: hsl(var(--divider) / 0.1);
+    @apply ml-2 pl-2 border-l-2;
+  }
+
+  .dropdown-base.dropdown-submenu .dropdown-submenu-item-icon {
+    @apply transition-transform;
+  }
+
+  .dropdown-base.dropdown-submenu .dropdown-submenu-item-icon {
+    @apply transition-transform;
+  }
+
+  .dropdown-base.dropdown-submenu
+    .dropdown-toggle[aria-expanded='true']
+    .dropdown-submenu-item-icon {
+    @apply rotate-90;
+  }
+
+  .dropdown-base .dropdown-toggle[aria-expanded='true'] .btn-base {
+    @apply opacity-[0.7] scale-[0.97];
   }
 }

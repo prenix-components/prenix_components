@@ -1,0 +1,36 @@
+@layer components {
+  .popover-base {
+    --popover: hsl(var(--content1));
+    --popover-foreground: hsl(var(--content1-foreground));
+    @apply inline-block;
+  }
+
+  .popover-base .dropdown-menu {
+    @apply hidden absolute min-w-[200px] z-[1070];
+  }
+
+  .popover-base .dropdown-menu.show {
+    @apply block;
+  }
+
+  .popover-base .popover {
+    box-shadow: var(--shadow-md);
+    @apply rounded-xl px-2.5 py-1;
+    @apply text-sm subpixel-antialiased outline-none box-border;
+    @apply opacity-0 scale-95 duration-150 transition-transform-opacity;
+    @apply origin-[left_top] ease-out;
+    @apply bg-[--popover] text-[--popover-foreground];
+  }
+
+  .popover-base .popover.open {
+    @apply opacity-100 scale-100 ease-in;
+  }
+
+  .popover-base .popover-toggle {
+    /* @apply h-fit w-fit inline-block; */
+  }
+
+  .popover-base .popover-toggle[aria-expanded='true'] .btn-base {
+    @apply opacity-[0.7] scale-[0.97];
+  }
+}

@@ -2,22 +2,14 @@ defmodule PrenixComponents.Icon do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  @sizes ["sm", "md", "lg"]
-
-  @colors [
-    "current",
-    "default",
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning"
-  ]
-
   attr :name, :string, default: nil, doc: "Heroicon name"
-  attr :class, :string, default: nil
-  attr :size, :string, default: "md", values: @sizes
-  attr :color, :string, default: "current", values: @colors
+  attr :base_class, :string, default: nil
+  attr :size, :string, default: "md", values: ~w(sm md lg)
+
+  attr :color, :string,
+    default: "current",
+    values: ~w(current default primary secondary success warning danger)
+
   slot :inner_block, doc: "Custom icon"
 
   def icon(assigns) do
@@ -34,27 +26,27 @@ defmodule PrenixComponents.Icon do
 
   defp render_heroicon(%{name: "hero-" <> _} = assigns) do
     ~H"""
-    <span class={[@name, @class]} />
+    <span class={[@name, @base_class]} />
     """
   end
 
   defp render_custom_icon(assigns) do
     ~H"""
-    <span class={@class}>
+    <span class={@base_class}>
       <%= render_slot(@inner_block) %>
     </span>
     """
   end
 
   defp set_assigns(assigns) do
-    class =
+    base_class =
       combine_class([
-        "icon",
+        "icon-base",
         "icon-#{assigns.color}",
         "icon-#{assigns.size}",
-        "#{assigns.class}"
+        "#{assigns.base_class}"
       ])
 
-    assign(assigns, :class, class)
+    assign(assigns, :base_class, base_class)
   end
 end

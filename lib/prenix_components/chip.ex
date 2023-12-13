@@ -2,32 +2,15 @@ defmodule PrenixComponents.Chip do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  @colors [
-    "default",
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger"
-  ]
-
-  @variants [
-    "solid",
-    "soft",
-    "outline"
-  ]
-
-  @sizes [
-    "sm",
-    "md",
-    "lg"
-  ]
-
   attr :class, :string, default: nil
-  attr :color, :string, default: "default", values: @colors
-  attr :variant, :string, default: "solid", values: @variants
+
+  attr :color, :string,
+    default: "default",
+    values: ~w(default primary secondary success warning danger)
+
+  attr :variant, :string, default: "solid", values: ~w(solid soft outline)
   attr :radius, :string, default: "full", values: ~w(sm md lg full)
-  attr :size, :string, default: "md", values: @sizes
+  attr :size, :string, default: "md", values: ~w(sm md lg)
   slot :inner_block
 
   def chip(assigns) do

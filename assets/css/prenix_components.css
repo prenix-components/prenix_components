@@ -1,4 +1,5 @@
 @import '../../vendors/tom-select/tom-select.css';
+@import '../../vendors/vanilla-calendar-pro/vanilla-calendar.min.css';
 @import './prenix_components/utils.css';
 
 @import './prenix_components/variables.css';
@@ -7,6 +8,7 @@
 @import './prenix_components/checkbox_group.css';
 @import './prenix_components/checkbox.css';
 @import './prenix_components/chip.css';
+@import './prenix_components/collapse.css';
 @import './prenix_components/container.css';
 @import './prenix_components/datepicker.css';
 @import './prenix_components/divider.css';
@@ -14,6 +16,7 @@
 @import './prenix_components/icon.css';
 @import './prenix_components/input.css';
 @import './prenix_components/modal.css';
+@import './prenix_components/popover.css';
 @import './prenix_components/spinner.css';
 @import './prenix_components/table.css';
 @import './prenix_components/tooltip.css';

@@ -12,6 +12,7 @@ defmodule PrenixComponents do
         Icon,
         Input,
         Modal,
+        Popover,
         Spinner,
         Table,
         Tooltip

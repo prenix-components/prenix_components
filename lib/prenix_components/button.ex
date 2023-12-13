@@ -3,39 +3,21 @@ defmodule PrenixComponents.Button do
   import PrenixComponents.Spinner
   import PrenixComponents.Helpers
 
-  @types ["button", "submit", "reset", "link"]
+  attr :type, :string, default: "button", values: ~w(button submit reset link)
 
-  @sizes [
-    "sm",
-    "md",
-    "lg"
-  ]
+  attr :color, :string,
+    default: "default",
+    values: ~w(default primary secondary success warning danger)
 
-  @colors [
-    "default",
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger"
-  ]
-
-  @variants [
-    "solid",
-    "soft",
-    "outline",
-    "ghost"
-  ]
-
-  attr :type, :string, default: "button", values: @types
-  attr :color, :string, default: "default", values: @colors
-  attr :variant, :string, default: "solid", values: @variants
-  attr :size, :string, default: "md", values: @sizes
+  attr :variant, :string, default: "solid", values: ~w(solid soft outline ghost)
+  attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :icon, :boolean, default: false
   attr :radius, :string, default: "lg", values: ~w(sm md lg full)
   attr :loading, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :base_class, :string, default: nil
+  attr :content_class, :string, default: nil
+  attr :spinner_class, :string, default: nil
   attr :rest, :global
   slot :inner_block
 
@@ -45,32 +27,32 @@ defmodule PrenixComponents.Button do
     ~H"""
     <%= if @type == "link" do %>
       <.link
-        class={@class}
+        class={@base_class}
         aria-disabled={@disabled || @loading}
         tabindex={if(@disabled || @loading, do: -1, else: false)}
         {@rest}
       >
-        <span class="btn-content">
+        <span class={@content_class}>
           <%= render_slot(@inner_block) %>
         </span>
 
-        <span :if={@loading} class="btn-spinner">
+        <span :if={@loading} class={@spinner_class}>
           <.spinner size="sm" />
         </span>
       </.link>
     <% else %>
       <button
-        class={@class}
+        class={@base_class}
         type={@type}
         disabled={@disabled || @loading}
         aria-disabled={@disabled || @loading}
         {@rest}
       >
-        <span class="btn-content">
+        <span class={@content_class}>
           <%= render_slot(@inner_block) %>
         </span>
 
-        <span :if={@loading} class="btn-spinner">
+        <span :if={@loading} class={@spinner_class}>
           <.spinner size="sm" />
         </span>
       </button>
@@ -79,9 +61,9 @@ defmodule PrenixComponents.Button do
   end
 
   defp set_assigns(assigns) do
-    class =
+    base_class =
       combine_class([
-        "btn btn-ripple",
+        "btn-base btn-ripple",
         "btn-#{assigns.color}",
         "btn-#{assigns.variant}",
         "btn-#{assigns.size}",
@@ -89,9 +71,24 @@ defmodule PrenixComponents.Button do
         if(assigns.icon, do: "btn-icon", else: nil),
         if(assigns.disabled, do: "btn-disabled", else: nil),
         if(assigns.loading, do: "btn-loading", else: nil),
-        assigns.class
+        assigns.base_class
       ])
 
-    assign(assigns, :class, class)
+    content_class =
+      combine_class([
+        "btn-content",
+        assigns.content_class
+      ])
+
+    spinner_class =
+      combine_class([
+        "btn-spinner",
+        assigns.spinner_class
+      ])
+
+    assigns
+    |> assign(:base_class, base_class)
+    |> assign(:content_class, content_class)
+    |> assign(:spinner_class, spinner_class)
   end
 end

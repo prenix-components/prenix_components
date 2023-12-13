@@ -46,60 +46,60 @@
     @apply whitespace-nowrap box-border;
   }
 
-  .chip-content {
+  .chip .chip-content {
     @apply flex-1 text-inherit font-normal px-2;
   }
 
-  .chip-sm {
+  .chip.chip-sm {
     @apply px-1 h-6 text-xs;
   }
 
-  .chip-sm > .chip-content {
+  .chip.chip-sm .chip-content {
     @apply px-1;
   }
 
-  .chip-md {
+  .chip.chip-md {
     @apply px-1 h-7 text-sm;
   }
 
-  .chip-md > .chip-content {
+  .chip.chip-md .chip-content {
     @apply px-2;
   }
 
-  .chip-lg {
+  .chip.chip-lg {
     @apply px-2 h-8 text-base;
   }
 
-  .chip-lg > .chip-content {
+  .chip.chip-lg .chip-content {
     @apply px-2;
   }
 
-  .chip-solid {
+  .chip.chip-solid {
     @apply bg-[--chip];
     @apply text-[--chip-foreground];
   }
 
-  .chip-outline {
+  .chip.chip-outline {
     @apply bg-transparent border-[--chip] text-[--chip-soft-foreground] border-2;
   }
 
-  .chip-soft {
+  .chip.chip-soft {
     @apply text-[--chip-soft-foreground] bg-[--chip-soft];
   }
 
-  .chip-radius-full {
+  .chip.chip-radius-full {
     @apply rounded-full;
   }
 
-  .chip-radius-sm {
+  .chip.chip-radius-sm {
     @apply rounded-md;
   }
 
-  .chip-radius-md {
+  .chip.chip-radius-md {
     @apply rounded-lg;
   }
 
-  .chip-radius-lg {
+  .chip.chip-radius-lg {
     @apply rounded-xl;
   }
 }

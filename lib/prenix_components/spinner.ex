@@ -2,29 +2,20 @@ defmodule PrenixComponents.Spinner do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  @sizes ["sm", "md", "lg"]
+  attr :base_class, :string, default: nil
+  attr :content_class, :string, default: nil
+  attr :size, :string, default: "md", values: ~w(sm md lg)
 
-  @colors [
-    "current",
-    "default",
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger"
-  ]
-
-  attr :class, :string, default: nil
-  attr :icon_class, :string, default: nil
-  attr :size, :string, default: "md", values: @sizes
-  attr :color, :string, default: "current", values: @colors
+  attr :color, :string,
+    default: "current",
+    values: ~w(current default primary secondary success warning danger)
 
   def spinner(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div aria-label="Loading" class={@class}>
-      <div class="spinner-content">
+    <div aria-label="Loading" class={@base_class}>
+      <div class={@content_class}>
         <span class="sr-only">Loading...</span>
         <i class="spinner-icon-solid" />
         <i class="spinner-icon-dotted" />
@@ -34,14 +25,20 @@ defmodule PrenixComponents.Spinner do
   end
 
   defp set_assigns(assigns) do
-    class =
+    base_class =
       combine_class([
-        "spinner",
+        "spinner-base",
         "spinner-#{assigns.color}",
         "spinner-#{assigns.size}",
-        "#{assigns.class}"
+        "#{assigns.base_class}"
       ])
 
-    assign(assigns, :class, class)
+    content_class =
+      combine_class([
+        "spinner-content",
+        assigns.content_class
+      ])
+
+    assigns |> assign(:base_class, base_class) |> assign(:content_class, content_class)
   end
 end

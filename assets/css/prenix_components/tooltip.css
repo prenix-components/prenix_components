@@ -1,7 +1,7 @@
 @layer components {
   .tooltip-default {
-    --tooltip: hsl(var(--background));
-    --tooltip-foreground: hsl(var(--foreground));
+    --tooltip: hsl(var(--content1));
+    --tooltip-foreground: hsl(var(--content1-foreground));
   }
 
   .tooltip-primary {
@@ -29,38 +29,39 @@
     --tooltip-foreground: hsl(var(--danger-foreground));
   }
 
-  .tooltip-wrapper {
+  .tooltip-base {
     @apply h-fit w-fit inline-block;
   }
 
   .tooltip {
     @apply inline-flex flex-col items-center justify-center relative;
   }
+
   .tooltip-inner {
     box-shadow: var(--shadow-md);
     @apply px-2.5 py-1 text-sm rounded-xl box-border relative z-[1080];
     @apply text-[--tooltip-foreground] bg-[--tooltip] subpixel-antialiased;
   }
 
-  .tooltip:before {
+  .tooltip-arrow.tooltip:before {
     border-radius: 2px;
     box-shadow: var(--shadow-md);
     @apply h-[10px] w-[10px] -z-[1] absolute content-[""] rotate-45 bg-[--tooltip];
   }
 
-  .tooltip[data-popper-placement='top']:before {
+  .tooltip-arrow.tooltip[data-popper-placement='top']:before {
     bottom: -3.5px;
   }
 
-  .tooltip[data-popper-placement='bottom']:before {
+  .tooltip-arrow.tooltip[data-popper-placement='bottom']:before {
     top: -3.5px;
   }
 
-  .tooltip[data-popper-placement='left']:before {
+  .tooltip-arrow.tooltip[data-popper-placement='left']:before {
     right: -3px;
   }
 
-  .tooltip[data-popper-placement='right']:before {
+  .tooltip-arrow.tooltip[data-popper-placement='right']:before {
     left: -3px;
   }
 }

@@ -41,7 +41,7 @@
     --button-soft-foreground: hsl(var(--danger));
   }
 
-  .btn {
+  .btn-base {
     @apply z-0 relative inline-flex items-center justify-center box-border appearance-none;
     @apply select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden;
     @apply tap-highlight-transparent outline-none;
@@ -50,109 +50,109 @@
     @apply hover:opacity-80;
   }
 
-  .btn-content {
+  .btn-base .btn-content {
     @apply inline-flex items-center justify-center;
   }
 
-  .btn-sm > .btn-content {
+  .btn-base.btn-sm .btn-content {
     @apply gap-2;
   }
 
-  .btn-md > .btn-content {
-    @apply gap-2;
-  }
-
-  .btn-lg > .btn-content {
-    @apply gap-3;
-  }
-
-  .btn-sm {
+  .btn-base.btn-sm {
     @apply px-3 text-xs min-w-[4rem] h-8;
   }
 
-  .btn-md {
+  .btn-base.btn-md .btn-content {
+    @apply gap-2;
+  }
+
+  .btn-base.btn-md {
     @apply px-4 text-sm min-w-[5rem] h-10;
   }
 
-  .btn-lg {
+  .btn-base.btn-lg .btn-content {
+    @apply gap-3;
+  }
+
+  .btn-base.btn-lg {
     @apply px-6 text-base min-w-[6rem] h-12;
   }
 
-  .btn-solid {
+  .btn-base.btn-solid {
     @apply bg-[--button] text-[--button-foreground] focus-visible:outline-[--button];
   }
 
-  .btn-soft {
+  .btn-base.btn-soft {
     @apply bg-[--button-soft] text-[--button-soft-foreground];
     @apply focus-visible:outline-[--button-soft-foreground];
   }
 
-  .btn-outline {
+  .btn-base.btn-outline {
     @apply bg-transparent border-[--button] text-[--button-soft-foreground] border-2;
     @apply focus-visible:outline-[--button];
   }
 
-  .btn-ghost {
+  .btn-base.btn-ghost {
     @apply bg-transparent hover:opacity-100 hover:bg-[--button-soft];
     @apply text-[--button-soft-foreground];
     @apply focus-visible:outline-[--button-soft-foreground];
   }
 
-  .btn-loading > .btn-content {
+  .btn-base.btn-loading .btn-content {
     @apply invisible;
   }
 
-  .btn-spinner {
+  .btn-base .btn-spinner {
     @apply absolute left-0 top-0 bottom-0 right-0;
     @apply place-content-center grid;
   }
 
-  .btn-disabled,
-  .btn-loading {
+  .btn-base.btn-disabled,
+  .btn-base.btn-loading {
     @apply opacity-[--disabled-opacity] pointer-events-none;
   }
 
-  .btn-radius-sm {
+  .btn-base.btn-radius-sm {
     @apply rounded-md;
   }
 
-  .btn-radius-md {
+  .btn-base.btn-radius-md {
     @apply rounded-lg;
   }
 
-  .btn-radius-lg {
+  .btn-base.btn-radius-lg {
     @apply rounded-xl;
   }
 
-  .btn-radius-full {
+  .btn-base.btn-radius-full {
     @apply rounded-full;
   }
 
-  .btn-icon {
+  .btn-base.btn-icon {
     @apply p-0;
   }
 
-  .btn-icon.btn-sm {
+  .btn-base.btn-icon.btn-sm {
     @apply w-8 h-8 min-w-[2rem];
   }
 
-  .btn-icon.btn-md {
+  .btn-base.btn-icon.btn-md {
     @apply w-10 h-10 min-w-[2.5rem];
   }
 
-  .btn-icon.btn-lg {
+  .btn-base.btn-icon.btn-lg {
     @apply w-12 h-12 min-w-[3rem];
   }
 
-  .btn-icon.btn-sm .btn-content .icon {
+  .btn-base.btn-icon.btn-sm .btn-content .icon {
     @apply h-5 w-5;
   }
 
-  .btn-icon.btn-md .btn-content .icon {
+  .btn-base.btn-icon.btn-md .btn-content .icon {
     @apply h-7 w-7;
   }
 
-  .btn-icon.btn-lg .btn-content .icon {
+  .btn-base.btn-icon.btn-lg .btn-content .icon {
     @apply h-9 w-9;
   }
 }

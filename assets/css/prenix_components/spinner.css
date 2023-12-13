@@ -17,68 +17,61 @@
     animation: spinner-spin 0.8s linear infinite;
   }
 
-  .spinner {
+  .spinner-base.spinner-default {
+    --spinner: hsl(var(--default));
+  }
+
+  .spinner-base.spinner-primary {
+    --spinner: hsl(var(--primary));
+  }
+
+  .spinner-base.spinner-secondary {
+    --spinner: hsl(var(--secondary));
+  }
+
+  .spinner-base.spinner-success {
+    --spinner: hsl(var(--success));
+  }
+
+  .spinner-base.spinner-warning {
+    --spinner: hsl(var(--warning));
+  }
+
+  .spinner-base.spinner-danger {
+    --spinner: hsl(var(--danger));
+  }
+
+  .spinner-base.spinner-current {
+    --spinner: currentColor;
+  }
+
+  .spinner-base {
     @apply relative inline-flex flex-col gap-2 items-center justify-center;
   }
 
-  .spinner-content {
+  .spinner-base .spinner-content {
     @apply relative flex;
   }
 
-  .spinner-icon-solid {
+  .spinner-base .spinner-icon-solid {
     @apply absolute w-full h-full rounded-full animate-spinner-ease-spin border-solid;
     @apply border-t-transparent border-l-transparent border-r-transparent border-[3px] border-b-[--spinner];
   }
 
-  .spinner-icon-dotted {
+  .spinner-base .spinner-icon-dotted {
     @apply absolute w-full h-full rounded-full opacity-75 animate-spinner-linear-spin;
     @apply border-dotted border-t-transparent border-l-transparent border-r-transparent border-[3px] border-b-[--spinner];
   }
 
-  .spinner-sm > .spinner-content {
+  .spinner-base.spinner-sm .spinner-content {
     @apply w-5 h-5;
   }
 
-  .spinner-md > .spinner-content {
+  .spinner-base.spinner-md .spinner-content {
     @apply w-8 h-8;
   }
 
-  .spinner-lg > .spinner-content {
+  .spinner-base.spinner-lg .spinner-content {
     @apply w-10 h-10;
-  }
-
-  .spinner-default > .spinner-content > .spinner-icon-solid,
-  .spinner-default > .spinner-content > .spinner-icon-dotted {
-    --spinner: hsl(var(--default));
-  }
-
-  .spinner-primary > .spinner-content > .spinner-icon-solid,
-  .spinner-primary > .spinner-content > .spinner-icon-dotted {
-    --spinner: hsl(var(--primary));
-  }
-
-  .spinner-secondary > .spinner-content > .spinner-icon-solid,
-  .spinner-secondary > .spinner-content > .spinner-icon-dotted {
-    --spinner: hsl(var(--secondary));
-  }
-
-  .spinner-success > .spinner-content > .spinner-icon-solid,
-  .spinner-success > .spinner-content > .spinner-icon-dotted {
-    --spinner: hsl(var(--success));
-  }
-
-  .spinner-warning > .spinner-content > .spinner-icon-solid,
-  .spinner-warning > .spinner-content > .spinner-icon-dotted {
-    --spinner: hsl(var(--warning));
-  }
-
-  .spinner-danger > .spinner-content > .spinner-icon-solid,
-  .spinner-danger > .spinner-content > .spinner-icon-dotted {
-    --spinner: hsl(var(--danger));
-  }
-
-  .spinner-current > .spinner-content > .spinner-icon-solid,
-  .spinner-current > .spinner-content > .spinner-icon-dotted {
-    --spinner: currentColor;
   }
 }

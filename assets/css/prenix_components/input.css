@@ -11,7 +11,7 @@
     @apply w-full;
   }
 
-  .input-wrapper {
+  .input-base .input-wrapper {
     box-shadow: var(--shadow-sm);
     @apply relative w-full inline-flex tap-highlight-transparent;
     @apply rounded-xl outline-none py-2 px-3 h-14 min-h-[2.5rem];
@@ -25,7 +25,7 @@
     @apply border-[--input-wrapper-border-focus];
   }
 
-  .input-inner-wrapper {
+  .input-base .input-inner-wrapper {
     @apply inline-flex w-full items-center h-full box-border pb-0.5 relative;
   }
 
@@ -33,7 +33,7 @@
     @apply items-end;
   }
 
-  .input-label {
+  .input-base .input-label {
     @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[--input-label];
     @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
     @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1 text-base;
@@ -49,12 +49,12 @@
     @apply text-[--input-label-focus];
   }
 
-  .input {
+  .input-base .input {
     @apply w-full font-normal bg-transparent outline-none placeholder:text-[--input-placeholder];
     @apply text-sm text-[--input] focus-visible:outline-none;
   }
 
-  .input-helper {
+  .input-base .input-helper {
     @apply p-1 text-xs text-[--input-helper];
     @apply inline-flex items-center gap-1;
   }

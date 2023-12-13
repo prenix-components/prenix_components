@@ -27,19 +27,19 @@
     --icon: hsl(var(--danger));
   }
 
-  .icon {
+  .icon-base {
     @apply inline-block align-middle text-[--icon];
   }
 
-  .icon-sm {
+  .icon-base.icon-sm {
     @apply w-4 h-4;
   }
 
-  .icon-md {
+  .icon-base.icon-md {
     @apply w-5 h-5;
   }
 
-  .icon-lg {
+  .icon-base.icon-lg {
     @apply w-6 h-6;
   }
 }

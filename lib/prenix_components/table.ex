@@ -13,7 +13,7 @@ defmodule PrenixComponents.Table do
     attr :class, :string
   end
 
-  slot :col, required: true do
+  slot :col do
     attr :label, :string
     attr :class, :string
   end
