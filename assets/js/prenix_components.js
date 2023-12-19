@@ -2,6 +2,7 @@ import './ripple'
 import * as Popper from '../../vendors/popperjs/popper.min'
 import bootstrap from '../../vendors/bootstrap/bootstrap.min'
 
+import { initAccordion } from './prenix_components/accordion'
 import { initAutocomplete, TomSelect } from './prenix_components/autocomplete'
 import { initCheckbox } from './prenix_components/checkbox'
 import { initCheckboxGroup } from './prenix_components/checkbox_group'
@@ -23,6 +24,7 @@ const initTooltip = () => {
 }
 
 const autoInit = () => {
+  initAccordion()
   initAutocomplete()
   initCheckbox()
   initCheckboxGroup()

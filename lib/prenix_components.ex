@@ -2,6 +2,7 @@ defmodule PrenixComponents do
   defmacro __using__(_) do
     quote do
       import PrenixComponents.{
+        Accordion,
         Autocomplete,
         Button,
         CheckboxGroup,

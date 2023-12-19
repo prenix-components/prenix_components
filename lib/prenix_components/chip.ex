@@ -2,7 +2,7 @@ defmodule PrenixComponents.Chip do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  attr :class, :string, default: nil
+  attr :base_class, :string, default: nil
 
   attr :color, :string,
     default: "default",
@@ -17,7 +17,7 @@ defmodule PrenixComponents.Chip do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class}>
+    <div class={@base_class}>
       <span class="chip-content">
         <%= render_slot(@inner_block) %>
       </span>
@@ -26,16 +26,16 @@ defmodule PrenixComponents.Chip do
   end
 
   defp set_assigns(assigns) do
-    class =
+    base_class =
       combine_class([
         "chip",
         "chip-#{assigns.color}",
         "chip-#{assigns.variant}",
         "chip-#{assigns.size}",
         "chip-radius-#{assigns.radius}",
-        "#{assigns.class}"
+        "#{assigns.base_class}"
       ])
 
-    assign(assigns, :class, class)
+    assign(assigns, :base_class, base_class)
   end
 end

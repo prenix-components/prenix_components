@@ -4,6 +4,7 @@
 
 @import './prenix_components/variables.css';
 @import './prenix_components/autocomplete.css';
+@import './prenix_components/accordion.css';
 @import './prenix_components/button.css';
 @import './prenix_components/checkbox_group.css';
 @import './prenix_components/checkbox.css';

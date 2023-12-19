@@ -172,7 +172,10 @@ defmodule PrenixComponents.Dropdown do
 
     menu_class =
       combine_class([
-        if(assigns.submenu, do: "collapse dropdown-submenu-inner", else: "dropdown-menu-inner"),
+        if(assigns.submenu,
+          do: "collapse prenix-collapse dropdown-submenu-inner",
+          else: "dropdown-menu-inner"
+        ),
         assigns.menu_class
       ])
 

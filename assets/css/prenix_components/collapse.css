@@ -1,19 +1,24 @@
 @layer components {
-  .collapse:not(.show) {
+  /* Prevent conflicting with tailwind collapse class */
+  .prenix-collapse.collapse {
     @apply hidden;
   }
 
-  .collapse {
+  .prenix-collapse.collapse.show {
+    @apply block;
+  }
+
+  .prenix-collapse.collapse {
     visibility: initial !important;
   }
 
   .collapsing {
     @apply h-0 overflow-hidden motion-reduce:transition-none;
-    transition: height 0.25s ease;
+    transition: height 0.3s ease;
   }
 
   .collapsing.collapse-horizontal {
     @apply w-0 h-auto  motion-reduce:transition-none;
-    transition: width 0.25s ease;
+    transition: height 0.3s ease;
   }
 }

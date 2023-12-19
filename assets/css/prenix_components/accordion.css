@@ -1,0 +1,67 @@
+@layer components {
+  .accordion-base {
+    --accordion: transparent;
+    --accordion-foreground: hsl(var(--foreground));
+    --accordion-caret-foreground: hsl(var(--neutral1-foreground));
+    --accordion-shadow: hsl(var(--content1));
+    --accordion-bordered-border: hsl(var(--divider) / var(--divider-opacity));
+    --accordion-item-splitted: hsl(var(--content1));
+
+    @apply w-full;
+    @apply text-[--accordion-foreground];
+  }
+
+  .accordion-base .accordion-item-toggle {
+    @apply flex py-4 w-full h-full gap-3 items-center tap-highlight-transparent outline-none;
+    @apply focus-visible:outline-2 focus-visible:outline-[hsl(var(--focus))];
+    @apply focus-visible:outline-offset-2 transition-opacity;
+  }
+
+  .accordion-base .accordion-item-toggle-content {
+    @apply flex-1 flex flex-col text-start text-lg;
+  }
+
+  .accordion-base .accordion-item-toggle-caret {
+    @apply text-[--accordion-caret-foreground] transition-transform rotate-0 rtl:-rotate-180;
+  }
+
+  .accordion-base
+    .accordion-item-toggle[aria-expanded='true']
+    .accordion-item-toggle-caret {
+    @apply -rotate-90;
+  }
+
+  .accordion-base .accordion-item-body {
+    @apply py-2;
+  }
+
+  .accordion-base .accordion-item:last-child .accordion-item-divider {
+    @apply hidden;
+  }
+
+  .accordion-base.accordion-light {
+    @apply px-2;
+  }
+
+  .accordion-base.accordion-shadow {
+    box-shadow: var(--shadow-md);
+    @apply rounded-xl px-4 bg-[--accordion-shadow];
+  }
+
+  .accordion-base.accordion-bordered {
+    @apply rounded-xl px-4 border-[--accordion-bordered-border] border-2;
+  }
+
+  .accordion-base.accordion-splitted {
+    @apply flex flex-col gap-2 px-2;
+  }
+
+  .accordion-base.accordion-splitted .accordion-item-divider {
+    @apply hidden;
+  }
+
+  .accordion-base.accordion-splitted .accordion-item {
+    box-shadow: var(--shadow-md);
+    @apply px-4 bg-[--accordion-item-splitted] rounded-xl;
+  }
+}

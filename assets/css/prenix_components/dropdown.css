@@ -114,8 +114,8 @@
   }
 
   .dropdown-base.dropdown-submenu .dropdown-submenu-inner {
-    border-left-color: hsl(var(--divider) / 0.1);
-    @apply ml-2 pl-2 border-l-2;
+    border-left-color: hsl(var(--divider) / var(--divider-opacity));
+    @apply ml-2 pl-2 border-l-[1px];
   }
 
   .dropdown-base.dropdown-submenu .dropdown-submenu-item-icon {
