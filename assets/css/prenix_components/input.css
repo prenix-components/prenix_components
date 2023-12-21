@@ -14,7 +14,7 @@
   .input .input-wrapper {
     box-shadow: var(--shadow-sm);
     @apply relative w-full inline-flex tap-highlight-transparent;
-    @apply rounded-xl outline-none py-2 px-3 h-14 min-h-[2.5rem];
+    @apply rounded-xl outline-none;
     @apply flex-col items-start justify-center gap-0 cursor-text;
     @apply transition-colors motion-reduce:transition-none;
     @apply border-2 border-[--input-wrapper-border];
@@ -26,23 +26,13 @@
   }
 
   .input .input-el-wrapper {
-    @apply inline-flex w-full items-center h-full box-border pb-0.5 relative;
-  }
-
-  .input[data-has-label='true'] .input-el-wrapper {
-    @apply items-end;
+    @apply inline-flex w-full items-center h-full box-border relative;
   }
 
   .input .input-label {
-    @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[--input-label];
+    @apply pointer-events-none origin-top-left subpixel-antialiased block text-[--input-label];
     @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
-    @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1 text-base;
-  }
-
-  .input[data-focus='true'] .input-label,
-  .input[data-has-placeholder='true'] .input-label,
-  .input[data-has-value='true'] .input-label {
-    @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
+    @apply pe-2 max-w-full inline-flex items-center gap-1;
   }
 
   .input[data-focus='true'] .input-label {
@@ -51,7 +41,7 @@
 
   .input .input-el {
     @apply w-full font-normal bg-transparent outline-none placeholder:text-[--input-placeholder];
-    @apply text-sm text-[--input] focus-visible:outline-none;
+    @apply text-[--input] focus-visible:outline-none;
   }
 
   .input .input-helper {
@@ -71,7 +61,117 @@
     @apply text-danger;
   }
 
+  .input-sm {
+    --input-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
+  }
+
+  .input-md {
+    --input-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
+  }
+
+  .input-lg {
+    --input-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
+  }
+
   .input[data-disabled] .input-wrapper {
     @apply pointer-events-none opacity-[--disabled-opacity];
+  }
+
+  .input.input-sm .input-wrapper {
+    @apply py-1.5 px-3 h-12 min-h-[2rem];
+  }
+
+  .input.input-md .input-wrapper {
+    @apply py-2 px-3 h-14 min-h-[2.5rem];
+  }
+
+  .input.input-lg .input-wrapper {
+    @apply py-2.5 px-3 h-16 min-h-[3rem];
+  }
+
+  .input.input-sm .input-label {
+    @apply text-sm;
+  }
+
+  .input.input-md .input-label {
+    @apply text-base;
+  }
+
+  .input.input-lg .input-label {
+    @apply text-base;
+  }
+
+  .input.input-sm .input-el {
+    @apply text-sm;
+  }
+
+  .input.input-md .input-el {
+    @apply text-sm;
+  }
+
+  .input.input-lg .input-el {
+    @apply text-base;
+  }
+
+  .input.input-label-inside .input-label {
+    @apply absolute justify-center text-ellipsis overflow-hidden;
+  }
+
+  .input.input-label-inside[data-focus='true'] .input-label,
+  .input.input-label-inside[data-has-placeholder='true'] .input-label,
+  .input.input-label-inside[data-has-value='true'] .input-label {
+    @apply scale-[0.85] translate-y-[--input-label-translate];
+  }
+
+  .input.input-label-inside[data-has-label='true'] .input-el-wrapper {
+    @apply items-end;
+  }
+
+  .input.input-label-outside {
+    @apply flex flex-col;
+  }
+
+  .input.input-label-outside .input-label {
+    @apply mb-1;
+  }
+
+  .input.input-label-outside-left {
+    @apply flex flex-row gap-2;
+  }
+
+  .input.input-label-outside-left .input-label {
+    @apply self-start shrink;
+  }
+
+  .input.input-label-outside-left .input-wrapper {
+    @apply grow;
+  }
+
+  .input.input-sm.input-label-outside-left .input-label {
+    @apply mt-4;
+  }
+
+  .input.input-md.input-label-outside-left .input-label {
+    @apply mt-4;
+  }
+
+  .input.input-lg.input-label-outside-left .input-label {
+    @apply mt-5;
+  }
+
+  .input.input-textarea .input-wrapper {
+    @apply h-auto;
+  }
+
+  .input.input-textarea.input.input-label-inside .input-label {
+    @apply static scale-[0.85] !translate-y-0;
+  }
+
+  .input.input-textarea .input-el {
+    @apply resize-none min-h-[60px] max-h-[160px] !overflow-x-auto;
+  }
+
+  .input.input-textarea.input-label-outside-left .input-label {
+    @apply mt-1;
   }
 }

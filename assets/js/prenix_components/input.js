@@ -1,6 +1,8 @@
 import { setHasValue } from './utils'
+import autosize from '../../../vendors/autosize/autosize.min'
 
 const initInput = () => {
+  console.log({ autosize })
   document.querySelectorAll('[data-input]').forEach(($baseEl) => {
     const $label = $baseEl.querySelector('.input-label')
     const $input = $baseEl.querySelector('.input-el')
@@ -16,6 +18,10 @@ const initInput = () => {
     }
 
     setHasValue({ value: $input.value, $wrapper: $baseEl })
+
+    if ($input.tagName === 'TEXTAREA') {
+      autosize($input)
+    }
 
     $input.addEventListener('focus', () => {
       $baseEl.dataset.focus = true

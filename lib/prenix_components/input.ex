@@ -10,6 +10,8 @@ defmodule PrenixComponents.Input do
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
   attr :placeholder, :string, default: nil
+  attr :size, :string, default: "md", values: ~w(sm md lg)
+  attr :label_placement, :string, default: "inside", values: ~w(inside outside outside-left)
 
   attr :type, :string,
     default: "text",
@@ -22,48 +24,63 @@ defmodule PrenixComponents.Input do
   attr :input_wrapper_class, :string, default: nil
   attr :input_class, :string, default: nil
   attr :helper_class, :string, default: nil
+
+  attr :rest, :global,
+    include: ~w(accept autocomplete capture cols disabled form list max maxlength min minlength
+              multiple pattern placeholder readonly required rows size step)
+
   slot :label
   slot :helper
+
   # slot :start_content
   # slot :end_content
 
-  def input(assigns) do
+  def input(%{label_placement: "inside"} = assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
     <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-input>
       <div class={@wrapper_class}>
-        <%= if @label_text do %>
-          <label class={@label_class} for={@id} id={"#{@id}-label"}><%= @label_text %></label>
-        <% end %>
+        <%= render_label(assigns) %>
 
-        <%= if length(@label) > 0 do %>
-          <label class={@label_class} for={@id} id={"#{@id}-label"}><%= render_slot(@label) %></label>
-        <% end %>
-
-        <div class={@input_wrapper_class}>
-          <input
-            id={@id}
-            type={@type}
-            name={@name}
-            class={@input_class}
-            placeholder={@placeholder}
-            disabled={@disabled}
-            value={@value}
-            aria-invalid={@invalid}
-            aria-labelledby={"#{@id}-label"}
-            aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
-          />
-        </div>
+        <%= render_input(assigns) %>
       </div>
 
-      <%= if @helper_text do %>
-        <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
-      <% end %>
+      <%= render_helper(assigns) %>
+    </div>
+    """
+  end
 
-      <%= if length(@helper) > 0 do %>
-        <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
-      <% end %>
+  def input(%{label_placement: "outside"} = assigns) do
+    assigns = set_assigns(assigns)
+
+    ~H"""
+    <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-input>
+      <%= render_label(assigns) %>
+
+      <div class={@wrapper_class}>
+        <%= render_input(assigns) %>
+      </div>
+
+      <%= render_helper(assigns) %>
+    </div>
+    """
+  end
+
+  def input(%{label_placement: "outside-left"} = assigns) do
+    assigns = set_assigns(assigns)
+
+    ~H"""
+    <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-input>
+      <%= render_label(assigns) %>
+
+      <div class="grow w-full">
+        <div class={@wrapper_class}>
+          <%= render_input(assigns) %>
+        </div>
+
+        <%= render_helper(assigns) %>
+      </div>
     </div>
     """
   end
@@ -72,6 +89,9 @@ defmodule PrenixComponents.Input do
     class =
       combine_class([
         "input",
+        "input-#{assigns.size}",
+        "input-label-#{assigns.label_placement}",
+        if(assigns.type == "textarea", do: "input-textarea", else: ""),
         assigns.class
       ])
 
@@ -119,5 +139,65 @@ defmodule PrenixComponents.Input do
     |> assign(:input_class, input_class)
     |> assign(:helper_class, helper_class)
     |> assign(id: id)
+  end
+
+  defp render_label(assigns) do
+    ~H"""
+    <%= if @label_text do %>
+      <label class={@label_class} for={@id} id={"#{@id}-label"}><%= @label_text %></label>
+    <% end %>
+
+    <%= if length(@label) > 0 do %>
+      <label class={@label_class} for={@id} id={"#{@id}-label"}><%= render_slot(@label) %></label>
+    <% end %>
+    """
+  end
+
+  defp render_helper(assigns) do
+    ~H"""
+    <%= if @helper_text do %>
+      <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
+    <% end %>
+
+    <%= if length(@helper) > 0 do %>
+      <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
+    <% end %>
+    """
+  end
+
+  defp render_input(assigns) do
+    ~H"""
+    <div class={@input_wrapper_class}>
+      <%= if @type == "textarea" do %>
+        <textarea
+          id={@id}
+          type={@type}
+          name={@name}
+          class={@input_class}
+          placeholder={@placeholder}
+          disabled={@disabled}
+          value={@value}
+          aria-invalid={@invalid}
+          aria-labelledby={"#{@id}-label"}
+          aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
+          {@rest}
+        ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
+      <% else %>
+        <input
+          id={@id}
+          type={@type}
+          name={@name}
+          class={@input_class}
+          placeholder={@placeholder}
+          disabled={@disabled}
+          value={@value}
+          aria-invalid={@invalid}
+          aria-labelledby={"#{@id}-label"}
+          aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
+          {@rest}
+        />
+      <% end %>
+    </div>
+    """
   end
 end

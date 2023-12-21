@@ -34,7 +34,7 @@
   .autocomplete .autocomplete-wrapper {
     box-shadow: var(--shadow-sm);
     @apply relative w-full inline-flex tap-highlight-transparent;
-    @apply rounded-xl outline-none py-2 px-3 h-14 min-h-[2.5rem];
+    @apply rounded-xl outline-none;
     @apply flex-col items-start justify-center gap-0 cursor-text;
     @apply transition-colors motion-reduce:transition-none;
     @apply border-2 border-[--autocomplete-wrapper-border];
@@ -46,23 +46,13 @@
   }
 
   .autocomplete .autocomplete-input-wrapper {
-    @apply inline-flex w-full items-center h-full box-border pb-0.5 relative;
-  }
-
-  .autocomplete[data-has-label='true'] .autocomplete-input-wrapper {
-    @apply items-end;
+    @apply inline-flex w-full items-center h-full box-border relative;
   }
 
   .autocomplete .autocomplete-label {
-    @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[--autocomplete-label];
+    @apply pointer-events-none origin-top-left subpixel-antialiased block text-[--autocomplete-label];
     @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
-    @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1 text-base;
-  }
-
-  .autocomplete[data-focus='true'] .autocomplete-label,
-  .autocomplete[data-has-placeholder='true'] .autocomplete-label,
-  .autocomplete[data-has-value='true'] .autocomplete-label {
-    @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
+    @apply pe-2 max-w-full inline-flex items-center gap-1 text-base;
   }
 
   .autocomplete[data-focus='true'] .autocomplete-label {
@@ -71,7 +61,7 @@
 
   .autocomplete .autocomplete-input {
     @apply w-full font-normal bg-transparent outline-none placeholder:text-[--autocomplete-placeholder];
-    @apply text-sm text-[--autocomplete-input] focus-visible:outline-none;
+    @apply text-[--autocomplete-input] focus-visible:outline-none;
   }
 
   .autocomplete .ts-wrapper.input-active .autocomplete-input,
@@ -124,6 +114,11 @@
 
   .autocomplete[data-has-label='true'] .autocomplete-dropdown {
     @apply mt-4;
+  }
+
+  .autocomplete.autocomplete-label-outside .autocomplete-dropdown,
+  .autocomplete.autocomplete-label-outside-left .autocomplete-dropdown {
+    @apply mt-6;
   }
 
   .autocomplete .no-results {
@@ -212,6 +207,110 @@
     left: -10000px;
   }
 
+  .autocomplete-sm {
+    --autocomplete-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
+  }
+
+  .autocomplete-md {
+    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
+  }
+
+  .autocomplete-lg {
+    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
+  }
+
+  .autocomplete.autocomplete-sm .autocomplete-wrapper {
+    @apply py-1.5 px-3 h-12 min-h-[2rem];
+  }
+
+  .autocomplete.autocomplete-md .autocomplete-wrapper {
+    @apply py-2 px-3 h-14 min-h-[2.5rem];
+  }
+
+  .autocomplete.autocomplete-lg .autocomplete-wrapper {
+    @apply py-2.5 px-3 h-16 min-h-[3rem];
+  }
+
+  .autocomplete.autocomplete-sm .autocomplete-label {
+    @apply text-sm;
+  }
+
+  .autocomplete.autocomplete-md .autocomplete-label {
+    @apply text-base;
+  }
+
+  .autocomplete.autocomplete-lg .autocomplete-label {
+    @apply text-base;
+  }
+
+  .autocomplete.autocomplete-sm .autocomplete-input,
+  .autocomplete.autocomplete-sm .autocomplete-item {
+    @apply text-sm;
+  }
+
+  .autocomplete.autocomplete-md .autocomplete-input,
+  .autocomplete.autocomplete-md .autocomplete-item {
+    @apply text-sm;
+  }
+
+  .autocomplete.autocomplete-lg .autocomplete-input,
+  .autocomplete.autocomplete-lg .autocomplete-item {
+    @apply text-base;
+  }
+
+  .autocomplete.autocomplete-label-inside[data-focus='true']
+    .autocomplete-label,
+  .autocomplete.autocomplete-label-inside[data-has-placeholder='true']
+    .autocomplete-label,
+  .autocomplete.autocomplete-label-inside[data-has-value='true']
+    .autocomplete-label {
+    @apply scale-[0.85] translate-y-[--autocomplete-label-translate];
+  }
+
+  .autocomplete.autocomplete-label-inside .autocomplete-label {
+    @apply absolute justify-center text-ellipsis overflow-hidden;
+  }
+
+  .autocomplete.autocomplete-label-inside[data-has-label='true']
+    .autocomplete-input-wrapper {
+    @apply items-end;
+  }
+
+  .autocomplete.autocomplete-label-outside {
+    @apply flex flex-col;
+  }
+
+  .autocomplete.autocomplete-label-outside .autocomplete-label {
+    @apply mb-1;
+  }
+
+  .autocomplete.autocomplete-label-outside-left {
+    @apply flex flex-row gap-2;
+  }
+
+  .autocomplete.autocomplete-label-outside-left .autocomplete-label {
+    @apply self-start shrink;
+  }
+
+  .autocomplete.autocomplete-label-outside-left .autocomplete-wrapper {
+    @apply grow;
+  }
+
+  .autocomplete.autocomplete-sm.autocomplete-label-outside-left
+    .autocomplete-label {
+    @apply mt-4;
+  }
+
+  .autocomplete.autocomplete-md.autocomplete-label-outside-left
+    .autocomplete-label {
+    @apply mt-4;
+  }
+
+  .autocomplete.autocomplete-lg.autocomplete-label-outside-left
+    .autocomplete-label {
+    @apply mt-5;
+  }
+
   /* Blank */
   .autocomplete .autocomplete-option.selected[data-value='']:after {
     @apply hidden;
@@ -253,13 +352,9 @@
     @apply flex-1 max-w-full min-w-[100px];
   }
 
-  .autocomplete[data-type='tags'] .autocomplete-label {
-    @apply self-start static mt-2;
-    @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
-  }
-
-  .autocomplete[data-type='tags'] .autocomplete-input-wrapper {
-    @apply -mt-3;
+  .autocomplete.autocomplete-label-inside[data-type='tags']
+    .autocomplete-label {
+    @apply static scale-[0.85] !translate-y-0;
   }
 
   .autocomplete[data-type='tags'] .autocomplete-remove-btn {
@@ -284,5 +379,31 @@
 
   .autocomplete[data-type='tags'] .chip-content {
     @apply truncate;
+  }
+
+  .autocomplete.autocomplete-sm.autocomplete-label-outside[data-type='tags']
+    .autocomplete-wrapper,
+  .autocomplete.autocomplete-sm.autocomplete-label-outside-left[data-type='tags']
+    .autocomplete-wrapper {
+    @apply p-1.5;
+  }
+
+  .autocomplete.autocomplete-md.autocomplete-label-outside[data-type='tags']
+    .autocomplete-wrapper,
+  .autocomplete.autocomplete-md.autocomplete-label-outside-left[data-type='tags']
+    .autocomplete-wrapper {
+    @apply p-2;
+  }
+
+  .autocomplete.autocomplete-lg.autocomplete-label-outside[data-type='tags']
+    .autocomplete-wrapper,
+  .autocomplete.autocomplete-lg.autocomplete-label-outside-left[data-type='tags']
+    .autocomplete-wrapper {
+    @apply p-2.5;
+  }
+
+  .autocomplete.autocomplete-label-outside-left[data-type='tags']
+    .autocomplete-label {
+    @apply mt-1;
   }
 }
