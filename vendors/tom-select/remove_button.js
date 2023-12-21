@@ -184,20 +184,10 @@
     if (!options.append) {
       return
     }
-    // var html =
-    //   '<a href="javascript:void(0)" class="' +
-    //   options.className +
-    //   '" tabindex="-1" title="' +
-    //   escape_html(options.title) +
-    //   '">' +
-    //   options.label +
-    //   '</a>'
 
     var html = `
-      <button title="Remove" class="autocomplete-remove-btn btn group btn-ripple btn-default btn-ghost btn-sm btn-icon btn-rounded" type="button">
-        <span class="btn-content">
-        <span class="hero-x-mark-mini icon icon-current icon-md"></span>
-        </span>
+      <button title="Remove" class="autocomplete-remove-btn" type="button">
+        <span class="ion-close"></span>
       </button>`
 
     self.hook('after', 'setupTemplates', () => {

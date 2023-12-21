@@ -41,7 +41,7 @@
     --button-soft-foreground: hsl(var(--danger));
   }
 
-  .btn-base {
+  .btn {
     @apply z-0 relative inline-flex items-center justify-center box-border appearance-none;
     @apply select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden;
     @apply tap-highlight-transparent outline-none;
@@ -50,109 +50,97 @@
     @apply hover:opacity-80;
   }
 
-  .btn-base .btn-content {
+  .btn .btn-content {
     @apply inline-flex items-center justify-center;
   }
 
-  .btn-base.btn-sm .btn-content {
+  .btn.btn-sm .btn-content {
     @apply gap-2;
   }
 
-  .btn-base.btn-sm {
+  .btn.btn-sm {
     @apply px-3 text-xs min-w-[4rem] h-8;
   }
 
-  .btn-base.btn-md .btn-content {
+  .btn.btn-md .btn-content {
     @apply gap-2;
   }
 
-  .btn-base.btn-md {
+  .btn.btn-md {
     @apply px-4 text-sm min-w-[5rem] h-10;
   }
 
-  .btn-base.btn-lg .btn-content {
+  .btn.btn-lg .btn-content {
     @apply gap-3;
   }
 
-  .btn-base.btn-lg {
+  .btn.btn-lg {
     @apply px-6 text-base min-w-[6rem] h-12;
   }
 
-  .btn-base.btn-solid {
+  .btn.btn-solid {
     @apply bg-[--button] text-[--button-foreground] focus-visible:outline-[--button];
   }
 
-  .btn-base.btn-soft {
+  .btn.btn-soft {
     @apply bg-[--button-soft] text-[--button-soft-foreground];
     @apply focus-visible:outline-[--button-soft-foreground];
   }
 
-  .btn-base.btn-outline {
+  .btn.btn-outline {
     @apply bg-transparent border-[--button] text-[--button-soft-foreground] border-2;
     @apply focus-visible:outline-[--button];
   }
 
-  .btn-base.btn-ghost {
+  .btn.btn-ghost {
     @apply bg-transparent hover:opacity-100 hover:bg-[--button-soft];
     @apply text-[--button-soft-foreground];
     @apply focus-visible:outline-[--button-soft-foreground];
   }
 
-  .btn-base.btn-loading .btn-content {
+  .btn.btn-loading .btn-content {
     @apply invisible;
   }
 
-  .btn-base .btn-spinner {
+  .btn .btn-spinner {
     @apply absolute left-0 top-0 bottom-0 right-0;
     @apply place-content-center grid;
   }
 
-  .btn-base.btn-disabled,
-  .btn-base.btn-loading {
+  .btn.btn-disabled,
+  .btn.btn-loading {
     @apply opacity-[--disabled-opacity] pointer-events-none;
   }
 
-  .btn-base.btn-radius-sm {
+  .btn.btn-radius-sm {
     @apply rounded-md;
   }
 
-  .btn-base.btn-radius-md {
+  .btn.btn-radius-md {
     @apply rounded-lg;
   }
 
-  .btn-base.btn-radius-lg {
+  .btn.btn-radius-lg {
     @apply rounded-xl;
   }
 
-  .btn-base.btn-radius-full {
+  .btn.btn-radius-full {
     @apply rounded-full;
   }
 
-  .btn-base.btn-icon {
+  .btn.btn-icon {
     @apply p-0;
   }
 
-  .btn-base.btn-icon.btn-sm {
+  .btn.btn-icon.btn-sm {
     @apply w-8 h-8 min-w-[2rem];
   }
 
-  .btn-base.btn-icon.btn-md {
+  .btn.btn-icon.btn-md {
     @apply w-10 h-10 min-w-[2.5rem];
   }
 
-  .btn-base.btn-icon.btn-lg {
+  .btn.btn-icon.btn-lg {
     @apply w-12 h-12 min-w-[3rem];
-  }
-
-  .btn-base.btn-icon.btn-sm .btn-content .icon {
-    @apply h-5 w-5;
-  }
-
-  .btn-base.btn-icon.btn-md .btn-content .icon {
-    @apply h-7 w-7;
-  }
-
-  .btn-base.btn-icon.btn-lg .btn-content .icon {
-    @apply h-9 w-9;
   }
 }

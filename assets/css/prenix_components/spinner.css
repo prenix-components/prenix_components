@@ -17,61 +17,61 @@
     animation: spinner-spin 0.8s linear infinite;
   }
 
-  .spinner-base.spinner-default {
+  .spinner.spinner-default {
     --spinner: hsl(var(--default));
   }
 
-  .spinner-base.spinner-primary {
+  .spinner.spinner-primary {
     --spinner: hsl(var(--primary));
   }
 
-  .spinner-base.spinner-secondary {
+  .spinner.spinner-secondary {
     --spinner: hsl(var(--secondary));
   }
 
-  .spinner-base.spinner-success {
+  .spinner.spinner-success {
     --spinner: hsl(var(--success));
   }
 
-  .spinner-base.spinner-warning {
+  .spinner.spinner-warning {
     --spinner: hsl(var(--warning));
   }
 
-  .spinner-base.spinner-danger {
+  .spinner.spinner-danger {
     --spinner: hsl(var(--danger));
   }
 
-  .spinner-base.spinner-current {
+  .spinner.spinner-current {
     --spinner: currentColor;
   }
 
-  .spinner-base {
+  .spinner {
     @apply relative inline-flex flex-col gap-2 items-center justify-center;
   }
 
-  .spinner-base .spinner-content {
+  .spinner .spinner-content {
     @apply relative flex;
   }
 
-  .spinner-base .spinner-icon-solid {
+  .spinner .spinner-icon-solid {
     @apply absolute w-full h-full rounded-full animate-spinner-ease-spin border-solid;
     @apply border-t-transparent border-l-transparent border-r-transparent border-[3px] border-b-[--spinner];
   }
 
-  .spinner-base .spinner-icon-dotted {
+  .spinner .spinner-icon-dotted {
     @apply absolute w-full h-full rounded-full opacity-75 animate-spinner-linear-spin;
     @apply border-dotted border-t-transparent border-l-transparent border-r-transparent border-[3px] border-b-[--spinner];
   }
 
-  .spinner-base.spinner-sm .spinner-content {
+  .spinner.spinner-sm .spinner-content {
     @apply w-5 h-5;
   }
 
-  .spinner-base.spinner-md .spinner-content {
+  .spinner.spinner-md .spinner-content {
     @apply w-8 h-8;
   }
 
-  .spinner-base.spinner-lg .spinner-content {
+  .spinner.spinner-lg .spinner-content {
     @apply w-10 h-10;
   }
 }

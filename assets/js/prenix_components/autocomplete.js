@@ -67,6 +67,11 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       plugins = { no_backspace_delete: {} }
   }
 
+  const $tagsItem = $wrapper.querySelector('[data-autocomplete-tags-item]')
+  const $tagsItemTemplate = $tagsItem.cloneNode(true)
+  $tagsItemTemplate.classList.remove('hidden')
+  $tagsItemTemplate.removeAttribute('data-autocomplete-tags-item')
+
   return {
     ...opts,
     plugins,
@@ -151,11 +156,9 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       },
       item: (data, _escape) => {
         if (isTags) {
-          return `<div class="chip chip-default chip-radius-md chip-solid chip-md">
-          <span class="chip-content">
-            ${data.text}
-          </span>
-        </div>`
+          let html = $tagsItemTemplate.outerHTML
+          html = html.replace(/{{AUTOCOMPLETE_TAGS_ITEM}}/, data.text)
+          return html
         } else if (isMultiple) {
           return '<div></div>'
         } else {
@@ -167,14 +170,13 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
         return '<div class="autocomplete-dropdown"></div>'
       },
       option_create: function (data, escape) {
+        let html = $tagsItemTemplate.outerHTML
+        html = html.replace(/{{AUTOCOMPLETE_TAGS_ITEM}}/, escape(data.input))
+
         return `
           <div class="autocomplete-create create">
             Add
-            <div class="chip chip-default chip-radius-md chip-solid chip-sm">
-              <span class="chip-content">
-                ${escape(data.input)}
-              </span>
-            </div>
+            ${html}
         </div>`
       },
     },

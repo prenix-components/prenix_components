@@ -2,21 +2,21 @@ defmodule PrenixComponents.Divider do
   import PrenixComponents.Helpers
   use Phoenix.Component
 
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :orientation, :string, default: "horizontal", values: ~w(horizontal vertical)
 
   def divider(assigns) do
-    base_class =
+    class =
       combine_class([
         "divider",
         "divider-#{assigns.orientation}",
-        assigns.base_class
+        assigns.class
       ])
 
-    assigns = assign(assigns, :base_class, base_class)
+    assigns = assign(assigns, :class, class)
 
     ~H"""
-    <hr class={@base_class} role="separator" />
+    <hr class={@class} role="separator" />
     """
   end
 end

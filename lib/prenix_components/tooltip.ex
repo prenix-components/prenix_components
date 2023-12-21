@@ -2,7 +2,7 @@ defmodule PrenixComponents.Tooltip do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :tooltip_class, :string, default: nil
 
   attr :color, :string,
@@ -19,7 +19,7 @@ defmodule PrenixComponents.Tooltip do
 
     ~H"""
     <span
-      class={@base_class}
+      class={@class}
       data-bs-toggle="tooltip"
       data-bs-custom-class={@tooltip_class}
       data-bs-title={@title}
@@ -32,10 +32,10 @@ defmodule PrenixComponents.Tooltip do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "tooltip-base",
-        assigns.base_class
+        "tooltip-toggle",
+        assigns.class
       ])
 
     tooltip_class =
@@ -46,7 +46,7 @@ defmodule PrenixComponents.Tooltip do
       ])
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:tooltip_class, tooltip_class)
   end
 end

@@ -11,9 +11,7 @@ const initPopover = () => {
 
     dr._parent.addEventListener('show.bs.dropdown', async (e) => {
       const $target = e.target
-      const $popover = $target
-        .closest('.popover-base')
-        .querySelector('.popover')
+      const $popover = $target.closest('.popover').querySelector('.popover')
 
       console.log('popover', $popover)
       setTimeout(() => $popover.classList.add('open'))
@@ -21,9 +19,7 @@ const initPopover = () => {
 
     dr._parent.addEventListener('hide.bs.dropdown', (e) => {
       const $target = e.target
-      const $popover = $target
-        .closest('.popover-base')
-        .querySelector('.popover')
+      const $popover = $target.closest('.popover').querySelector('.popover')
 
       $popover.classList.remove('open')
     })

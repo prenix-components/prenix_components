@@ -2,7 +2,7 @@ defmodule PrenixComponents.Spinner do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :content_class, :string, default: nil
   attr :size, :string, default: "md", values: ~w(sm md lg)
 
@@ -14,7 +14,7 @@ defmodule PrenixComponents.Spinner do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div aria-label="Loading" class={@base_class}>
+    <div aria-label="Loading" class={@class}>
       <div class={@content_class}>
         <span class="sr-only">Loading...</span>
         <i class="spinner-icon-solid" />
@@ -25,12 +25,12 @@ defmodule PrenixComponents.Spinner do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "spinner-base",
+        "spinner",
         "spinner-#{assigns.color}",
         "spinner-#{assigns.size}",
-        "#{assigns.base_class}"
+        "#{assigns.class}"
       ])
 
     content_class =
@@ -39,6 +39,6 @@ defmodule PrenixComponents.Spinner do
         assigns.content_class
       ])
 
-    assigns |> assign(:base_class, base_class) |> assign(:content_class, content_class)
+    assigns |> assign(:class, class) |> assign(:content_class, content_class)
   end
 end

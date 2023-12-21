@@ -51,7 +51,7 @@ const checkboxTemplate = (id, label) => {
       aria-label="${label}"
     />
   </div>
-  <span aria-hidden="true" class="checkbox">
+  <span aria-hidden="true" class="checkbox-el">
     <svg aria-hidden="true" role="presentation" viewBox="0 0 17 18" class="checkbox-checkmark">
       <polyline
         fill="none"
@@ -101,7 +101,7 @@ export default function (_userOptions) {
       const id = `autocomplete-checkbox-${randomString()}-${timestamp}`
       $checkbox.setAttribute('data-checkbox', '')
       $checkbox.setAttribute('for', id)
-      $checkbox.classList.add('checkbox-base', 'autocomplete-option-checkbox')
+      $checkbox.classList.add('checkbox', 'autocomplete-option-checkbox')
       $checkbox.innerHTML = checkboxTemplate(id, label)
 
       const hashed = hash_key(data[self.settings.valueField])

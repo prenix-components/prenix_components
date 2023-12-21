@@ -9,7 +9,7 @@
     @apply opacity-100 duration-150 ease-linear;
   }
 
-  .modal-base {
+  .modal {
     --modal: hsl(var(--content1));
     --modal-foreground: hsl(var(--content1-foreground));
     --modal-dialog-width: initial;
@@ -37,23 +37,23 @@
     @apply overflow-x-hidden overflow-y-auto hidden;
   }
 
-  .modal-base.show {
+  .modal.show {
     @apply opacity-100 duration-150 ease-linear;
   }
 
-  .modal-base.modal-sm {
+  .modal.modal-sm {
     --modal-dialog-max-width: theme(maxWidth.sm);
   }
 
-  .modal-base.modal-md {
+  .modal.modal-md {
     --modal-dialog-max-width: theme(maxWidth.lg);
   }
 
-  .modal-base.modal-lg .modal-dialog {
+  .modal.modal-lg .modal-dialog {
     --modal-dialog-max-width: theme(maxWidth.2xl);
   }
 
-  .modal-base .modal-dialog {
+  .modal .modal-dialog {
     transform: translate(0, -50px);
     min-height: calc(100% - var(--modal-dialog-margin-y) * 2);
     @apply transition-transform ease-out duration-300 pointer-events-none;
@@ -62,11 +62,11 @@
     @apply max-w-[--modal-dialog-max-width] mx-[--modal-dialog-margin-x];
   }
 
-  .modal-base.show .modal-dialog {
+  .modal.show .modal-dialog {
     transform: none;
   }
 
-  .modal-base .modal-content {
+  .modal .modal-content {
     box-shadow: var(--shadow-md);
     @apply flex flex-col relative w-full box-border;
     @apply rounded-[--modal-content-border-radius] pointer-events-auto;
@@ -75,37 +75,37 @@
     @apply mx-[--modal-dialog-margin-y];
   }
 
-  .modal-base .modal-header {
+  .modal .modal-header {
     @apply py-4 px-6 flex-initial text-lg font-semibold flex flex-col gap-1;
   }
 
-  .modal-base .modal-body {
+  .modal .modal-body {
     @apply flex flex-1 flex-col gap-3 px-6 py-2;
     overflow-y: --modal-body-overflow-y;
   }
 
-  .modal-base .modal-footer {
+  .modal .modal-footer {
     @apply flex flex-row gap-2 px-6 py-4 justify-end;
   }
 
-  .modal-base .modal-close {
+  .modal .modal-close {
     color: hsl(var(--neutral1-foreground));
     @apply absolute appearance-none select-none top-1 right-1 p-2;
   }
 
-  .modal-base.modal-scroll-inside .modal-dialog {
+  .modal.modal-scroll-inside .modal-dialog {
     height: calc(100% - var(--modal-dialog-margin-y) * 2);
   }
 
-  .modal-base.modal-scroll-inside .modal-content {
+  .modal.modal-scroll-inside .modal-content {
     @apply max-h-full overflow-hidden;
   }
 
-  .modal-base.modal-scroll-inside .modal-body {
+  .modal.modal-scroll-inside .modal-body {
     @apply overflow-y-auto;
   }
 
-  .modal-base.modal-fullscreen-always {
+  .modal.modal-fullscreen-always {
     --modal-dialog-max-width: none;
     --modal-dialog-width: 100vw;
     --modal-dialog-height: 100%;
@@ -117,7 +117,7 @@
   }
 
   @media (max-width: theme(screens.2xl)) {
-    .modal-base.modal-fullscreen-2xl-below {
+    .modal.modal-fullscreen-2xl-below {
       --modal-dialog-max-width: none;
       --modal-dialog-width: 100vw;
       --modal-dialog-height: 100%;
@@ -130,7 +130,7 @@
   }
 
   @media (max-width: theme(screens.xl)) {
-    .modal-base.modal-fullscreen-xl-below {
+    .modal.modal-fullscreen-xl-below {
       --modal-dialog-max-width: none;
       --modal-dialog-width: 100vw;
       --modal-dialog-height: 100%;
@@ -143,7 +143,7 @@
   }
 
   @media (max-width: theme(screens.lg)) {
-    .modal-base.modal-fullscreen-lg-below {
+    .modal.modal-fullscreen-lg-below {
       --modal-dialog-max-width: none;
       --modal-dialog-width: 100vw;
       --modal-dialog-height: 100%;
@@ -156,7 +156,7 @@
   }
 
   @media (max-width: theme(screens.md)) {
-    .modal-base.modal-fullscreen-md-below {
+    .modal.modal-fullscreen-md-below {
       --modal-dialog-max-width: none;
       --modal-dialog-width: 100vw;
       --modal-dialog-height: 100%;
@@ -169,7 +169,7 @@
   }
 
   @media (max-width: theme(screens.sm)) {
-    .modal-base.modal-fullscreen-sm-below {
+    .modal.modal-fullscreen-sm-below {
       --modal-dialog-max-width: none;
       --modal-dialog-width: 100vw;
       --modal-dialog-height: 100%;

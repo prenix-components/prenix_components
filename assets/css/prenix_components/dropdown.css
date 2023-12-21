@@ -41,21 +41,21 @@
     --dropdown-item-soft-foreground: hsl(var(--danger));
   }
 
-  .dropdown-base {
+  .dropdown {
     --dropdown: hsl(var(--content1));
     --dropdown-foreground: hsl(var(--content1-foreground));
     @apply inline-block;
   }
 
-  .dropdown-base .dropdown-menu {
+  .dropdown .dropdown-menu {
     @apply hidden absolute min-w-[200px] z-[1000];
   }
 
-  .dropdown-base .dropdown-menu.show {
+  .dropdown .dropdown-menu.show {
     @apply block;
   }
 
-  .dropdown-base .dropdown-menu-inner {
+  .dropdown .dropdown-menu-inner {
     box-shadow: var(--shadow-md);
     @apply min-w-[200px] p-2 rounded-xl;
     @apply text-sm subpixel-antialiased outline-none box-border;
@@ -64,75 +64,75 @@
     @apply bg-[--dropdown] text-[--dropdown-foreground];
   }
 
-  .dropdown-base .dropdown-menu-inner.open {
+  .dropdown .dropdown-menu-inner.open {
     @apply opacity-100 scale-100 ease-in;
   }
 
-  .dropdown-base .dropdown-divider {
+  .dropdown .dropdown-divider {
     @apply my-1 px-2;
   }
 
-  .dropdown-base .dropdown-rotate {
+  .dropdown .dropdown-rotate {
     @apply transition-transform inline-flex;
   }
 
-  .dropdown-base .dropdown-toggle.show .dropdown-rotate {
+  .dropdown .dropdown-toggle.show .dropdown-rotate {
     @apply rotate-180;
   }
 
-  .dropdown-base .dropdown-item {
+  .dropdown .dropdown-item {
     @apply flex gap-2 items-center justify-between relative px-2 py-1.5 w-full h-full box-border rounded-lg;
     @apply subpixel-antialiased cursor-pointer tap-highlight-transparent outline-none;
   }
 
-  .dropdown-base.dropdown-solid .dropdown-item {
+  .dropdown.dropdown-solid .dropdown-item {
     @apply focus:bg-[--dropdown-item] focus:text-[--dropdown-item-foreground];
   }
 
-  .dropdown-base.dropdown-solid .dropdown-item[data-hover='true'] {
+  .dropdown.dropdown-solid .dropdown-item[data-hover='true'] {
     @apply bg-[--dropdown-item] text-[--dropdown-item-foreground];
   }
 
-  .dropdown-base.dropdown-soft .dropdown-item {
+  .dropdown.dropdown-soft .dropdown-item {
     @apply focus:bg-[--dropdown-item-soft] focus:text-[--dropdown-item-soft-foreground];
   }
 
-  .dropdown-base.dropdown-soft .dropdown-item[data-hover='true'] {
+  .dropdown.dropdown-soft .dropdown-item[data-hover='true'] {
     @apply bg-[--dropdown-item-soft] text-[--dropdown-item-soft-foreground];
   }
 
-  .dropdown-base .dropdown-item-disabled {
+  .dropdown .dropdown-item-disabled {
     @apply opacity-50 pointer-events-none;
   }
 
-  .dropdown-base.dropdown-submenu {
+  .dropdown.dropdown-submenu {
     @apply w-full block;
   }
 
-  .dropdown-base.dropdown-submenu .dropdown-toggle {
+  .dropdown.dropdown-submenu .dropdown-toggle {
     @apply block;
   }
 
-  .dropdown-base.dropdown-submenu .dropdown-submenu-inner {
+  .dropdown.dropdown-submenu .dropdown-submenu-inner {
     border-left-color: hsl(var(--divider) / var(--divider-opacity));
     @apply ml-2 pl-2 border-l-[1px];
   }
 
-  .dropdown-base.dropdown-submenu .dropdown-submenu-item-icon {
+  .dropdown.dropdown-submenu .dropdown-submenu-item-icon {
     @apply transition-transform;
   }
 
-  .dropdown-base.dropdown-submenu .dropdown-submenu-item-icon {
+  .dropdown.dropdown-submenu .dropdown-submenu-item-icon {
     @apply transition-transform;
   }
 
-  .dropdown-base.dropdown-submenu
+  .dropdown.dropdown-submenu
     .dropdown-toggle[aria-expanded='true']
     .dropdown-submenu-item-icon {
     @apply rotate-90;
   }
 
-  .dropdown-base .dropdown-toggle[aria-expanded='true'] .btn-base {
+  .dropdown .dropdown-toggle[aria-expanded='true'] .btn {
     @apply opacity-[0.7] scale-[0.97];
   }
 }

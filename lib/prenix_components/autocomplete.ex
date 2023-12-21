@@ -1,6 +1,7 @@
 defmodule PrenixComponents.Autocomplete do
   use Phoenix.Component
   import PrenixComponents.Helpers
+  import PrenixComponents.Chip
 
   attr :name, :string, required: true
   attr :options, :list, required: true
@@ -13,10 +14,10 @@ defmodule PrenixComponents.Autocomplete do
   attr :disabled, :boolean, default: false
   attr :allow_blank, :boolean, default: false
   attr :placeholder, :string, default: nil
-  attr :base_class, :string, default: nil
-  attr :input_wrapper_class, :string, default: nil
+  attr :class, :string, default: nil
+  attr :wrapper_class, :string, default: nil
   attr :label_class, :string, default: nil
-  attr :input_inner_wrapper_class, :string, default: nil
+  attr :input_wrapper_class, :string, default: nil
   attr :input_class, :string, default: nil
   attr :helper_class, :string, default: nil
 
@@ -30,14 +31,18 @@ defmodule PrenixComponents.Autocomplete do
 
     ~H"""
     <div
-      class={@base_class}
+      class={@class}
       data-invalid={@invalid}
       data-disabled={@disabled}
       data-allow-blank={@allow_blank}
       data-type={@type}
       data-autocomplete
     >
-      <div class={@input_wrapper_class}>
+      <.chip data-autocomplete-tags-item class="hidden">
+        {{AUTOCOMPLETE_TAGS_ITEM}}
+      </.chip>
+
+      <div class={@wrapper_class}>
         <%= if @label_text do %>
           <label class={@label_class} for={@id}><%= @label_text %></label>
         <% end %>
@@ -46,7 +51,7 @@ defmodule PrenixComponents.Autocomplete do
           <label class={@label_class} for={@id}><%= render_slot(@label) %></label>
         <% end %>
 
-        <div class={@input_inner_wrapper_class}>
+        <div class={@input_wrapper_class}>
           <%= if @type == "tags" do %>
             <input
               type="text"
@@ -108,16 +113,16 @@ defmodule PrenixComponents.Autocomplete do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "autocomplete-base",
-        "#{assigns.base_class}"
+        "autocomplete",
+        "#{assigns.class}"
       ])
 
-    input_wrapper_class =
+    wrapper_class =
       combine_class([
         "autocomplete-wrapper",
-        assigns.input_wrapper_class
+        assigns.wrapper_class
       ])
 
     label_class =
@@ -126,10 +131,10 @@ defmodule PrenixComponents.Autocomplete do
         assigns.label_class
       ])
 
-    input_inner_wrapper_class =
+    input_wrapper_class =
       combine_class([
-        "autocomplete-inner-wrapper",
-        assigns.input_inner_wrapper_class
+        "autocomplete-input-wrapper",
+        assigns.input_wrapper_class
       ])
 
     helper_class =
@@ -157,10 +162,10 @@ defmodule PrenixComponents.Autocomplete do
       )
 
     assigns
-    |> assign(:base_class, base_class)
-    |> assign(:input_wrapper_class, input_wrapper_class)
+    |> assign(:class, class)
+    |> assign(:wrapper_class, wrapper_class)
     |> assign(:label_class, label_class)
-    |> assign(:input_inner_wrapper_class, input_inner_wrapper_class)
+    |> assign(:input_wrapper_class, input_wrapper_class)
     |> assign(:helper_class, helper_class)
     |> assign(id: id)
     |> assign(:delimited_options, delimited_options)

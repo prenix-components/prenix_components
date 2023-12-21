@@ -16,10 +16,10 @@ defmodule PrenixComponents.Input do
     values: ~w(checkbox color date datetime-local email file hidden month number password
                range radio search select tel text textarea time url week)
 
-  attr :base_class, :string, default: nil
-  attr :input_wrapper_class, :string, default: nil
+  attr :class, :string, default: nil
+  attr :wrapper_class, :string, default: nil
   attr :label_class, :string, default: nil
-  attr :input_inner_wrapper_class, :string, default: nil
+  attr :input_wrapper_class, :string, default: nil
   attr :input_class, :string, default: nil
   attr :helper_class, :string, default: nil
   slot :label
@@ -31,8 +31,8 @@ defmodule PrenixComponents.Input do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@base_class} data-invalid={@invalid} data-disabled={@disabled} data-input>
-      <div class={@input_wrapper_class}>
+    <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-input>
+      <div class={@wrapper_class}>
         <%= if @label_text do %>
           <label class={@label_class} for={@id} id={"#{@id}-label"}><%= @label_text %></label>
         <% end %>
@@ -41,7 +41,7 @@ defmodule PrenixComponents.Input do
           <label class={@label_class} for={@id} id={"#{@id}-label"}><%= render_slot(@label) %></label>
         <% end %>
 
-        <div class={@input_inner_wrapper_class}>
+        <div class={@input_wrapper_class}>
           <input
             id={@id}
             type={@type}
@@ -69,16 +69,16 @@ defmodule PrenixComponents.Input do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "input-base",
-        assigns.base_class
+        "input",
+        assigns.class
       ])
 
-    input_wrapper_class =
+    wrapper_class =
       combine_class([
         "input-wrapper",
-        assigns.input_wrapper_class
+        assigns.wrapper_class
       ])
 
     label_class =
@@ -87,15 +87,16 @@ defmodule PrenixComponents.Input do
         assigns.label_class
       ])
 
-    input_inner_wrapper_class =
+    input_wrapper_class =
       combine_class([
-        "input-inner-wrapper",
-        assigns.input_inner_wrapper_class
+        "input-el-wrapper",
+        assigns.input_wrapper_class
       ])
 
     input_class =
       combine_class([
-        "input"
+        "input-el",
+        assigns.input_class
       ])
 
     helper_class =
@@ -111,10 +112,10 @@ defmodule PrenixComponents.Input do
       end
 
     assigns
-    |> assign(:base_class, base_class)
-    |> assign(:input_wrapper_class, input_wrapper_class)
+    |> assign(:class, class)
+    |> assign(:wrapper_class, wrapper_class)
     |> assign(:label_class, label_class)
-    |> assign(:input_inner_wrapper_class, input_inner_wrapper_class)
+    |> assign(:input_wrapper_class, input_wrapper_class)
     |> assign(:input_class, input_class)
     |> assign(:helper_class, helper_class)
     |> assign(id: id)

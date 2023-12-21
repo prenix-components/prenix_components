@@ -3,7 +3,7 @@ defmodule PrenixComponents.Table do
   import PrenixComponents.Helpers
 
   attr :rows, :list, required: true
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :table_class, :string, default: nil
   attr :th_class, :string, default: nil
   attr :td_class, :string, default: nil
@@ -19,11 +19,10 @@ defmodule PrenixComponents.Table do
   end
 
   def table(assigns) do
-    IO.inspect(assigns, label: "table assigns")
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@base_class}>
+    <div class={@class}>
       <table class={@table_class}>
         <%!-- <caption :if={length(@caption) > 0} class="table-caption">
         <%= render_slot(@caption) %>
@@ -60,11 +59,11 @@ defmodule PrenixComponents.Table do
   end
 
   defp set_assigns(assigns) do
-    base_class =
-      combine_class(["table-base", assigns.base_class])
+    class =
+      combine_class(["table", assigns.class])
 
     table_class =
-      combine_class(["table", assigns.table_class])
+      combine_class(["table-el", assigns.table_class])
 
     th_class =
       combine_class(["th group", assigns.th_class])
@@ -73,7 +72,7 @@ defmodule PrenixComponents.Table do
       combine_class(["td", assigns.td_class])
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:table_class, table_class)
     |> assign(:th_class, th_class)
     |> assign(:td_class, td_class)

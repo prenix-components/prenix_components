@@ -29,7 +29,7 @@
     --tooltip-foreground: hsl(var(--danger-foreground));
   }
 
-  .tooltip-base {
+  .tooltip-toggle {
     @apply h-fit w-fit inline-block;
   }
 

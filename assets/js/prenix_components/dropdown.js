@@ -14,7 +14,7 @@ const initDropdown = () => {
     dropdownInstance._parent.addEventListener('show.bs.dropdown', async (e) => {
       const $target = e.target
       const $menuInner = $target
-        .closest('.dropdown-base')
+        .closest('.dropdown')
         .querySelector('.dropdown-menu-inner')
 
       setTimeout(() => $menuInner.classList.add('open'))
@@ -23,7 +23,7 @@ const initDropdown = () => {
     dropdownInstance._parent.addEventListener('hide.bs.dropdown', (e) => {
       const $target = e.target
       const $menuInner = $target
-        .closest('.dropdown-base')
+        .closest('.dropdown')
         .querySelector('.dropdown-menu-inner')
 
       $menuInner.classList.remove('open')

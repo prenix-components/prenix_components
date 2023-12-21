@@ -15,7 +15,7 @@ defmodule PrenixComponents.Button do
   attr :radius, :string, default: "lg", values: ~w(sm md lg full)
   attr :loading, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :content_class, :string, default: nil
   attr :spinner_class, :string, default: nil
   attr :rest, :global
@@ -27,7 +27,7 @@ defmodule PrenixComponents.Button do
     ~H"""
     <%= if @type == "link" do %>
       <.link
-        class={@base_class}
+        class={@class}
         aria-disabled={@disabled || @loading}
         tabindex={if(@disabled || @loading, do: -1, else: false)}
         {@rest}
@@ -42,7 +42,7 @@ defmodule PrenixComponents.Button do
       </.link>
     <% else %>
       <button
-        class={@base_class}
+        class={@class}
         type={@type}
         disabled={@disabled || @loading}
         aria-disabled={@disabled || @loading}
@@ -61,9 +61,9 @@ defmodule PrenixComponents.Button do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "btn-base btn-ripple",
+        "btn btn-ripple",
         "btn-#{assigns.color}",
         "btn-#{assigns.variant}",
         "btn-#{assigns.size}",
@@ -71,7 +71,7 @@ defmodule PrenixComponents.Button do
         if(assigns.icon, do: "btn-icon", else: nil),
         if(assigns.disabled, do: "btn-disabled", else: nil),
         if(assigns.loading, do: "btn-loading", else: nil),
-        assigns.base_class
+        assigns.class
       ])
 
     content_class =
@@ -87,7 +87,7 @@ defmodule PrenixComponents.Button do
       ])
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:content_class, content_class)
     |> assign(:spinner_class, spinner_class)
   end

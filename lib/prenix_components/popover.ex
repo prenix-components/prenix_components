@@ -22,7 +22,7 @@ defmodule PrenixComponents.Popover do
     "dropstart" => "8, 0"
   }
 
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :toggle_class, :string, default: nil
   attr :popover_class, :string, default: nil
   attr :placement, :string, default: "dropdown-center", values: Map.keys(@placements)
@@ -34,7 +34,7 @@ defmodule PrenixComponents.Popover do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@base_class} data-popover>
+    <div class={@class} data-popover>
       <div
         class={@toggle_class}
         data-bs-toggle="dropdown"
@@ -55,10 +55,10 @@ defmodule PrenixComponents.Popover do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "popover-base #{@placements[assigns.placement]}",
-        assigns.base_class
+        "popover #{@placements[assigns.placement]}",
+        assigns.class
       ])
 
     toggle_class =
@@ -81,7 +81,7 @@ defmodule PrenixComponents.Popover do
       end
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:toggle_class, toggle_class)
     |> assign(:popover_class, popover_class)
     |> assign(:offset, offset)

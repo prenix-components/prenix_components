@@ -3,7 +3,7 @@ import { setHasValue } from './utils'
 const initInput = () => {
   document.querySelectorAll('[data-input]').forEach(($baseEl) => {
     const $label = $baseEl.querySelector('.input-label')
-    const $input = $baseEl.querySelector('.input')
+    const $input = $baseEl.querySelector('.input-el')
 
     if ($input.placeholder && $input.placeholder.length > 0) {
       $baseEl.dataset.hasPlaceholder = true

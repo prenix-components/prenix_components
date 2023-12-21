@@ -9,7 +9,7 @@ defmodule PrenixComponents.Checkbox do
   attr :label_text, :string, default: nil
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :label_class, :string, default: nil
   attr :checkbox_class, :string, default: nil
   slot :label
@@ -18,13 +18,7 @@ defmodule PrenixComponents.Checkbox do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <label
-      class={@base_class}
-      for={@id}
-      data-checkbox
-      data-disabled={@disabled}
-      data-invalid={@invalid}
-    >
+    <label class={@class} for={@id} data-checkbox data-disabled={@disabled} data-invalid={@invalid}>
       <div class="visually-hidden">
         <input
           id={@id}
@@ -67,10 +61,10 @@ defmodule PrenixComponents.Checkbox do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "checkbox-base",
-        "#{assigns.base_class}"
+        "checkbox",
+        "#{assigns.class}"
       ])
 
     label_class =
@@ -81,7 +75,7 @@ defmodule PrenixComponents.Checkbox do
 
     checkbox_class =
       combine_class([
-        "checkbox",
+        "checkbox-el",
         "#{assigns.checkbox_class}"
       ])
 
@@ -92,7 +86,7 @@ defmodule PrenixComponents.Checkbox do
       end
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:label_class, label_class)
     |> assign(:checkbox_class, checkbox_class)
     |> assign(:id, id)

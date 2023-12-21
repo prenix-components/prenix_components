@@ -23,7 +23,7 @@ defmodule PrenixComponents.Modal do
   attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :scroll_behavior, :string, default: nil, values: @scroll_behaviors
   attr :fullscreen, :string, default: nil, values: @fullscreens
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :dialog_class, :string, default: nil
   attr :content_class, :string, default: nil
   attr :header_class, :string, default: nil
@@ -37,13 +37,7 @@ defmodule PrenixComponents.Modal do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div
-      class={@base_class}
-      id={@id}
-      tabindex="-1"
-      aria-labelledby={"#{@id}-label"}
-      aria-hidden="true"
-    >
+    <div class={@class} id={@id} tabindex="-1" aria-labelledby={"#{@id}-label"} aria-hidden="true">
       <div class={@dialog_class}>
         <div class={@content_class}>
           <.button
@@ -51,10 +45,10 @@ defmodule PrenixComponents.Modal do
             icon
             radius="full"
             variant="ghost"
-            base_class="modal-close"
+            class="modal-close"
             data-bs-dismiss="modal"
           >
-            <.icon name="hero-x-mark-mini" />
+            <.icon name="ion-close" />
           </.button>
 
           <%= if length(@header) > 0 do %>
@@ -81,9 +75,9 @@ defmodule PrenixComponents.Modal do
   end
 
   def set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "modal modal-base",
+        "modal",
         "modal-#{assigns.size}",
         if(assigns.scroll_behavior, do: "modal-scroll-#{assigns.scroll_behavior}", else: nil),
         if(assigns.fullscreen, do: "modal-fullscreen-#{assigns.fullscreen}", else: nil)
@@ -120,7 +114,7 @@ defmodule PrenixComponents.Modal do
       ])
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:dialog_class, dialog_class)
     |> assign(:content_class, content_class)
     |> assign(:header_class, header_class)

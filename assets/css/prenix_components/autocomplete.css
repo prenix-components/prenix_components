@@ -1,5 +1,5 @@
 @layer components {
-  .autocomplete-base {
+  .autocomplete {
     --autocomplete-placeholder: hsl(var(--neutral1-foreground));
     --autocomplete-input: hsl(var(--foreground));
     --autocomplete-label: hsl(var(--neutral2-foreground));
@@ -23,15 +23,15 @@
     @apply w-full;
   }
 
-  .autocomplete-base .ts-wrapper {
+  .autocomplete .ts-wrapper {
     @apply relative w-full;
   }
 
-  .autocomplete-base [data-original-input] {
+  .autocomplete [data-original-input] {
     @apply bg-transparent visually-hidden;
   }
 
-  .autocomplete-base .autocomplete-wrapper {
+  .autocomplete .autocomplete-wrapper {
     box-shadow: var(--shadow-sm);
     @apply relative w-full inline-flex tap-highlight-transparent;
     @apply rounded-xl outline-none py-2 px-3 h-14 min-h-[2.5rem];
@@ -41,75 +41,75 @@
     @apply hover:border-[--autocomplete-wrapper-border-hover];
   }
 
-  .autocomplete-base[data-focus='true'] .autocomplete-wrapper {
+  .autocomplete[data-focus='true'] .autocomplete-wrapper {
     @apply border-[--autocomplete-wrapper-border-focus];
   }
 
-  .autocomplete-base .autocomplete-inner-wrapper {
+  .autocomplete .autocomplete-input-wrapper {
     @apply inline-flex w-full items-center h-full box-border pb-0.5 relative;
   }
 
-  .autocomplete-base[data-has-label='true'] .autocomplete-inner-wrapper {
+  .autocomplete[data-has-label='true'] .autocomplete-input-wrapper {
     @apply items-end;
   }
 
-  .autocomplete-base .autocomplete-label {
+  .autocomplete .autocomplete-label {
     @apply absolute pointer-events-none origin-top-left subpixel-antialiased block text-[--autocomplete-label];
     @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
     @apply pe-2 max-w-full text-ellipsis overflow-hidden inline-flex items-center justify-center gap-1 text-base;
   }
 
-  .autocomplete-base[data-focus='true'] .autocomplete-label,
-  .autocomplete-base[data-has-placeholder='true'] .autocomplete-label,
-  .autocomplete-base[data-has-value='true'] .autocomplete-label {
+  .autocomplete[data-focus='true'] .autocomplete-label,
+  .autocomplete[data-has-placeholder='true'] .autocomplete-label,
+  .autocomplete[data-has-value='true'] .autocomplete-label {
     @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
   }
 
-  .autocomplete-base[data-focus='true'] .autocomplete-label {
+  .autocomplete[data-focus='true'] .autocomplete-label {
     @apply text-[--autocomplete-label-focus];
   }
 
-  .autocomplete-base .autocomplete-input {
+  .autocomplete .autocomplete-input {
     @apply w-full font-normal bg-transparent outline-none placeholder:text-[--autocomplete-placeholder];
     @apply text-sm text-[--autocomplete-input] focus-visible:outline-none;
   }
 
-  .autocomplete-base .ts-wrapper.input-active .autocomplete-input,
-  .autocomplete-base .ts-wrapper.dropdown-active .autocomplete-input {
+  .autocomplete .ts-wrapper.input-active .autocomplete-input,
+  .autocomplete .ts-wrapper.dropdown-active .autocomplete-input {
     @apply block;
   }
 
-  .autocomplete-base .autocomplete-helper {
+  .autocomplete .autocomplete-helper {
     @apply p-1 text-xs text-[--autocomplete-helper];
     @apply inline-flex items-center gap-1;
   }
 
-  .autocomplete-base[data-invalid] .autocomplete-wrapper {
+  .autocomplete[data-invalid] .autocomplete-wrapper {
     @apply border-danger;
   }
 
-  .autocomplete-base[data-invalid] .autocomplete-label {
+  .autocomplete[data-invalid] .autocomplete-label {
     @apply text-danger;
   }
 
-  .autocomplete-base[data-invalid] .autocomplete-helper {
+  .autocomplete[data-invalid] .autocomplete-helper {
     @apply text-danger;
   }
 
-  .autocomplete-base[data-disabled] .autocomplete-wrapper {
+  .autocomplete[data-disabled] .autocomplete-wrapper {
     @apply pointer-events-none opacity-[--disabled-opacity];
   }
 
-  .autocomplete-base[data-type='single'] .ts-wrapper,
-  .autocomplete-base[data-type='multiple'] .ts-wrapper {
+  .autocomplete[data-type='single'] .ts-wrapper,
+  .autocomplete[data-type='multiple'] .ts-wrapper {
     @apply w-full pr-5 text-sm;
   }
 
-  .autocomplete-base .autocomplete-dropdown {
+  .autocomplete .autocomplete-dropdown {
     @apply absolute top-[100%] left-0 w-full z-[1000] mt-6;
   }
 
-  .autocomplete-base .ts-dropdown-content {
+  .autocomplete .ts-dropdown-content {
     box-shadow: var(--shadow-md);
     overflow: hidden auto;
     @apply bg-[--autocomplete-dropdown] text-[--autocomplete-dropdown-foreground];
@@ -118,49 +118,49 @@
     @apply overflow-x-hidden overflow-y-auto max-h-[200px]  scroll-smooth;
   }
 
-  .autocomplete-base .ts-dropdown-content.open {
+  .autocomplete .ts-dropdown-content.open {
     @apply opacity-100 scale-100 ease-in;
   }
 
-  .autocomplete-base[data-has-label='true'] .autocomplete-dropdown {
+  .autocomplete[data-has-label='true'] .autocomplete-dropdown {
     @apply mt-4;
   }
 
-  .autocomplete-base .no-results {
+  .autocomplete .no-results {
     @apply px-2 py-1.5 text-[--autocomplete-no-results];
   }
 
-  .autocomplete-base .autocomplete-option,
-  .autocomplete-base .autocomplete-create {
+  .autocomplete .autocomplete-option,
+  .autocomplete .autocomplete-create {
     @apply relative flex px-2 py-1.5 break-words;
     @apply cursor-pointer rounded-lg subpixel-antialiased;
     @apply tap-highlight-transparent outline-none;
   }
 
-  .autocomplete-base .autocomplete-option.active {
+  .autocomplete .autocomplete-option.active {
     @apply bg-[--autocomplete-option-active] text-[--autocomplete-option-active-foreground];
   }
 
-  .autocomplete-base[data-type='single'] .autocomplete-option {
+  .autocomplete[data-type='single'] .autocomplete-option {
     @apply pr-8 flex;
   }
 
-  .autocomplete-base .autocomplete-option[aria-disabled='true'] {
+  .autocomplete .autocomplete-option[aria-disabled='true'] {
     @apply opacity-[--disabled-opacity] text-[--autocomplete-option-disabled];
     @apply cursor-default  pointer-events-none;
   }
 
-  .autocomplete-base
+  .autocomplete
     .autocomplete-option[aria-disabled='true']
     .autocomplete-option-label {
     @apply cursor-default;
   }
 
-  .autocomplete-base .autocomplete-option[data-selectable] .highlight {
+  .autocomplete .autocomplete-option[data-selectable] .highlight {
     @apply bg-[--autocomplete-option-highlight];
   }
 
-  .autocomplete-base[data-type='single'] .autocomplete-option.selected:after {
+  .autocomplete[data-type='single'] .autocomplete-option.selected:after {
     -webkit-mask-image: var(--autocomplete-option-active-checkmark-img);
     mask-image: var(--autocomplete-option-active-checkmark-img);
     background: var(--autocomplete-option-active-checkmark);
@@ -168,30 +168,30 @@
     @apply top-[50%] -translate-y-[50%];
   }
 
-  .autocomplete-base .autocomplete-option-label {
+  .autocomplete .autocomplete-option-label {
     @apply break-words flex-1 min-w-0;
   }
 
-  .autocomplete-base[data-type='single'] .autocomplete-item,
-  .autocomplete-base[data-type='multiple'] .autocomplete-item {
+  .autocomplete[data-type='single'] .autocomplete-item,
+  .autocomplete[data-type='multiple'] .autocomplete-item {
     @apply truncate w-full;
   }
 
-  .autocomplete-base[data-type='single']
+  .autocomplete[data-type='single']
     .ts-wrapper.dropdown-active
     .autocomplete-item,
-  .autocomplete-base[data-type='multiple']
+  .autocomplete[data-type='multiple']
     .ts-wrapper.input-active
     .autocomplete-item {
     @apply max-w-0 max-h-0;
   }
 
-  .autocomplete-base .autocomplete-item {
+  .autocomplete .autocomplete-item {
     @apply text-[--autocomplete-input];
   }
 
-  .autocomplete-base[data-type='single'] .autocomplete-inner-wrapper:after,
-  .autocomplete-base[data-type='multiple'] .autocomplete-inner-wrapper:after {
+  .autocomplete[data-type='single'] .autocomplete-input-wrapper:after,
+  .autocomplete[data-type='multiple'] .autocomplete-input-wrapper:after {
     -webkit-mask-image: var(--autocomplete-dropdown-caret-img);
     mask-image: var(--autocomplete-dropdown-caret-img);
     background: var(--autocomplete-dropdown-caret);
@@ -199,86 +199,90 @@
     @apply w-5 h-5 transition-transform;
   }
 
-  .autocomplete-base[data-type='single'][data-focus='true']
-    .autocomplete-inner-wrapper:after,
-  .autocomplete-base[data-type='multiple'][data-focus='true']
-    .autocomplete-inner-wrapper:after {
+  .autocomplete[data-type='single'][data-focus='true']
+    .autocomplete-input-wrapper:after,
+  .autocomplete[data-type='multiple'][data-focus='true']
+    .autocomplete-input-wrapper:after {
     @apply rotate-180;
   }
 
-  .autocomplete-base .input-hidden .ts-control .autocomplete-input {
+  .autocomplete .input-hidden .ts-control .autocomplete-input {
     opacity: 0;
     position: absolute;
     left: -10000px;
   }
 
   /* Blank */
-  .autocomplete-base .autocomplete-option.selected[data-value='']:after {
+  .autocomplete .autocomplete-option.selected[data-value='']:after {
     @apply hidden;
   }
 
-  .autocomplete-base .autocomplete-option[data-value=''] {
+  .autocomplete .autocomplete-option[data-value=''] {
     @apply min-h-[2rem] pr-2;
   }
 
-  .autocomplete-base .autocomplete-item[data-value=''] {
+  .autocomplete .autocomplete-item[data-value=''] {
     @apply text-[--autocomplete-placeholder];
   }
 
   /* Multiple */
-  .autocomplete-base[data-type='multiple'] .autocomplete-option {
+  .autocomplete[data-type='multiple'] .autocomplete-option {
     @apply flex;
   }
 
-  .autocomplete-base[data-type='multiple'] .autocomplete-option-checkbox {
+  .autocomplete[data-type='multiple'] .autocomplete-option-checkbox {
     --checkbox-border: var(--autocomplete-option-checkbox);
   }
 
-  .autocomplete-base[data-type='multiple']
+  .autocomplete[data-type='multiple']
     .autocomplete-option[aria-disabled='true']
     .autocomplete-option-checkbox {
     --checkbox-border: var(--autocomplete-option-disabled);
   }
 
   /* Tags */
-  .autocomplete-base[data-type='tags'] .ts-control {
+  .autocomplete[data-type='tags'] .ts-control {
     @apply gap-1 flex-wrap flex;
   }
 
-  .autocomplete-base[data-type='tags'] .autocomplete-wrapper {
+  .autocomplete[data-type='tags'] .autocomplete-wrapper {
     @apply h-auto justify-start;
   }
 
-  .autocomplete-base[data-type='tags'] .autocomplete-input {
+  .autocomplete[data-type='tags'] .autocomplete-input {
     @apply flex-1 max-w-full min-w-[100px];
   }
 
-  .autocomplete-base[data-type='tags'] .autocomplete-label {
+  .autocomplete[data-type='tags'] .autocomplete-label {
     @apply self-start static mt-2;
     @apply scale-[0.85] -translate-y-[calc(50%_+_0.875rem/2_-_6px_-_2px)];
   }
 
-  .autocomplete-base[data-type='tags'] .autocomplete-inner-wrapper {
+  .autocomplete[data-type='tags'] .autocomplete-input-wrapper {
     @apply -mt-3;
   }
 
-  .autocomplete-base[data-type='tags'] .autocomplete-remove-btn {
-    @apply h-5 w-5 min-w-[auto] -ml-1;
+  .autocomplete[data-type='tags'] .autocomplete-remove-btn {
+    @apply h-4 w-4 inline-flex;
   }
 
-  .autocomplete-base[data-type='tags'] .autocomplete-create {
+  .autocomplete[data-type='tags'] .autocomplete-remove-btn-icon {
+    @apply h-4 w-4;
+  }
+
+  .autocomplete[data-type='tags'] .autocomplete-create {
     @apply flex items-center gap-2;
   }
 
-  .autocomplete-base[data-type='tags'] .autocomplete-create .chip {
+  .autocomplete[data-type='tags'] .autocomplete-create .chip {
     @apply flex-1 min-w-[1px];
   }
 
-  .autocomplete-base[data-type='tags'] .chip {
+  .autocomplete[data-type='tags'] .chip {
     @apply w-full;
   }
 
-  .autocomplete-base[data-type='tags'] .chip-content {
+  .autocomplete[data-type='tags'] .chip-content {
     @apply truncate;
   }
 }

@@ -11,7 +11,7 @@ defmodule PrenixComponents.CheckboxGroup do
   attr :helper_text, :string, default: nil
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :checkbox_group_wrapper_class, :string, default: nil
   attr :label_class, :string, default: nil
   attr :helper_class, :string, default: nil
@@ -25,7 +25,7 @@ defmodule PrenixComponents.CheckboxGroup do
 
     ~H"""
     <div
-      class={@base_class}
+      class={@class}
       role="group"
       data-checkbox-group
       id={@id}
@@ -68,10 +68,10 @@ defmodule PrenixComponents.CheckboxGroup do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "checkbox-group-base",
-        "#{assigns.base_class}"
+        "checkbox-group",
+        "#{assigns.class}"
       ])
 
     checkbox_group_wrapper_class =
@@ -99,7 +99,7 @@ defmodule PrenixComponents.CheckboxGroup do
       end
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:checkbox_group_wrapper_class, checkbox_group_wrapper_class)
     |> assign(:label_class, label_class)
     |> assign(:helper_class, helper_class)

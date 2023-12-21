@@ -4,7 +4,7 @@ defmodule PrenixComponents.Accordion do
   import PrenixComponents.Icon
   import PrenixComponents.Divider
 
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :variant, :string, default: "light", values: ~w(light shadow bordered splitted)
   attr :expand_multiple, :boolean, default: false
   slot :inner_block
@@ -13,14 +13,14 @@ defmodule PrenixComponents.Accordion do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@base_class} data-accordion id={@id} data-expand-multiple={@expand_multiple}>
+    <div class={@class} data-accordion id={@id} data-expand-multiple={@expand_multiple}>
       <%= render_slot(@inner_block) %>
     </div>
     """
   end
 
   attr :show, :boolean, default: false
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :toggle_class, :string, default: nil
   attr :toggle_content_class, :string, default: nil
   attr :toggle_caret_class, :string, default: nil
@@ -34,7 +34,7 @@ defmodule PrenixComponents.Accordion do
     assigns = set_accordion_item_assigns(assigns)
 
     ~H"""
-    <div class={@base_class}>
+    <div class={@class}>
       <button
         class={@toggle_class}
         data-bs-toggle="collapse"
@@ -46,7 +46,7 @@ defmodule PrenixComponents.Accordion do
           <%= render_slot(@toggle) %>
         </span>
 
-        <.icon base_class={@toggle_caret_class} name="hero-chevron-left-mini" />
+        <.icon class={@toggle_caret_class} name="ion-chevron-back" />
       </button>
 
       <div id={@id} class={@collapse_class} data-bs-parent="">
@@ -55,30 +55,30 @@ defmodule PrenixComponents.Accordion do
         </div>
       </div>
 
-      <.divider base_class={@divider_class} />
+      <.divider class={@divider_class} />
     </div>
     """
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "accordion-base",
+        "accordion",
         "accordion-#{assigns.variant}",
-        "#{assigns.base_class}"
+        "#{assigns.class}"
       ])
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:id, "accordion-#{random_string()}")
     |> assign(:expand_multiple, if(assigns.expand_multiple, do: "true", else: "false"))
   end
 
   defp set_accordion_item_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
         "accordion-item",
-        "#{assigns.base_class}"
+        "#{assigns.class}"
       ])
 
     toggle_class =
@@ -119,7 +119,7 @@ defmodule PrenixComponents.Accordion do
 
     assigns
     |> assign(:id, "accordion-item-#{random_string()}")
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:toggle_class, toggle_class)
     |> assign(:toggle_content_class, toggle_content_class)
     |> assign(:toggle_caret_class, toggle_caret_class)

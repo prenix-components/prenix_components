@@ -2,7 +2,7 @@ defmodule PrenixComponents.Chip do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
 
   attr :color, :string,
     default: "default",
@@ -11,13 +11,14 @@ defmodule PrenixComponents.Chip do
   attr :variant, :string, default: "solid", values: ~w(solid soft outline)
   attr :radius, :string, default: "full", values: ~w(sm md lg full)
   attr :size, :string, default: "md", values: ~w(sm md lg)
+  attr :rest, :global
   slot :inner_block
 
   def chip(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@base_class}>
+    <div class={@class} {@rest}>
       <span class="chip-content">
         <%= render_slot(@inner_block) %>
       </span>
@@ -26,16 +27,16 @@ defmodule PrenixComponents.Chip do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
         "chip",
         "chip-#{assigns.color}",
         "chip-#{assigns.variant}",
         "chip-#{assigns.size}",
         "chip-radius-#{assigns.radius}",
-        "#{assigns.base_class}"
+        "#{assigns.class}"
       ])
 
-    assign(assigns, :base_class, base_class)
+    assign(assigns, :class, class)
   end
 end

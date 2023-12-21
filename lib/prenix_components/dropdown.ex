@@ -22,7 +22,7 @@ defmodule PrenixComponents.Dropdown do
     "dropstart" => "8, 0"
   }
 
-  attr :base_class, :string, default: nil
+  attr :class, :string, default: nil
   attr :toggle_class, :string, default: nil
   attr :menu_class, :string, default: nil
   attr :submenu, :boolean, default: false
@@ -38,7 +38,7 @@ defmodule PrenixComponents.Dropdown do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@base_class} data-dropdown>
+    <div class={@class} data-dropdown>
       <%= if @submenu do %>
         <div
           class={@toggle_class}
@@ -105,7 +105,7 @@ defmodule PrenixComponents.Dropdown do
 
         <%= if @submenu do %>
           <div class="dropdown-submenu-item-icon">
-            <.icon name="hero-chevron-right-mini" />
+            <.icon name="ion-chevron-forward" size="sm" />
           </div>
         <% end %>
       </.link>
@@ -120,10 +120,11 @@ defmodule PrenixComponents.Dropdown do
         {@rest}
       >
         <%= render_dropdown_item(assigns) %>
+
         <%= if @submenu do %>
-          <div class="dropdown-submenu-item-icon">
-            <.icon name="hero-chevron-right-mini" />
-          </div>
+          <span class="dropdown-submenu-item-icon">
+            <.icon name="ion-chevron-forward" size="sm" />
+          </span>
         <% end %>
       </button>
     <% end %>
@@ -139,7 +140,7 @@ defmodule PrenixComponents.Dropdown do
       <%= if length(@inner_block) > 0 do %>
         <%= render_slot(@inner_block) %>
       <% else %>
-        <.icon name="hero-chevron-down-mini" />
+        <.icon name="ion-chevron-down" size="sm" />
       <% end %>
     </span>
     """
@@ -156,12 +157,12 @@ defmodule PrenixComponents.Dropdown do
   end
 
   defp set_assigns(assigns) do
-    base_class =
+    class =
       combine_class([
-        "dropdown-base #{@placements[assigns.placement]}",
+        "dropdown #{@placements[assigns.placement]}",
         "dropdown-#{assigns.variant}",
         if(assigns.submenu, do: "dropend dropdown-submenu", else: nil),
-        assigns.base_class
+        assigns.class
       ])
 
     toggle_class =
@@ -188,7 +189,7 @@ defmodule PrenixComponents.Dropdown do
       end
 
     assigns
-    |> assign(:base_class, base_class)
+    |> assign(:class, class)
     |> assign(:toggle_class, toggle_class)
     |> assign(:menu_class, menu_class)
     |> assign(:offset, offset)
