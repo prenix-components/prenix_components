@@ -42,6 +42,12 @@ const initInput = () => {
     $inputWrapper.addEventListener('click', () => {
       $input.focus()
     })
+
+    $baseEl.querySelectorAll('.input-content').forEach(($c) => {
+      if ($c.innerHTML.trim().length === 0) {
+        $c.remove()
+      }
+    })
   })
 }
 

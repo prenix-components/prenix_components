@@ -1,5 +1,66 @@
 import '../../../vendors/vanillajs-datepicker/datepicker-full.min'
-import { setHasValue, getNavigatorLanguage } from './utils'
+import Cleave from '../../../vendors/cleavejs/cleave.min'
+
+import {
+  setHasValue,
+  getNavigatorLanguage,
+  getDateFormatPattern,
+} from './utils'
+
+const dateFormat = getDateFormatPattern(getNavigatorLanguage())
+
+const getDateDelimiter = (format) => {
+  switch (true) {
+    case format.indexOf(' ') !== -1:
+      return ' '
+    case format.indexOf('-') !== -1:
+      return '-'
+    case format.indexOf('.') !== -1:
+      return '.'
+    default:
+      return '/'
+  }
+}
+
+const dateDelimiter = getDateDelimiter(dateFormat)
+
+const getDatePattern = (format) => {
+  const dateFormatArr = format.split(dateDelimiter)
+  const patternArr = []
+  dateFormatArr.forEach((p) => {
+    if (p.includes('y')) {
+      patternArr.push('Y')
+    } else if (p.includes('m')) {
+      patternArr.push('m')
+    } else {
+      patternArr.push('d')
+    }
+  })
+
+  return patternArr
+}
+
+const datePattern = getDatePattern(dateFormat)
+
+const yearIndex = datePattern.indexOf('Y')
+const monthIndex = datePattern.indexOf('m')
+const dayIndex = datePattern.indexOf('d')
+
+const getPlaceholder = (pattern) => {
+  const placeholderArr = []
+
+  pattern.forEach((p) => {
+    if (p.includes('Y')) {
+      placeholderArr.push('yyyy')
+    } else if (p.includes('m')) {
+      placeholderArr.push('mm')
+    } else {
+      placeholderArr.push('dd')
+    }
+  })
+
+  return placeholderArr.join(dateDelimiter)
+}
 
 const initDatepicker = () => {
   document.querySelectorAll('[data-datepicker]').forEach(($baseEl) => {
@@ -8,6 +69,8 @@ const initDatepicker = () => {
     const $clearBtn = $baseEl.querySelector('.datepicker-clear-btn')
     const optsStr = $baseEl.dataset.datepickerOpts
     const opts = JSON.parse(optsStr)
+    $input.placeholder = getPlaceholder(datePattern)
+    let defaultValue = $input.value
 
     const datepicker = new window.Datepicker($input, {
       todayButton: true,
@@ -18,24 +81,23 @@ const initDatepicker = () => {
       nextArrow: `<span class="btn-content"><span class="ion-chevron-forward icon icon-current icon-sm"></span></span>`,
       format: {
         toValue(date, _format, _locale) {
-          const dateISO = $input.dataset.value
+          let dateStr = defaultValue
 
-          if (!dateISO) {
-            return new Date(date)
+          if (defaultValue) {
+            defaultValue = null
+            return new Date(dateStr)
           }
 
-          return new Date(dateISO)
+          dateStr = date
+          const dateArr = dateStr.split(dateDelimiter)
+
+          // Return UTC date
+          return new Date(
+            `${dateArr[yearIndex]}-${dateArr[monthIndex]}-${dateArr[dayIndex]}`,
+          )
         },
         toDisplay(date, _format, _locale) {
-          let dateObj = date
-
-          if (!(date instanceof Date)) {
-            dateObj = new Date(date)
-          }
-
-          const dateISO = dateObj.toISOString()
-          $input.dataset.value = dateISO
-
+          const dateObj = new Date(date)
           return new Intl.DateTimeFormat(getNavigatorLanguage()).format(dateObj)
         },
       },
@@ -44,16 +106,22 @@ const initDatepicker = () => {
     $input.addEventListener('changeDate', (e) => {
       const value = e.target.value
       setHasValue({ value, $wrapper: $baseEl })
-      $hiddenInput.value = e.target.dataset.value
+      const date = e.detail.date
+      if (date) $hiddenInput.value = date.toISOString()
     })
 
     $clearBtn.addEventListener('click', (e) => {
       datepicker.setDate({ clear: true })
       $input.value = ''
-      $input.dataset.value = ''
       $hiddenInput.value = ''
       setHasValue({ value: '', $wrapper: $baseEl })
       e.stopPropagation()
+    })
+
+    new Cleave($input, {
+      date: true,
+      delimiter: dateDelimiter,
+      datePattern: datePattern,
     })
   })
 }

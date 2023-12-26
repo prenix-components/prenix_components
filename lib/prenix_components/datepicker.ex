@@ -10,7 +10,6 @@ defmodule PrenixComponents.Datepicker do
   attr :helper_text, :string, default: nil
   attr :invalid, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :placeholder, :string, default: nil
   attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :label_placement, :string, default: "inside", values: ~w(inside outside outside-left)
 
@@ -54,7 +53,6 @@ defmodule PrenixComponents.Datepicker do
       helper_text={@helper_text}
       invalid={@invalid}
       disabled={@disabled}
-      placeholder={@placeholder}
       size={@size}
       label_placement={@label_placement}
       class={@class}

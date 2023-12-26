@@ -215,7 +215,9 @@ defmodule PrenixComponents.Autocomplete do
     ~H"""
     <div class={@input_wrapper_class}>
       <%= if length(@start_content) > 0 do %>
-        <%= render_slot(@start_content) %>
+        <div class="autocomplete-content">
+          <%= render_slot(@start_content) %>
+        </div>
       <% end %>
 
       <%= if @type == "tags" do %>
@@ -262,7 +264,9 @@ defmodule PrenixComponents.Autocomplete do
       <% end %>
 
       <%= if length(@end_content) > 0 do %>
-        <%= render_slot(@end_content) %>
+        <div class="autocomplete-content">
+          <%= render_slot(@end_content) %>
+        </div>
       <% end %>
     </div>
     """

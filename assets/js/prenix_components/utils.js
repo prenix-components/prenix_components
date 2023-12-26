@@ -32,4 +32,27 @@ const getNavigatorLanguage = () => {
   }
 }
 
-export { setHasValue, randomString, getNavigatorLanguage }
+const getDateFormatPattern = (locale) => {
+  const getPatternForPart = (part) => {
+    switch (part.type) {
+      case 'day':
+        return 'd'.repeat(part.value.length)
+      case 'month':
+        return 'm'.repeat(part.value.length)
+      case 'year':
+        return 'y'.repeat(part.value.length)
+      case 'literal':
+        return part.value
+      default:
+        console.log('Unsupported date part', part)
+        return ''
+    }
+  }
+
+  return new Intl.DateTimeFormat(locale)
+    .formatToParts(new Date('2021-01-01'))
+    .map(getPatternForPart)
+    .join('')
+}
+
+export { setHasValue, randomString, getNavigatorLanguage, getDateFormatPattern }

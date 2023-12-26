@@ -60,30 +60,15 @@
     @apply py-2.5 h-16;
   }
 
-  .autocomplete.autocomplete-sm .autocomplete-label {
+  .autocomplete.autocomplete-sm {
     @apply text-sm;
   }
 
-  .autocomplete.autocomplete-md .autocomplete-label {
-    @apply text-base;
-  }
-
-  .autocomplete.autocomplete-lg .autocomplete-label {
-    @apply text-base;
-  }
-
-  .autocomplete.autocomplete-sm .autocomplete-input,
-  .autocomplete.autocomplete-sm .autocomplete-item {
+  .autocomplete.autocomplete-md {
     @apply text-sm;
   }
 
-  .autocomplete.autocomplete-md .autocomplete-input,
-  .autocomplete.autocomplete-md .autocomplete-item {
-    @apply text-sm;
-  }
-
-  .autocomplete.autocomplete-lg .autocomplete-input,
-  .autocomplete.autocomplete-lg .autocomplete-item {
+  .autocomplete.autocomplete-lg {
     @apply text-base;
   }
 
@@ -155,6 +140,10 @@
 
   .autocomplete .autocomplete-dropdown {
     @apply absolute top-[100%] left-0 w-full z-[1070] mt-3;
+  }
+
+  .autocomplete .autocomplete-content {
+    @apply flex items-center justify-center;
   }
 
   .autocomplete .ts-dropdown-content {

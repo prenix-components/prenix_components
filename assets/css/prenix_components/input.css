@@ -35,27 +35,15 @@
     @apply px-3 min-h-[3rem] rounded-[12px];
   }
 
-  .input.input-sm .input-label {
+  .input.input-sm {
     @apply text-sm;
   }
 
-  .input.input-md .input-label {
-    @apply text-base;
-  }
-
-  .input.input-lg .input-label {
-    @apply text-base;
-  }
-
-  .input.input-sm .input-el {
+  .input.input-md {
     @apply text-sm;
   }
 
-  .input.input-md .input-el {
-    @apply text-sm;
-  }
-
-  .input.input-lg .input-el {
+  .input.input-lg {
     @apply text-base;
   }
 
@@ -67,6 +55,10 @@
     @apply transition-colors motion-reduce:transition-none;
     @apply border-2 border-[--input-wrapper-border];
     @apply hover:border-[--input-wrapper-border-hover];
+  }
+
+  .input .input-content {
+    @apply flex items-center justify-center;
   }
 
   .input[data-focus='true'] .input-wrapper {

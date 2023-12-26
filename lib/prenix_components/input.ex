@@ -140,7 +140,9 @@ defmodule PrenixComponents.Input do
     ~H"""
     <div class={@input_wrapper_class}>
       <%= if length(@start_content) > 0 do %>
-        <%= render_slot(@start_content) %>
+        <div class="input-content">
+          <%= render_slot(@start_content) %>
+        </div>
       <% end %>
 
       <%= if @type == "textarea" do %>
@@ -160,7 +162,7 @@ defmodule PrenixComponents.Input do
       <% else %>
         <input
           id={@id}
-          type={@type}
+          type={if(@type == "datepicker", do: "text", else: @type)}
           name={@name}
           class={@input_class}
           placeholder={@placeholder}
@@ -174,7 +176,9 @@ defmodule PrenixComponents.Input do
       <% end %>
 
       <%= if length(@end_content) > 0 do %>
-        <%= render_slot(@end_content) %>
+        <div class="input-content">
+          <%= render_slot(@end_content) %>
+        </div>
       <% end %>
     </div>
     """
