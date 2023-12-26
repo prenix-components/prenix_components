@@ -6,15 +6,15 @@ import { initAccordion } from './prenix_components/accordion'
 import { initAutocomplete, TomSelect } from './prenix_components/autocomplete'
 import { initCheckbox } from './prenix_components/checkbox'
 import { initCheckboxGroup } from './prenix_components/checkbox_group'
+import { initDatepicker } from './prenix_components/datepicker'
 import { initDropdown } from './prenix_components/dropdown'
-import { initInput } from './prenix_components/input'
-import { initPopover } from './prenix_components/popover'
-import './prenix_components/datepicker'
+import { initInput, autosize } from './prenix_components/input'
 
 const prenixModules = {
   TomSelect,
   Popper,
   bootstrap,
+  autosize,
 }
 
 const initTooltip = () => {
@@ -28,9 +28,9 @@ const autoInit = () => {
   initAutocomplete()
   initCheckbox()
   initCheckboxGroup()
+  initDatepicker()
   initDropdown()
   initInput()
-  initPopover()
   initTooltip()
 }
 

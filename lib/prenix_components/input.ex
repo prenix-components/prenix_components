@@ -1,6 +1,7 @@
 defmodule PrenixComponents.Input do
   use Phoenix.Component
   import PrenixComponents.Helpers
+  import PrenixComponents.Icon
 
   attr :name, :string, required: true
   attr :id, :string
@@ -16,7 +17,7 @@ defmodule PrenixComponents.Input do
   attr :type, :string,
     default: "text",
     values: ~w(checkbox color date datetime-local email file hidden month number password
-               range radio search select tel text textarea time url week)
+               range radio search select tel text textarea time url week datepicker)
 
   attr :class, :string, default: nil
   attr :wrapper_class, :string, default: nil
@@ -27,60 +28,26 @@ defmodule PrenixComponents.Input do
 
   attr :rest, :global,
     include: ~w(accept autocomplete capture cols disabled form list max maxlength min minlength
-              multiple pattern placeholder readonly required rows size step)
+              multiple pattern placeholder readonly required rows size step )
 
   slot :label
   slot :helper
+  slot :start_content
+  slot :end_content
 
-  # slot :start_content
-  # slot :end_content
-
-  def input(%{label_placement: "inside"} = assigns) do
+  def input(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-input>
-      <div class={@wrapper_class}>
-        <%= render_label(assigns) %>
-
-        <%= render_input(assigns) %>
-      </div>
-
-      <%= render_helper(assigns) %>
-    </div>
-    """
-  end
-
-  def input(%{label_placement: "outside"} = assigns) do
-    assigns = set_assigns(assigns)
-
-    ~H"""
-    <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-input>
-      <%= render_label(assigns) %>
-
-      <div class={@wrapper_class}>
-        <%= render_input(assigns) %>
-      </div>
-
-      <%= render_helper(assigns) %>
-    </div>
-    """
-  end
-
-  def input(%{label_placement: "outside-left"} = assigns) do
-    assigns = set_assigns(assigns)
-
-    ~H"""
-    <div class={@class} data-invalid={@invalid} data-disabled={@disabled} data-input>
-      <%= render_label(assigns) %>
-
-      <div class="grow w-full">
-        <div class={@wrapper_class}>
-          <%= render_input(assigns) %>
-        </div>
-
-        <%= render_helper(assigns) %>
-      </div>
+    <div
+      class={@class}
+      data-invalid={@invalid}
+      data-disabled={@disabled}
+      data-input
+      data-datepicker={@type == "datepicker"}
+      data-datepicker-opts={@datepicker_opts}
+    >
+      <%= render_content(assigns) %>
     </div>
     """
   end
@@ -131,6 +98,9 @@ defmodule PrenixComponents.Input do
         true -> "input-#{random_string()}"
       end
 
+    datepicker_opts = Jason.encode!(%{a: 1, b: 2})
+    IO.inspect(datepicker_opts)
+
     assigns
     |> assign(:class, class)
     |> assign(:wrapper_class, wrapper_class)
@@ -139,6 +109,7 @@ defmodule PrenixComponents.Input do
     |> assign(:input_class, input_class)
     |> assign(:helper_class, helper_class)
     |> assign(id: id)
+    |> assign(:datepicker_opts, datepicker_opts)
   end
 
   defp render_label(assigns) do
@@ -168,6 +139,10 @@ defmodule PrenixComponents.Input do
   defp render_input(assigns) do
     ~H"""
     <div class={@input_wrapper_class}>
+      <%= if length(@start_content) > 0 do %>
+        <%= render_slot(@start_content) %>
+      <% end %>
+
       <%= if @type == "textarea" do %>
         <textarea
           id={@id}
@@ -197,7 +172,74 @@ defmodule PrenixComponents.Input do
           {@rest}
         />
       <% end %>
+
+      <%= if length(@end_content) > 0 do %>
+        <%= render_slot(@end_content) %>
+      <% end %>
     </div>
+    """
+  end
+
+  defp render_content(%{label_placement: "inside"} = assigns) do
+    ~H"""
+    <div class={@wrapper_class}>
+      <%= render_label(assigns) %>
+
+      <%= render_input(assigns) %>
+
+      <%= render_datepicker_content(assigns) %>
+    </div>
+
+    <%= render_helper(assigns) %>
+    """
+  end
+
+  defp render_content(%{label_placement: "outside"} = assigns) do
+    ~H"""
+    <%= render_label(assigns) %>
+
+    <div class={@wrapper_class}>
+      <%= render_input(assigns) %>
+
+      <%= render_datepicker_content(assigns) %>
+    </div>
+
+    <%= render_helper(assigns) %>
+    """
+  end
+
+  defp render_content(%{label_placement: "outside-left"} = assigns) do
+    ~H"""
+    <%= render_label(assigns) %>
+
+    <div class="grow w-full">
+      <div class={@wrapper_class}>
+        <%= render_input(assigns) %>
+
+        <%= render_datepicker_content(assigns) %>
+      </div>
+
+      <%= render_helper(assigns) %>
+    </div>
+    """
+  end
+
+  defp render_datepicker_content(%{type: "datepicker"} = assigns) do
+    ~H"""
+    <button class="datepicker-clear-btn shrink-0 inline-flex">
+      <.icon name="ion-close-circle" class="text-neutral2-foreground" />
+    </button>
+
+    <.icon
+      name="ion-calendar-clear-outline pointer-events-none datepicker-calendar-icon"
+      class="text-neutral1-foreground block shrink-0"
+    />
+    """
+  end
+
+  defp render_datepicker_content(assigns) do
+    ~H"""
+
     """
   end
 end

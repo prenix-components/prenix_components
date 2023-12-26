@@ -44,7 +44,7 @@ defmodule PrenixComponents.Icon do
         "icon",
         "icon-#{assigns.color}",
         "icon-#{assigns.size}",
-        "#{assigns.class}"
+        assigns.class
       ])
 
     assign(assigns, :class, class)

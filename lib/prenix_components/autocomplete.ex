@@ -2,6 +2,8 @@ defmodule PrenixComponents.Autocomplete do
   use Phoenix.Component
   import PrenixComponents.Helpers
   import PrenixComponents.Chip
+  import PrenixComponents.Icon
+  import PrenixComponents.Button
 
   attr :name, :string, required: true
   attr :options, :list, required: true
@@ -22,11 +24,10 @@ defmodule PrenixComponents.Autocomplete do
   attr :input_wrapper_class, :string, default: nil
   attr :input_class, :string, default: nil
   attr :helper_class, :string, default: nil
-
   slot :label
   slot :helper
-  # slot :start_content
-  # slot :end_content
+  slot :start_content
+  slot :end_content
 
   def autocomplete(%{label_placement: "inside"} = assigns) do
     assigns = set_assigns(assigns)
@@ -48,6 +49,10 @@ defmodule PrenixComponents.Autocomplete do
         <%= render_label(assigns) %>
 
         <%= render_input(assigns) %>
+
+        <.button size="sm" icon radius="full" variant="ghost" class="autocomplete-dropdown-toggle">
+          <.icon name="ion-chevron-down" size="sm" />
+        </.button>
       </div>
 
       <%= render_helper(assigns) %>
@@ -75,6 +80,10 @@ defmodule PrenixComponents.Autocomplete do
 
       <div class={@wrapper_class}>
         <%= render_input(assigns) %>
+
+        <.button size="sm" icon radius="full" variant="ghost" class="autocomplete-dropdown-toggle">
+          <.icon name="ion-chevron-down" size="sm" />
+        </.button>
       </div>
 
       <%= render_helper(assigns) %>
@@ -103,6 +112,10 @@ defmodule PrenixComponents.Autocomplete do
       <div class="grow w-full">
         <div class={@wrapper_class}>
           <%= render_input(assigns) %>
+
+          <.button size="sm" icon radius="full" variant="ghost" class="autocomplete-dropdown-toggle">
+            <.icon name="ion-chevron-down" size="sm" />
+          </.button>
         </div>
 
         <%= render_helper(assigns) %>
@@ -201,6 +214,10 @@ defmodule PrenixComponents.Autocomplete do
   defp render_input(assigns) do
     ~H"""
     <div class={@input_wrapper_class}>
+      <%= if length(@start_content) > 0 do %>
+        <%= render_slot(@start_content) %>
+      <% end %>
+
       <%= if @type == "tags" do %>
         <input
           type="text"
@@ -242,6 +259,10 @@ defmodule PrenixComponents.Autocomplete do
             <%= option.name %>
           </option>
         </select>
+      <% end %>
+
+      <%= if length(@end_content) > 0 do %>
+        <%= render_slot(@end_content) %>
       <% end %>
     </div>
     """

@@ -2,7 +2,6 @@ import { setHasValue } from './utils'
 import autosize from '../../../vendors/autosize/autosize.min'
 
 const initInput = () => {
-  console.log({ autosize })
   document.querySelectorAll('[data-input]').forEach(($baseEl) => {
     const $label = $baseEl.querySelector('.input-label')
     const $input = $baseEl.querySelector('.input-el')
@@ -12,9 +11,12 @@ const initInput = () => {
     }
 
     if ($label) {
-      $baseEl.dataset.hasLabel = true
       const labelText = $label.textContent.trim()
-      $input.setAttribute('aria-label', labelText)
+
+      if (labelText.length > 0) {
+        $baseEl.dataset.hasLabel = true
+        $input.setAttribute('aria-label', labelText)
+      }
     }
 
     setHasValue({ value: $input.value, $wrapper: $baseEl })
@@ -43,4 +45,4 @@ const initInput = () => {
   })
 }
 
-export { initInput }
+export { initInput, autosize }

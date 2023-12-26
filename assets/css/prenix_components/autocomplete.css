@@ -13,14 +13,78 @@
     --autocomplete-option-active-foreground: hsl(var(--default-foreground));
     --autocomplete-option-highlight: hsl(var(--primary) / 0.4);
     --autocomplete-option-disabled: hsl(var(--neutral2-foreground));
-    --autocomplete-dropdown-caret-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
-    --autocomplete-dropdown-caret: hsl(var(--content1-foreground));
     --autocomplete-option-active-checkmark-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
     --autocomplete-option-active-checkmark: hsl(var(--content1-foreground));
     --autocomplete-dropdown: hsl(var(--content1));
     --autocomplete-dropdown-foreground: hsl(var(--content1-foreground));
     --autocomplete-option-checkbox: hsl(var(--foreground));
     @apply w-full;
+  }
+
+  .autocomplete-sm {
+    --autocomplete-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
+  }
+
+  .autocomplete-md {
+    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
+  }
+
+  .autocomplete-lg {
+    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
+  }
+
+  .autocomplete.autocomplete-sm .autocomplete-wrapper {
+    @apply px-3 min-h-[2rem] rounded-[8px];
+  }
+
+  .autocomplete.autocomplete-md .autocomplete-wrapper {
+    @apply px-3 min-h-[2.5rem] rounded-[10px];
+  }
+
+  .autocomplete.autocomplete-lg .autocomplete-wrapper {
+    @apply px-3 min-h-[3rem] rounded-[12px];
+  }
+
+  .autocomplete.autocomplete-sm.autocomplete-label-inside
+    .autocomplete-wrapper {
+    @apply py-1.5 h-12;
+  }
+
+  .autocomplete.autocomplete-md.autocomplete-label-inside
+    .autocomplete-wrapper {
+    @apply py-2 h-14;
+  }
+
+  .autocomplete.autocomplete-lg.autocomplete-label-inside
+    .autocomplete-wrapper {
+    @apply py-2.5 h-16;
+  }
+
+  .autocomplete.autocomplete-sm .autocomplete-label {
+    @apply text-sm;
+  }
+
+  .autocomplete.autocomplete-md .autocomplete-label {
+    @apply text-base;
+  }
+
+  .autocomplete.autocomplete-lg .autocomplete-label {
+    @apply text-base;
+  }
+
+  .autocomplete.autocomplete-sm .autocomplete-input,
+  .autocomplete.autocomplete-sm .autocomplete-item {
+    @apply text-sm;
+  }
+
+  .autocomplete.autocomplete-md .autocomplete-input,
+  .autocomplete.autocomplete-md .autocomplete-item {
+    @apply text-sm;
+  }
+
+  .autocomplete.autocomplete-lg .autocomplete-input,
+  .autocomplete.autocomplete-lg .autocomplete-item {
+    @apply text-base;
   }
 
   .autocomplete .ts-wrapper {
@@ -34,7 +98,7 @@
   .autocomplete .autocomplete-wrapper {
     box-shadow: var(--shadow-sm);
     @apply relative w-full inline-flex tap-highlight-transparent;
-    @apply rounded-xl outline-none;
+    @apply outline-none;
     @apply flex-col items-start justify-center gap-0 cursor-text;
     @apply transition-colors motion-reduce:transition-none;
     @apply border-2 border-[--autocomplete-wrapper-border];
@@ -46,13 +110,12 @@
   }
 
   .autocomplete .autocomplete-input-wrapper {
-    @apply inline-flex w-full items-center h-full box-border relative;
+    @apply inline-flex w-full items-center h-full box-border relative gap-1.5;
   }
 
   .autocomplete .autocomplete-label {
-    @apply pointer-events-none origin-top-left subpixel-antialiased block text-[--autocomplete-label];
-    @apply cursor-text will-change-auto !duration-200 !ease-out motion-reduce:transition-none transition-[transform,color,left,opacity];
-    @apply pe-2 max-w-full inline-flex items-center gap-1 text-base;
+    @apply subpixel-antialiased block text-[--autocomplete-label];
+    @apply pe-2 max-w-full inline-flex items-center gap-1;
   }
 
   .autocomplete[data-focus='true'] .autocomplete-label {
@@ -90,13 +153,8 @@
     @apply pointer-events-none opacity-[--disabled-opacity];
   }
 
-  .autocomplete[data-type='single'] .ts-wrapper,
-  .autocomplete[data-type='multiple'] .ts-wrapper {
-    @apply w-full pr-5 text-sm;
-  }
-
   .autocomplete .autocomplete-dropdown {
-    @apply absolute top-[100%] left-0 w-full z-[1000] mt-6;
+    @apply absolute top-[100%] left-0 w-full z-[1070] mt-3;
   }
 
   .autocomplete .ts-dropdown-content {
@@ -110,15 +168,6 @@
 
   .autocomplete .ts-dropdown-content.open {
     @apply opacity-100 scale-100 ease-in;
-  }
-
-  .autocomplete[data-has-label='true'] .autocomplete-dropdown {
-    @apply mt-4;
-  }
-
-  .autocomplete.autocomplete-label-outside .autocomplete-dropdown,
-  .autocomplete.autocomplete-label-outside-left .autocomplete-dropdown {
-    @apply mt-6;
   }
 
   .autocomplete .no-results {
@@ -178,26 +227,22 @@
   .autocomplete[data-type='multiple']
     .ts-wrapper.input-active
     .autocomplete-item {
-    @apply max-w-0 max-h-0;
+    @apply hidden;
   }
 
   .autocomplete .autocomplete-item {
     @apply text-[--autocomplete-input];
   }
 
-  .autocomplete[data-type='single'] .autocomplete-input-wrapper:after,
-  .autocomplete[data-type='multiple'] .autocomplete-input-wrapper:after {
-    -webkit-mask-image: var(--autocomplete-dropdown-caret-img);
-    mask-image: var(--autocomplete-dropdown-caret-img);
-    background: var(--autocomplete-dropdown-caret);
-    @apply content-[""] right-0 top-2 absolute;
-    @apply w-5 h-5 transition-transform;
+  .autocomplete .autocomplete-dropdown-toggle {
+    @apply !text-neutral1-foreground;
+    @apply transition-transform;
   }
 
   .autocomplete[data-type='single'][data-focus='true']
-    .autocomplete-input-wrapper:after,
+    .autocomplete-dropdown-toggle,
   .autocomplete[data-type='multiple'][data-focus='true']
-    .autocomplete-input-wrapper:after {
+    .autocomplete-dropdown-toggle {
     @apply rotate-180;
   }
 
@@ -205,57 +250,6 @@
     opacity: 0;
     position: absolute;
     left: -10000px;
-  }
-
-  .autocomplete-sm {
-    --autocomplete-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
-  }
-
-  .autocomplete-md {
-    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
-  }
-
-  .autocomplete-lg {
-    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
-  }
-
-  .autocomplete.autocomplete-sm .autocomplete-wrapper {
-    @apply py-1.5 px-3 h-12 min-h-[2rem];
-  }
-
-  .autocomplete.autocomplete-md .autocomplete-wrapper {
-    @apply py-2 px-3 h-14 min-h-[2.5rem];
-  }
-
-  .autocomplete.autocomplete-lg .autocomplete-wrapper {
-    @apply py-2.5 px-3 h-16 min-h-[3rem];
-  }
-
-  .autocomplete.autocomplete-sm .autocomplete-label {
-    @apply text-sm;
-  }
-
-  .autocomplete.autocomplete-md .autocomplete-label {
-    @apply text-base;
-  }
-
-  .autocomplete.autocomplete-lg .autocomplete-label {
-    @apply text-base;
-  }
-
-  .autocomplete.autocomplete-sm .autocomplete-input,
-  .autocomplete.autocomplete-sm .autocomplete-item {
-    @apply text-sm;
-  }
-
-  .autocomplete.autocomplete-md .autocomplete-input,
-  .autocomplete.autocomplete-md .autocomplete-item {
-    @apply text-sm;
-  }
-
-  .autocomplete.autocomplete-lg .autocomplete-input,
-  .autocomplete.autocomplete-lg .autocomplete-item {
-    @apply text-base;
   }
 
   .autocomplete.autocomplete-label-inside[data-focus='true']
@@ -267,8 +261,14 @@
     @apply scale-[0.85] translate-y-[--autocomplete-label-translate];
   }
 
+  .autocomplete:not([data-type='tags']) .autocomplete-wrapper {
+    @apply flex flex-row items-center justify-start;
+  }
+
   .autocomplete.autocomplete-label-inside .autocomplete-label {
-    @apply absolute justify-center text-ellipsis overflow-hidden;
+    @apply absolute justify-center text-ellipsis overflow-hidden pointer-events-none;
+    @apply origin-top-left will-change-auto !duration-200 !ease-out;
+    @apply motion-reduce:transition-none transition-[transform,color,left,opacity];
   }
 
   .autocomplete.autocomplete-label-inside[data-has-label='true']
@@ -298,17 +298,17 @@
 
   .autocomplete.autocomplete-sm.autocomplete-label-outside-left
     .autocomplete-label {
-    @apply mt-4;
+    @apply mt-1.5;
   }
 
   .autocomplete.autocomplete-md.autocomplete-label-outside-left
     .autocomplete-label {
-    @apply mt-4;
+    @apply mt-2;
   }
 
   .autocomplete.autocomplete-lg.autocomplete-label-outside-left
     .autocomplete-label {
-    @apply mt-5;
+    @apply mt-3;
   }
 
   /* Blank */
@@ -344,8 +344,12 @@
     @apply gap-1 flex-wrap flex;
   }
 
+  .autocomplete[data-type='tags'] .autocomplete-dropdown-toggle {
+    @apply hidden;
+  }
+
   .autocomplete[data-type='tags'] .autocomplete-wrapper {
-    @apply h-auto justify-start;
+    @apply !h-auto justify-start;
   }
 
   .autocomplete[data-type='tags'] .autocomplete-input {

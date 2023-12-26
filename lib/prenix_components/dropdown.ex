@@ -24,52 +24,57 @@ defmodule PrenixComponents.Dropdown do
 
   attr :class, :string, default: nil
   attr :toggle_class, :string, default: nil
-  attr :menu_class, :string, default: nil
+  attr :content_class, :string, default: nil
   attr :submenu, :boolean, default: false
   attr :variant, :string, default: "solid", values: ~w(solid soft)
   attr :auto_close, :string, default: "outside", values: ~w(true inside outside false)
   attr :placement, :string, default: "dropdown", values: Map.keys(@placements)
   attr :offset, :string, default: nil
   slot :toggle, required: true
-  slot :menu, required: true
   slot :inner_block
+
+  def dropdown(%{submenu: true} = assigns) do
+    assigns = set_assigns(assigns)
+
+    ~H"""
+    <div class={@class}>
+      <div
+        class={@toggle_class}
+        data-bs-toggle="collapse"
+        data-bs-target={"##{@submenu_id}"}
+        aria-expanded="false"
+        aria-controls={@submenu_id}
+      >
+        <%= render_slot(@toggle) %>
+      </div>
+
+      <div class={@content_class} id={@submenu_id}>
+        <%= render_slot(@inner_block) %>
+      </div>
+    </div>
+    """
+  end
 
   def dropdown(assigns) do
     assigns = set_assigns(assigns)
 
     ~H"""
     <div class={@class} data-dropdown>
-      <%= if @submenu do %>
-        <div
-          class={@toggle_class}
-          data-bs-toggle="collapse"
-          data-bs-target={"##{@submenu_id}"}
-          aria-expanded="false"
-          aria-controls={@submenu_id}
-        >
-          <%= render_slot(@toggle) %>
-        </div>
+      <div
+        class={@toggle_class}
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        data-bs-offset={@offset}
+        data-bs-auto-close={@auto_close}
+      >
+        <%= render_slot(@toggle) %>
+      </div>
 
-        <div class={@menu_class} id={@submenu_id}>
-          <%= render_slot(@menu) %>
+      <div class="dropdown-menu">
+        <div class={@content_class}>
+          <%= render_slot(@inner_block) %>
         </div>
-      <% else %>
-        <div
-          class={@toggle_class}
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          data-bs-offset={@offset}
-          data-bs-auto-close={@auto_close}
-        >
-          <%= render_slot(@toggle) %>
-        </div>
-
-        <div class="dropdown-menu">
-          <div class={@menu_class}>
-            <%= render_slot(@menu) %>
-          </div>
-        </div>
-      <% end %>
+      </div>
     </div>
     """
   end
@@ -80,7 +85,7 @@ defmodule PrenixComponents.Dropdown do
     default: "default",
     values: ~w(default primary secondary success warning danger)
 
-  attr :submenu, :boolean, default: false
+  attr :submenu_toggle, :boolean, default: false
   attr :class, :string, default: nil
   attr :disabled, :boolean, default: false
   attr :rest, :global
@@ -103,10 +108,10 @@ defmodule PrenixComponents.Dropdown do
       >
         <%= render_dropdown_item(assigns) %>
 
-        <%= if @submenu do %>
-          <div class="dropdown-submenu-item-icon">
+        <%= if @submenu_toggle do %>
+          <span class="dropdown-submenu-item-icon">
             <.icon name="ion-chevron-forward" size="sm" />
-          </div>
+          </span>
         <% end %>
       </.link>
     <% else %>
@@ -121,7 +126,7 @@ defmodule PrenixComponents.Dropdown do
       >
         <%= render_dropdown_item(assigns) %>
 
-        <%= if @submenu do %>
+        <%= if @submenu_toggle do %>
           <span class="dropdown-submenu-item-icon">
             <.icon name="ion-chevron-forward" size="sm" />
           </span>
@@ -171,13 +176,13 @@ defmodule PrenixComponents.Dropdown do
         assigns.toggle_class
       ])
 
-    menu_class =
+    content_class =
       combine_class([
         if(assigns.submenu,
-          do: "collapse prenix-collapse dropdown-submenu-inner",
-          else: "dropdown-menu-inner"
+          do: "collapse prenix-collapse dropdown-submenu-content",
+          else: "dropdown-content"
         ),
-        assigns.menu_class
+        assigns.content_class
       ])
 
     offset =
@@ -191,7 +196,7 @@ defmodule PrenixComponents.Dropdown do
     assigns
     |> assign(:class, class)
     |> assign(:toggle_class, toggle_class)
-    |> assign(:menu_class, menu_class)
+    |> assign(:content_class, content_class)
     |> assign(:offset, offset)
     |> assign(:submenu_id, "dropdown-submenu-#{random_string()}")
   end

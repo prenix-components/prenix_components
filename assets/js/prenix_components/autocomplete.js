@@ -103,6 +103,7 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       $controlInput.setAttribute('data-1p-ignore', '')
     },
     onDropdownOpen: (_$tsDropdown) => {
+      $wrapper.dataset.dropdownOpen = true
       const $tsDropdownContent = $wrapper.querySelector('.ts-dropdown-content')
       const $controlInput = $wrapper.querySelector('.autocomplete-input')
       setTimeout(() => {
@@ -114,6 +115,8 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       })
     },
     onDropdownClose: (_$tsDropdown) => {
+      $wrapper.dataset.dropdownOpen = false
+
       if (!isTags) {
         $originalInput.tomselect.blur()
       }
@@ -199,13 +202,13 @@ const initAutocomplete = () => {
 
     const $autocompleteWrapper = $baseEl.querySelector('.autocomplete-wrapper')
 
-    $autocompleteWrapper.addEventListener('click', () => {
+    $autocompleteWrapper.addEventListener('click', (e) => {
       const $input = $baseEl.querySelector(originalInputSelector)
       const tomSelectInstance = $input.tomselect
       tomSelectInstance.focus()
     })
 
-    new TomSelect(
+    const tomselect = new TomSelect(
       $originalInput,
       tomSelectOptions({
         allowBlank,

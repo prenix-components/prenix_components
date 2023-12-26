@@ -8,12 +8,12 @@ defmodule PrenixComponents do
         CheckboxGroup,
         Checkbox,
         Chip,
+        Datepicker,
         Divider,
         Dropdown,
         Icon,
         Input,
         Modal,
-        Popover,
         Spinner,
         Table,
         Tooltip

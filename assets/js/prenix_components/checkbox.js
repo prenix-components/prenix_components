@@ -1,7 +1,4 @@
 const setSelected = ({ boolean, $wrapper, $polyline }) => {
-  console.log({ $wrapper })
-  console.log({ $polyline })
-
   if (boolean) {
     $wrapper.dataset.selected = true
     $polyline.setAttribute('stroke-dashoffset', 44)

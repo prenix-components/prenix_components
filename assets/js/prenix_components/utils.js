@@ -1,5 +1,5 @@
 const setHasValue = ({ value, $wrapper }) => {
-  if (value.length > 0) {
+  if (value && value.length > 0) {
     $wrapper.dataset.hasValue = true
   } else {
     $wrapper.dataset.hasValue = false
@@ -19,4 +19,17 @@ const randomString = (length = 10) => {
   return result
 }
 
-export { setHasValue, randomString }
+const getNavigatorLanguage = () => {
+  if (navigator.languages && navigator.languages.length) {
+    return navigator.languages[0]
+  } else {
+    return (
+      navigator.userLanguage ||
+      navigator.language ||
+      navigator.browserLanguage ||
+      'en'
+    )
+  }
+}
+
+export { setHasValue, randomString, getNavigatorLanguage }
