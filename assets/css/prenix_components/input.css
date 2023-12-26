@@ -173,7 +173,7 @@
   }
 
   .input.input-textarea .input-wrapper {
-    @apply h-auto;
+    @apply !h-auto;
   }
 
   .input.input-textarea.input.input-label-inside .input-label {
@@ -186,5 +186,21 @@
 
   .input.input-textarea.input-label-outside-left .input-label {
     @apply mt-1;
+  }
+
+  .input.input-textarea.input-sm .input-wrapper {
+    @apply py-1.5;
+  }
+
+  .input.input-textarea.input-md .input-wrapper {
+    @apply py-2;
+  }
+
+  .input.input-textarea.input-lg .input-wrapper {
+    @apply py-2.5;
+  }
+
+  .input.input-textarea .input-el-wrapper {
+    @apply gap-0;
   }
 }

@@ -5,7 +5,6 @@ const initDatepicker = () => {
   document.querySelectorAll('[data-datepicker]').forEach(($baseEl) => {
     const $input = $baseEl.querySelector('input')
     const $hiddenInput = document.querySelector($input.dataset.target)
-    console.log({ $hiddenInput })
     const $clearBtn = $baseEl.querySelector('.datepicker-clear-btn')
     const optsStr = $baseEl.dataset.datepickerOpts
     const opts = JSON.parse(optsStr)
