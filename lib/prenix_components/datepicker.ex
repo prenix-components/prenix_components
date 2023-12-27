@@ -14,12 +14,6 @@ defmodule PrenixComponents.Datepicker do
   attr :disabled, :boolean, default: false
   attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :label_placement, :string, default: "inside", values: ~w(inside outside outside-left)
-
-  attr :type, :string,
-    default: "text",
-    values: ~w(checkbox color date datetime-local email file hidden month number password
-               range radio search select tel text textarea time url week datepicker)
-
   attr :class, :string, default: nil
   attr :wrapper_class, :string, default: nil
   attr :label_class, :string, default: nil

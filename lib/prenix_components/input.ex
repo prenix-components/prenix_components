@@ -45,7 +45,6 @@ defmodule PrenixComponents.Input do
       data-disabled={@disabled}
       data-input
       data-datepicker={@type == "datepicker"}
-      data-datepicker-opts={@datepicker_opts}
     >
       <%= render_content(assigns) %>
     </div>
@@ -98,9 +97,6 @@ defmodule PrenixComponents.Input do
         true -> "input-#{random_string()}"
       end
 
-    datepicker_opts = Jason.encode!(%{a: 1, b: 2})
-    IO.inspect(datepicker_opts)
-
     assigns
     |> assign(:class, class)
     |> assign(:wrapper_class, wrapper_class)
@@ -109,7 +105,6 @@ defmodule PrenixComponents.Input do
     |> assign(:input_class, input_class)
     |> assign(:helper_class, helper_class)
     |> assign(id: id)
-    |> assign(:datepicker_opts, datepicker_opts)
     |> assign(
       :calendar_icon,
       Application.get_env(:prenix_components, :calendar_icon, "ion-calendar-clear-outline")
