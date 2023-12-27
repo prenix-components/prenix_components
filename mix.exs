@@ -4,7 +4,7 @@ defmodule PrenixComponents.MixProject do
   def project do
     [
       app: :prenix_components,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -32,7 +32,7 @@ defmodule PrenixComponents.MixProject do
 
   defp description() do
     """
-    Prebuilt UI components for Phoenix.
+    Prebuilt UI components for Phoenix inspired by NextUI.
     """
   end
 
