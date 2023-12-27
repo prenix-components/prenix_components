@@ -77,8 +77,8 @@ const initDatepicker = () => {
       todayHighlight: true,
       todayButtonMode: 1,
       buttonClass: 'btn btn-ripple btn-default btn-ghost btn-sm btn-radius-lg',
-      prevArrow: `<span class="btn-content"><span class="ion-chevron-back icon icon-current icon-sm"></span></span>`,
-      nextArrow: `<span class="btn-content"><span class="ion-chevron-forward icon icon-current icon-sm"></span></span>`,
+      prevArrow: $input.dataset.prevArrowHtml,
+      nextArrow: $input.dataset.nextArrowHtml,
       format: {
         toValue(date, _format, _locale) {
           let dateStr = defaultValue

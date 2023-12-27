@@ -46,7 +46,7 @@ defmodule PrenixComponents.Accordion do
           <%= render_slot(@toggle) %>
         </span>
 
-        <.icon class={@toggle_caret_class} name="ion-chevron-back" />
+        <.icon class={@toggle_caret_class} name={@chevron_left_icon} />
       </button>
 
       <div id={@id} class={@collapse_class} data-bs-parent="">
@@ -126,5 +126,9 @@ defmodule PrenixComponents.Accordion do
     |> assign(:body_class, body_class)
     |> assign(:collapse_class, collapse_class)
     |> assign(:divider_class, divider_class)
+    |> assign(
+      :chevron_left_icon,
+      Application.get_env(:prenix_components, :chevron_left_icon, "ion-chevron-back")
+    )
   end
 end

@@ -3,7 +3,6 @@ import no_active_items from '../../../vendors/tom-select/no_active_items'
 import no_backspace_delete from '../../../vendors/tom-select/no_backspace_delete'
 import remove_button from '../../../vendors/tom-select/remove_button'
 import autocomplete_multiple from './autocomplete_multiple_plugin'
-
 import { setHasValue } from './utils'
 
 TomSelect.define('autocomplete_multiple', autocomplete_multiple)
@@ -67,10 +66,8 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       plugins = { no_backspace_delete: {} }
   }
 
-  const $tagsItem = $wrapper.querySelector('[data-autocomplete-tags-item]')
-  const $tagsItemTemplate = $tagsItem.cloneNode(true)
-  $tagsItemTemplate.classList.remove('hidden')
-  $tagsItemTemplate.removeAttribute('data-autocomplete-tags-item')
+  let tagItemTemplate = $wrapper.dataset.tagItemTemplate
+  tagItemTemplate = tagItemTemplate
 
   return {
     ...opts,
@@ -159,8 +156,8 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       },
       item: (data, _escape) => {
         if (isTags) {
-          let html = $tagsItemTemplate.outerHTML
-          html = html.replace(/{{AUTOCOMPLETE_TAGS_ITEM}}/, data.text)
+          let html = tagItemTemplate
+          html = html.replace(/{{AUTOCOMPLETE_TAG_ITEM}}/, data.text)
           return html
         } else if (isMultiple) {
           return '<div></div>'
@@ -173,8 +170,8 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
         return '<div class="autocomplete-dropdown"></div>'
       },
       option_create: function (data, escape) {
-        let html = $tagsItemTemplate.outerHTML
-        html = html.replace(/{{AUTOCOMPLETE_TAGS_ITEM}}/, escape(data.input))
+        let html = tagItemTemplate
+        html = html.replace(/{{AUTOCOMPLETE_TAG_ITEM}}/, escape(data.input))
 
         return `
           <div class="autocomplete-create create">

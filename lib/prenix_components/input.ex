@@ -110,6 +110,14 @@ defmodule PrenixComponents.Input do
     |> assign(:helper_class, helper_class)
     |> assign(id: id)
     |> assign(:datepicker_opts, datepicker_opts)
+    |> assign(
+      :calendar_icon,
+      Application.get_env(:prenix_components, :calendar_icon, "ion-calendar-clear-outline")
+    )
+    |> assign(
+      :close_circle_icon,
+      Application.get_env(:prenix_components, :close_circle_icon, "ion-close-circle")
+    )
   end
 
   defp render_label(assigns) do
@@ -230,14 +238,11 @@ defmodule PrenixComponents.Input do
 
   defp render_datepicker_content(%{type: "datepicker"} = assigns) do
     ~H"""
-    <button class="datepicker-clear-btn shrink-0 inline-flex">
-      <.icon name="ion-close-circle" class="text-neutral2-foreground" />
+    <button class="datepicker-clear-btn">
+      <.icon name={@close_circle_icon} />
     </button>
 
-    <.icon
-      name="ion-calendar-clear-outline pointer-events-none datepicker-calendar-icon"
-      class="text-neutral1-foreground block shrink-0"
-    />
+    <.icon name={@calendar_icon} />
     """
   end
 

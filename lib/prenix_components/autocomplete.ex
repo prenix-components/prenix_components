@@ -4,6 +4,7 @@ defmodule PrenixComponents.Autocomplete do
   import PrenixComponents.Chip
   import PrenixComponents.Icon
   import PrenixComponents.Button
+  import Phoenix.LiveViewTest
 
   attr :name, :string, required: true
   attr :options, :list, required: true
@@ -40,19 +41,17 @@ defmodule PrenixComponents.Autocomplete do
       data-allow-blank={@allow_blank}
       data-type={@type}
       data-autocomplete
+      data-tag-item-template={@tag_item_template}
+      data-remove-button-html={@remove_button_html}
     >
-      <.chip data-autocomplete-tags-item class="hidden" radius="md" size={@chip_size}>
-        {{AUTOCOMPLETE_TAGS_ITEM}}
-      </.chip>
-
       <div class={@wrapper_class}>
         <%= render_label(assigns) %>
 
         <%= render_input(assigns) %>
 
-        <.button size="sm" icon radius="full" variant="ghost" class="autocomplete-dropdown-toggle">
-          <.icon name="ion-chevron-down" size="sm" />
-        </.button>
+        <div class="autocomplete-dropdown-icon">
+          <.icon name={@chevron_down_icon} size="sm" />
+        </div>
       </div>
 
       <%= render_helper(assigns) %>
@@ -71,19 +70,17 @@ defmodule PrenixComponents.Autocomplete do
       data-allow-blank={@allow_blank}
       data-type={@type}
       data-autocomplete
+      data-tag-item-template={@tag_item_template}
+      data-remove-button-html={@remove_button_html}
     >
-      <.chip data-autocomplete-tags-item class="hidden" radius="md" size={@chip_size}>
-        {{AUTOCOMPLETE_TAGS_ITEM}}
-      </.chip>
-
       <%= render_label(assigns) %>
 
       <div class={@wrapper_class}>
         <%= render_input(assigns) %>
 
-        <.button size="sm" icon radius="full" variant="ghost" class="autocomplete-dropdown-toggle">
-          <.icon name="ion-chevron-down" size="sm" />
-        </.button>
+        <div class="autocomplete-dropdown-icon">
+          <.icon name={@chevron_down_icon} size="sm" />
+        </div>
       </div>
 
       <%= render_helper(assigns) %>
@@ -102,20 +99,18 @@ defmodule PrenixComponents.Autocomplete do
       data-allow-blank={@allow_blank}
       data-type={@type}
       data-autocomplete
+      data-tag-item-template={@tag_item_template}
+      data-remove-button-html={@remove_button_html}
     >
-      <.chip data-autocomplete-tags-item class="hidden" radius="md" size={@chip_size}>
-        {{AUTOCOMPLETE_TAGS_ITEM}}
-      </.chip>
-
       <%= render_label(assigns) %>
 
       <div class="grow w-full">
         <div class={@wrapper_class}>
           <%= render_input(assigns) %>
 
-          <.button size="sm" icon radius="full" variant="ghost" class="autocomplete-dropdown-toggle">
-            <.icon name="ion-chevron-down" size="sm" />
-          </.button>
+          <div class="autocomplete-dropdown-icon">
+            <.icon name={@chevron_down_icon} size="sm" />
+          </div>
         </div>
 
         <%= render_helper(assigns) %>
@@ -175,6 +170,8 @@ defmodule PrenixComponents.Autocomplete do
         else: ""
       )
 
+    chip_size = if(assigns.size == "sm", do: "sm", else: "md")
+
     assigns
     |> assign(:class, class)
     |> assign(:wrapper_class, wrapper_class)
@@ -184,7 +181,12 @@ defmodule PrenixComponents.Autocomplete do
     |> assign(id: id)
     |> assign(:delimited_options, delimited_options)
     |> assign(:delimited_value, delimited_value)
-    |> assign(:chip_size, if(assigns.size == "sm", do: "sm", else: "md"))
+    |> assign(
+      :chevron_down_icon,
+      Application.get_env(:prenix_components, :chevron_down_icon, "ion-chevron-down")
+    )
+    |> assign(:tag_item_template, remove_html_comment(tag_item_template(chip_size)))
+    |> assign(:remove_button_html, remove_html_comment(remove_button_html()))
   end
 
   defp render_label(assigns) do
@@ -270,5 +272,29 @@ defmodule PrenixComponents.Autocomplete do
       <% end %>
     </div>
     """
+  end
+
+  defp tag_item_template(chip_size) do
+    assigns = %{
+      chip_size: chip_size
+    }
+
+    rendered_to_string(~H"""
+    <.chip radius="md" size={@chip_size}>
+      {{AUTOCOMPLETE_TAG_ITEM}}
+    </.chip>
+    """)
+  end
+
+  defp remove_button_html do
+    assigns = %{
+      name: Application.get_env(:prenix_components, :close_icon, "ion-close")
+    }
+
+    rendered_to_string(~H"""
+    <button title="Remove" class="autocomplete-remove-btn" type="button">
+      <.icon name={@name} size="sm" />
+    </button>
+    """)
   end
 end

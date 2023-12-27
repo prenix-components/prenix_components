@@ -96,6 +96,7 @@
 
   .autocomplete .autocomplete-input-wrapper {
     @apply inline-flex w-full items-center h-full box-border relative gap-1.5;
+    @apply max-w-[calc(100%_-_24px)];
   }
 
   .autocomplete .autocomplete-label {
@@ -207,7 +208,7 @@
 
   .autocomplete[data-type='single'] .autocomplete-item,
   .autocomplete[data-type='multiple'] .autocomplete-item {
-    @apply truncate w-full;
+    @apply truncate;
   }
 
   .autocomplete[data-type='single']
@@ -223,15 +224,15 @@
     @apply text-[--autocomplete-input];
   }
 
-  .autocomplete .autocomplete-dropdown-toggle {
-    @apply !text-neutral1-foreground;
-    @apply transition-transform;
+  .autocomplete .autocomplete-dropdown-icon {
+    @apply text-neutral1-foreground transition-transform inline-flex;
   }
 
-  .autocomplete[data-type='single'][data-focus='true']
-    .autocomplete-dropdown-toggle,
-  .autocomplete[data-type='multiple'][data-focus='true']
-    .autocomplete-dropdown-toggle {
+  .autocomplete[data-type='tags'] .autocomplete-dropdown-icon {
+    @apply hidden;
+  }
+
+  .autocomplete[data-focus='true'] .autocomplete-dropdown-icon {
     @apply rotate-180;
   }
 
@@ -251,7 +252,7 @@
   }
 
   .autocomplete:not([data-type='tags']) .autocomplete-wrapper {
-    @apply flex flex-row items-center justify-start;
+    @apply flex flex-row items-center justify-start gap-1.5;
   }
 
   .autocomplete.autocomplete-label-inside .autocomplete-label {
@@ -279,10 +280,6 @@
 
   .autocomplete.autocomplete-label-outside-left .autocomplete-label {
     @apply self-start shrink;
-  }
-
-  .autocomplete.autocomplete-label-outside-left .autocomplete-wrapper {
-    @apply grow;
   }
 
   .autocomplete.autocomplete-sm.autocomplete-label-outside-left

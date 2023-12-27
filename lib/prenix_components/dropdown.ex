@@ -110,7 +110,7 @@ defmodule PrenixComponents.Dropdown do
 
         <%= if @submenu_toggle do %>
           <span class="dropdown-submenu-item-icon">
-            <.icon name="ion-chevron-forward" size="sm" />
+            <.icon name={@chevron_right_icon} size="sm" />
           </span>
         <% end %>
       </.link>
@@ -128,7 +128,7 @@ defmodule PrenixComponents.Dropdown do
 
         <%= if @submenu_toggle do %>
           <span class="dropdown-submenu-item-icon">
-            <.icon name="ion-chevron-forward" size="sm" />
+            <.icon name={@chevron_right_icon} size="sm" />
           </span>
         <% end %>
       </button>
@@ -140,12 +140,19 @@ defmodule PrenixComponents.Dropdown do
   slot :inner_block
 
   def dropdown_rotate(assigns) do
+    assigns =
+      assign(
+        assigns,
+        :chevron_down_icon,
+        Application.get_env(:prenix_components, :chevron_down_icon, "ion-chevron-down")
+      )
+
     ~H"""
     <span class={["dropdown-rotate", @class]}>
       <%= if length(@inner_block) > 0 do %>
         <%= render_slot(@inner_block) %>
       <% else %>
-        <.icon name="ion-chevron-down" size="sm" />
+        <.icon name={@chevron_down_icon} size="sm" />
       <% end %>
     </span>
     """
@@ -211,7 +218,12 @@ defmodule PrenixComponents.Dropdown do
         assigns.class
       ])
 
-    assign(assigns, :class, class)
+    assigns
+    |> assign(:class, class)
+    |> assign(
+      :chevron_right_icon,
+      Application.get_env(:prenix_components, :chevron_right_icon, "ion-chevron-forward")
+    )
   end
 
   defp render_dropdown_item(assigns) do

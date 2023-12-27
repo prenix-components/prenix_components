@@ -29,6 +29,7 @@ defmodule PrenixComponents.Modal do
   attr :header_class, :string, default: nil
   attr :body_class, :string, default: nil
   attr :footer_class, :string, default: nil
+  attr :close_button_class, :string, default: nil
   slot :header
   slot :body
   slot :footer
@@ -45,10 +46,10 @@ defmodule PrenixComponents.Modal do
             icon
             radius="full"
             variant="ghost"
-            class="modal-close"
+            class={@close_button_class}
             data-bs-dismiss="modal"
           >
-            <.icon name="ion-close" />
+            <.icon name={@close_icon} />
           </.button>
 
           <%= if length(@header) > 0 do %>
@@ -113,6 +114,12 @@ defmodule PrenixComponents.Modal do
         assigns.footer_class
       ])
 
+    close_button_class =
+      combine_class([
+        "modal-close",
+        assigns.close_button_class
+      ])
+
     assigns
     |> assign(:class, class)
     |> assign(:dialog_class, dialog_class)
@@ -120,5 +127,7 @@ defmodule PrenixComponents.Modal do
     |> assign(:header_class, header_class)
     |> assign(:body_class, body_class)
     |> assign(:footer_class, footer_class)
+    |> assign(:close_button_class, close_button_class)
+    |> assign(:close_icon, Application.get_env(:prenix_components, :close_icon, "ion-close"))
   end
 end

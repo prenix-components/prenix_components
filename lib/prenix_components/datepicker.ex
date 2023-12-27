@@ -1,7 +1,9 @@
 defmodule PrenixComponents.Datepicker do
   use Phoenix.Component
   import PrenixComponents.Input
+  import PrenixComponents.Icon
   import PrenixComponents.Helpers
+  import Phoenix.LiveViewTest
 
   attr :name, :string, required: true
   attr :id, :string, default: nil
@@ -41,7 +43,11 @@ defmodule PrenixComponents.Datepicker do
         true -> "datepicker-#{random_string()}"
       end
 
-    assigns = assigns |> assign(:id, id)
+    assigns =
+      assigns
+      |> assign(:id, id)
+      |> assign(:prev_arrow_html, remove_html_comment(prev_arrow_html()))
+      |> assign(:next_arrow_html, remove_html_comment(next_arrow_html()))
 
     ~H"""
     <.input
@@ -62,6 +68,8 @@ defmodule PrenixComponents.Datepicker do
       input_class={@input_class}
       helper_class={@helper_class}
       data-target={"##{@id}-hidden"}
+      data-prev-arrow-html={@prev_arrow_html}
+      data-next-arrow-html={@next_arrow_html}
       {@rest}
     >
       <:label>
@@ -83,5 +91,25 @@ defmodule PrenixComponents.Datepicker do
 
     <input type="hidden" value={@value} name={@name} id={"#{@id}-hidden"} />
     """
+  end
+
+  defp prev_arrow_html do
+    assigns = %{
+      name: Application.get_env(:prenix_components, :chevron_left_icon, "ion-chevron-back")
+    }
+
+    rendered_to_string(~H"""
+    <.icon name={@name} />
+    """)
+  end
+
+  defp next_arrow_html do
+    assigns = %{
+      name: Application.get_env(:prenix_components, :chevron_right_icon, "ion-chevron-forward")
+    }
+
+    rendered_to_string(~H"""
+    <.icon name={@name} />
+    """)
   end
 end

@@ -2,7 +2,6 @@
  * Tom Select v2.3.1
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-
 ;(function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined'
     ? (module.exports = factory())
@@ -185,10 +184,9 @@
       return
     }
 
-    var html = `
-      <button title="Remove" class="autocomplete-remove-btn" type="button">
-        <span class="ion-close"></span>
-      </button>`
+    const $input = this.input
+    const $baseEl = $input.closest('[data-autocomplete]')
+    const html = $baseEl.dataset.removeButtonHtml
 
     self.hook('after', 'setupTemplates', () => {
       var orig_render_item = self.settings.render.item

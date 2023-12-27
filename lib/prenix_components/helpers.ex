@@ -27,4 +27,8 @@ defmodule PrenixComponents.Helpers do
   def html_safe_escape(string) do
     string |> html_escape() |> safe_to_string()
   end
+
+  def remove_html_comment(string) do
+    Regex.replace(~r/<\!--.*?-->/, string, "")
+  end
 end
