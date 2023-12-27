@@ -120,7 +120,7 @@
 
   .autocomplete .autocomplete-helper {
     @apply p-1 text-xs text-[--autocomplete-helper];
-    @apply inline-flex items-center gap-1;
+    @apply flex items-center gap-1;
   }
 
   .autocomplete[data-invalid] .autocomplete-wrapper {

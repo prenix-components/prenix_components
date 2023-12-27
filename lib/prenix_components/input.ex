@@ -3,7 +3,7 @@ defmodule PrenixComponents.Input do
   import PrenixComponents.Helpers
   import PrenixComponents.Icon
 
-  attr :name, :string, required: true
+  attr :name, :any
   attr :id, :string
   attr :value, :any, default: nil
   attr :label_text, :string, default: nil
@@ -13,6 +13,8 @@ defmodule PrenixComponents.Input do
   attr :placeholder, :string, default: nil
   attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :label_placement, :string, default: "inside", values: ~w(inside outside outside-left)
+  attr :field, Phoenix.HTML.FormField
+  attr :errors, :list, default: []
 
   attr :type, :string,
     default: "text",
@@ -34,6 +36,18 @@ defmodule PrenixComponents.Input do
   slot :helper
   slot :start_content
   slot :end_content
+
+  def input(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
+    errors = translate_field_errors(field)
+
+    assigns
+    |> assign(field: nil, id: assigns.id || field.id)
+    |> assign(:errors, errors)
+    |> assign(:invalid, errors != [])
+    |> assign(:name, field.name)
+    |> assign(:value, field.value)
+    |> input()
+  end
 
   def input(assigns) do
     assigns = set_assigns(assigns)
@@ -129,13 +143,27 @@ defmodule PrenixComponents.Input do
 
   defp render_helper(assigns) do
     ~H"""
-    <%= if @helper_text do %>
-      <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
-    <% end %>
+    <%= if @errors != [] do %>
+      <%= render_errors(assigns) %>
+    <% else %>
+      <%= if @helper_text do %>
+        <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
+      <% end %>
 
-    <%= if length(@helper) > 0 do %>
-      <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
+      <%= if length(@helper) > 0 do %>
+        <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
+      <% end %>
     <% end %>
+    """
+  end
+
+  defp render_errors(assigns) do
+    ~H"""
+    <div id={"#{@id}-helper"}>
+      <p :for={msg <- @errors} class={@helper_class}>
+        <%= msg %>
+      </p>
+    </div>
     """
   end
 
@@ -170,7 +198,7 @@ defmodule PrenixComponents.Input do
           class={@input_class}
           placeholder={@placeholder}
           disabled={@disabled}
-          value={@value}
+          value={Phoenix.HTML.Form.normalize_value(@type, @value)}
           aria-invalid={@invalid}
           aria-labelledby={"#{@id}-label"}
           aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}

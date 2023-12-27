@@ -16,7 +16,7 @@
 
   .checkbox-group-helper {
     @apply text-sm text-[--checkbox-group-helper];
-    @apply inline-flex items-center gap-1;
+    @apply flex items-center gap-1;
   }
 
   .checkbox-group[data-invalid] .checkbox-group-helper {

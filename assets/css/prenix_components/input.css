@@ -85,7 +85,7 @@
 
   .input .input-helper {
     @apply p-1 text-xs text-[--input-helper];
-    @apply inline-flex items-center gap-1;
+    @apply flex items-center gap-1;
   }
 
   .input[data-invalid] .input-wrapper {
