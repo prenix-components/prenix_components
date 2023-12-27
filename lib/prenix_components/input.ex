@@ -4,7 +4,7 @@ defmodule PrenixComponents.Input do
   import PrenixComponents.Icon
 
   attr :name, :any
-  attr :id, :string
+  attr :id, :string, default: nil
   attr :value, :any, default: nil
   attr :label_text, :string, default: nil
   attr :helper_text, :string, default: nil
