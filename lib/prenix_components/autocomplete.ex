@@ -3,7 +3,6 @@ defmodule PrenixComponents.Autocomplete do
   import PrenixComponents.Helpers
   import PrenixComponents.Chip
   import PrenixComponents.Icon
-  import PrenixComponents.Button
   import Phoenix.LiveViewTest
 
   attr :name, :string, required: true

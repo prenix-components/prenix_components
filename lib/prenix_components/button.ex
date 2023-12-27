@@ -18,7 +18,7 @@ defmodule PrenixComponents.Button do
   attr :class, :string, default: nil
   attr :content_class, :string, default: nil
   attr :spinner_class, :string, default: nil
-  attr :rest, :global
+  attr :rest, :global, include: ~w(href)
   slot :inner_block
 
   def button(assigns) do

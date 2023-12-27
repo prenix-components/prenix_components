@@ -88,7 +88,7 @@ defmodule PrenixComponents.Dropdown do
   attr :submenu_toggle, :boolean, default: false
   attr :class, :string, default: nil
   attr :disabled, :boolean, default: false
-  attr :rest, :global
+  attr :rest, :global, include: ~w(href)
   slot :start_content
   slot :end_content
   slot :inner_block
