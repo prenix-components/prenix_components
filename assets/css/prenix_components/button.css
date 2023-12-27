@@ -2,43 +2,43 @@
   .btn-default {
     --button: hsl(var(--default));
     --button-foreground: hsl(var(--default-foreground));
-    --button-soft: hsl(var(--default) / 0.4);
-    --button-soft-foreground: hsl(var(--default-foreground));
+    --button-flat: hsl(var(--default) / 0.4);
+    --button-flat-foreground: hsl(var(--default-foreground));
   }
 
   .btn-primary {
     --button: hsl(var(--primary));
     --button-foreground: hsl(var(--primary-foreground));
-    --button-soft: hsl(var(--primary) / 0.2);
-    --button-soft-foreground: hsl(var(--primary));
+    --button-flat: hsl(var(--primary) / 0.2);
+    --button-flat-foreground: hsl(var(--primary));
   }
 
   .btn-secondary {
     --button: hsl(var(--secondary));
     --button-foreground: hsl(var(--secondary-foreground));
-    --button-soft: hsl(var(--secondary) / 0.2);
-    --button-soft-foreground: hsl(var(--secondary));
+    --button-flat: hsl(var(--secondary) / 0.2);
+    --button-flat-foreground: hsl(var(--secondary));
   }
 
   .btn-success {
     --button: hsl(var(--success));
     --button-foreground: hsl(var(--success-foreground));
-    --button-soft: hsl(var(--success) / 0.2);
-    --button-soft-foreground: hsl(var(--success));
+    --button-flat: hsl(var(--success) / 0.2);
+    --button-flat-foreground: hsl(var(--success));
   }
 
   .btn-warning {
     --button: hsl(var(--warning));
     --button-foreground: hsl(var(--warning-foreground));
-    --button-soft: hsl(var(--warning) / 0.2);
-    --button-soft-foreground: hsl(var(--warning));
+    --button-flat: hsl(var(--warning) / 0.2);
+    --button-flat-foreground: hsl(var(--warning));
   }
 
   .btn-danger {
     --button: hsl(var(--danger));
     --button-foreground: hsl(var(--danger-foreground));
-    --button-soft: hsl(var(--danger) / 0.2);
-    --button-soft-foreground: hsl(var(--danger));
+    --button-flat: hsl(var(--danger) / 0.2);
+    --button-flat-foreground: hsl(var(--danger));
   }
 
   .btn {
@@ -82,20 +82,20 @@
     @apply bg-[--button] text-[--button-foreground] focus-visible:outline-[--button];
   }
 
-  .btn.btn-soft {
-    @apply bg-[--button-soft] text-[--button-soft-foreground];
-    @apply focus-visible:outline-[--button-soft-foreground];
+  .btn.btn-flat {
+    @apply bg-[--button-flat] text-[--button-flat-foreground];
+    @apply focus-visible:outline-[--button-flat-foreground];
   }
 
-  .btn.btn-outline {
-    @apply bg-transparent border-[--button] text-[--button-soft-foreground] border-2;
+  .btn.btn-bordered {
+    @apply bg-transparent border-[--button] text-[--button-flat-foreground] border-2;
     @apply focus-visible:outline-[--button];
   }
 
-  .btn.btn-ghost {
-    @apply bg-transparent hover:opacity-100 hover:bg-[--button-soft];
-    @apply text-[--button-soft-foreground];
-    @apply focus-visible:outline-[--button-soft-foreground];
+  .btn.btn-light {
+    @apply bg-transparent hover:opacity-100 hover:bg-[--button-flat];
+    @apply text-[--button-flat-foreground];
+    @apply focus-visible:outline-[--button-flat-foreground];
   }
 
   .btn.btn-loading .btn-content {

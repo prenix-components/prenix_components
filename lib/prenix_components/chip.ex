@@ -8,7 +8,7 @@ defmodule PrenixComponents.Chip do
     default: "default",
     values: ~w(default primary secondary success warning danger)
 
-  attr :variant, :string, default: "solid", values: ~w(solid soft outline)
+  attr :variant, :string, default: "solid", values: ~w(solid flat bordered)
   attr :radius, :string, default: "full", values: ~w(sm md lg full)
   attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :rest, :global

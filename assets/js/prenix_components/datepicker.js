@@ -76,7 +76,7 @@ const initDatepicker = () => {
       todayButton: true,
       todayHighlight: true,
       todayButtonMode: 1,
-      buttonClass: 'btn btn-ripple btn-default btn-ghost btn-sm btn-radius-lg',
+      buttonClass: 'btn btn-ripple btn-default btn-light btn-sm btn-radius-lg',
       prevArrow: $input.dataset.prevArrowHtml,
       nextArrow: $input.dataset.nextArrowHtml,
       format: {

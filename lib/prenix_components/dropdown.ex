@@ -26,7 +26,7 @@ defmodule PrenixComponents.Dropdown do
   attr :toggle_class, :string, default: nil
   attr :content_class, :string, default: nil
   attr :submenu, :boolean, default: false
-  attr :variant, :string, default: "solid", values: ~w(solid soft)
+  attr :variant, :string, default: "solid", values: ~w(solid flat)
   attr :auto_close, :string, default: "outside", values: ~w(true inside outside false)
   attr :placement, :string, default: "dropdown", values: Map.keys(@placements)
   attr :offset, :string, default: nil

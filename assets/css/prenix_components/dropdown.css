@@ -2,43 +2,43 @@
   .dropdown-item-default {
     --dropdown-item: hsl(var(--default));
     --dropdown-item-foreground: hsl(var(--default-foreground));
-    --dropdown-item-soft: hsl(var(--default) / 0.4);
-    --dropdown-item-soft-foreground: hsl(var(--default-foreground));
+    --dropdown-item-flat: hsl(var(--default) / 0.4);
+    --dropdown-item-flat-foreground: hsl(var(--default-foreground));
   }
 
   .dropdown-item-primary {
     --dropdown-item: hsl(var(--primary));
     --dropdown-item-foreground: hsl(var(--primary-foreground));
-    --dropdown-item-soft: hsl(var(--primary) / 0.2);
-    --dropdown-item-soft-foreground: hsl(var(--primary));
+    --dropdown-item-flat: hsl(var(--primary) / 0.2);
+    --dropdown-item-flat-foreground: hsl(var(--primary));
   }
 
   .dropdown-item-secondary {
     --dropdown-item: hsl(var(--secondary));
     --dropdown-item-foreground: hsl(var(--secondary-foreground));
-    --dropdown-item-soft: hsl(var(--secondary) / 0.2);
-    --dropdown-item-soft-foreground: hsl(var(--secondary));
+    --dropdown-item-flat: hsl(var(--secondary) / 0.2);
+    --dropdown-item-flat-foreground: hsl(var(--secondary));
   }
 
   .dropdown-item-success {
     --dropdown-item: hsl(var(--success));
     --dropdown-item-foreground: hsl(var(--success-foreground));
-    --dropdown-item-soft: hsl(var(--success) / 0.2);
-    --dropdown-item-soft-foreground: hsl(var(--success));
+    --dropdown-item-flat: hsl(var(--success) / 0.2);
+    --dropdown-item-flat-foreground: hsl(var(--success));
   }
 
   .dropdown-item-warning {
     --dropdown-item: hsl(var(--warning));
     --dropdown-item-foreground: hsl(var(--warning-foreground));
-    --dropdown-item-soft: hsl(var(--warning) / 0.2);
-    --dropdown-item-soft-foreground: hsl(var(--warning));
+    --dropdown-item-flat: hsl(var(--warning) / 0.2);
+    --dropdown-item-flat-foreground: hsl(var(--warning));
   }
 
   .dropdown-item-danger {
     --dropdown-item: hsl(var(--danger));
     --dropdown-item-foreground: hsl(var(--danger-foreground));
-    --dropdown-item-soft: hsl(var(--danger) / 0.2);
-    --dropdown-item-soft-foreground: hsl(var(--danger));
+    --dropdown-item-flat: hsl(var(--danger) / 0.2);
+    --dropdown-item-flat-foreground: hsl(var(--danger));
   }
 
   .dropdown {
@@ -93,12 +93,12 @@
     @apply bg-[--dropdown-item] text-[--dropdown-item-foreground];
   }
 
-  .dropdown.dropdown-soft .dropdown-item {
-    @apply focus:bg-[--dropdown-item-soft] focus:text-[--dropdown-item-soft-foreground];
+  .dropdown.dropdown-flat .dropdown-item {
+    @apply focus:bg-[--dropdown-item-flat] focus:text-[--dropdown-item-flat-foreground];
   }
 
-  .dropdown.dropdown-soft .dropdown-item[data-hover='true'] {
-    @apply bg-[--dropdown-item-soft] text-[--dropdown-item-soft-foreground];
+  .dropdown.dropdown-flat .dropdown-item[data-hover='true'] {
+    @apply bg-[--dropdown-item-flat] text-[--dropdown-item-flat-foreground];
   }
 
   .dropdown .dropdown-item-disabled {

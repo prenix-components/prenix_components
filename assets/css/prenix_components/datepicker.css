@@ -131,8 +131,8 @@
   }
 
   .datepicker .today-btn {
-    --button-soft: hsl(var(--primary) / 0.2);
-    --button-soft-foreground: hsl(var(--primary));
+    --button-flat: hsl(var(--primary) / 0.2);
+    --button-flat-foreground: hsl(var(--primary));
     @apply font-bold text-sm;
   }
 

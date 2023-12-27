@@ -9,7 +9,7 @@ defmodule PrenixComponents.Button do
     default: "default",
     values: ~w(default primary secondary success warning danger)
 
-  attr :variant, :string, default: "solid", values: ~w(solid soft outline ghost)
+  attr :variant, :string, default: "solid", values: ~w(solid flat bordered light)
   attr :size, :string, default: "md", values: ~w(sm md lg)
   attr :icon, :boolean, default: false
   attr :radius, :string, default: "lg", values: ~w(sm md lg full)

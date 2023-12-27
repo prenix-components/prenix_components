@@ -2,43 +2,43 @@
   .chip-default {
     --chip: hsl(var(--default));
     --chip-foreground: hsl(var(--default-foreground));
-    --chip-soft: hsl(var(--default) / 0.4);
-    --chip-soft-foreground: hsl(var(--default-foreground));
+    --chip-flat: hsl(var(--default) / 0.4);
+    --chip-flat-foreground: hsl(var(--default-foreground));
   }
 
   .chip-primary {
     --chip: hsl(var(--primary));
     --chip-foreground: hsl(var(--primary-foreground));
-    --chip-soft: hsl(var(--primary) / 0.2);
-    --chip-soft-foreground: hsl(var(--primary));
+    --chip-flat: hsl(var(--primary) / 0.2);
+    --chip-flat-foreground: hsl(var(--primary));
   }
 
   .chip-secondary {
     --chip: hsl(var(--secondary));
     --chip-foreground: hsl(var(--secondary-foreground));
-    --chip-soft: hsl(var(--secondary) / 0.2);
-    --chip-soft-foreground: hsl(var(--secondary));
+    --chip-flat: hsl(var(--secondary) / 0.2);
+    --chip-flat-foreground: hsl(var(--secondary));
   }
 
   .chip-success {
     --chip: hsl(var(--success));
     --chip-foreground: hsl(var(--success-foreground));
-    --chip-soft: hsl(var(--success) / 0.2);
-    --chip-soft-foreground: hsl(var(--success));
+    --chip-flat: hsl(var(--success) / 0.2);
+    --chip-flat-foreground: hsl(var(--success));
   }
 
   .chip-warning {
     --chip: hsl(var(--warning));
     --chip-foreground: hsl(var(--warning-foreground));
-    --chip-soft: hsl(var(--warning) / 0.2);
-    --chip-soft-foreground: hsl(var(--warning));
+    --chip-flat: hsl(var(--warning) / 0.2);
+    --chip-flat-foreground: hsl(var(--warning));
   }
 
   .chip-danger {
     --chip: hsl(var(--danger));
     --chip-foreground: hsl(var(--danger-foreground));
-    --chip-soft: hsl(var(--danger) / 0.2);
-    --chip-soft-foreground: hsl(var(--danger));
+    --chip-flat: hsl(var(--danger) / 0.2);
+    --chip-flat-foreground: hsl(var(--danger));
   }
 
   .chip {
@@ -79,12 +79,12 @@
     @apply text-[--chip-foreground];
   }
 
-  .chip.chip-outline {
-    @apply bg-transparent border-[--chip] text-[--chip-soft-foreground] border-2;
+  .chip.chip-bordered {
+    @apply bg-transparent border-[--chip] text-[--chip-flat-foreground] border-2;
   }
 
-  .chip.chip-soft {
-    @apply text-[--chip-soft-foreground] bg-[--chip-soft];
+  .chip.chip-flat {
+    @apply text-[--chip-flat-foreground] bg-[--chip-flat];
   }
 
   .chip.chip-radius-full {

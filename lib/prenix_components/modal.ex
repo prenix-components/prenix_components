@@ -45,7 +45,7 @@ defmodule PrenixComponents.Modal do
             size="sm"
             icon
             radius="full"
-            variant="ghost"
+            variant="light"
             class={@close_button_class}
             data-bs-dismiss="modal"
           >
