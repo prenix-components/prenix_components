@@ -61,7 +61,7 @@
     @apply flex items-center justify-center;
   }
 
-  .input[data-focus='true'] .input-wrapper {
+  .input[data-js-focus='true'] .input-wrapper {
     @apply border-[--input-wrapper-border-focus];
   }
 
@@ -74,7 +74,7 @@
     @apply pe-2 max-w-full inline-flex items-center gap-1;
   }
 
-  .input[data-focus='true'] .input-label {
+  .input[data-js-focus='true'] .input-label {
     @apply text-[--input-label-focus];
   }
 
@@ -110,13 +110,13 @@
     @apply motion-reduce:transition-none transition-[transform,color,left,opacity];
   }
 
-  .input.input-label-inside[data-focus='true'] .input-label,
-  .input.input-label-inside[data-has-placeholder='true'] .input-label,
-  .input.input-label-inside[data-has-value='true'] .input-label {
+  .input.input-label-inside[data-js-focus='true'] .input-label,
+  .input.input-label-inside[data-js-has-placeholder='true'] .input-label,
+  .input.input-label-inside[data-js-has-value='true'] .input-label {
     @apply scale-[0.85] translate-y-[--input-label-translate];
   }
 
-  .input.input-label-inside[data-has-label='true'] .input-el-wrapper {
+  .input.input-label-inside[data-js-has-label='true'] .input-el-wrapper {
     @apply items-end;
   }
 

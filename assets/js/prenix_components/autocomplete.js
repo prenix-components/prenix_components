@@ -94,7 +94,7 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       }
 
       if ($controlInput.placeholder && $controlInput.placeholder.length > 0) {
-        $wrapper.dataset.hasPlaceholder = true
+        $wrapper.dataset.jsHasPlaceholder = true
       }
 
       $controlInput.setAttribute('data-1p-ignore', '')
@@ -138,10 +138,10 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       })
     },
     onFocus: () => {
-      $wrapper.dataset.focus = true
+      $wrapper.dataset.jsFocus = true
     },
     onBlur: () => {
-      $wrapper.dataset.focus = false
+      $wrapper.dataset.jsFocus = false
     },
     render: {
       option: (data, _escape) => {
@@ -195,7 +195,7 @@ const initAutocomplete = () => {
       $wrapper: $baseEl,
     })
 
-    if ($label) $baseEl.dataset.hasLabel = true
+    if ($label) $baseEl.dataset.jsHasLabel = true
 
     const $autocompleteWrapper = $baseEl.querySelector('.autocomplete-wrapper')
 

@@ -29,11 +29,11 @@
     @apply after:text-[--checkbox-checkmark-foreground];
   }
 
-  .checkbox[data-focus='true'] .checkbox-el {
+  .checkbox[data-js-focus='true'] .checkbox-el {
     @apply ring-2 ring-offset-2 ring-[--checkbox-checkmark] ring-offset-background;
   }
 
-  .checkbox[data-selected='true'] .checkbox-el {
+  .checkbox[data-js-selected='true'] .checkbox-el {
     @apply after:scale-100 after:opacity-100;
   }
 
@@ -41,11 +41,11 @@
     @apply z-10 opacity-0 w-4 h-3 transition-opacity motion-reduce:transition-none;
   }
 
-  .checkbox[data-selected='true'] .checkbox-checkmark {
+  .checkbox[data-js-selected='true'] .checkbox-checkmark {
     @apply opacity-100;
   }
 
-  .checkbox[data-selected='true'] .checkbox-el {
+  .checkbox[data-js-selected='true'] .checkbox-el {
     @apply before:border-transparent;
   }
 

@@ -1,8 +1,8 @@
 const setHasValue = ({ value, $wrapper }) => {
   if (value && value.length > 0) {
-    $wrapper.dataset.hasValue = true
+    $wrapper.dataset.jsHasValue = true
   } else {
-    $wrapper.dataset.hasValue = false
+    $wrapper.dataset.jsHasValue = false
   }
 }
 

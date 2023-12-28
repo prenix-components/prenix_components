@@ -1,10 +1,10 @@
 const setSelected = ({ boolean, $wrapper, $polyline }) => {
   if (boolean) {
-    $wrapper.dataset.selected = true
+    $wrapper.dataset.jsSelected = true
     $polyline.setAttribute('stroke-dashoffset', 44)
   } else {
     $polyline.setAttribute('stroke-dashoffset', 66)
-    $wrapper.dataset.selected = false
+    $wrapper.dataset.jsSelected = false
   }
 }
 
@@ -34,15 +34,15 @@ const initCheckbox = (
     })
 
     $input.addEventListener('click', () => {
-      $baseEl.dataset.focus = false
+      $baseEl.dataset.jsFocus = false
     })
 
     $input.addEventListener('focus', () => {
-      $baseEl.dataset.focus = true
+      $baseEl.dataset.jsFocus = true
     })
 
     $input.addEventListener('blur', () => {
-      $baseEl.dataset.focus = false
+      $baseEl.dataset.jsFocus = false
     })
   })
 }

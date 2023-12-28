@@ -7,14 +7,14 @@ const initInput = () => {
     const $input = $baseEl.querySelector('.input-el')
 
     if ($input.placeholder && $input.placeholder.length > 0) {
-      $baseEl.dataset.hasPlaceholder = true
+      $baseEl.dataset.jsHasPlaceholder = true
     }
 
     if ($label) {
       const labelText = $label.textContent.trim()
 
       if (labelText.length > 0) {
-        $baseEl.dataset.hasLabel = true
+        $baseEl.dataset.jsHasLabel = true
         $input.setAttribute('aria-label', labelText)
       }
     }
@@ -26,11 +26,11 @@ const initInput = () => {
     }
 
     $input.addEventListener('focus', () => {
-      $baseEl.dataset.focus = true
+      $baseEl.dataset.jsFocus = true
     })
 
     $input.addEventListener('blur', () => {
-      $baseEl.dataset.focus = false
+      $baseEl.dataset.jsFocus = false
     })
 
     $input.addEventListener('change', (e) => {
