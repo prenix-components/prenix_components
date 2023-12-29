@@ -1,0 +1,77 @@
+@layer components {
+  .link {
+    @apply relative inline-flex items-center tap-highlight-transparent outline-none gap-1 underline-offset-4;
+    @apply focus-visible:outline-2 focus-visible:outline-[hsl(var(--focus))] focus-visible:outline-offset-2;
+    @apply hover:opacity-80 active:opacity-[--disabled-opacity] transition-opacity text-[--link];
+  }
+
+  .link-current {
+    --link: textCurrent;
+  }
+
+  .link-default {
+    --link: hsl(var(--default));
+  }
+
+  .link-primary {
+    --link: hsl(var(--primary));
+  }
+
+  .link-secondary {
+    --link: hsl(var(--secondary));
+  }
+
+  .link-success {
+    --link: hsl(var(--success));
+  }
+
+  .link-warning {
+    --link: hsl(var(--warning));
+  }
+
+  .link-danger {
+    --link: hsl(var(--danger));
+  }
+
+  .link.link-inherit {
+    font-size: inherit;
+  }
+
+  .link.link-sm {
+    @apply text-sm;
+  }
+
+  .link.link-md {
+    @apply text-base;
+  }
+
+  .link.link-lg {
+    @apply text-lg;
+  }
+
+  .link.link-underline-none {
+    @apply no-underline;
+  }
+
+  .link.link-underline-hover {
+    @apply hover:underline;
+  }
+
+  .link.link-underline-always {
+    @apply underline;
+  }
+
+  .link.link-underline-active {
+    @apply active:underline;
+  }
+
+  .link.link-underline-focus {
+    @apply focus:underline;
+  }
+
+  .link.link-disabled {
+    @apply opacity-[--disabled-opacity] pointer-events-none;
+  }
+}
+
+/* text-medium text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity */

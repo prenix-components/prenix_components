@@ -128,7 +128,7 @@ defmodule PrenixComponents.Accordion do
     |> assign(:divider_class, divider_class)
     |> assign(
       :chevron_left_icon,
-      Application.get_env(:prenix_components, :chevron_left_icon, "ion-chevron-back")
+      Application.get_env(:prenix_components, :chevron_left_icon, "mdi-chevron-left")
     )
   end
 end

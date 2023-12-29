@@ -89,7 +89,7 @@ defmodule PrenixComponents.Datepicker do
 
   defp prev_arrow_html do
     assigns = %{
-      name: Application.get_env(:prenix_components, :chevron_left_icon, "ion-chevron-back")
+      name: Application.get_env(:prenix_components, :chevron_left_icon, "mdi-chevron-left")
     }
 
     rendered_to_string(~H"""
@@ -99,7 +99,7 @@ defmodule PrenixComponents.Datepicker do
 
   defp next_arrow_html do
     assigns = %{
-      name: Application.get_env(:prenix_components, :chevron_right_icon, "ion-chevron-forward")
+      name: Application.get_env(:prenix_components, :chevron_right_icon, "mdi-chevron-right")
     }
 
     rendered_to_string(~H"""

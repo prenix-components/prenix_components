@@ -21,7 +21,7 @@
     @apply hidden text-neutral2-foreground shrink-0;
   }
 
-  .input[data-datepicker][data-has-value='true']:not([data-disabled])
+  .input[data-datepicker][data-js-has-value='true']:not([data-disabled])
     .input-wrapper:hover
     .datepicker-clear-btn {
     @apply inline-flex;
@@ -31,7 +31,7 @@
     @apply text-neutral1-foreground block shrink-0;
   }
 
-  .input[data-datepicker][data-has-value='true']:not([data-disabled])
+  .input[data-datepicker][data-js-has-value='true']:not([data-disabled])
     .input-wrapper:hover
     .datepicker-calendar-icon {
     @apply hidden;

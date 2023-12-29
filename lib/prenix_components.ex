@@ -4,6 +4,7 @@ defmodule PrenixComponents do
       import PrenixComponents.{
         Accordion,
         Autocomplete,
+        Avatar,
         Button,
         CheckboxGroup,
         Checkbox,
@@ -13,6 +14,7 @@ defmodule PrenixComponents do
         Dropdown,
         Icon,
         Input,
+        Link,
         Modal,
         Spinner,
         Table,

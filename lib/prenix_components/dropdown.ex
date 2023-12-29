@@ -88,7 +88,7 @@ defmodule PrenixComponents.Dropdown do
   attr :submenu_toggle, :boolean, default: false
   attr :class, :string, default: nil
   attr :disabled, :boolean, default: false
-  attr :rest, :global, include: ~w(href)
+  attr :rest, :global, include: ~w(href method)
   slot :start_content
   slot :end_content
   slot :inner_block
@@ -110,7 +110,7 @@ defmodule PrenixComponents.Dropdown do
 
         <%= if @submenu_toggle do %>
           <span class="dropdown-submenu-item-icon">
-            <.icon name={@chevron_right_icon} size="sm" />
+            <.icon name={@chevron_right_icon} />
           </span>
         <% end %>
       </.link>
@@ -128,7 +128,7 @@ defmodule PrenixComponents.Dropdown do
 
         <%= if @submenu_toggle do %>
           <span class="dropdown-submenu-item-icon">
-            <.icon name={@chevron_right_icon} size="sm" />
+            <.icon name={@chevron_right_icon} />
           </span>
         <% end %>
       </button>
@@ -144,7 +144,7 @@ defmodule PrenixComponents.Dropdown do
       assign(
         assigns,
         :chevron_down_icon,
-        Application.get_env(:prenix_components, :chevron_down_icon, "ion-chevron-down")
+        Application.get_env(:prenix_components, :chevron_down_icon, "mdi-expand-more")
       )
 
     ~H"""
@@ -152,7 +152,7 @@ defmodule PrenixComponents.Dropdown do
       <%= if length(@inner_block) > 0 do %>
         <%= render_slot(@inner_block) %>
       <% else %>
-        <.icon name={@chevron_down_icon} size="sm" />
+        <.icon name={@chevron_down_icon} />
       <% end %>
     </span>
     """
@@ -222,7 +222,7 @@ defmodule PrenixComponents.Dropdown do
     |> assign(:class, class)
     |> assign(
       :chevron_right_icon,
-      Application.get_env(:prenix_components, :chevron_right_icon, "ion-chevron-forward")
+      Application.get_env(:prenix_components, :chevron_right_icon, "mdi-chevron-right")
     )
   end
 

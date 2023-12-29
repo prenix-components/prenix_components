@@ -1,8 +1,9 @@
 @import './prenix_components/utils.css';
-
 @import './prenix_components/variables.css';
-@import './prenix_components/autocomplete.css';
+
 @import './prenix_components/accordion.css';
+@import './prenix_components/autocomplete.css';
+@import './prenix_components/avatar.css';
 @import './prenix_components/button.css';
 @import './prenix_components/checkbox_group.css';
 @import './prenix_components/checkbox.css';
@@ -14,6 +15,7 @@
 @import './prenix_components/dropdown.css';
 @import './prenix_components/icon.css';
 @import './prenix_components/input.css';
+@import './prenix_components/link.css';
 @import './prenix_components/modal.css';
 @import './prenix_components/spinner.css';
 @import './prenix_components/table.css';

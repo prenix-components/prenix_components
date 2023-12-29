@@ -128,6 +128,6 @@ defmodule PrenixComponents.Modal do
     |> assign(:body_class, body_class)
     |> assign(:footer_class, footer_class)
     |> assign(:close_button_class, close_button_class)
-    |> assign(:close_icon, Application.get_env(:prenix_components, :close_icon, "ion-close"))
+    |> assign(:close_icon, Application.get_env(:prenix_components, :close_icon, "mdi-close"))
   end
 end

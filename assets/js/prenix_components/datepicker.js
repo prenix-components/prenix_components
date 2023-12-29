@@ -68,7 +68,7 @@ const initDatepicker = () => {
     const $hiddenInput = document.querySelector($input.dataset.target)
     const $clearBtn = $baseEl.querySelector('.datepicker-clear-btn')
     const optsStr = $baseEl.dataset.datepickerOpts
-    const opts = JSON.parse(optsStr)
+    // const opts = JSON.parse(optsStr)
     $input.placeholder = getPlaceholder(datePattern)
     let defaultValue = $input.value
 

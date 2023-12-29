@@ -49,7 +49,7 @@ defmodule PrenixComponents.Autocomplete do
         <%= render_input(assigns) %>
 
         <div class="autocomplete-dropdown-icon">
-          <.icon name={@chevron_down_icon} size="sm" />
+          <.icon name={@chevron_down_icon} />
         </div>
       </div>
 
@@ -78,7 +78,7 @@ defmodule PrenixComponents.Autocomplete do
         <%= render_input(assigns) %>
 
         <div class="autocomplete-dropdown-icon">
-          <.icon name={@chevron_down_icon} size="sm" />
+          <.icon name={@chevron_down_icon} />
         </div>
       </div>
 
@@ -108,7 +108,7 @@ defmodule PrenixComponents.Autocomplete do
           <%= render_input(assigns) %>
 
           <div class="autocomplete-dropdown-icon">
-            <.icon name={@chevron_down_icon} size="sm" />
+            <.icon name={@chevron_down_icon} />
           </div>
         </div>
 
@@ -182,7 +182,7 @@ defmodule PrenixComponents.Autocomplete do
     |> assign(:delimited_value, delimited_value)
     |> assign(
       :chevron_down_icon,
-      Application.get_env(:prenix_components, :chevron_down_icon, "ion-chevron-down")
+      Application.get_env(:prenix_components, :chevron_down_icon, "mdi-expand-more")
     )
     |> assign(:tag_item_template, remove_html_comment(tag_item_template(chip_size)))
     |> assign(:remove_button_html, remove_html_comment(remove_button_html()))
@@ -287,7 +287,7 @@ defmodule PrenixComponents.Autocomplete do
 
   defp remove_button_html do
     assigns = %{
-      name: Application.get_env(:prenix_components, :close_icon, "ion-close")
+      name: Application.get_env(:prenix_components, :close_icon, "mdi-close")
     }
 
     rendered_to_string(~H"""

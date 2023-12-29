@@ -121,11 +121,11 @@ defmodule PrenixComponents.Input do
     |> assign(id: id)
     |> assign(
       :calendar_icon,
-      Application.get_env(:prenix_components, :calendar_icon, "ion-calendar-clear-outline")
+      Application.get_env(:prenix_components, :calendar_icon, "mdi-calendar-today")
     )
     |> assign(
       :close_circle_icon,
-      Application.get_env(:prenix_components, :close_circle_icon, "ion-close-circle")
+      Application.get_env(:prenix_components, :close_circle_icon, "mdi-cancel")
     )
   end
 
@@ -265,7 +265,7 @@ defmodule PrenixComponents.Input do
       <.icon name={@close_circle_icon} />
     </button>
 
-    <.icon name={@calendar_icon} />
+    <.icon name={@calendar_icon} class="datepicker-calendar-icon" />
     """
   end
 

@@ -3,7 +3,7 @@ defmodule PrenixComponents.Button do
   import PrenixComponents.Spinner
   import PrenixComponents.Helpers
 
-  attr :type, :string, default: "button", values: ~w(button submit reset link)
+  attr :type, :string, default: nil, values: ["button", "submit", "reset", "link", nil]
 
   attr :color, :string,
     default: "default",
@@ -18,7 +18,8 @@ defmodule PrenixComponents.Button do
   attr :class, :string, default: nil
   attr :content_class, :string, default: nil
   attr :spinner_class, :string, default: nil
-  attr :rest, :global, include: ~w(href)
+  attr :link_type, :string, default: nil
+  attr :rest, :global, include: ~w(href method download hreflang referrerpolicy rel target)
   slot :inner_block
 
   def button(assigns) do
@@ -30,6 +31,7 @@ defmodule PrenixComponents.Button do
         class={@class}
         aria-disabled={@disabled || @loading}
         tabindex={if(@disabled || @loading, do: -1, else: false)}
+        type={@link_type}
         {@rest}
       >
         <span class={@content_class}>
