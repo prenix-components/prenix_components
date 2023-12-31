@@ -56,6 +56,17 @@ defmodule PrenixComponents.Helpers do
     end
   end
 
+  def merge_classes(list) do
+    Enum.reduce(list, %{}, fn map, acc ->
+      Enum.reduce(map, acc, fn item, acc_inner ->
+        name = elem(item, 0)
+        class = elem(item, 1)
+
+        Map.update(acc_inner, name, class, fn existing_value -> "#{existing_value} #{class}" end)
+      end)
+    end)
+  end
+
   def translate_field_name(field) do
     backend = Application.get_env(:prenix_components, :gettext_backend)
     field_name = "#{field}"

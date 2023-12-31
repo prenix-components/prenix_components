@@ -52,7 +52,7 @@ defmodule PrenixComponents.Checkbox do
           <%= @label_text %>
         <% end %>
 
-        <%= if length(@label) > 0 do %>
+        <%= if @label != [] do %>
           <%= render_slot(@label) %>
         <% end %>
       </span>

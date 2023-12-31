@@ -194,7 +194,7 @@ defmodule PrenixComponents.Autocomplete do
       <label class={@label_class} for={@id}><%= @label_text %></label>
     <% end %>
 
-    <%= if length(@label) > 0 do %>
+    <%= if @label != [] do %>
       <label class={@label_class} for={@id}><%= render_slot(@label) %></label>
     <% end %>
     """
@@ -206,7 +206,7 @@ defmodule PrenixComponents.Autocomplete do
       <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
     <% end %>
 
-    <%= if length(@helper) > 0 do %>
+    <%= if @helper != [] do %>
       <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
     <% end %>
     """
@@ -215,7 +215,7 @@ defmodule PrenixComponents.Autocomplete do
   defp render_input(assigns) do
     ~H"""
     <div class={@input_wrapper_class}>
-      <%= if length(@start_content) > 0 do %>
+      <%= if @start_content != [] do %>
         <div class="autocomplete-content">
           <%= render_slot(@start_content) %>
         </div>
@@ -232,7 +232,7 @@ defmodule PrenixComponents.Autocomplete do
           data-input-class={@input_class}
           data-options={@delimited_options}
           value={@delimited_value}
-          aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
+          aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
         />
       <% else %>
         <select
@@ -243,7 +243,7 @@ defmodule PrenixComponents.Autocomplete do
           multiple={@type === "multiple"}
           data-original-input
           data-input-class={@input_class}
-          aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
+          aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
         >
           <option value=""><%= @placeholder %></option>
 
@@ -264,7 +264,7 @@ defmodule PrenixComponents.Autocomplete do
         </select>
       <% end %>
 
-      <%= if length(@end_content) > 0 do %>
+      <%= if @end_content != [] do %>
         <div class="autocomplete-content">
           <%= render_slot(@end_content) %>
         </div>

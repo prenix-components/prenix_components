@@ -4,11 +4,13 @@ defmodule PrenixComponents.Icon do
 
   attr :name, :string, default: nil, doc: "Tabler icon name"
   attr :class, :string, default: nil
-  attr :size, :string, default: "md", values: ~w(sm md lg)
+  attr :size, :string, default: "md", values: ~w(sm md lg custom)
 
   attr :color, :string,
     default: "current",
     values: ~w(current default primary secondary success warning danger)
+
+  attr :rest, :global
 
   slot :inner_block, doc: "Custom icon"
 
@@ -26,13 +28,13 @@ defmodule PrenixComponents.Icon do
 
   defp render_icon(assigns) do
     ~H"""
-    <span class={[@name, @class]} />
+    <span class={[@name, @class]} {@rest} />
     """
   end
 
   defp render_custom_icon(assigns) do
     ~H"""
-    <span class={@class}>
+    <span class={@class} {@rest}>
       <%= render_slot(@inner_block) %>
     </span>
     """

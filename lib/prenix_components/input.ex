@@ -135,7 +135,7 @@ defmodule PrenixComponents.Input do
       <label class={@label_class} for={@id} id={"#{@id}-label"}><%= @label_text %></label>
     <% end %>
 
-    <%= if length(@label) > 0 do %>
+    <%= if @label != [] do %>
       <label class={@label_class} for={@id} id={"#{@id}-label"}><%= render_slot(@label) %></label>
     <% end %>
     """
@@ -150,7 +150,7 @@ defmodule PrenixComponents.Input do
         <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
       <% end %>
 
-      <%= if length(@helper) > 0 do %>
+      <%= if @helper != [] do %>
         <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
       <% end %>
     <% end %>
@@ -170,7 +170,7 @@ defmodule PrenixComponents.Input do
   defp render_input(assigns) do
     ~H"""
     <div class={@input_wrapper_class}>
-      <%= if length(@start_content) > 0 do %>
+      <%= if @start_content != [] do %>
         <div class="input-content">
           <%= render_slot(@start_content) %>
         </div>
@@ -187,7 +187,7 @@ defmodule PrenixComponents.Input do
           value={@value}
           aria-invalid={@invalid}
           aria-labelledby={"#{@id}-label"}
-          aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
+          aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
           {@rest}
         ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
       <% else %>
@@ -201,12 +201,12 @@ defmodule PrenixComponents.Input do
           value={Phoenix.HTML.Form.normalize_value(@type, @value)}
           aria-invalid={@invalid}
           aria-labelledby={"#{@id}-label"}
-          aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
+          aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
           {@rest}
         />
       <% end %>
 
-      <%= if length(@end_content) > 0 do %>
+      <%= if @end_content != [] do %>
         <div class="input-content">
           <%= render_slot(@end_content) %>
         </div>

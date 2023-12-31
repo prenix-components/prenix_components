@@ -1,8 +1,32 @@
 defmodule PrenixComponents.Accordion do
   use Phoenix.Component
   import PrenixComponents.Helpers
-  import PrenixComponents.Icon
-  import PrenixComponents.Divider
+
+  @classes %{
+    base: %{
+      "accordion" => "js-accordion",
+      "accordion-item" => "js-accordion-item",
+      "accordion-item-toggle" => "js-accordion-item-toggle",
+      "accordion-item-icon-wrapper" => "js-accordion-item-icon-wrapper",
+      "accordion-item-icon" => "js-accordion-item-icon",
+      "accordion-item-body" => "js-accordion-item-body",
+      "accordion-item-divider" => "js-accordion-item-divider"
+    },
+    light: %{
+      "accordion" => "js-accordion--light"
+    },
+    shadow: %{
+      "accordion" => "js-accordion--shadow"
+    },
+    bordered: %{
+      "accordion" => "js-accordion--bordered"
+    },
+    splitted: %{
+      "accordion" => "js-accordion--splitted",
+      "accordion-item" => "js-accordion-item--splitted",
+      "accordion-item-divider" => "js-accordion-item-divider--splitted"
+    }
+  }
 
   attr :class, :string, default: nil
   attr :variant, :string, default: "light", values: ~w(light shadow bordered splitted)
@@ -13,122 +37,27 @@ defmodule PrenixComponents.Accordion do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class} data-accordion id={@id} data-expand-multiple={@expand_multiple}>
+    <div
+      class={@class}
+      data-accordion
+      id={@id}
+      data-expand-multiple={@expand_multiple}
+      data-classes={@classes}
+    >
       <%= render_slot(@inner_block) %>
     </div>
     """
   end
 
-  attr :show, :boolean, default: false
-  attr :class, :string, default: nil
-  attr :toggle_class, :string, default: nil
-  attr :toggle_content_class, :string, default: nil
-  attr :toggle_caret_class, :string, default: nil
-  attr :body_class, :string, default: nil
-  attr :divider_class, :string, default: nil
-
-  slot :toggle
-  slot :inner_block
-
-  def accordion_item(assigns) do
-    assigns = set_accordion_item_assigns(assigns)
-
-    ~H"""
-    <div class={@class}>
-      <button
-        class={@toggle_class}
-        data-bs-toggle="collapse"
-        data-bs-target={"##{@id}"}
-        aria-expanded={if(@show, do: "true", else: "false")}
-        aria-controls={@id}
-      >
-        <span class={@toggle_content_class}>
-          <%= render_slot(@toggle) %>
-        </span>
-
-        <.icon class={@toggle_caret_class} name={@chevron_left_icon} />
-      </button>
-
-      <div id={@id} class={@collapse_class} data-bs-parent="">
-        <div class={@body_class}>
-          <%= render_slot(@inner_block) %>
-        </div>
-      </div>
-
-      <.divider class={@divider_class} />
-    </div>
-    """
-  end
-
   defp set_assigns(assigns) do
-    class =
-      combine_class([
-        "accordion",
-        "accordion-#{assigns.variant}",
-        "#{assigns.class}"
-      ])
+    # Classes are added via Javascript because Phoenix doesn't support nested slots :)
+    data_classes =
+      Jason.encode!(merge_classes([@classes[:base], @classes[String.to_atom(assigns.variant)]]))
 
     assigns
-    |> assign(:class, class)
+    |> assign(:class, assigns.class)
     |> assign(:id, "accordion-#{random_string()}")
     |> assign(:expand_multiple, if(assigns.expand_multiple, do: "true", else: "false"))
-  end
-
-  defp set_accordion_item_assigns(assigns) do
-    class =
-      combine_class([
-        "accordion-item",
-        "#{assigns.class}"
-      ])
-
-    toggle_class =
-      combine_class([
-        "accordion-item-toggle",
-        assigns.toggle_class
-      ])
-
-    toggle_content_class =
-      combine_class([
-        "accordion-item-toggle-content",
-        assigns.toggle_content_class
-      ])
-
-    toggle_caret_class =
-      combine_class([
-        "accordion-item-toggle-caret",
-        assigns.toggle_caret_class
-      ])
-
-    body_class =
-      combine_class([
-        "accordion-item-body",
-        assigns.body_class
-      ])
-
-    collapse_class =
-      combine_class([
-        "accordion-collapse prenix-collapse collapse",
-        if(assigns.show, do: "show", else: nil)
-      ])
-
-    divider_class =
-      combine_class([
-        "accordion-item-divider",
-        assigns.divider_class
-      ])
-
-    assigns
-    |> assign(:id, "accordion-item-#{random_string()}")
-    |> assign(:class, class)
-    |> assign(:toggle_class, toggle_class)
-    |> assign(:toggle_content_class, toggle_content_class)
-    |> assign(:toggle_caret_class, toggle_caret_class)
-    |> assign(:body_class, body_class)
-    |> assign(:collapse_class, collapse_class)
-    |> assign(:divider_class, divider_class)
-    |> assign(
-      :chevron_left_icon,
-      Application.get_env(:prenix_components, :chevron_left_icon, "mdi-chevron-left")
-    )
+    |> assign(:classes, data_classes)
   end
 end

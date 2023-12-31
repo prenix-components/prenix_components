@@ -56,6 +56,12 @@
     transition-property: margin, opacity;
   }
 
+  .transition-transform-background {
+    transition-property: transform, background;
+    transition-timing-function: ease;
+    transition-duration: 0.25s;
+  }
+
   .ring-offset-background {
     --tw-ring-offset-color: hsl(var(--background));
   }

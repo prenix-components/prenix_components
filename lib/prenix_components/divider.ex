@@ -4,6 +4,7 @@ defmodule PrenixComponents.Divider do
 
   attr :class, :string, default: nil
   attr :orientation, :string, default: "horizontal", values: ~w(horizontal vertical)
+  attr :rest, :global
 
   def divider(assigns) do
     class =
@@ -16,7 +17,7 @@ defmodule PrenixComponents.Divider do
     assigns = assign(assigns, :class, class)
 
     ~H"""
-    <hr class={@class} role="separator" />
+    <hr class={@class} role="separator" {@rest} />
     """
   end
 end

@@ -31,15 +31,15 @@
     @apply inline-block align-middle text-[--icon];
   }
 
-  .icon.icon-sm {
+  .icon-sm {
     @apply w-4 h-4;
   }
 
-  .icon.icon-md {
+  .icon-md {
     @apply w-5 h-5;
   }
 
-  .icon.icon-lg {
+  .icon-lg {
     @apply w-6 h-6;
   }
 }

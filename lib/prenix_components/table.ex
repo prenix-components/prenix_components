@@ -35,7 +35,7 @@ defmodule PrenixComponents.Table do
           </tr>
         </thead>
         <tbody class="tbody">
-          <%= if length(@rows) > 0 do %>
+          <%= if @rows != [] do %>
             <tr :for={row <- @rows} class="tr">
               <td :for={{col, _i} <- Enum.with_index(@col)} class={[@td_class, Map.get(col, :class)]}>
                 <%= render_slot(col, row) %>

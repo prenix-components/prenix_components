@@ -47,7 +47,7 @@
     @apply tap-highlight-transparent outline-none;
     @apply focus-visible:outline-offset-2 focus-visible:outline-2;
     @apply transition-transform-colors-opacity motion-reduce:transition-none;
-    @apply hover:opacity-80;
+    @apply hover:brightness-90;
   }
 
   .btn .btn-content {
@@ -93,7 +93,7 @@
   }
 
   .btn.btn-light {
-    @apply bg-transparent hover:opacity-100 hover:bg-[--button-flat];
+    @apply bg-transparent hover:opacity-100 hover:bg-[--button-flat] hover:brightness-100;
     @apply text-[--button-flat-foreground];
     @apply focus-visible:outline-[--button-flat-foreground];
   }

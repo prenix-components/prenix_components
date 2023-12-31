@@ -4,75 +4,63 @@
     @apply align-middle outline-none bg-[--avatar] text-[--avatar-foreground];
   }
 
-  .avatar-default {
-    --avatar: hsl(var(--default));
-    --avatar-foreground: hsl(var(--default-foreground));
-    --avatar-border: hsl(var(--default));
+  .avatar--default {
+    @apply bg-default text-default-foreground ring-default;
   }
 
-  .avatar-primary {
-    --avatar: hsl(var(--primary));
-    --avatar-foreground: hsl(var(--primary-foreground));
-    --avatar-border: hsl(var(--primary));
+  .avatar--primary {
+    @apply bg-primary text-primary-foreground ring-primary;
   }
 
-  .avatar-secondary {
-    --avatar: hsl(var(--secondary));
-    --avatar-foreground: hsl(var(--secondary-foreground));
-    --avatar-border: hsl(var(--secondary));
+  .avatar--secondary {
+    @apply bg-secondary text-secondary-foreground ring-secondary;
   }
 
-  .avatar-success {
-    --avatar: hsl(var(--success));
-    --avatar-foreground: hsl(var(--success-foreground));
-    --avatar-border: hsl(var(--success));
+  .avatar--success {
+    @apply bg-success text-success-foreground ring-success;
   }
 
-  .avatar-warning {
-    --avatar: hsl(var(--warning));
-    --avatar-foreground: hsl(var(--warning-foreground));
-    --avatar-border: hsl(var(--warning));
+  .avatar--warning {
+    @apply bg-warning text-warning-foreground ring-warning;
   }
 
-  .avatar-danger {
-    --avatar: hsl(var(--danger));
-    --avatar-foreground: hsl(var(--danger-foreground));
-    --avatar-border: hsl(var(--danger));
+  .avatar--danger {
+    @apply bg-danger text-danger-foreground ring-danger;
   }
 
-  .avatar.avatar-sm {
-    @apply w-8 h-8 text-xs;
+  .avatar--sm {
+    @apply w-8 h-8 text-sm;
   }
 
-  .avatar.avatar-md {
-    @apply w-10 h-10 text-xs;
+  .avatar--md {
+    @apply w-10 h-10 text-base;
   }
 
-  .avatar.avatar-lg {
-    @apply w-14 h-14 text-sm;
+  .avatar--lg {
+    @apply w-14 h-14 text-lg;
   }
 
-  .avatar.avatar-radius-sm {
+  .avatar--radius-sm {
     @apply rounded-md;
   }
 
-  .avatar.avatar-radius-md {
+  .avatar--radius-md {
     @apply rounded-lg;
   }
 
-  .avatar.avatar-radius-lg {
+  .avatar--radius-lg {
     @apply rounded-xl;
   }
 
-  .avatar.avatar-radius-full {
+  .avatar--radius-full {
     @apply rounded-full;
   }
 
-  .avatar.avatar-bordered {
-    @apply ring-2 ring-offset-2 ring-offset-background ring-[--avatar-border];
+  .avatar--bordered {
+    @apply ring-2 ring-offset-2 ring-offset-background;
   }
 
-  .avatar .avatar-img {
+  .avatar-img {
     @apply flex object-cover w-full h-full transition-opacity !duration-500 opacity-0;
   }
 
@@ -80,19 +68,19 @@
     @apply opacity-100;
   }
 
-  .avatar .avatar-fallback {
+  .avatar-fallback {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center;
   }
 
-  .avatar.avatar-sm .avatar-fallback .icon {
+  .avatar-icon--sm {
     @apply w-5 h-5;
   }
 
-  .avatar.avatar-md .avatar-fallback .icon {
+  .avatar-icon--md {
     @apply w-6 h-6;
   }
 
-  .avatar.avatar-lg .avatar-fallback .icon {
+  .avatar-icon--lg {
     @apply w-8 h-8;
   }
 }

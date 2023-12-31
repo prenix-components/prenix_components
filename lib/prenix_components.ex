@@ -3,9 +3,12 @@ defmodule PrenixComponents do
     quote do
       import PrenixComponents.{
         Accordion,
+        Accordion.AccordionItem,
         Autocomplete,
         Avatar,
+        Badge,
         Button,
+        Card,
         CheckboxGroup,
         Checkbox,
         Chip,

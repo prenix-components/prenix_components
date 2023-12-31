@@ -29,7 +29,7 @@ defmodule PrenixComponents.CheckboxGroup do
       role="group"
       data-checkbox-group
       id={@id}
-      aria-describedby={if(@helper_text || length(@helper) > 0, do: "#{@id}-helper", else: nil)}
+      aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
       data-invalid={@invalid}
     >
       <span class={@label_class}>
@@ -37,7 +37,7 @@ defmodule PrenixComponents.CheckboxGroup do
           <%= @label_text %>
         <% end %>
 
-        <%= if length(@label) > 0 do %>
+        <%= if @label != [] do %>
           <%= render_slot(@label) %>
         <% end %>
       </span>
@@ -60,7 +60,7 @@ defmodule PrenixComponents.CheckboxGroup do
         <p class={@helper_class} id={"#{@id}-helper"}><%= @helper_text %></p>
       <% end %>
 
-      <%= if length(@helper) > 0 do %>
+      <%= if @helper != [] do %>
         <p class={@helper_class} id={"#{@id}-helper"}><%= render_slot(@helper) %></p>
       <% end %>
     </div>

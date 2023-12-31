@@ -3,6 +3,60 @@ defmodule PrenixComponents.Avatar do
   import PrenixComponents.Helpers
   import PrenixComponents.Icon
 
+  @classes %{
+    base: %{
+      "avatar" => "avatar",
+      "avatar-img" => "avatar-img",
+      "avatar-fallback" => "avatar-fallback",
+      "avatar-icon" => "avatar-icon"
+    },
+    default: %{
+      "avatar" => "avatar--default"
+    },
+    primary: %{
+      "avatar" => "avatar--primary"
+    },
+    secondary: %{
+      "avatar" => "avatar--secondary"
+    },
+    success: %{
+      "avatar" => "avatar--success"
+    },
+    warning: %{
+      "avatar" => "avatar--warning"
+    },
+    danger: %{
+      "avatar" => "avatar--danger"
+    },
+    sm: %{
+      "avatar" => "avatar--sm",
+      "avatar-icon" => "avatar-icon--sm"
+    },
+    md: %{
+      "avatar" => "avatar--md",
+      "avatar-icon" => "avatar-icon--md"
+    },
+    lg: %{
+      "avatar" => "avatar--lg",
+      "avatar-icon" => "avatar-icon--lg"
+    },
+    radius_sm: %{
+      "avatar" => "avatar--radius-sm"
+    },
+    radius_md: %{
+      "avatar" => "avatar--radius-md"
+    },
+    radius_lg: %{
+      "avatar" => "avatar--radius-lg"
+    },
+    radius_full: %{
+      "avatar" => "avatar--radius-full"
+    },
+    bordered: %{
+      "avatar" => "avatar--bordered"
+    }
+  }
+
   attr :color, :string,
     default: "default",
     values: ~w(default primary secondary success warning danger)
@@ -11,12 +65,12 @@ defmodule PrenixComponents.Avatar do
   attr :radius, :string, default: "full", values: ~w(sm md lg full)
 
   attr :src, :string, default: nil
-
   attr :class, :string, default: nil
   attr :img_class, :string, default: nil
   attr :fallback_class, :string, default: nil
-  attr :fallback_icon, :string, default: nil
-  attr :fallback_name, :string, default: nil
+  attr :icon, :string, default: nil
+  attr :icon_class, :string, default: nil
+  attr :name, :string, default: nil
   attr :show_fallback, :boolean, default: false
   attr :bordered, :boolean, default: false
 
@@ -24,15 +78,21 @@ defmodule PrenixComponents.Avatar do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <span tabindex="-1" class={@class} data-avatar>
-      <img src={@src} class={@img_class} alt="avatar" />
+    <span tabindex="-1" class={@class}>
+      <img
+        src={@src}
+        class={@img_class}
+        alt="avatar"
+        data-js-loaded="true"
+        onload="this.closest('.avatar').dataset.jsLoaded=true"
+      />
 
       <%= if @show_fallback do %>
         <span class={@fallback_class}>
-          <%= if @fallback_name do %>
-            <%= @fallback_name %>
+          <%= if @name do %>
+            <%= @name %>
           <% else %>
-            <.icon name={@avatar_icon} />
+            <.icon class={@icon_class} name={@avatar_icon} size="custom" />
           <% end %>
         </span>
       <% end %>
@@ -41,35 +101,47 @@ defmodule PrenixComponents.Avatar do
   end
 
   defp set_assigns(assigns) do
-    class =
-      combine_class([
-        "avatar",
-        "avatar-#{assigns.size}",
-        "avatar-radius-#{assigns.radius}",
-        if(assigns.bordered, do: "avatar-bordered", else: ""),
-        "avatar-#{assigns.color}",
-        assigns.class
-      ])
-
-    img_class =
-      combine_class([
-        "avatar-img",
-        assigns.img_class
-      ])
-
-    fallback_class =
-      combine_class([
-        "avatar-fallback",
-        assigns.fallback_class
+    classes =
+      merge_classes([
+        @classes[:base],
+        @classes[String.to_atom(assigns.color)],
+        if(assigns.bordered, do: @classes[:bordered], else: %{}),
+        @classes[String.to_atom(assigns.size)],
+        @classes[String.to_atom("radius_#{assigns.radius}")]
       ])
 
     assigns
-    |> assign(:class, class)
-    |> assign(:img_class, img_class)
-    |> assign(:fallback_class, fallback_class)
+    |> assign(
+      :class,
+      combine_class([
+        classes["avatar"],
+        assigns.class
+      ])
+    )
+    |> assign(
+      :img_class,
+      combine_class([
+        classes["avatar-img"],
+        assigns.img_class
+      ])
+    )
+    |> assign(
+      :fallback_class,
+      combine_class([
+        classes["avatar-fallback"],
+        assigns.fallback_class
+      ])
+    )
+    |> assign(
+      :icon_class,
+      combine_class([
+        classes["avatar-icon"],
+        assigns.icon_class
+      ])
+    )
     |> assign(
       :avatar_icon,
-      assigns.fallback_icon || Application.get_env(:prenix_components, :user_icon, "mdi-person")
+      assigns.icon || Application.get_env(:prenix_components, :user_icon, "mdi-person")
     )
   end
 end

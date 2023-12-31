@@ -3,8 +3,8 @@ import * as Popper from '../../vendors/popperjs/popper.min'
 import bootstrap from '../../vendors/bootstrap/bootstrap.min'
 
 import { initAccordion } from './prenix_components/accordion'
-import { initAvatar } from './prenix_components/avatar'
 import { initAutocomplete, TomSelect } from './prenix_components/autocomplete'
+import { initBadge } from './prenix_components/badge'
 import { initCheckbox } from './prenix_components/checkbox'
 import { initCheckboxGroup } from './prenix_components/checkbox_group'
 import { initDatepicker } from './prenix_components/datepicker'
@@ -27,7 +27,7 @@ const initTooltip = () => {
 const autoInit = () => {
   initAccordion()
   initAutocomplete()
-  initAvatar()
+  initBadge()
   initCheckbox()
   initCheckboxGroup()
   initDatepicker()

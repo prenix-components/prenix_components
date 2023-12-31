@@ -149,7 +149,7 @@ defmodule PrenixComponents.Dropdown do
 
     ~H"""
     <span class={["dropdown-rotate", @class]}>
-      <%= if length(@inner_block) > 0 do %>
+      <%= if @inner_block != [] do %>
         <%= render_slot(@inner_block) %>
       <% else %>
         <.icon name={@chevron_down_icon} />

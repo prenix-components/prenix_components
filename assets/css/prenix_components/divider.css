@@ -1,13 +1,13 @@
 @layer components {
-  hr.divider {
-    background-color: hsl(var(--divider) / var(--divider-opacity));
+  .divider {
+    @apply bg-divider;
   }
 
-  hr.divider-horizontal {
+  .divider-horizontal {
     @apply shrink-0 border-none w-full h-px;
   }
 
-  hr.divider-vertical {
+  .divider-vertical {
     @apply shrink-0 border-none h-full w-px;
   }
 }
