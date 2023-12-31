@@ -1,67 +1,61 @@
 @layer components {
-  .accordion {
-    --accordion: transparent;
-    --accordion-foreground: hsl(var(--foreground));
-    --accordion-caret-foreground: hsl(var(--neutral1-foreground));
-    --accordion-shadow: hsl(var(--content1));
-    --accordion-bordered-border: hsl(var(--divider) / var(--divider-opacity));
-    --accordion-item-splitted: hsl(var(--content1));
-
+  .js-accordion {
     @apply w-full;
-    @apply text-[--accordion-foreground];
+    @apply text-foreground;
   }
 
-  .accordion .accordion-item-toggle {
-    @apply flex py-4 w-full h-full gap-3 items-center tap-highlight-transparent outline-none;
-    @apply focus-visible:outline-2 focus-visible:outline-[hsl(var(--focus))];
-    @apply focus-visible:outline-offset-2 transition-opacity;
+  .js-accordion-item:last-child .js-accordion-item-divider {
+    @apply hidden;
   }
 
-  .accordion .accordion-item-toggle-content {
-    @apply flex-1 flex flex-col text-start text-lg;
-  }
-
-  .accordion .accordion-item-toggle-caret {
-    @apply text-[--accordion-caret-foreground] transition-transform rotate-0 rtl:-rotate-180;
-  }
-
-  .accordion
-    .accordion-item-toggle[aria-expanded='true']
-    .accordion-item-toggle-caret {
-    @apply -rotate-90;
-  }
-
-  .accordion .accordion-item-body {
+  .js-accordion-item-body {
     @apply py-2;
   }
 
-  .accordion .accordion-item:last-child .accordion-item-divider {
-    @apply hidden;
+  .js-accordion-item-toggle {
+    @apply py-4 w-full h-full tap-highlight-transparent outline-none;
+    @apply focus-visible:outline-2 focus-visible:outline-[hsl(var(--focus))];
+    @apply focus-visible:outline-offset-2 transition-opacity;
+    @apply relative text-start text-lg pr-6;
   }
 
-  .accordion.accordion-light {
+  .js-accordion-item-icon-wrapper {
+    @apply absolute right-0 top-1/2 inline-flex;
+    @apply text-neutral1-foreground -translate-y-1/2;
+  }
+
+  .js-accordion-item-icon {
+    @apply transition-transform rotate-0 rtl:-rotate-180;
+  }
+  .js-accordion-item-toggle[aria-expanded='true'] .js-accordion-item-icon {
+    @apply -rotate-90;
+  }
+
+  /* Light */
+  .js-accordion--light {
     @apply px-2;
   }
 
-  .accordion.accordion-shadow {
-    box-shadow: var(--shadow-md);
-    @apply rounded-xl px-4 bg-[--accordion-shadow];
+  /* Shadow */
+  .js-accordion--shadow {
+    @apply rounded-xl px-4 shadow-medium;
   }
 
-  .accordion.accordion-bordered {
-    @apply rounded-xl px-4 border-[--accordion-bordered-border] border-2;
+  /* Bordered */
+  .js-accordion--bordered {
+    @apply rounded-xl px-4 border-divider border-2;
   }
 
-  .accordion.accordion-splitted {
+  /* Splitted */
+  .js-accordion--splitted {
     @apply flex flex-col gap-2 px-2;
   }
 
-  .accordion.accordion-splitted .accordion-item-divider {
-    @apply hidden;
+  .js-accordion-item--splitted {
+    @apply shadow-medium bg-content text-content-foreground px-4  rounded-xl;
   }
 
-  .accordion.accordion-splitted .accordion-item {
-    box-shadow: var(--shadow-md);
-    @apply px-4 bg-[--accordion-item-splitted] rounded-xl;
+  .js-accordion-item-divider--splitted {
+    @apply hidden;
   }
 }
