@@ -1,47 +1,5 @@
 @layer components {
-  .btn-default {
-    --button: hsl(var(--default));
-    --button-foreground: hsl(var(--default-foreground));
-    --button-flat: hsl(var(--default) / 0.4);
-    --button-flat-foreground: hsl(var(--default-foreground));
-  }
-
-  .btn-primary {
-    --button: hsl(var(--primary));
-    --button-foreground: hsl(var(--primary-foreground));
-    --button-flat: hsl(var(--primary) / 0.2);
-    --button-flat-foreground: hsl(var(--primary));
-  }
-
-  .btn-secondary {
-    --button: hsl(var(--secondary));
-    --button-foreground: hsl(var(--secondary-foreground));
-    --button-flat: hsl(var(--secondary) / 0.2);
-    --button-flat-foreground: hsl(var(--secondary));
-  }
-
-  .btn-success {
-    --button: hsl(var(--success));
-    --button-foreground: hsl(var(--success-foreground));
-    --button-flat: hsl(var(--success) / 0.2);
-    --button-flat-foreground: hsl(var(--success));
-  }
-
-  .btn-warning {
-    --button: hsl(var(--warning));
-    --button-foreground: hsl(var(--warning-foreground));
-    --button-flat: hsl(var(--warning) / 0.2);
-    --button-flat-foreground: hsl(var(--warning));
-  }
-
-  .btn-danger {
-    --button: hsl(var(--danger));
-    --button-foreground: hsl(var(--danger-foreground));
-    --button-flat: hsl(var(--danger) / 0.2);
-    --button-flat-foreground: hsl(var(--danger));
-  }
-
-  .btn {
+  .button {
     @apply z-0 relative inline-flex items-center justify-center box-border appearance-none;
     @apply select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden;
     @apply tap-highlight-transparent outline-none;
@@ -50,97 +8,139 @@
     @apply hover:brightness-90;
   }
 
-  .btn .btn-content {
+  .button-content {
     @apply inline-flex items-center justify-center;
   }
 
-  .btn.btn-sm .btn-content {
-    @apply gap-2;
-  }
-
-  .btn.btn-sm {
+  .button--sm {
     @apply px-3 text-xs min-w-[4rem] h-8;
   }
 
-  .btn.btn-md .btn-content {
-    @apply gap-2;
-  }
-
-  .btn.btn-md {
+  .button--md {
     @apply px-4 text-sm min-w-[5rem] h-10;
   }
 
-  .btn.btn-lg .btn-content {
-    @apply gap-3;
-  }
-
-  .btn.btn-lg {
+  .button--lg {
     @apply px-6 text-base min-w-[6rem] h-12;
   }
 
-  .btn.btn-solid {
+  .button-content--sm {
+    @apply gap-2;
+  }
+
+  .button-content--md {
+    @apply gap-2;
+  }
+
+  .button-content--lg {
+    @apply gap-3;
+  }
+
+  .button--solid {
     @apply bg-[--button] text-[--button-foreground] focus-visible:outline-[--button];
   }
 
-  .btn.btn-flat {
+  .button--flat {
     @apply bg-[--button-flat] text-[--button-flat-foreground];
     @apply focus-visible:outline-[--button-flat-foreground];
   }
 
-  .btn.btn-bordered {
+  .button--bordered {
     @apply bg-transparent border-[--button] text-[--button-flat-foreground] border-2;
     @apply focus-visible:outline-[--button];
   }
 
-  .btn.btn-light {
+  .button--light {
     @apply bg-transparent hover:opacity-100 hover:bg-[--button-flat] hover:brightness-100;
     @apply text-[--button-flat-foreground];
     @apply focus-visible:outline-[--button-flat-foreground];
   }
 
-  .btn.btn-loading .btn-content {
+  .button--default {
+    --button: hsl(var(--default));
+    --button-foreground: hsl(var(--default-foreground));
+    --button-flat: hsl(var(--default) / 0.4);
+    --button-flat-foreground: hsl(var(--default-foreground));
+  }
+
+  .button--primary {
+    --button: hsl(var(--primary));
+    --button-foreground: hsl(var(--primary-foreground));
+    --button-flat: hsl(var(--primary) / 0.2);
+    --button-flat-foreground: hsl(var(--primary));
+  }
+
+  .button--secondary {
+    --button: hsl(var(--secondary));
+    --button-foreground: hsl(var(--secondary-foreground));
+    --button-flat: hsl(var(--secondary) / 0.2);
+    --button-flat-foreground: hsl(var(--secondary));
+  }
+
+  .button--success {
+    --button: hsl(var(--success));
+    --button-foreground: hsl(var(--success-foreground));
+    --button-flat: hsl(var(--success) / 0.2);
+    --button-flat-foreground: hsl(var(--success));
+  }
+
+  .button--warning {
+    --button: hsl(var(--warning));
+    --button-foreground: hsl(var(--warning-foreground));
+    --button-flat: hsl(var(--warning) / 0.2);
+    --button-flat-foreground: hsl(var(--warning));
+  }
+
+  .button--danger {
+    --button: hsl(var(--danger));
+    --button-foreground: hsl(var(--danger-foreground));
+    --button-flat: hsl(var(--danger) / 0.2);
+    --button-flat-foreground: hsl(var(--danger));
+  }
+
+  .button--radius-sm {
+    @apply rounded-md;
+  }
+
+  .button--radius-md {
+    @apply rounded-lg;
+  }
+
+  .button--radius-lg {
+    @apply rounded-xl;
+  }
+
+  .button--radius-full {
+    @apply rounded-full;
+  }
+
+  .button-content--loading {
     @apply invisible;
   }
 
-  .btn .btn-spinner {
+  .button-spinner-wrapper {
     @apply absolute left-0 top-0 bottom-0 right-0;
     @apply place-content-center grid;
   }
 
-  .btn.btn-disabled,
-  .btn.btn-loading {
-    @apply opacity-[--disabled-opacity] pointer-events-none;
+  .button--disabled,
+  .button--loading {
+    @apply opacity-disabled pointer-events-none hover:brightness-100;
   }
 
-  .btn.btn-radius-sm {
-    @apply rounded-md;
-  }
-
-  .btn.btn-radius-md {
-    @apply rounded-lg;
-  }
-
-  .btn.btn-radius-lg {
-    @apply rounded-xl;
-  }
-
-  .btn.btn-radius-full {
-    @apply rounded-full;
-  }
-
-  .btn.btn-icon {
+  .button--icon {
     @apply p-0;
   }
 
-  .btn.btn-icon.btn-sm {
+  .button--icon-sm {
     @apply w-8 h-8 min-w-[2rem];
   }
 
-  .btn.btn-icon.btn-md {
+  .button--icon-md {
     @apply w-10 h-10 min-w-[2.5rem];
   }
 
-  .btn.btn-icon.btn-lg {
+  .button--icon-lg {
     @apply w-12 h-12 min-w-[3rem];
   }
 }

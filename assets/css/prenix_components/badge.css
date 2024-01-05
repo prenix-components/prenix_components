@@ -3,79 +3,66 @@
     @apply relative inline-flex shrink-0;
   }
 
-  .badge .badge-content {
-    /* @apply flex z-10 flex-wrap absolute box-border rounded-full whitespace-nowrap place-content-center items-center;
-    @apply select-none subpixel-antialiased text-sm px-0 border-2 bg-[--badge] text-[--badge-foreground];
-    @apply border-[hsl(var(--background))]; */
-    @apply absolute box-border rounded-full whitespace-nowrap;
-    @apply select-none border-2 bg-[--badge] text-[--badge-foreground] z-10;
-    @apply border-[hsl(var(--background))] !leading-none;
-    @apply grid grid-cols-1 place-items-center;
+  .badge-content {
+    @apply flex flex-row flex-wrap place-content-center items-center;
+    @apply box-border absolute text-xs leading-none;
+    @apply min-w-5 h-5 px-1.5 rounded-full;
   }
 
-  .badge .badge-content-inner {
-    /* px-1 */
+  .badge-content--default {
+    @apply bg-default text-default-foreground;
   }
 
-  .badge-default {
-    --badge: hsl(var(--default));
-    --badge-foreground: hsl(var(--default-foreground));
+  .badge-content--primary {
+    @apply bg-primary text-primary-foreground;
   }
 
-  .badge-primary {
-    --badge: hsl(var(--primary));
-    --badge-foreground: hsl(var(--primary-foreground));
+  .badge-content--secondary {
+    @apply bg-secondary text-secondary-foreground;
   }
 
-  .badge-secondary {
-    --badge: hsl(var(--secondary));
-    --badge-foreground: hsl(var(--secondary-foreground));
+  .badge-content--success {
+    @apply bg-success text-success-foreground;
   }
 
-  .badge-success {
-    --badge: hsl(var(--success));
-    --badge-foreground: hsl(var(--success-foreground));
+  .badge-content--warning {
+    @apply bg-warning text-warning-foreground;
   }
 
-  .badge-warning {
-    --badge: hsl(var(--warning));
-    --badge-foreground: hsl(var(--warning-foreground));
+  .badge-content--danger {
+    @apply bg-danger text-danger-foreground;
   }
 
-  .badge-danger {
-    --badge: hsl(var(--danger));
-    --badge-foreground: hsl(var(--danger-foreground));
+  .badge-content--rectangle {
+    --badge-content-position: 0%;
   }
 
-  .badge.badge-sm .badge-content {
-    @apply min-w-4 min-h-4 text-xs;
+  .badge-content--circle {
+    --badge-content-position: 5%;
   }
 
-  .badge.badge-md .badge-content {
-    @apply min-w-5 min-h-5 text-sm;
+  .badge-content--top-right {
+    @apply top-[--badge-content-position] right-[--badge-content-position] translate-x-[--badge-content-translate] -translate-y-[--badge-content-translate];
   }
 
-  .badge.badge-lg .badge-content {
-    @apply min-w-6 min-h-6 text-sm;
+  .badge-content--top-left {
+    @apply top-[--badge-content-position] left-[--badge-content-position] -translate-x-[--badge-content-translate] -translate-y-[--badge-content-translate];
   }
 
-  .badge.badge-top-right .badge-content {
-    @apply top-[5%] right-[5%] translate-x-1/2 -translate-y-1/2;
+  .badge-content--bottom-right {
+    @apply bottom-[--badge-content-position] right-[--badge-content-position] translate-x-[--badge-content-translate] translate-y-[--badge-content-translate];
   }
 
-  .badge.badge-top-left .badge-content {
-    @apply top-[5%] left-[5%] -translate-x-1/2 -translate-y-1/2;
+  .badge-content--bottom-left {
+    @apply bottom-[--badge-content-position] left-[--badge-content-position] -translate-x-[--badge-content-translate] translate-y-[--badge-content-translate];
   }
 
-  .badge.badge-bottom-right .badge-content {
-    @apply bottom-[5%] right-[5%] translate-x-1/2 translate-y-1/2;
+  .badge-content--with-content {
+    --badge-content-translate: 50%;
   }
 
-  .badge.badge-bottom-left .badge-content {
-    @apply bottom-[5%] left-[5%] -translate-x-1/2 translate-y-1/2;
-  }
-
-  .badge[data-js-padded='true'] .badge-content {
-    @apply px-1;
+  .badge-content--dot {
+    --badge-content-translate: 20%;
+    @apply h-2 min-w-2 px-0;
   }
 }

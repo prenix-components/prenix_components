@@ -92,7 +92,7 @@ defmodule PrenixComponents.Avatar do
           <%= if @name do %>
             <%= @name %>
           <% else %>
-            <.icon class={@icon_class} name={@avatar_icon} size="custom" />
+            <.icon class={@icon_class} name={@avatar_icon} size="" />
           <% end %>
         </span>
       <% end %>

@@ -1,12 +1,7 @@
 @layer components {
   .ripple {
-    position: absolute;
-    background: var(--ripple);
-    border-radius: 50%;
-    width: 5px;
-    height: 5px;
+    @apply absolute bg-ripple rounded-[50%] w-[5px] h-[5px] opacity-0;
     animation: ripple-effect 0.88s 1;
-    opacity: 0;
   }
 
   @keyframes ripple-effect {

@@ -17,7 +17,7 @@ const rippleEffect = ({ $rippleEl, e }) => {
 
 window.addEventListener('click', (e) => {
   const $targetEl = e.target
-  const $rippleEl = $targetEl.closest('.btn-ripple')
+  const $rippleEl = $targetEl.closest('[data-ripple]')
 
   if ($rippleEl) {
     rippleEffect({ $rippleEl, e })

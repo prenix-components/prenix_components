@@ -2,9 +2,46 @@ defmodule PrenixComponents.Spinner do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
+  @classes %{
+    base: %{
+      "spinner" => "spinner",
+      "spinner-content" => "spinner-content"
+    },
+    sm: %{
+      "spinner-content" => "spinner-content--sm"
+    },
+    md: %{
+      "spinner-content" => "spinner-content--md"
+    },
+    lg: %{
+      "spinner-content" => "spinner-content--lg"
+    },
+    current: %{
+      "spinner" => "spinner--current"
+    },
+    default: %{
+      "spinner" => "spinner--default"
+    },
+    primary: %{
+      "spinner" => "spinner--primary"
+    },
+    secondary: %{
+      "spinner" => "spinner--secondary"
+    },
+    success: %{
+      "spinner" => "spinner--success"
+    },
+    warning: %{
+      "spinner" => "spinner--warning"
+    },
+    danger: %{
+      "spinner" => "spinner--danger"
+    }
+  }
+
   attr :class, :string, default: nil
   attr :content_class, :string, default: nil
-  attr :size, :string, default: "md", values: ~w(sm md lg)
+  attr :size, :string, default: "md", values: ["sm", "md", "lg", ""]
 
   attr :color, :string,
     default: "current",
@@ -25,20 +62,31 @@ defmodule PrenixComponents.Spinner do
   end
 
   defp set_assigns(assigns) do
-    class =
-      combine_class([
-        "spinner",
-        "spinner-#{assigns.color}",
-        "spinner-#{assigns.size}",
-        "#{assigns.class}"
+    IO.inspect(assigns, label: "assign")
+
+    classes =
+      merge_classes([
+        @classes[:base],
+        @classes[String.to_atom(assigns.color)],
+        if(assigns.size != "", do: @classes[String.to_atom(assigns.size)], else: %{})
       ])
 
-    content_class =
+    IO.inspect(classes, label: "classes")
+
+    assigns
+    |> assign(
+      :class,
       combine_class([
-        "spinner-content",
+        classes["spinner"],
+        assigns.class
+      ])
+    )
+    |> assign(
+      :content_class,
+      combine_class([
+        classes["spinner-content"],
         assigns.content_class
       ])
-
-    assigns |> assign(:class, class) |> assign(:content_class, content_class)
+    )
   end
 end

@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = plugin(
   function ({ addUtilities }) {
     addUtilities({
-      'opacity-disabled': {
+      '.opacity-disabled': {
         opacity: 'var(--disabled-opacity)',
       },
       '.shadow-small': {
