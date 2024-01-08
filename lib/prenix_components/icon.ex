@@ -2,9 +2,45 @@ defmodule PrenixComponents.Icon do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
+  @classes %{
+    base: %{
+      "icon" => "icon"
+    },
+    sm: %{
+      "icon" => "icon--sm"
+    },
+    md: %{
+      "icon" => "icon--md"
+    },
+    lg: %{
+      "icon" => "icon--lg"
+    },
+    current: %{
+      "icon" => "icon--current"
+    },
+    default: %{
+      "icon" => "icon--default"
+    },
+    primary: %{
+      "icon" => "icon--primary"
+    },
+    secondary: %{
+      "icon" => "icon--secondary"
+    },
+    success: %{
+      "icon" => "icon--success"
+    },
+    warning: %{
+      "icon" => "icon--warning"
+    },
+    danger: %{
+      "icon" => "icon--danger"
+    }
+  }
+
   attr :name, :string, default: nil, doc: "Tabler icon name"
   attr :class, :string, default: nil
-  attr :size, :string, default: "md", values: ~w(sm md lg custom)
+  attr :size, :string, default: "md", values: ["sm", "md", "lg", ""]
 
   attr :color, :string,
     default: "current",
@@ -41,14 +77,20 @@ defmodule PrenixComponents.Icon do
   end
 
   defp set_assigns(assigns) do
-    class =
-      combine_class([
-        "icon",
-        "icon-#{assigns.color}",
-        "icon-#{assigns.size}",
-        assigns.class
+    classes =
+      merge_classes([
+        @classes[:base],
+        @classes[String.to_atom(assigns.color)],
+        if(assigns.size != "", do: @classes[String.to_atom(assigns.size)], else: %{})
       ])
 
-    assign(assigns, :class, class)
+    assigns
+    |> assign(
+      :class,
+      combine_class([
+        classes["icon"],
+        assigns.class
+      ])
+    )
   end
 end

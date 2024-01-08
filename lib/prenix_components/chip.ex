@@ -2,7 +2,66 @@ defmodule PrenixComponents.Chip do
   use Phoenix.Component
   import PrenixComponents.Helpers
 
+  @classes %{
+    base: %{
+      "chip" => "chip",
+      "chip-content" => "chip-content"
+    },
+    solid: %{
+      "chip" => "chip--solid"
+    },
+    flat: %{
+      "chip" => "chip--flat"
+    },
+    bordered: %{
+      "chip" => "chip--bordered"
+    },
+    sm: %{
+      "chip" => "chip--sm",
+      "chip-content" => "chip-content--sm"
+    },
+    md: %{
+      "chip" => "chip--md",
+      "chip-content" => "chip-content--md"
+    },
+    lg: %{
+      "chip" => "chip--lg",
+      "chip-content" => "chip-content--lg"
+    },
+    radius_sm: %{
+      "chip" => "chip--radius-sm"
+    },
+    radius_md: %{
+      "chip" => "chip--radius-md"
+    },
+    radius_lg: %{
+      "chip" => "chip--radius-lg"
+    },
+    radius_full: %{
+      "chip" => "chip--radius-full"
+    },
+    default: %{
+      "chip" => "chip--default"
+    },
+    primary: %{
+      "chip" => "chip--primary"
+    },
+    secondary: %{
+      "chip" => "chip--secondary"
+    },
+    success: %{
+      "chip" => "chip--success"
+    },
+    warning: %{
+      "chip" => "chip--warning"
+    },
+    danger: %{
+      "chip" => "chip--danger"
+    }
+  }
+
   attr :class, :string, default: nil
+  attr :content_class, :string, default: nil
 
   attr :color, :string,
     default: "default",
@@ -19,7 +78,7 @@ defmodule PrenixComponents.Chip do
 
     ~H"""
     <div class={@class} {@rest}>
-      <span class="chip-content">
+      <span class={@content_class}>
         <%= render_slot(@inner_block) %>
       </span>
     </div>
@@ -27,16 +86,29 @@ defmodule PrenixComponents.Chip do
   end
 
   defp set_assigns(assigns) do
-    class =
-      combine_class([
-        "chip",
-        "chip-#{assigns.color}",
-        "chip-#{assigns.variant}",
-        "chip-#{assigns.size}",
-        "chip-radius-#{assigns.radius}",
-        "#{assigns.class}"
+    classes =
+      merge_classes([
+        @classes[:base],
+        @classes[String.to_atom(assigns.size)],
+        @classes[String.to_atom(assigns.color)],
+        @classes[String.to_atom(assigns.variant)],
+        @classes[String.to_atom("radius_#{assigns.radius}")]
       ])
 
-    assign(assigns, :class, class)
+    assigns
+    |> assign(
+      :class,
+      combine_class([
+        classes["chip"],
+        assigns.class
+      ])
+    )
+    |> assign(
+      :content_class,
+      combine_class([
+        classes["chip-content"],
+        assigns.content_class
+      ])
+    )
   end
 end

@@ -51,7 +51,7 @@ const checkboxTemplate = (id, label) => {
       aria-label="${label}"
     />
   </div>
-  <span aria-hidden="true" class="checkbox-el">
+  <span aria-hidden="true" class="checkbox-checkbox">
     <svg aria-hidden="true" role="presentation" viewBox="0 0 17 18" class="checkbox-checkmark">
       <polyline
         fill="none"

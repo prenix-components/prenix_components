@@ -4,7 +4,6 @@ defmodule PrenixComponents.Card do
   import PrenixComponents.Divider
 
   attr :class, :string, default: nil
-  attr :body_class, :string, default: nil
 
   slot :header do
     attr :divider, :boolean
@@ -29,7 +28,7 @@ defmodule PrenixComponents.Card do
     ~H"""
     <div class={@class} tabindex="-1">
       <%= for header <- @header do %>
-        <div class={["card-header", Map.get(header, :class, "")]}>
+        <div class={["card-header", Map.get(header, :class)]}>
           <%= render_slot(header) %>
         </div>
 
@@ -39,7 +38,7 @@ defmodule PrenixComponents.Card do
       <% end %>
 
       <%= for body <- @body do %>
-        <div class={["card-body", Map.get(body, :class, "")]}>
+        <div class={["card-body", Map.get(body, :class)]}>
           <%= render_slot(body) %>
         </div>
       <% end %>
@@ -53,8 +52,8 @@ defmodule PrenixComponents.Card do
 
         <div class={[
           "card-footer",
-          Map.get(footer, :class, ""),
-          if(Map.get(footer, :blurred, false), do: "card-footer-blurred", else: "")
+          Map.get(footer, :class),
+          if(Map.get(footer, :blurred, false), do: "card-footer--blurred", else: "")
         ]}>
           <%= render_slot(footer) %>
         </div>
@@ -64,13 +63,13 @@ defmodule PrenixComponents.Card do
   end
 
   defp set_assigns(assigns) do
-    class =
+    assigns
+    |> assign(
+      :class,
       combine_class([
         "card",
-        "#{assigns.class}"
+        assigns.class
       ])
-
-    assigns
-    |> assign(:class, class)
+    )
   end
 end

@@ -187,7 +187,9 @@ defmodule PrenixComponents.Input do
           value={@value}
           aria-invalid={@invalid}
           aria-labelledby={"#{@id}-label"}
-          aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
+          aria-describedby={
+            if(@helper_text || @helper != [] || @errors != [], do: "#{@id}-helper", else: nil)
+          }
           {@rest}
         ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
       <% else %>
@@ -201,7 +203,9 @@ defmodule PrenixComponents.Input do
           value={Phoenix.HTML.Form.normalize_value(@type, @value)}
           aria-invalid={@invalid}
           aria-labelledby={"#{@id}-label"}
-          aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
+          aria-describedby={
+            if(@helper_text || @helper != [] || @errors != [], do: "#{@id}-helper", else: nil)
+          }
           {@rest}
         />
       <% end %>

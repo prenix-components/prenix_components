@@ -62,16 +62,12 @@ defmodule PrenixComponents.Spinner do
   end
 
   defp set_assigns(assigns) do
-    IO.inspect(assigns, label: "assign")
-
     classes =
       merge_classes([
         @classes[:base],
         @classes[String.to_atom(assigns.color)],
         if(assigns.size != "", do: @classes[String.to_atom(assigns.size)], else: %{})
       ])
-
-    IO.inspect(classes, label: "classes")
 
     assigns
     |> assign(

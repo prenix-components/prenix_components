@@ -1,59 +1,130 @@
 @layer components {
   .checkbox {
-    --checkbox-border: hsl(var(--default));
-    --checkbox-label: hsl(var(--foreground));
-    --checkbox-checkmark-foreground: hsl(var(--primary-foreground));
-    --checkbox-checkmark: hsl(var(--primary));
     @apply relative max-w-fit inline-flex items-center justify-start cursor-pointer;
     @apply tap-highlight-transparent p-2 -m-2 select-none;
   }
 
   .checkbox-label {
-    @apply relative text-[--checkbox-label] select-none text-base;
+    @apply relative text-foreground select-none;
     @apply transition-colors-opacity before:transition-width motion-reduce:transition-none;
     @apply inline-flex items-center justify-center gap-1 -ml-1;
   }
 
-  .checkbox-el {
+  .checkbox-label--sm {
+    @apply text-sm;
+  }
+
+  .checkbox-label--sm {
+    @apply text-base;
+  }
+
+  .checkbox-label--lg {
+    @apply text-lg;
+  }
+
+  .checkbox-checkbox {
     @apply relative inline-flex items-center justify-center flex-shrink-0 overflow-hidden;
-    @apply outline-none after:bg-[--checkbox-checkmark] w-5 h-5 mr-2;
-    @apply rounded-[calc(12px*0.6)] motion-reduce:transition-none;
+    @apply outline-none after:bg-[--checkbox-checkmark] mr-2;
+    @apply motion-reduce:transition-none;
     @apply transition-transform text-[--checkbox-checkmark-foreground];
 
     @apply before:content-[''] before:absolute before:inset-0 before:border-solid before:border-2;
-    @apply before:rounded-[calc(12px*0.6)] before:box-border before:border-[--checkbox-border];
+    @apply before:box-border before:border-default;
     @apply before:transition-colors;
 
     @apply after:content-[''] after:absolute after:inset-0 after:scale-50 after:opacity-0 after:origin-center;
-    @apply after:!ease-linear after:!duration-200 after:transition-transform-opacity after:rounded-[calc(12px*0.6)];
+    @apply after:!ease-linear after:!duration-200 after:transition-transform-opacity;
     @apply after:text-[--checkbox-checkmark-foreground];
   }
 
-  .checkbox[data-js-focus='true'] .checkbox-el {
+  .checkbox-checkbox--sm {
+    @apply w-4 h-4 rounded-[calc(12px*0.5)] before:rounded-[calc(12px*0.5)] after:rounded-[calc(12px*0.5)];
+  }
+
+  .checkbox-checkbox--md {
+    @apply w-5 h-5 rounded-[calc(12px*0.6)] before:rounded-[calc(12px*0.6)] after:rounded-[calc(12px*0.6)];
+  }
+
+  .checkbox-checkbox--lg {
+    @apply w-6 h-6 rounded-[calc(12px*0.7)] before:rounded-[calc(12px*0.7)] after:rounded-[calc(12px*0.7)];
+  }
+
+  .checkbox-checkbox--default {
+    --checkbox-checkmark-foreground: hsl(var(--default-foreground));
+    --checkbox-checkmark: hsl(var(--default));
+  }
+
+  .checkbox-checkbox--primary {
+    --checkbox-checkmark-foreground: hsl(var(--primary-foreground));
+    --checkbox-checkmark: hsl(var(--primary));
+  }
+
+  .checkbox-checkbox--secondary {
+    --checkbox-checkmark-foreground: hsl(var(--secondary-foreground));
+    --checkbox-checkmark: hsl(var(--secondary));
+  }
+
+  .checkbox-checkbox--success {
+    --checkbox-checkmark-foreground: hsl(var(--success-foreground));
+    --checkbox-checkmark: hsl(var(--success));
+  }
+
+  .checkbox-checkbox--warning {
+    --checkbox-checkmark-foreground: hsl(var(--warning-foreground));
+    --checkbox-checkmark: hsl(var(--warning));
+  }
+
+  .checkbox-checkbox--danger {
+    --checkbox-checkmark-foreground: hsl(var(--danger-foreground));
+    --checkbox-checkmark: hsl(var(--danger));
+  }
+
+  .checkbox[data-js-focus='true'] .checkbox-checkbox {
     @apply ring-2 ring-offset-2 ring-[--checkbox-checkmark] ring-offset-background;
   }
 
-  .checkbox[data-js-selected='true'] .checkbox-el {
+  .checkbox[data-js-selected='true'] .checkbox-checkbox {
     @apply after:scale-100 after:opacity-100;
   }
 
   .checkbox-checkmark {
-    @apply z-10 opacity-0 w-4 h-3 transition-opacity motion-reduce:transition-none;
+    @apply z-10 opacity-0 transition-opacity motion-reduce:transition-none;
+  }
+
+  .checkbox-checkmark--sm {
+    @apply w-3 h-2;
+  }
+
+  .checkbox-checkmark--md {
+    @apply w-4 h-3;
+  }
+
+  .checkbox-checkmark--lg {
+    @apply w-5 h-4;
   }
 
   .checkbox[data-js-selected='true'] .checkbox-checkmark {
     @apply opacity-100;
   }
 
-  .checkbox[data-js-selected='true'] .checkbox-el {
+  .checkbox[data-js-selected='true'] .checkbox-checkbox {
     @apply before:border-transparent;
   }
 
-  .checkbox[data-invalid] .checkbox-el {
+  .checkbox-checkbox--invalid {
     @apply before:border-danger;
   }
 
-  .checkbox[data-disabled] {
+  .checkbox--disabled {
     @apply opacity-50 pointer-events-none;
+  }
+
+  .checkbox-helper {
+    @apply p-1 text-xs text-neutral2-foreground;
+    @apply flex items-center gap-1 -ml-1;
+  }
+
+  .checkbox-helper--invalid {
+    @apply text-danger;
   }
 }

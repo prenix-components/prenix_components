@@ -1,12 +1,10 @@
 @layer components {
   .checkbox-group {
-    --checkbox-group-label: hsl(var(--neutral2-foreground));
-    --checkbox-group-helper: hsl(var(--neutral2-foreground));
     @apply relative flex flex-col gap-2;
   }
 
   .checkbox-group-label {
-    @apply relative text-base text-[--checkbox-group-label];
+    @apply relative text-base text-neutral2-foreground;
     @apply inline-flex items-center gap-1;
   }
 
@@ -15,7 +13,7 @@
   }
 
   .checkbox-group-helper {
-    @apply text-sm text-[--checkbox-group-helper];
+    @apply text-sm text-neutral2-foreground;
     @apply flex items-center gap-1;
   }
 
