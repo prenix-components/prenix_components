@@ -91,8 +91,8 @@ defmodule PrenixComponents.Checkbox do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div data-checkbox>
-      <label class={@class} for={@id}>
+    <div>
+      <label class={@class} for={@id} data-checkbox>
         <div class="visually-hidden">
           <input
             id={@id}
