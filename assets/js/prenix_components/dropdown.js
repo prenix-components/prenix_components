@@ -3,6 +3,12 @@ import bootstrap from '../../../vendors/bootstrap/bootstrap.min'
 const initDropdown = () => {
   document.querySelectorAll('[data-dropdown]').forEach(($baseEl) => {
     const $toggle = $baseEl.querySelector('[data-bs-toggle]')
+    const variant = $baseEl.dataset.variant
+
+    const dropdownItems = $baseEl.querySelectorAll('.dropdown-item')
+    dropdownItems.forEach(($di) => {
+      $di.classList.add(`dropdown-item--${variant}`)
+    })
 
     const dropdownInstance = new bootstrap.Dropdown($toggle, {
       popperConfig(defaultBsPopperConfig) {

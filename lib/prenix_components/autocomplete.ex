@@ -119,36 +119,16 @@ defmodule PrenixComponents.Autocomplete do
   end
 
   defp set_assigns(assigns) do
-    class =
-      combine_class([
-        "autocomplete",
-        "autocomplete-#{assigns.size}",
-        "autocomplete-label-#{assigns.label_placement}",
-        "#{assigns.class}"
-      ])
+    unmerged_classes = get_classes(assigns)
 
-    wrapper_class =
-      combine_class([
-        "autocomplete-wrapper",
-        assigns.wrapper_class
-      ])
-
-    label_class =
-      combine_class([
-        "autocomplete-label",
-        assigns.label_class
-      ])
-
-    input_wrapper_class =
-      combine_class([
-        "autocomplete-input-wrapper",
-        assigns.input_wrapper_class
-      ])
-
-    helper_class =
-      combine_class([
-        "autocomplete-helper",
-        assigns.helper_class
+    classes =
+      merge_classes([
+        unmerged_classes[:base],
+        unmerged_classes[String.to_atom(assigns.size)],
+        unmerged_classes[String.to_atom(assigns.label_placement)],
+        unmerged_classes[String.to_atom(assigns.type)],
+        if(assigns.invalid, do: unmerged_classes[:invalid], else: %{}),
+        if(assigns.disabled, do: unmerged_classes[:disabled], else: %{})
       ])
 
     id =
@@ -172,11 +152,48 @@ defmodule PrenixComponents.Autocomplete do
     chip_size = if(assigns.size == "sm", do: "sm", else: "md")
 
     assigns
-    |> assign(:class, class)
-    |> assign(:wrapper_class, wrapper_class)
-    |> assign(:label_class, label_class)
-    |> assign(:input_wrapper_class, input_wrapper_class)
-    |> assign(:helper_class, helper_class)
+    |> assign(
+      :class,
+      combine_class([
+        classes["autocomplete"],
+        assigns.class
+      ])
+    )
+    |> assign(
+      :wrapper_class,
+      combine_class([
+        classes["autocomplete-wrapper"],
+        assigns.wrapper_class
+      ])
+    )
+    |> assign(
+      :input_class,
+      combine_class([
+        classes["autocomplete-input"],
+        assigns.input_class
+      ])
+    )
+    |> assign(
+      :label_class,
+      combine_class([
+        classes["autocomplete-label"],
+        assigns.label_class
+      ])
+    )
+    |> assign(
+      :input_wrapper_class,
+      combine_class([
+        classes["autocomplete-input-wrapper"],
+        assigns.input_wrapper_class
+      ])
+    )
+    |> assign(
+      :helper_class,
+      combine_class([
+        classes["autocomplete-helper"],
+        assigns.helper_class
+      ])
+    )
     |> assign(id: id)
     |> assign(:delimited_options, delimited_options)
     |> assign(:delimited_value, delimited_value)
@@ -271,6 +288,73 @@ defmodule PrenixComponents.Autocomplete do
       <% end %>
     </div>
     """
+  end
+
+  defp get_classes(assigns) do
+    %{
+      base: %{
+        "autocomplete" => "autocomplete",
+        "autocomplete-wrapper" => "autocomplete-wrapper",
+        "autocomplete-label" => "autocomplete-label",
+        "autocomplete-input-wrapper" => "autocomplete-input-wrapper",
+        "autocomplete-input" => "autocomplete-input",
+        "autocomplete-helper" => "autocomplete-helper",
+        "autocomplete-content" => "autocomplete-content"
+      },
+      sm: %{
+        "autocomplete" => "autocomplete--sm",
+        "autocomplete-wrapper" => "autocomplete-wrapper--sm"
+      },
+      md: %{
+        "autocomplete" => "autocomplete--md",
+        "autocomplete-wrapper" => "autocomplete-wrapper--md"
+      },
+      lg: %{
+        "autocomplete" => "autocomplete--lg",
+        "autocomplete-wrapper" => "autocomplete-wrapper--lg"
+      },
+      invalid: %{
+        "autocomplete-wrapper" => "autocomplete-wrapper--invalid",
+        "autocomplete-label" => "autocomplete-label--invalid",
+        "autocomplete-helper" => "autocomplete-helper--invalid"
+      },
+      disabled: %{
+        "autocomplete-wrapper" => "autocomplete-wrapper--disabled"
+      },
+      inside: %{
+        "autocomplete-label" => "autocomplete-label--inside",
+        "autocomplete-input-wrapper" => "autocomplete-input-wrapper--inside",
+        "autocomplete-wrapper" => "autocomplete-wrapper--inside-#{assigns.size}"
+      },
+      outside: %{
+        "autocomplete" => "autocomplete--outside",
+        "autocomplete-wrapper" => "autocomplete-wrapper--outside",
+        "autocomplete-label" => "autocomplete-label--outside"
+      },
+      "outside-left": %{
+        "autocomplete" => "autocomplete--outside-left",
+        "autocomplete-wrapper" => "autocomplete-wrapper--outside-left",
+        "autocomplete-label" =>
+          "autocomplete-label--outside-left autocomplete-label--outside-left-#{assigns.size}",
+        "autocomplete-wrapper" => "autocomplete-wrapper--outside-left"
+      },
+      single: %{
+        "autocomplete-wrapper" => "autocomplete-wrapper--single"
+      },
+      multiple: %{
+        "autocomplete-wrapper" => "autocomplete-wrapper--multiple"
+      },
+      tags: %{
+        "autocomplete-wrapper" =>
+          "autocomplete-wrapper--tags autocomplete-wrapper--tags-#{assigns.size}",
+        "autocomplete-label" => "autocomplete-label--tags-#{assigns.label_placement}",
+        "autocomplete-input-wrapper" => "autocomplete-input-wrapper--tags",
+        "autocomplete-input" => "autocomplete-input--tags"
+      },
+      datepicker: %{
+        "autocomplete-wrapper" => "autocomplete-wrapper--datepicker"
+      }
+    }
   end
 
   defp tag_item_template(chip_size) do

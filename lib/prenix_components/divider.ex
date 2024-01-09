@@ -10,7 +10,7 @@ defmodule PrenixComponents.Divider do
     class =
       combine_class([
         "divider",
-        "divider-#{assigns.orientation}",
+        "divider--#{assigns.orientation}",
         assigns.class
       ])
 

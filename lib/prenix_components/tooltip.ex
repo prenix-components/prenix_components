@@ -40,7 +40,7 @@ defmodule PrenixComponents.Tooltip do
 
     tooltip_class =
       combine_class([
-        "tooltip-#{assigns.color}",
+        "tooltip--#{assigns.color}",
         assigns.tooltip_class,
         if(assigns.arrow, do: "tooltip-arrow", else: nil)
       ])

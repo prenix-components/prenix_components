@@ -53,56 +53,24 @@ defmodule PrenixComponents.Input do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div
-      class={@class}
-      data-invalid={@invalid}
-      data-disabled={@disabled}
-      data-input
-      data-datepicker={@type == "datepicker"}
-    >
+    <div class={@class} data-input data-datepicker={@type == "datepicker"}>
       <%= render_content(assigns) %>
     </div>
     """
   end
 
   defp set_assigns(assigns) do
-    class =
-      combine_class([
-        "input",
-        "input-#{assigns.size}",
-        "input-label-#{assigns.label_placement}",
-        if(assigns.type == "textarea", do: "input-textarea", else: ""),
-        assigns.class
-      ])
+    unmerged_classes = get_classes(assigns)
 
-    wrapper_class =
-      combine_class([
-        "input-wrapper",
-        assigns.wrapper_class
-      ])
-
-    label_class =
-      combine_class([
-        "input-label",
-        assigns.label_class
-      ])
-
-    input_wrapper_class =
-      combine_class([
-        "input-el-wrapper",
-        assigns.input_wrapper_class
-      ])
-
-    input_class =
-      combine_class([
-        "input-el",
-        assigns.input_class
-      ])
-
-    helper_class =
-      combine_class([
-        "input-helper",
-        assigns.helper_class
+    classes =
+      merge_classes([
+        unmerged_classes[:base],
+        unmerged_classes[String.to_atom(assigns.size)],
+        unmerged_classes[String.to_atom(assigns.label_placement)],
+        if(assigns.type == "textarea", do: unmerged_classes[:textarea], else: %{}),
+        if(assigns.invalid, do: unmerged_classes[:invalid], else: %{}),
+        if(assigns.disabled, do: unmerged_classes[:disabled], else: %{}),
+        if(assigns.type == "datepicker", do: unmerged_classes[:datepicker], else: %{})
       ])
 
     id =
@@ -112,12 +80,48 @@ defmodule PrenixComponents.Input do
       end
 
     assigns
-    |> assign(:class, class)
-    |> assign(:wrapper_class, wrapper_class)
-    |> assign(:label_class, label_class)
-    |> assign(:input_wrapper_class, input_wrapper_class)
-    |> assign(:input_class, input_class)
-    |> assign(:helper_class, helper_class)
+    |> assign(
+      :class,
+      combine_class([
+        classes["input"],
+        assigns.class
+      ])
+    )
+    |> assign(
+      :wrapper_class,
+      combine_class([
+        classes["input-wrapper"],
+        assigns.wrapper_class
+      ])
+    )
+    |> assign(
+      :label_class,
+      combine_class([
+        classes["input-label"],
+        assigns.label_class
+      ])
+    )
+    |> assign(
+      :input_wrapper_class,
+      combine_class([
+        classes["input-el-wrapper"],
+        assigns.input_wrapper_class
+      ])
+    )
+    |> assign(
+      :input_class,
+      combine_class([
+        classes["input-el"],
+        assigns.input_class
+      ])
+    )
+    |> assign(
+      :helper_class,
+      combine_class([
+        classes["input-helper"],
+        assigns.helper_class
+      ])
+    )
     |> assign(id: id)
     |> assign(
       :calendar_icon,
@@ -277,5 +281,64 @@ defmodule PrenixComponents.Input do
     ~H"""
 
     """
+  end
+
+  defp get_classes(assigns) do
+    %{
+      base: %{
+        "input" => "input",
+        "input-wrapper" => "input-wrapper",
+        "input-label" => "input-label",
+        "input-el-wrapper" => "input-el-wrapper",
+        "input-el" => "input-el",
+        "input-helper" => "input-helper",
+        "input-content" => "input-content"
+      },
+      sm: %{
+        "input" => "input--sm",
+        "input-wrapper" => "input-wrapper--sm"
+      },
+      md: %{
+        "input" => "input--md",
+        "input-wrapper" => "input-wrapper--md"
+      },
+      lg: %{
+        "input" => "input--lg",
+        "input-wrapper" => "input-wrapper--lg"
+      },
+      invalid: %{
+        "input-wrapper" => "input-wrapper--invalid",
+        "input-label" => "input-label--invalid",
+        "input-helper" => "input-helper--invalid"
+      },
+      disabled: %{
+        "input-wrapper" => "input-wrapper--disabled"
+      },
+      inside: %{
+        "input-label" => "input-label--inside",
+        "input-el-wrapper" => "input-el-wrapper--inside",
+        "input-wrapper" => "input-wrapper--inside-#{assigns.size}"
+      },
+      outside: %{
+        "input" => "input--outside",
+        "input-wrapper" => "input-wrapper--outside",
+        "input-label" => "input-label--outside"
+      },
+      "outside-left": %{
+        "input" => "input--outside-left",
+        "input-wrapper" => "input-wrapper--outside-left",
+        "input-label" => "input-label--outside-left input-label--outside-left-#{assigns.size}",
+        "input-wrapper" => "input-wrapper--outside-left"
+      },
+      textarea: %{
+        "input-wrapper" => "input-wrapper--textarea input-wrapper--textarea-#{assigns.size}",
+        "input-label" => "input-label--textarea-#{assigns.label_placement}",
+        "input-el-wrapper" => "input-el-wrapper--textarea",
+        "input-el" => "input-el--textarea"
+      },
+      datepicker: %{
+        "input-wrapper" => "input-wrapper--datepicker"
+      }
+    }
   end
 end

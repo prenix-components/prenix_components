@@ -5,73 +5,71 @@
     @apply hover:opacity-80 active:opacity-[--disabled-opacity] transition-opacity text-[--link];
   }
 
-  .link-current {
+  .link--current {
     --link: textCurrent;
   }
 
-  .link-default {
+  .link--default {
     --link: hsl(var(--default));
   }
 
-  .link-primary {
+  .link--primary {
     --link: hsl(var(--primary));
   }
 
-  .link-secondary {
+  .link--secondary {
     --link: hsl(var(--secondary));
   }
 
-  .link-success {
+  .link--success {
     --link: hsl(var(--success));
   }
 
-  .link-warning {
+  .link--warning {
     --link: hsl(var(--warning));
   }
 
-  .link-danger {
+  .link--danger {
     --link: hsl(var(--danger));
   }
 
-  .link.link-inherit {
+  .link--inherit {
     font-size: inherit;
   }
 
-  .link.link-sm {
+  .link--sm {
     @apply text-sm;
   }
 
-  .link.link-md {
+  .link--md {
     @apply text-base;
   }
 
-  .link.link-lg {
+  .link--lg {
     @apply text-lg;
   }
 
-  .link.link-underline-none {
+  .link--underline-none {
     @apply no-underline;
   }
 
-  .link.link-underline-hover {
+  .link--underline-hover {
     @apply hover:underline;
   }
 
-  .link.link-underline-always {
+  .link--underline-always {
     @apply underline;
   }
 
-  .link.link-underline-active {
+  .link--underline-active {
     @apply active:underline;
   }
 
-  .link.link-underline-focus {
+  .link--underline-focus {
     @apply focus:underline;
   }
 
-  .link.link-disabled {
-    @apply opacity-[--disabled-opacity] pointer-events-none;
+  .link--disabled {
+    @apply opacity-disabled pointer-events-none;
   }
 }
-
-/* text-medium text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity */

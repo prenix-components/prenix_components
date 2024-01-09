@@ -3,11 +3,11 @@
     @apply bg-divider;
   }
 
-  .divider-horizontal {
+  .divider--horizontal {
     @apply shrink-0 border-none w-full h-px;
   }
 
-  .divider-vertical {
+  .divider--vertical {
     @apply shrink-0 border-none h-full w-px;
   }
 }

@@ -31,7 +31,8 @@ const buildDisplayText = (select) => {
 }
 
 const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
-  const originalInputClass = $originalInput.dataset.inputClass
+  const originalInputClass = $originalInput.dataset.inputClass.split(' ')
+
   const isMultiple = type === 'multiple'
   const isTags = type === 'tags'
   let opts = {
@@ -78,7 +79,7 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
         $autocompleteItem.classList.add('autocomplete-item', 'item')
 
         if (originalInputClass) {
-          $autocompleteItem.classList.add(originalInputClass)
+          $autocompleteItem.classList.add(...originalInputClass)
         }
 
         $autocompleteItem.innerHTML = buildDisplayText($originalInput)
@@ -90,7 +91,7 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
       const $controlInput = $wrapper.querySelector('.autocomplete-input')
 
       if (originalInputClass) {
-        $controlInput.classList.add(originalInputClass)
+        $controlInput.classList.add(...originalInputClass)
       }
 
       if ($controlInput.placeholder && $controlInput.placeholder.length > 0) {
@@ -162,8 +163,7 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
         } else if (isMultiple) {
           return '<div></div>'
         } else {
-          const originalInputClass = $originalInput.dataset.inputClass || ''
-          return `<div class="autocomplete-item ${originalInputClass}">${data.text}</div>`
+          return `<div class="autocomplete-item">${data.text}</div>`
         }
       },
       dropdown: () => {

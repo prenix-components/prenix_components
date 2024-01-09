@@ -72,11 +72,15 @@ const initDatepicker = () => {
     $input.placeholder = getPlaceholder(datePattern)
     let defaultValue = $input.value
 
+    const div = document.createElement('div')
+    div.innerHTML = $input.dataset.buttonHtml.trim()
+    const buttonClass = [...div.firstChild.classList]
+
     const datepicker = new window.Datepicker($input, {
       todayButton: true,
       todayHighlight: true,
       todayButtonMode: 1,
-      buttonClass: 'btn btn-ripple btn-default btn-light btn-sm btn-radius-lg',
+      buttonClass: buttonClass.join(' '),
       prevArrow: $input.dataset.prevArrowHtml,
       nextArrow: $input.dataset.nextArrowHtml,
       format: {

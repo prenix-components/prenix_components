@@ -1,198 +1,212 @@
 @layer components {
   .input {
-    --input-placeholder: hsl(var(--neutral1-foreground));
-    --input: hsl(var(--foreground));
-    --input-label: hsl(var(--neutral2-foreground));
-    --input-label-focus: hsl(var(--foreground));
-    --input-helper: hsl(var(--neutral2-foreground));
-    --input-wrapper-border: hsl(var(--default) / 0.5);
-    --input-wrapper-border-hover: hsl(var(--default));
-    --input-wrapper-border-focus: hsl(var(--foreground));
     @apply w-full;
   }
 
-  .input-sm {
+  .input-wrapper--sm {
+    @apply py-2 px-3 min-h-[2rem] rounded-[8px];
+  }
+
+  .input-wrapper--md {
+    @apply py-3 px-3 min-h-[2.5rem] rounded-[10px];
+  }
+
+  .input-wrapper--lg {
+    @apply py-3.5 px-3 min-h-[3rem] rounded-[12px];
+  }
+
+  .input--sm {
     --input-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
+    @apply text-sm;
   }
 
-  .input-md {
+  .input--md {
     --input-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
+    @apply text-sm;
   }
 
-  .input-lg {
+  .input--lg {
     --input-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
-  }
-
-  .input.input-sm .input-wrapper {
-    @apply px-3 min-h-[2rem] rounded-[8px];
-  }
-
-  .input.input-md .input-wrapper {
-    @apply px-3 min-h-[2.5rem] rounded-[10px];
-  }
-
-  .input.input-lg .input-wrapper {
-    @apply px-3 min-h-[3rem] rounded-[12px];
-  }
-
-  .input.input-sm {
-    @apply text-sm;
-  }
-
-  .input.input-md {
-    @apply text-sm;
-  }
-
-  .input.input-lg {
     @apply text-base;
   }
 
-  .input .input-wrapper {
-    box-shadow: var(--shadow-sm);
+  .input-wrapper {
     @apply relative w-full inline-flex tap-highlight-transparent;
-    @apply outline-none;
+    @apply outline-none shadow-small;
     @apply flex-col items-start justify-center gap-0 cursor-text;
     @apply transition-colors motion-reduce:transition-none;
-    @apply border-2 border-[--input-wrapper-border];
-    @apply hover:border-[--input-wrapper-border-hover];
+    @apply border-2 border-default/50;
+    @apply hover:border-default;
   }
 
-  .input .input-content {
+  .input-content {
     @apply flex items-center justify-center;
   }
 
   .input[data-js-focus='true'] .input-wrapper {
-    @apply border-[--input-wrapper-border-focus];
+    @apply border-foreground;
   }
 
-  .input .input-el-wrapper {
+  .input-el-wrapper {
     @apply inline-flex w-full items-center h-full box-border relative gap-1.5;
   }
 
-  .input .input-label {
-    @apply subpixel-antialiased block text-[--input-label];
+  .input-label {
+    @apply subpixel-antialiased text-neutral2-foreground;
     @apply pe-2 max-w-full inline-flex items-center gap-1;
   }
 
   .input[data-js-focus='true'] .input-label {
-    @apply text-[--input-label-focus];
+    @apply text-foreground;
   }
 
-  .input .input-el {
-    @apply w-full font-normal bg-transparent outline-none placeholder:text-[--input-placeholder];
-    @apply text-[--input] focus-visible:outline-none;
+  .input-el {
+    @apply w-full font-normal bg-transparent outline-none placeholder:text-neutral1-foreground;
+    @apply text-foreground focus-visible:outline-none;
   }
 
-  .input .input-helper {
-    @apply p-1 text-xs text-[--input-helper];
+  .input-helper {
+    @apply p-1 text-xs text-neutral2-foreground;
     @apply flex items-center gap-1;
   }
 
-  .input[data-invalid] .input-wrapper {
+  .input-wrapper--invalid {
+    @apply border-danger hover:border-danger;
+  }
+
+  .input[data-js-focus='true'] .input-wrapper--invalid {
     @apply border-danger;
   }
 
-  .input[data-invalid] .input-label {
+  .input[data-js-focus='true'] .input-label--invalid {
     @apply text-danger;
   }
 
-  .input[data-invalid] .input-helper {
+  .input-label--invalid {
     @apply text-danger;
   }
 
-  .input[data-disabled] .input-wrapper {
-    @apply pointer-events-none opacity-[--disabled-opacity];
+  .input-helper--invalid {
+    @apply text-danger;
   }
 
-  .input.input-label-inside .input-label {
+  .input-wrapper--disabled {
+    @apply pointer-events-none opacity-disabled;
+  }
+
+  .input-label--inside {
     @apply absolute justify-center text-ellipsis overflow-hidden pointer-events-none;
     @apply origin-top-left will-change-auto !duration-200 !ease-out;
     @apply motion-reduce:transition-none transition-[transform,color,left,opacity];
   }
 
-  .input.input-label-inside[data-js-focus='true'] .input-label,
-  .input.input-label-inside[data-js-has-placeholder='true'] .input-label,
-  .input.input-label-inside[data-js-has-value='true'] .input-label {
+  .input[data-js-focus='true'] .input-label--inside,
+  .input[data-js-has-placeholder='true'] .input-label--inside,
+  .input[data-js-has-value='true'] .input-label--inside {
     @apply scale-[0.85] translate-y-[--input-label-translate];
   }
 
-  .input.input-label-inside[data-js-has-label='true'] .input-el-wrapper {
+  .input[data-js-has-label='true'] .input-el-wrapper--inside {
     @apply items-end;
   }
 
-  .input.input-sm.input-label-inside .input-wrapper {
+  .input-wrapper--inside-sm {
     @apply py-1.5 h-12;
   }
 
-  .input.input-md.input-label-inside .input-wrapper {
+  .input-wrapper--inside-md {
     @apply py-2 h-14;
   }
 
-  .input.input-lg.input-label-inside .input-wrapper {
+  .input-wrapper--inside-lg {
     @apply py-2.5 h-16;
   }
 
-  .input.input-label-outside {
+  .input--outside {
     @apply flex flex-col;
   }
 
-  .input.input-label-outside .input-label {
+  .input-label--outside {
     @apply mb-1;
   }
 
-  .input.input-label-outside-left {
+  .input--outside-left {
     @apply flex flex-row gap-2;
   }
 
-  .input.input-label-outside-left .input-label {
+  .input-label--outside-left {
     @apply shrink self-start;
   }
 
-  .input.input-label-outside-left .input-wrapper {
-    @apply grow;
-  }
-
-  .input.input-sm.input-label-outside-left .input-label {
-    @apply mt-1.5;
-  }
-
-  .input.input-md.input-label-outside-left .input-label {
-    @apply mt-2;
-  }
-
-  .input.input-lg.input-label-outside-left .input-label {
+  .input-label--outside-left-sm {
     @apply mt-3;
   }
 
-  .input.input-textarea .input-wrapper {
-    @apply !h-auto;
+  .input-label--outside-left-md {
+    @apply mt-3.5;
   }
 
-  .input.input-textarea.input.input-label-inside .input-label {
+  .input-label--outside-left-lg {
+    @apply mt-4;
+  }
+
+  .input-wrapper--outside-left {
+    @apply grow;
+  }
+
+  .input-wrapper--textarea {
+    @apply h-auto;
+  }
+
+  .input-label--textarea-inside {
     @apply static scale-[0.85] !translate-y-0;
   }
 
-  .input.input-textarea .input-el {
+  .input-label--textarea-outside-left {
+    @apply self-start mt-1;
+  }
+
+  .input-el--textarea {
     @apply resize-none min-h-[60px] max-h-[160px] !overflow-x-auto;
   }
 
-  .input.input-textarea.input-label-outside-left .input-label {
-    @apply mt-1;
-  }
-
-  .input.input-textarea.input-sm .input-wrapper {
+  .input-wrapper--textarea-sm {
     @apply py-1.5;
   }
 
-  .input.input-textarea.input-md .input-wrapper {
+  .input-wrapper--textarea-md {
     @apply py-2;
   }
 
-  .input.input-textarea.input-lg .input-wrapper {
+  .input-wrapper--textarea-lg {
     @apply py-2.5;
   }
 
-  .input.input-textarea .input-el-wrapper {
+  .input-el-wrapper--textarea {
     @apply gap-0;
+  }
+
+  .input-wrapper--datepicker {
+    @apply flex flex-row items-center justify-start gap-1;
+  }
+
+  .datepicker-clear-btn {
+    @apply hidden text-neutral2-foreground shrink-0;
+  }
+
+  .input[data-js-has-value='true']:not(disabled)
+    .input-wrapper--datepicker:hover
+    .datepicker-clear-btn {
+    @apply inline-flex;
+  }
+
+  .datepicker-calendar-icon {
+    @apply text-neutral1-foreground block shrink-0;
+  }
+
+  .input[data-js-has-value='true']:not(disabled)
+    .input-wrapper--datepicker:hover
+    .datepicker-calendar-icon {
+    @apply hidden;
   }
 }

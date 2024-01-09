@@ -43,32 +43,18 @@ const get_hash = (value) => {
 const checkboxQuery = 'input[type="checkbox"]'
 
 const checkboxTemplate = (id, label) => {
-  return `<div class="visually-hidden">
-    <input
-      id=${id}
-      aria-labelledby="${id}-label"
-      type="checkbox"
-      aria-label="${label}"
-    />
-  </div>
-  <span aria-hidden="true" class="checkbox-checkbox">
-    <svg aria-hidden="true" role="presentation" viewBox="0 0 17 18" class="checkbox-checkmark">
-      <polyline
-        fill="none"
-        points="1 9 7 14 15 4"
-        stroke="currentColor"
-        stroke-dasharray="22"
-        stroke-dashoffset="66"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        style="transition: stroke-dashoffset 250ms linear 0.2s;">
-      </polyline>
-    </svg>
-  </span>
-  <span id="${id}-label" class="checkbox-label" style="display: none">
-    ${label}
-  </span>`
+  return `
+    <div class="visually-hidden">
+      <input id=${id} aria-labelledby="${id}-label" type="checkbox" aria-label="${label}">
+    </div>
+    <span aria-hidden="true" class="checkbox-checkbox checkbox-checkbox--md checkbox-checkbox--primary">
+      <svg aria-hidden="true" role="presentation" viewBox="0 0 17 18" class="checkbox-checkmark checkbox-checkmark--md">
+        <polyline fill="none" points="1 9 7 14 15 4" stroke="currentColor" stroke-dasharray="22" stroke-dashoffset="66" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="transition: stroke-dashoffset 250ms linear 0.2s;">
+          <polyline fill="none" points="1 9 7 14 15 4" stroke="currentColor" stroke-dasharray="22" stroke-dashoffset="44" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="transition: stroke-dashoffset 250ms linear 0.2s;">
+          </polyline>
+        </polyline>
+      </svg>
+    </span>`
 }
 
 export default function (_userOptions) {

@@ -14,7 +14,6 @@ defmodule PrenixComponents.Table do
   end
 
   slot :col do
-    attr :label, :string
     attr :class, :string
   end
 
@@ -43,7 +42,7 @@ defmodule PrenixComponents.Table do
             </tr>
           <% else %>
             <tr class="tr">
-              <td class="td td-empty-state" colspan={length(@header)}>
+              <td class="td td--empty-state" colspan={length(@header)}>
                 <%= if @empty_state_message do %>
                   <%= @empty_state_message %>
                 <% else %>

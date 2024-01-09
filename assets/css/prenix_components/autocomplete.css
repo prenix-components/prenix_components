@@ -1,18 +1,8 @@
 @layer components {
   .autocomplete {
-    --autocomplete-placeholder: hsl(var(--neutral1-foreground));
-    --autocomplete-input: hsl(var(--foreground));
-    --autocomplete-label: hsl(var(--neutral2-foreground));
-    --autocomplete-label-focus: hsl(var(--foreground));
-    --autocomplete-helper: hsl(var(--neutral2-foreground));
-    --autocomplete-wrapper-border: hsl(var(--default) / 0.5);
-    --autocomplete-wrapper-border-hover: hsl(var(--default));
-    --autocomplete-wrapper-border-focus: hsl(var(--foreground));
-    --autocomplete-no-results: hsl(var(--neutral2-foreground));
     --autocomplete-option-active: hsl(var(--default));
     --autocomplete-option-active-foreground: hsl(var(--default-foreground));
     --autocomplete-option-highlight: hsl(var(--primary) / 0.4);
-    --autocomplete-option-disabled: hsl(var(--neutral2-foreground));
     --autocomplete-option-active-checkmark-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' class='w-5 h-5'%3E%3Cpath fill-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
     --autocomplete-option-active-checkmark: hsl(var(--content1-foreground));
     --autocomplete-dropdown: hsl(var(--content1));
@@ -21,51 +11,42 @@
     @apply w-full;
   }
 
-  .autocomplete-sm {
-    --autocomplete-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
+  .autocomplete-wrapper--sm {
+    @apply py-2 px-3 min-h-[2rem] rounded-[8px];
   }
 
-  .autocomplete-md {
-    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
+  .autocomplete-wrapper--md {
+    @apply py-3 px-3 min-h-[2.5rem] rounded-[10px];
   }
 
-  .autocomplete-lg {
-    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
+  .autocomplete-wrapper--lg {
+    @apply py-3.5 px-3 min-h-[3rem] rounded-[12px];
   }
 
-  .autocomplete-sm .autocomplete-wrapper {
-    @apply px-3 min-h-[2rem] rounded-[8px];
-  }
-
-  .autocomplete-md .autocomplete-wrapper {
-    @apply px-3 min-h-[2.5rem] rounded-[10px];
-  }
-
-  .autocomplete-lg .autocomplete-wrapper {
-    @apply px-3 min-h-[3rem] rounded-[12px];
-  }
-
-  .autocomplete-sm.autocomplete-label-inside .autocomplete-wrapper {
+  .autocomplete-wrapper--inside-sm {
     @apply py-1.5 h-12;
   }
 
-  .autocomplete-md.autocomplete-label-inside .autocomplete-wrapper {
+  .autocomplete-wrapper--inside-md {
     @apply py-2 h-14;
   }
 
-  .autocomplete-lg.autocomplete-label-inside .autocomplete-wrapper {
+  .autocomplete-wrapper--inside-lg {
     @apply py-2.5 h-16;
   }
 
-  .autocomplete-sm {
+  .autocomplete--sm {
+    --autocomplete-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
     @apply text-sm;
   }
 
-  .autocomplete-md {
+  .autocomplete--md {
+    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
     @apply text-sm;
   }
 
-  .autocomplete-lg {
+  .autocomplete--lg {
+    --autocomplete-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
     @apply text-base;
   }
 
@@ -73,22 +54,21 @@
     @apply relative w-full;
   }
 
-  .autocomplete [data-original-input] {
+  [data-original-input] {
     @apply bg-transparent visually-hidden;
   }
 
   .autocomplete-wrapper {
-    box-shadow: var(--shadow-sm);
     @apply relative w-full inline-flex tap-highlight-transparent;
-    @apply outline-none;
+    @apply outline-none shadow-small shadow-small;
     @apply flex-col items-start justify-center gap-0 cursor-text;
     @apply transition-colors motion-reduce:transition-none;
-    @apply border-2 border-[--autocomplete-wrapper-border];
-    @apply hover:border-[--autocomplete-wrapper-border-hover];
+    @apply border-2 border-default/50;
+    @apply hover:border-default;
   }
 
   .autocomplete[data-js-focus='true'] .autocomplete-wrapper {
-    @apply border-[--autocomplete-wrapper-border-focus];
+    @apply border-foreground;
   }
 
   .autocomplete-input-wrapper {
@@ -97,17 +77,17 @@
   }
 
   .autocomplete-label {
-    @apply subpixel-antialiased block text-[--autocomplete-label];
+    @apply subpixel-antialiased block text-neutral2-foreground;
     @apply pe-2 max-w-full inline-flex items-center gap-1;
   }
 
   .autocomplete[data-js-focus='true'] .autocomplete-label {
-    @apply text-[--autocomplete-label-focus];
+    @apply text-foreground;
   }
 
   .autocomplete-input {
-    @apply w-full font-normal bg-transparent outline-none placeholder:text-[--autocomplete-placeholder];
-    @apply text-[--autocomplete-input] focus-visible:outline-none;
+    @apply w-full font-normal bg-transparent outline-none placeholder:text-neutral1-foreground;
+    @apply text-foreground focus-visible:outline-none;
   }
 
   .ts-wrapper.input-active .autocomplete-input,
@@ -116,24 +96,32 @@
   }
 
   .autocomplete-helper {
-    @apply p-1 text-xs text-[--autocomplete-helper];
+    @apply p-1 text-xs text-neutral2-foreground;
     @apply flex items-center gap-1;
   }
 
-  .autocomplete[data-invalid] .autocomplete-wrapper {
+  .autocomplete-wrapper--invalid {
+    @apply border-danger hover:border-danger;
+  }
+
+  .autocomplete-label--invalid {
+    @apply text-danger;
+  }
+
+  .autocomplete-helper--invalid {
+    @apply text-danger;
+  }
+
+  .autocomplete[data-js-focus='true'] .autocomplete-wrapper--invalid {
     @apply border-danger;
   }
 
-  .autocomplete[data-invalid] .autocomplete-label {
+  .autocomplete[data-js-focus='true'] .autocomplete-label--invalid {
     @apply text-danger;
   }
 
-  .autocomplete[data-invalid] .autocomplete-helper {
-    @apply text-danger;
-  }
-
-  .autocomplete[data-disabled] .autocomplete-wrapper {
-    @apply pointer-events-none opacity-[--disabled-opacity];
+  .autocomplete-wrapper--disabled {
+    @apply pointer-events-none opacity-disabled;
   }
 
   .autocomplete-dropdown {
@@ -158,7 +146,7 @@
   }
 
   .autocomplete .no-results {
-    @apply px-2 py-1.5 text-[--autocomplete-no-results];
+    @apply px-2 py-1.5 text-neutral2-foreground;
   }
 
   .autocomplete-option,
@@ -169,7 +157,7 @@
   }
 
   .autocomplete-option.active {
-    @apply bg-[--autocomplete-option-active] text-[--autocomplete-option-active-foreground];
+    @apply bg-default text-default-foreground;
   }
 
   .autocomplete[data-type='single'] .autocomplete-option {
@@ -177,12 +165,12 @@
   }
 
   .autocomplete-option[aria-disabled='true'] {
-    @apply opacity-[--disabled-opacity] text-[--autocomplete-option-disabled];
+    @apply opacity-disabled text-neutral2-foreground;
     @apply cursor-not-allowed;
   }
 
   .autocomplete .autocomplete-option[data-selectable] .highlight {
-    @apply bg-[--autocomplete-option-highlight];
+    @apply bg-primary/40;
   }
 
   .autocomplete[data-type='single'] .autocomplete-option.selected:after {
@@ -193,7 +181,7 @@
     @apply top-[50%] -translate-y-[50%];
   }
 
-  .autocomplete .autocomplete-option-label {
+  .autocomplete-option-label {
     @apply break-words flex-1 min-w-0;
   }
 
@@ -211,11 +199,11 @@
     @apply hidden;
   }
 
-  .autocomplete .autocomplete-item {
-    @apply text-[--autocomplete-input];
+  .autocomplete-item {
+    @apply text-foreground;
   }
 
-  .autocomplete .autocomplete-dropdown-icon {
+  .autocomplete-dropdown-icon {
     @apply text-neutral1-foreground transition-transform inline-flex;
   }
 
@@ -227,78 +215,72 @@
     @apply rotate-180;
   }
 
-  .autocomplete .input-hidden .ts-control .autocomplete-input {
+  .input-hidden .ts-control .autocomplete-input {
     opacity: 0;
     position: absolute;
     left: -10000px;
   }
 
-  .autocomplete.autocomplete-label-inside[data-js-focus='true']
-    .autocomplete-label,
-  .autocomplete.autocomplete-label-inside[data-js-has-placeholder='true']
-    .autocomplete-label,
-  .autocomplete.autocomplete-label-inside[data-js-has-value='true']
-    .autocomplete-label {
+  .autocomplete[data-js-focus='true'] .autocomplete-label--inside,
+  .autocomplete[data-js-has-placeholder='true'] .autocomplete-label--inside,
+  .autocomplete[data-js-has-value='true'] .autocomplete-label--inside {
     @apply scale-[0.85] translate-y-[--autocomplete-label-translate];
   }
 
-  .autocomplete:not([data-type='tags']) .autocomplete-wrapper {
+  .autocomplete-wrapper--single,
+  .autocomplete-wrapper--multiple {
     @apply flex flex-row items-center justify-start gap-1.5;
   }
 
-  .autocomplete.autocomplete-label-inside .autocomplete-label {
+  .autocomplete-label--inside {
     @apply absolute justify-center text-ellipsis overflow-hidden pointer-events-none;
     @apply origin-top-left will-change-auto !duration-200 !ease-out;
     @apply motion-reduce:transition-none transition-[transform,color,left,opacity];
   }
 
-  .autocomplete.autocomplete-label-inside[data-js-has-label='true']
-    .autocomplete-input-wrapper {
+  .autocomplete[data-js-has-label='true'] .autocomplete-input-wrapper--inside {
     @apply items-end;
   }
 
-  .autocomplete.autocomplete-label-outside {
+  .autocomplete--outside {
     @apply flex flex-col;
   }
 
-  .autocomplete.autocomplete-label-outside .autocomplete-label {
+  .autocomplete-label--outside {
     @apply mb-1;
   }
 
-  .autocomplete.autocomplete-label-outside-left {
+  .autocomplete--outside-left {
     @apply flex flex-row gap-2;
   }
 
-  .autocomplete.autocomplete-label-outside-left .autocomplete-label {
+  .autocomplete-label--outside-left {
     @apply self-start shrink;
   }
 
-  .autocomplete.autocomplete-sm.autocomplete-label-outside-left
-    .autocomplete-label {
-    @apply mt-1.5;
-  }
-
-  .autocomplete.autocomplete-md.autocomplete-label-outside-left
-    .autocomplete-label {
-    @apply mt-2;
-  }
-
-  .autocomplete.autocomplete-lg.autocomplete-label-outside-left
-    .autocomplete-label {
+  .autocomplete-label--outside-left-sm {
     @apply mt-3;
   }
 
+  .autocomplete-label--outside-left-md {
+    @apply mt-3.5;
+  }
+
+  .autocomplete-label--outside-left-lg {
+    @apply mt-4;
+  }
+
   /* Blank */
-  .autocomplete .autocomplete-option.selected[data-value='']:after {
+  .autocomplete-option.selected[data-value='']:after {
     @apply hidden;
   }
 
-  .autocomplete .autocomplete-option[data-value=''] {
+  .autocomplete-option[data-value=''] {
     @apply min-h-[2rem] pr-2;
   }
 
-  .autocomplete .autocomplete-item[data-value=''] {
-    @apply text-[--autocomplete-placeholder];
+  .autocomplete-item[data-value=''] {
+    @apply text-neutral1-foreground;
   }
 
   /* Multiple */
@@ -306,14 +288,17 @@
     @apply flex;
   }
 
-  .autocomplete[data-type='multiple'] .autocomplete-option-checkbox {
-    --checkbox-border: var(--autocomplete-option-checkbox);
+  .autocomplete[data-type='multiple']
+    .autocomplete-option-checkbox
+    .checkbox-checkbox {
+    @apply before:border-foreground;
   }
 
   .autocomplete[data-type='multiple']
     .autocomplete-option[aria-disabled='true']
-    .autocomplete-option-checkbox {
-    --checkbox-border: var(--autocomplete-option-disabled);
+    .autocomplete-option-checkbox
+    .checkbox-checkbox {
+    @apply before:border-neutral2-foreground;
   }
 
   /* Tags */
@@ -325,16 +310,15 @@
     @apply hidden;
   }
 
-  .autocomplete[data-type='tags'] .autocomplete-wrapper {
-    @apply !h-auto justify-start;
+  .autocomplete-wrapper--tags {
+    @apply h-auto justify-start;
   }
 
-  .autocomplete[data-type='tags'] .autocomplete-input {
+  .autocomplete-input--tags {
     @apply flex-1 max-w-full min-w-[100px];
   }
 
-  .autocomplete.autocomplete-label-inside[data-type='tags']
-    .autocomplete-label {
+  .autocomplete-label--tags-inside {
     @apply static scale-[0.85] !translate-y-0;
   }
 
@@ -362,29 +346,19 @@
     @apply truncate;
   }
 
-  .autocomplete.autocomplete-sm.autocomplete-label-outside[data-type='tags']
-    .autocomplete-wrapper,
-  .autocomplete.autocomplete-sm.autocomplete-label-outside-left[data-type='tags']
-    .autocomplete-wrapper {
+  .autocomplete-wrapper--tags-sm {
     @apply p-1.5;
   }
 
-  .autocomplete.autocomplete-md.autocomplete-label-outside[data-type='tags']
-    .autocomplete-wrapper,
-  .autocomplete.autocomplete-md.autocomplete-label-outside-left[data-type='tags']
-    .autocomplete-wrapper {
+  .autocomplete-wrapper--tags-md {
     @apply p-2;
   }
 
-  .autocomplete.autocomplete-lg.autocomplete-label-outside[data-type='tags']
-    .autocomplete-wrapper,
-  .autocomplete.autocomplete-lg.autocomplete-label-outside-left[data-type='tags']
-    .autocomplete-wrapper {
+  .autocomplete-wrapper--tags-lg {
     @apply p-2.5;
   }
 
-  .autocomplete.autocomplete-label-outside-left[data-type='tags']
-    .autocomplete-label {
+  .autocomplete-label--tags-outside-left {
     @apply mt-1;
   }
 }

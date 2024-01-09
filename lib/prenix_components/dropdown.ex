@@ -37,7 +37,7 @@ defmodule PrenixComponents.Dropdown do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class}>
+    <div class={@class} data-variant={@variant}>
       <div
         class={@toggle_class}
         data-bs-toggle="collapse"
@@ -59,7 +59,7 @@ defmodule PrenixComponents.Dropdown do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class} data-dropdown>
+    <div data-dropdown class={@class} data-variant={@variant}>
       <div
         class={@toggle_class}
         data-bs-toggle="dropdown"
@@ -173,7 +173,7 @@ defmodule PrenixComponents.Dropdown do
       combine_class([
         "dropdown #{@placements[assigns.placement]}",
         "dropdown-#{assigns.variant}",
-        if(assigns.submenu, do: "dropend dropdown-submenu", else: nil),
+        if(assigns.submenu, do: "dropend dropdown--submenu", else: nil),
         assigns.class
       ])
 
@@ -212,9 +212,8 @@ defmodule PrenixComponents.Dropdown do
     class =
       combine_class([
         "dropdown-item group",
-        "dropdown-item-#{assigns.color}",
-        if(assigns.disabled, do: "dropdown-item-disabled disabled", else: nil),
-        if(assigns.type == "submenu", do: "dropdown-item-submenu", else: nil),
+        "dropdown-item--#{assigns.color}",
+        if(assigns.disabled, do: "dropdown-item--disabled disabled", else: nil),
         assigns.class
       ])
 

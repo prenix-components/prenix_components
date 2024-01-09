@@ -17,7 +17,7 @@
     @apply flex items-center gap-1;
   }
 
-  .checkbox-group[data-invalid] .checkbox-group-helper {
+  .checkbox-group-helper--invalid {
     @apply text-danger;
   }
 }

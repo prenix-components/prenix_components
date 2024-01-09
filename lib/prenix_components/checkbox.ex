@@ -91,8 +91,8 @@ defmodule PrenixComponents.Checkbox do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div>
-      <label class={@class} for={@id} data-checkbox data-disabled={@disabled} data-invalid={@invalid}>
+    <div data-checkbox>
+      <label class={@class} for={@id}>
         <div class="visually-hidden">
           <input
             id={@id}
@@ -101,7 +101,7 @@ defmodule PrenixComponents.Checkbox do
             aria-describedby={
               if(@helper_text || @helper != [] || @errors != [], do: "#{@id}-helper", else: nil)
             }
-            aria-invalid="true"
+            aria-invalid={@invalid}
             type="checkbox"
             value={@value}
             disabled={@disabled}

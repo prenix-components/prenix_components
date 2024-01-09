@@ -4,8 +4,38 @@ defmodule PrenixComponents.Modal do
   import PrenixComponents.Icon
   import PrenixComponents.Button
 
+  @classes %{
+    base: %{
+      "modal" => "modal",
+      "modal-header" => "modal-header",
+      "modal-body" => "modal-body",
+      "modal-footer" => "modal-footer",
+      "modal-dialog" => "modal-dialog",
+      "modal-content" => "modal-content",
+      "modal-close" => "modal-close"
+    },
+    sm: %{
+      "modal" => "modal--sm"
+    },
+    md: %{
+      "modal" => "modal--md"
+    },
+    lg: %{
+      "modal" => "modal--lg"
+    },
+    outside: %{
+      "modal" => "modal--scroll-outside",
+      "modal-content" => "modal-content--scroll-outside"
+    },
+    inside: %{
+      "modal-body" => "modal-body--scroll-inside",
+      "modal-dialog" => "modal-dialog--scroll-inside",
+      "modal-content" => "modal-content--scroll-inside"
+    }
+  }
+
   @scroll_behaviors [
-    nil,
+    "outside",
     "inside"
   ]
 
@@ -21,7 +51,7 @@ defmodule PrenixComponents.Modal do
 
   attr :id, :string, required: true
   attr :size, :string, default: "md", values: ~w(sm md lg)
-  attr :scroll_behavior, :string, default: nil, values: @scroll_behaviors
+  attr :scroll_behavior, :string, default: "outside", values: ~w(outside inside)
   attr :fullscreen, :string, default: nil, values: @fullscreens
   attr :class, :string, default: nil
   attr :dialog_class, :string, default: nil
@@ -61,13 +91,13 @@ defmodule PrenixComponents.Modal do
           </.button>
 
           <%= for header <- @header do %>
-            <div class={["modal-header", Map.get(header, :class, "")]}>
+            <div class={[@header_class, Map.get(header, :class)]}>
               <%= render_slot(header) %>
             </div>
           <% end %>
 
           <%= for body <- @body do %>
-            <div class={["modal-body", Map.get(body, :class, "")]}>
+            <div class={[@body_class, Map.get(body, :class)]}>
               <%= render_slot(body) %>
             </div>
           <% end %>
@@ -75,7 +105,7 @@ defmodule PrenixComponents.Modal do
           <%= render_slot(@inner_block) %>
 
           <%= for footer <- @footer do %>
-            <div class={["modal-footer", Map.get(footer, :class, "")]}>
+            <div class={[@footer_class, Map.get(footer, :class)]}>
               <%= render_slot(footer) %>
             </div>
           <% end %>
@@ -86,37 +116,46 @@ defmodule PrenixComponents.Modal do
   end
 
   def set_assigns(assigns) do
-    class =
-      combine_class([
-        "modal",
-        "modal-#{assigns.size}",
-        if(assigns.scroll_behavior, do: "modal-scroll-#{assigns.scroll_behavior}", else: nil),
-        if(assigns.fullscreen, do: "modal-fullscreen-#{assigns.fullscreen}", else: nil)
-      ])
-
-    dialog_class =
-      combine_class([
-        "modal-dialog",
-        assigns.dialog_class
-      ])
-
-    content_class =
-      combine_class([
-        "modal-content",
-        assigns.content_class
-      ])
-
-    close_button_class =
-      combine_class([
-        "modal-close",
-        assigns.close_button_class
+    classes =
+      merge_classes([
+        @classes[:base],
+        @classes[String.to_atom(assigns.size)],
+        @classes[String.to_atom(assigns.scroll_behavior)]
       ])
 
     assigns
-    |> assign(:class, class)
-    |> assign(:dialog_class, dialog_class)
-    |> assign(:content_class, content_class)
-    |> assign(:close_button_class, close_button_class)
+    |> assign(
+      :class,
+      combine_class([
+        classes["modal"],
+        if(assigns.fullscreen, do: "modal--fullscreen-#{assigns.fullscreen}", else: nil),
+        assigns.class
+      ])
+    )
+    |> assign(
+      :dialog_class,
+      combine_class([
+        classes["modal-dialog"],
+        assigns.dialog_class
+      ])
+    )
+    |> assign(
+      :content_class,
+      combine_class([
+        classes["modal-content"],
+        assigns.content_class
+      ])
+    )
+    |> assign(
+      :close_button_class,
+      combine_class([
+        classes["modal-close"],
+        assigns.close_button_class
+      ])
+    )
+    |> assign(:header_class, classes["modal-header"])
+    |> assign(:body_class, classes["modal-body"])
+    |> assign(:footer_class, classes["modal-footer"])
     |> assign(:close_icon, Application.get_env(:prenix_components, :close_icon, "mdi-close"))
   end
 end

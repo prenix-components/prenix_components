@@ -54,10 +54,10 @@ defmodule PrenixComponents.Link do
     class =
       combine_class([
         "link",
-        "link-#{assigns.color}",
-        "link-#{assigns.size}",
-        "link-underline-#{assigns.underline}",
-        if(assigns.disabled, do: "link-disabled", else: nil),
+        "link--#{assigns.color}",
+        "link--#{assigns.size}",
+        "link--underline-#{assigns.underline}",
+        if(assigns.disabled, do: "link--disabled", else: nil),
         assigns.class
       ])
 

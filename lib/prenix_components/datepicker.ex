@@ -2,6 +2,7 @@ defmodule PrenixComponents.Datepicker do
   use Phoenix.Component
   import PrenixComponents.Input
   import PrenixComponents.Icon
+  import PrenixComponents.Button
   import PrenixComponents.Helpers
   import Phoenix.LiveViewTest
 
@@ -42,6 +43,7 @@ defmodule PrenixComponents.Datepicker do
       |> assign(:id, id)
       |> assign(:prev_arrow_html, remove_html_comment(prev_arrow_html()))
       |> assign(:next_arrow_html, remove_html_comment(next_arrow_html()))
+      |> assign(:button_html, remove_html_comment(button_html()))
 
     ~H"""
     <.input
@@ -64,6 +66,7 @@ defmodule PrenixComponents.Datepicker do
       data-target={"##{@id}-hidden"}
       data-prev-arrow-html={@prev_arrow_html}
       data-next-arrow-html={@next_arrow_html}
+      data-button-html={@button_html}
       {@rest}
     >
       <:label>
@@ -104,6 +107,14 @@ defmodule PrenixComponents.Datepicker do
 
     rendered_to_string(~H"""
     <.icon name={@name} />
+    """)
+  end
+
+  defp button_html do
+    assigns = %{}
+
+    rendered_to_string(~H"""
+    <.button variant="light" size="sm" radius="lg" color="default" />
     """)
   end
 end

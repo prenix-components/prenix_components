@@ -30,7 +30,6 @@ defmodule PrenixComponents.CheckboxGroup do
       data-checkbox-group
       id={@id}
       aria-describedby={if(@helper_text || @helper != [], do: "#{@id}-helper", else: nil)}
-      data-invalid={@invalid}
     >
       <span class={@label_class}>
         <%= if @label_text do %>
@@ -89,7 +88,8 @@ defmodule PrenixComponents.CheckboxGroup do
     helper_class =
       combine_class([
         "checkbox-group-helper",
-        "#{assigns.helper_class}"
+        "#{assigns.helper_class}",
+        if(assigns.invalid, do: "checkbox-group-helper--invalid", else: nil)
       ])
 
     id =

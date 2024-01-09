@@ -1,40 +1,7 @@
 @layer components {
   .datepicker {
-    --datepicker: hsl(var(--content1));
-    --datepicker-foreground: hsl(var(--content1-foreground));
-    --datepicker-selected: hsl(var(--primary));
-    --datepicker-selected-foreground: hsl(var(--primary-foreground));
-    --datepicker-hover: hsl(var(--default) / 0.4);
-    --datepicker-focused-border: hsl(var(--primary));
-    --datepicker-today-foreground: hsl(var(--primary));
-    --datepicker-day-out-of-bounds: hsl(var(--neutral1-foreground));
-    @apply p-2 rounded-xl w-min;
-    @apply bg-[--datepicker] text-[--datepicker-foreground];
-    box-shadow: var(--shadow-md);
-  }
-
-  .input[data-datepicker] .input-wrapper {
-    @apply flex flex-row items-center justify-start gap-1;
-  }
-
-  .input[data-datepicker] .datepicker-clear-btn {
-    @apply hidden text-neutral2-foreground shrink-0;
-  }
-
-  .input[data-datepicker][data-js-has-value='true']:not([data-disabled])
-    .input-wrapper:hover
-    .datepicker-clear-btn {
-    @apply inline-flex;
-  }
-
-  .input[data-datepicker] .datepicker-calendar-icon {
-    @apply text-neutral1-foreground block shrink-0;
-  }
-
-  .input[data-datepicker][data-js-has-value='true']:not([data-disabled])
-    .input-wrapper:hover
-    .datepicker-calendar-icon {
-    @apply hidden;
+    @apply p-2 rounded-xl w-min shadow-medium;
+    @apply bg-content text-content-foreground;
   }
 
   .datepicker:not(.active) {
@@ -98,7 +65,7 @@
   }
 
   .datepicker .datepicker-cell:not(.disabled):hover {
-    @apply cursor-pointer bg-[--datepicker-hover];
+    @apply cursor-pointer bg-default/40;
   }
 
   .datepicker .datepicker-cell.disabled {
@@ -115,7 +82,7 @@
   }
 
   .datepicker .datepicker-cell.today {
-    @apply text-[--datepicker-today-foreground] font-bold;
+    @apply text-primary font-bold;
   }
 
   .datepicker .dow {
@@ -123,7 +90,7 @@
   }
 
   .datepicker .datepicker-cell.focused:not(.selected) {
-    @apply border-[--datepicker-focused-border];
+    @apply border-primary;
   }
 
   .datepicker .datepicker-footer .datepicker-controls {
@@ -138,12 +105,12 @@
 
   .datepicker .datepicker-cell.selected,
   .datepicker .datepicker-cell.selected:hover {
-    @apply bg-[--datepicker-selected] text-[--datepicker-selected-foreground] font-bold;
+    @apply bg-primary text-primary-foreground font-bold;
   }
 
   .datepicker .datepicker-cell.day.next,
   .datepicker .datepicker-cell.day.prev {
-    @apply text-[--datepicker-day-out-of-bounds];
+    @apply text-neutral1-foreground;
   }
 }
 

@@ -1,30 +1,25 @@
 @layer components {
   .table {
-    --table-th: hsl(var(--neutral2-foreground));
-    --table-empty-state: hsl(var(--neutral1-foreground));
-    --table: hsl(var(--content1));
-    --table-foreground: hsl(var(--content1-foreground));
-    box-shadow: var(--shadow-sm);
-    @apply p-4 flex flex-col relative justify-between gap-4 bg-[--table] text-[--table-foreground];
-    @apply overflow-auto rounded-xl w-full;
+    @apply p-4 flex flex-col relative justify-between gap-4 bg-content text-content-foreground;
+    @apply overflow-auto rounded-xl w-full shadow-medium;
   }
 
-  .table .table-el {
+  .table-el {
     @apply min-w-full h-auto table-auto w-full;
   }
 
-  .table .th {
-    @apply px-3 h-10 text-left align-middle bg-default/40 whitespace-nowrap text-[--table-th];
+  .th {
+    @apply px-3 h-10 text-left align-middle bg-default/40 whitespace-nowrap text-neutral2-foreground;
     @apply first:rounded-l-lg last:rounded-r-lg outline-none text-sm font-semibold;
   }
 
-  .table .td {
+  .td {
     @apply py-2 px-3 relative align-middle whitespace-normal text-sm font-normal [&>*]:relative outline-none;
     @apply before:content-[''] before:absolute before:z-0 before:inset-0 before:opacity-0 before:bg-default/40;
     @apply first:before:rounded-l-lg last:before:rounded-r-lg;
   }
 
-  .table .td-empty-state {
-    @apply align-middle text-center h-20 text-[--table-empty-state];
+  .td--empty-state {
+    @apply align-middle text-center h-20 text-neutral1-foreground;
   }
 }

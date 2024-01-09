@@ -1,34 +1,4 @@
 @layer components {
-  .tooltip-default {
-    --tooltip: hsl(var(--content1));
-    --tooltip-foreground: hsl(var(--content1-foreground));
-  }
-
-  .tooltip-primary {
-    --tooltip: hsl(var(--primary));
-    --tooltip-foreground: hsl(var(--primary-foreground));
-  }
-
-  .tooltip-secondary {
-    --tooltip: hsl(var(--secondary));
-    --tooltip-foreground: hsl(var(--secondary-foreground));
-  }
-
-  .tooltip-success {
-    --tooltip: hsl(var(--success));
-    --tooltip-foreground: hsl(var(--success-foreground));
-  }
-
-  .tooltip-warning {
-    --tooltip: hsl(var(--warning));
-    --tooltip-foreground: hsl(var(--warning-foreground));
-  }
-
-  .tooltip-danger {
-    --tooltip: hsl(var(--danger));
-    --tooltip-foreground: hsl(var(--danger-foreground));
-  }
-
   .tooltip-toggle {
     @apply h-fit w-fit inline-block;
   }
@@ -37,9 +7,38 @@
     @apply inline-flex flex-col items-center justify-center relative;
   }
 
+  .tooltip--default {
+    --tooltip: hsl(var(--content));
+    --tooltip-foreground: hsl(var(--content-foreground));
+  }
+
+  .tooltip--primary {
+    --tooltip: hsl(var(--primary));
+    --tooltip-foreground: hsl(var(--primary-foreground));
+  }
+
+  .tooltip--secondary {
+    --tooltip: hsl(var(--secondary));
+    --tooltip-foreground: hsl(var(--secondary-foreground));
+  }
+
+  .tooltip--success {
+    --tooltip: hsl(var(--success));
+    --tooltip-foreground: hsl(var(--success-foreground));
+  }
+
+  .tooltip--warning {
+    --tooltip: hsl(var(--warning));
+    --tooltip-foreground: hsl(var(--warning-foreground));
+  }
+
+  .tooltip--danger {
+    --tooltip: hsl(var(--danger));
+    --tooltip-foreground: hsl(var(--danger-foreground));
+  }
+
   .tooltip-inner {
-    box-shadow: var(--shadow-md);
-    @apply px-2.5 py-1 text-sm rounded-xl box-border relative z-[1080];
+    @apply px-2.5 py-1 text-sm rounded-xl box-border relative z-[1080] shadow-medium;
     @apply text-[--tooltip-foreground] bg-[--tooltip] subpixel-antialiased;
   }
 
