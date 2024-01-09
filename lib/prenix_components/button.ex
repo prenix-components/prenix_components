@@ -68,7 +68,8 @@ defmodule PrenixComponents.Button do
     },
     loading: %{
       "button" => "button--loading",
-      "button-content" => "button-content--loading"
+      "button-content" => "button-content--loading",
+      "button-spinner-wrapper" => "button-spinner-wrapper--loading"
     },
     icon: %{
       "button" => "button--icon"
@@ -121,7 +122,7 @@ defmodule PrenixComponents.Button do
           <%= render_slot(@inner_block) %>
         </span>
 
-        <span :if={@loading} class={@spinner_wrapper_class}>
+        <span class={@spinner_wrapper_class}>
           <.spinner size="sm" class={@spinner_class} />
         </span>
       </.link>
@@ -138,7 +139,7 @@ defmodule PrenixComponents.Button do
           <%= render_slot(@inner_block) %>
         </span>
 
-        <span :if={@loading} class={@spinner_wrapper_class}>
+        <span class={@spinner_wrapper_class}>
           <.spinner size="sm" class={@spinner_class} />
         </span>
       </button>

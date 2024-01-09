@@ -120,7 +120,11 @@
 
   .button-spinner-wrapper {
     @apply absolute left-0 top-0 bottom-0 right-0;
-    @apply place-content-center grid;
+    @apply place-content-center grid invisible;
+  }
+
+  .button-spinner-wrapper--loading {
+    @apply visible;
   }
 
   .button--disabled,
@@ -142,5 +146,18 @@
 
   .button--icon-lg {
     @apply w-12 h-12 min-w-[3rem];
+  }
+
+  /* Live view support */
+  .phx-submit-loading .button-content {
+    @apply invisible;
+  }
+
+  .phx-submit-loading .button-spinner-wrapper {
+    @apply visible;
+  }
+
+  .phx-submit-loading {
+    @apply opacity-disabled pointer-events-none hover:brightness-100;
   }
 }

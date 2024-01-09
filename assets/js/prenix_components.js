@@ -9,6 +9,7 @@ import { initCheckboxGroup } from './prenix_components/checkbox_group'
 import { initDatepicker } from './prenix_components/datepicker'
 import { initDropdown } from './prenix_components/dropdown'
 import { initInput, autosize } from './prenix_components/input'
+import { initToast } from './prenix_components/toast'
 
 const prenixModules = {
   TomSelect,
@@ -32,6 +33,7 @@ const autoInit = () => {
   initDropdown()
   initInput()
   initTooltip()
+  initToast()
 }
 
 autoInit()

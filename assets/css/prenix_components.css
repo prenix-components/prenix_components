@@ -2,6 +2,7 @@
 @import './prenix_components/variables.css';
 
 @import './prenix_components/accordion.css';
+@import './prenix_components/alert.css';
 @import './prenix_components/autocomplete.css';
 @import './prenix_components/avatar.css';
 @import './prenix_components/badge.css';
@@ -21,5 +22,6 @@
 @import './prenix_components/modal.css';
 @import './prenix_components/spinner.css';
 @import './prenix_components/table.css';
+@import './prenix_components/toast.css';
 @import './prenix_components/tooltip.css';
 @import './prenix_components/typography.css';

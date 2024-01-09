@@ -4,6 +4,7 @@ defmodule PrenixComponents do
       import PrenixComponents.{
         Accordion,
         Accordion.AccordionItem,
+        Alert,
         Autocomplete,
         Avatar,
         Badge,
@@ -21,6 +22,7 @@ defmodule PrenixComponents do
         Modal,
         Spinner,
         Table,
+        Toast,
         Tooltip
       }
     end

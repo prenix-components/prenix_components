@@ -1,0 +1,83 @@
+@layer components {
+  .toast-container {
+    @apply space-y-4 fixed;
+  }
+
+  .toast-container--top-right {
+    @apply top-5 right-5;
+  }
+
+  .toast-container--top-left {
+    @apply top-5 left-5;
+  }
+
+  .toast-container--bottom-right {
+    @apply bottom-5 right-5;
+  }
+
+  .toast-container--bottom-left {
+    @apply bottom-5 left-5;
+  }
+
+  .toast {
+    @apply rounded-lg shadow-medium p-4 flex gap-2 w-full max-w-xs;
+  }
+
+  .toast-body {
+    @apply grow;
+  }
+
+  .toast-close {
+    @apply !text-inherit;
+  }
+
+  .toast--default {
+    --toast: hsl(var(--content));
+    --toast-foreground: hsl(var(--content-foreground));
+    --toast-flat: hsl(var(--content));
+    --toast-flat-foreground: hsl(var(--content-foreground));
+  }
+
+  .toast--primary {
+    --toast: hsl(var(--primary));
+    --toast-foreground: hsl(var(--primary-foreground));
+    --toast-flat: hsl(var(--primary) / 0.2);
+    --toast-flat-foreground: hsl(var(--foreground));
+  }
+
+  .toast--secondary {
+    --toast: hsl(var(--secondary));
+    --toast-foreground: hsl(var(--secondary-foreground));
+    --toast-flat: hsl(var(--secondary) / 0.2);
+    --toast-flat-foreground: hsl(var(--foreground));
+  }
+
+  .toast--success {
+    --toast: hsl(var(--success));
+    --toast-foreground: hsl(var(--success-foreground));
+    --toast-flat: hsl(var(--success) / 0.2);
+    --toast-flat-foreground: hsl(var(--foreground));
+  }
+
+  .toast--warning {
+    --toast: hsl(var(--warning));
+    --toast-foreground: hsl(var(--warning-foreground));
+    --toast-flat: hsl(var(--warning) / 0.2);
+    --toast-flat-foreground: hsl(var(--foreground));
+  }
+
+  .toast--danger {
+    --toast: hsl(var(--danger));
+    --toast-foreground: hsl(var(--danger-foreground));
+    --toast-flat: hsl(var(--danger) / 0.2);
+    --toast-flat-foreground: hsl(var(--foreground));
+  }
+
+  .toast--solid {
+    @apply bg-[--toast] text-[--toast-foreground];
+  }
+
+  .toast--flat {
+    @apply bg-[--toast-flat] text-[--toast-flat-foreground];
+  }
+}
