@@ -335,8 +335,7 @@ defmodule PrenixComponents.Autocomplete do
         "autocomplete" => "autocomplete--outside-left",
         "autocomplete-wrapper" => "autocomplete-wrapper--outside-left",
         "autocomplete-label" =>
-          "autocomplete-label--outside-left autocomplete-label--outside-left-#{assigns.size}",
-        "autocomplete-wrapper" => "autocomplete-wrapper--outside-left"
+          "autocomplete-label--outside-left autocomplete-label--outside-left-#{assigns.size}"
       },
       single: %{
         "autocomplete-wrapper" => "autocomplete-wrapper--single"

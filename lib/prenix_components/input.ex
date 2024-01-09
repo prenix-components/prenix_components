@@ -327,8 +327,7 @@ defmodule PrenixComponents.Input do
       "outside-left": %{
         "input" => "input--outside-left",
         "input-wrapper" => "input-wrapper--outside-left",
-        "input-label" => "input-label--outside-left input-label--outside-left-#{assigns.size}",
-        "input-wrapper" => "input-wrapper--outside-left"
+        "input-label" => "input-label--outside-left input-label--outside-left-#{assigns.size}"
       },
       textarea: %{
         "input-wrapper" => "input-wrapper--textarea input-wrapper--textarea-#{assigns.size}",

@@ -34,11 +34,6 @@ defmodule PrenixComponents.Modal do
     }
   }
 
-  @scroll_behaviors [
-    "outside",
-    "inside"
-  ]
-
   @fullscreens [
     nil,
     "always",
