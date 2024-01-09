@@ -52,7 +52,7 @@ defmodule PrenixComponents.Checkbox do
     }
   }
 
-  attr :name, :string, required: true
+  attr :name, :any
   attr :size, :string, default: "md", values: ~w(sm md lg)
 
   attr :color, :string,
@@ -60,7 +60,7 @@ defmodule PrenixComponents.Checkbox do
     values: ~w(default primary secondary success warning danger)
 
   attr :value, :any, required: true
-  attr :id, :string
+  attr :id, :string, default: nil
   attr :checked, :boolean, default: false
   attr :label_text, :string, default: nil
   attr :helper_text, :string, default: nil
