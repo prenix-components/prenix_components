@@ -21,7 +21,10 @@ const initToast = () => {
     const autoDismissDuration = $baseEl.dataset.autoDismissDuration
 
     const container = document.querySelector(`.toast-container--${placement}`)
-    container.appendChild($baseEl)
+
+    if (!$baseEl.closest('.toast-container')) {
+      container.appendChild($baseEl)
+    }
 
     if (autoDismiss === '') {
       setTimeout(() => {

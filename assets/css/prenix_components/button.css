@@ -149,15 +149,15 @@
   }
 
   /* Live view support */
-  .phx-submit-loading .button-content {
+  .button.phx-submit-loading .button-content {
     @apply invisible;
   }
 
-  .phx-submit-loading .button-spinner-wrapper {
+  .button.phx-submit-loading .button-spinner-wrapper {
     @apply visible;
   }
 
-  .phx-submit-loading {
+  .button.phx-submit-loading {
     @apply opacity-disabled pointer-events-none hover:brightness-100;
   }
 }
