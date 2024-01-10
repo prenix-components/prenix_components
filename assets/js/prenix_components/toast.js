@@ -1,4 +1,4 @@
-import { hide } from './utils'
+import { hide, show } from './utils'
 
 const initToast = () => {
   const placements = ['top-right', 'top-left', 'bottom-right', 'bottom-left']
@@ -19,23 +19,48 @@ const initToast = () => {
     const placement = $baseEl.dataset.placement
     const autoDismiss = $baseEl.dataset.autoDismiss
     const autoDismissDuration = $baseEl.dataset.autoDismissDuration
-
     const container = document.querySelector(`.toast-container--${placement}`)
 
     if (!$baseEl.closest('.toast-container')) {
-      container.appendChild($baseEl)
+      const $clone = $baseEl.cloneNode(true)
+      $baseEl.remove()
+      container.appendChild($clone)
     }
 
     if (autoDismiss === '') {
       setTimeout(() => {
-        hide($baseEl)
+        hide($clone)
       }, parseInt(autoDismissDuration))
     }
 
     if ($closeButton) {
       $closeButton.addEventListener('click', () => {
-        hide($baseEl)
+        hide($clone)
       })
+    }
+  })
+
+  window.addEventListener('phx:hide_toast', (e) => {
+    const selector = e.detail.selector
+
+    if (selector) {
+      const $el = document.querySelector(selector)
+
+      if ($el) {
+        hide($el)
+      }
+    }
+  })
+
+  window.addEventListener('phx:show_toast', (e) => {
+    const selector = e.detail.selector
+
+    if (selector) {
+      const $el = document.querySelector(selector)
+
+      if ($el) {
+        show($el)
+      }
     }
   })
 }

@@ -63,10 +63,19 @@ const hide = ($el, delay = 200) => {
   }, delay)
 }
 
+const show = ($el, delay = 200) => {
+  $el.classList.remove('opacity-0')
+
+  setTimeout(() => {
+    $el.classList.remove('hidden')
+  }, delay)
+}
+
 export {
   setHasValue,
   randomString,
   getNavigatorLanguage,
   getDateFormatPattern,
   hide,
+  show,
 }
