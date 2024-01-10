@@ -70,6 +70,8 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
   let tagItemTemplate = $wrapper.dataset.tagItemTemplate
   tagItemTemplate = tagItemTemplate
 
+  const checkmarkIconHtml = $wrapper.dataset.checkmarkIconHtml
+
   return {
     ...opts,
     plugins,
@@ -150,9 +152,9 @@ const tomSelectOptions = ({ type, allowBlank, $originalInput, $wrapper }) => {
         const label = $option ? $option.text : data.text
 
         if ($option && $option.dataset.template) {
-          return `<div class="autocomplete-option"><div class="autocomplete-option-label">${$option.dataset.template}</div></div>`
+          return `<div class="autocomplete-option"><div class="autocomplete-option-label">${$option.dataset.template}</div>${checkmarkIconHtml}</div>`
         } else {
-          return `<div class="autocomplete-option"><div class="autocomplete-option-label">${label}</div></div>`
+          return `<div class="autocomplete-option"><div class="autocomplete-option-label">${label}</div>${checkmarkIconHtml}</div>`
         }
       },
       item: (data, _escape) => {

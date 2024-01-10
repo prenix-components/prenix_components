@@ -42,6 +42,7 @@ defmodule PrenixComponents.Autocomplete do
       data-autocomplete
       data-tag-item-template={@tag_item_template}
       data-remove-button-html={@remove_button_html}
+      data-checkmark-icon-html={@checkmark_icon_html}
     >
       <div class={@wrapper_class}>
         <%= render_label(assigns) %>
@@ -71,6 +72,7 @@ defmodule PrenixComponents.Autocomplete do
       data-autocomplete
       data-tag-item-template={@tag_item_template}
       data-remove-button-html={@remove_button_html}
+      data-checkmark-icon-html={@checkmark_icon_html}
     >
       <%= render_label(assigns) %>
 
@@ -100,6 +102,7 @@ defmodule PrenixComponents.Autocomplete do
       data-autocomplete
       data-tag-item-template={@tag_item_template}
       data-remove-button-html={@remove_button_html}
+      data-checkmark-icon-html={@checkmark_icon_html}
     >
       <%= render_label(assigns) %>
 
@@ -203,6 +206,7 @@ defmodule PrenixComponents.Autocomplete do
     )
     |> assign(:tag_item_template, remove_html_comment(tag_item_template(chip_size)))
     |> assign(:remove_button_html, remove_html_comment(remove_button_html()))
+    |> assign(:checkmark_icon_html, remove_html_comment(checkmark_icon_html()))
   end
 
   defp render_label(assigns) do
@@ -377,6 +381,16 @@ defmodule PrenixComponents.Autocomplete do
     <button title="Remove" class="autocomplete-remove-btn" type="button">
       <.icon name={@name} size="sm" />
     </button>
+    """)
+  end
+
+  defp checkmark_icon_html do
+    assigns = %{
+      name: Application.get_env(:prenix_components, :checkmark_icon, "mdi-check")
+    }
+
+    rendered_to_string(~H"""
+    <.icon name={@name} size="sm" class="autocomplete-option-checkmark-icon" />
     """)
   end
 end

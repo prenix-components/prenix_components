@@ -11,6 +11,7 @@ import { initDatepicker } from './prenix_components/datepicker'
 import { initDropdown } from './prenix_components/dropdown'
 import { initInput, autosize } from './prenix_components/input'
 import { initToast } from './prenix_components/toast'
+import { initThemeSwitcher } from './prenix_components/theme_switcher'
 
 const prenixModules = {
   TomSelect,
@@ -36,6 +37,7 @@ const autoInit = () => {
   initInput()
   initTooltip()
   initToast()
+  initThemeSwitcher()
 }
 
 autoInit()

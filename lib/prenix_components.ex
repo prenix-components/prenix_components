@@ -22,6 +22,7 @@ defmodule PrenixComponents do
         Modal,
         Spinner,
         Table,
+        ThemeSwitcher,
         Toast,
         Tooltip
       }

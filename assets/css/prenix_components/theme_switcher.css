@@ -1,0 +1,25 @@
+@layer components {
+  html .theme-switcher-icon-light {
+    @apply hidden;
+  }
+
+  html.dark .theme-switcher-icon-dark {
+    @apply hidden;
+  }
+
+  html.dark .theme-switcher-icon-light {
+    @apply inline-flex;
+  }
+
+  html .theme-switcher-select-dark .icon {
+    @apply hidden;
+  }
+
+  html.dark .theme-switcher-select-dark .icon {
+    @apply block;
+  }
+
+  html.dark .theme-switcher-select-light .icon {
+    @apply hidden;
+  }
+}
