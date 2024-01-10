@@ -80,7 +80,7 @@ defmodule PrenixComponents.Toast do
           radius="full"
           variant="light"
           class={@close_button_class}
-          data-bs-dismiss="toast"
+          data-dismiss
           aria-label="Close"
         >
           <.icon name={@close_icon} />

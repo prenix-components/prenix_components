@@ -6,7 +6,7 @@ defmodule PrenixComponents.Alert do
 
   @classes %{
     base: %{
-      "alert" => "alert alert-dismissable",
+      "alert" => "alert",
       "alert-body" => "alert-body",
       "alert-close" => "alert-close"
     },
@@ -52,7 +52,7 @@ defmodule PrenixComponents.Alert do
     assigns = set_assigns(assigns)
 
     ~H"""
-    <div class={@class} role="alert">
+    <div class={@class} role="alert" data-alert>
       <div class={@body_class}>
         <%= render_slot(@inner_block) %>
       </div>
@@ -64,7 +64,7 @@ defmodule PrenixComponents.Alert do
           radius="full"
           variant="light"
           class={@close_button_class}
-          data-bs-dismiss="alert"
+          data-dismiss="alert"
           aria-label="Close"
         >
           <.icon name={@close_icon} />

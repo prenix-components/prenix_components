@@ -1,37 +1,37 @@
-const initToast = () => {
-  ;['top-right', 'top-left', 'bottom-right', 'bottom-left'].forEach(
-    (placement) => {
-      const hasContainer = document.querySelector(
-        `.toast-container--${placement}`,
-      )
+import { hide } from './utils'
 
-      if (!hasContainer) {
-        const div = document.createElement('div')
-        div.classList.add('toast-container', `toast-container--${placement}`)
-        document.body.appendChild(div)
-      }
-    },
-  )
+const initToast = () => {
+  const placements = ['top-right', 'top-left', 'bottom-right', 'bottom-left']
+  placements.forEach((placement) => {
+    const hasContainer = document.querySelector(
+      `.toast-container--${placement}`,
+    )
+
+    if (!hasContainer) {
+      const div = document.createElement('div')
+      div.classList.add('toast-container', `toast-container--${placement}`)
+      document.body.appendChild(div)
+    }
+  })
 
   document.querySelectorAll('[data-toast]').forEach(($baseEl) => {
-    const $closeButton = $baseEl.querySelector('[data-bs-dismiss="toast"]')
+    const $closeButton = $baseEl.querySelector('[data-dismiss]')
     const placement = $baseEl.dataset.placement
     const autoDismiss = $baseEl.dataset.autoDismiss
     const autoDismissDuration = $baseEl.dataset.autoDismissDuration
-    console.log('placement', placement)
 
     const container = document.querySelector(`.toast-container--${placement}`)
     container.appendChild($baseEl)
 
     if (autoDismiss === '') {
       setTimeout(() => {
-        $baseEl.remove()
+        hide($baseEl)
       }, parseInt(autoDismissDuration))
     }
 
     if ($closeButton) {
       $closeButton.addEventListener('click', () => {
-        $baseEl.remove()
+        hide($baseEl)
       })
     }
   })

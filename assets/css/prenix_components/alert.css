@@ -1,6 +1,7 @@
 @layer components {
   .alert {
     @apply rounded-lg shadow-medium p-4 flex gap-2 w-full;
+    @apply transition-opacity ease-in duration-200;
   }
 
   .alert-body {
@@ -8,7 +9,7 @@
   }
 
   .alert-close {
-    @apply !text-inherit;
+    @apply !text-inherit -mt-2 -mr-2;
   }
 
   .alert--default {

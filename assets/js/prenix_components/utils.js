@@ -55,4 +55,18 @@ const getDateFormatPattern = (locale) => {
     .join('')
 }
 
-export { setHasValue, randomString, getNavigatorLanguage, getDateFormatPattern }
+const hide = ($el, delay = 200) => {
+  $el.classList.add('opacity-0')
+
+  setTimeout(() => {
+    $el.remove()
+  }, delay)
+}
+
+export {
+  setHasValue,
+  randomString,
+  getNavigatorLanguage,
+  getDateFormatPattern,
+  hide,
+}
