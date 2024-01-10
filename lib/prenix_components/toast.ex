@@ -62,12 +62,12 @@ defmodule PrenixComponents.Toast do
     ~H"""
     <div
       class={@class}
-      {@rest}
       role="alert"
       data-toast
       data-auto-dismiss={@auto_dismiss}
       data-auto-dismiss-duration={@auto_dismiss_duration}
       data-placement={@placement}
+      {@rest}
     >
       <div class={@body_class}>
         <%= render_slot(@inner_block) %>

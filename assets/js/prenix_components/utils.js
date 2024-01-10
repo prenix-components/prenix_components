@@ -59,7 +59,7 @@ const hide = ($el, delay = 200) => {
   $el.classList.add('opacity-0')
 
   setTimeout(() => {
-    $el.remove()
+    $el.classList.add('hidden')
   }, delay)
 }
 

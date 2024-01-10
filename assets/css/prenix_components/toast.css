@@ -1,6 +1,6 @@
 @layer components {
   .toast-container {
-    @apply space-y-4 fixed;
+    @apply space-y-4 fixed z-[1090];
   }
 
   .toast-container--top-right {
@@ -20,7 +20,7 @@
   }
 
   .toast {
-    @apply rounded-lg shadow-medium p-4 flex gap-2 w-full max-w-xs;
+    @apply rounded-lg shadow-medium p-4 flex gap-2 w-80 sm:w-96;
     @apply transition-opacity ease-in duration-200;
   }
 
