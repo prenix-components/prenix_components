@@ -20,22 +20,27 @@ const initToast = () => {
     const autoDismiss = $baseEl.dataset.autoDismiss
     const autoDismissDuration = $baseEl.dataset.autoDismissDuration
     const container = document.querySelector(`.toast-container--${placement}`)
+    const $clone = $baseEl.cloneNode(true)
+    let shouldAppend = !$baseEl.closest('.toast-container')
 
-    if (!$baseEl.closest('.toast-container')) {
-      const $clone = $baseEl.cloneNode(true)
+    if (shouldAppend) {
       $baseEl.remove()
       container.appendChild($clone)
     }
 
     if (autoDismiss === '') {
+      const $el = shouldAppend ? $clone : $baseEl
       setTimeout(() => {
-        hide($clone)
+        hide($el)
       }, parseInt(autoDismissDuration))
     }
 
     if ($closeButton) {
-      $closeButton.addEventListener('click', () => {
-        hide($clone)
+      const $el = shouldAppend ? $clone : $baseEl
+      const $elCloseButton = $el.querySelector('[data-dismiss]')
+
+      $elCloseButton.addEventListener('click', () => {
+        hide($el)
       })
     }
   })
