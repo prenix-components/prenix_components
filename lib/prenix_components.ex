@@ -13,6 +13,7 @@ defmodule PrenixComponents do
         CheckboxGroup,
         Checkbox,
         Chip,
+        Collapse,
         Datepicker,
         Divider,
         Dropdown,

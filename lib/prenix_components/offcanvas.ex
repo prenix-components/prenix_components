@@ -25,7 +25,6 @@ defmodule PrenixComponents.Offcanvas do
   }
 
   attr :id, :string, required: true
-  attr :name, :string, default: nil
   attr :class, :string, default: nil
   attr :body_class, :string, default: nil
   attr :close_button_class, :string, default: nil
