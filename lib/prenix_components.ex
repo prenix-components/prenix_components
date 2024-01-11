@@ -20,6 +20,7 @@ defmodule PrenixComponents do
         Input,
         Link,
         Modal,
+        Offcanvas,
         Spinner,
         Table,
         ThemeSwitcher,

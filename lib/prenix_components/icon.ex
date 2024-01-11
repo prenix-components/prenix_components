@@ -38,7 +38,7 @@ defmodule PrenixComponents.Icon do
     }
   }
 
-  attr :name, :string, default: nil, doc: "Tabler icon name"
+  attr :name, :string, default: nil
   attr :class, :string, default: nil
   attr :size, :string, default: "md", values: ["sm", "md", "lg", ""]
 
@@ -48,7 +48,7 @@ defmodule PrenixComponents.Icon do
 
   attr :rest, :global
 
-  slot :inner_block, doc: "Custom icon"
+  slot :inner_block
 
   def icon(assigns) do
     assigns = set_assigns(assigns)

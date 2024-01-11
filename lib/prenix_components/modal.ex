@@ -81,6 +81,7 @@ defmodule PrenixComponents.Modal do
             variant="light"
             class={@close_button_class}
             data-bs-dismiss="modal"
+            aria-label="Close"
           >
             <.icon name={@close_icon} />
           </.button>

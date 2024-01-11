@@ -21,11 +21,6 @@ const currentTheme = () => {
 }
 
 const initThemeSwitcher = () => {
-  console.log(
-    "localStorage.getItem('color-theme')",
-    localStorage.getItem('color-theme'),
-  )
-
   // On page load or when changing themes, best to add inline in `head` to avoid FOUC
   if (currentTheme() === 'dark') {
     setDarkTheme()
@@ -39,7 +34,6 @@ const initThemeSwitcher = () => {
     $toggles.forEach(($t) => {
       $t.addEventListener('click', () => {
         const theme = $t.dataset.themeSwitcherToggle
-        console.log({ theme })
 
         if (theme === 'dark') {
           setDarkTheme()

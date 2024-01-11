@@ -52,7 +52,7 @@
 
   .autocomplete-wrapper {
     @apply relative w-full inline-flex tap-highlight-transparent;
-    @apply outline-none shadow-small shadow-small;
+    @apply outline-none shadow-small;
     @apply flex-col items-start justify-center gap-0 cursor-text;
     @apply transition-colors motion-reduce:transition-none;
     @apply border-2 border-default/50;

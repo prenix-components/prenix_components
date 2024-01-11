@@ -45,6 +45,10 @@
     @apply inline-block;
   }
 
+  .dropdown-toggle {
+    @apply h-fit w-fit inline-block;
+  }
+
   .dropdown-menu {
     @apply hidden absolute min-w-[200px] z-[1070];
   }

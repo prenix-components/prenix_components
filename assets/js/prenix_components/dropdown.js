@@ -39,7 +39,13 @@ const initDropdown = () => {
   document.querySelectorAll('.dropdown-item').forEach(($di) => {
     $di.addEventListener('mouseover', (e) => {
       e.stopPropagation()
+      $di.focus()
       $di.dataset.hover = true
+    })
+
+    $di.addEventListener('blur', (e) => {
+      e.stopPropagation()
+      $di.dataset.hover = false
     })
 
     $di.addEventListener('mouseout', (e) => {
