@@ -51,4 +51,4 @@ const initInput = () => {
   })
 }
 
-export { initInput, autosize }
+export { initInput }

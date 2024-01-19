@@ -1,0 +1,156 @@
+@layer components {
+  .select {
+    @apply w-full;
+  }
+
+  .select-wrapper--sm {
+    @apply py-2 px-3 min-h-[2rem] rounded-[8px];
+  }
+
+  .select-wrapper--md {
+    @apply py-3 px-3 min-h-[2.5rem] rounded-[10px];
+  }
+
+  .select-wrapper--lg {
+    @apply py-3.5 px-3 min-h-[3rem] rounded-[12px];
+  }
+
+  .select--sm {
+    --select-label-translate: calc(calc(50% + 0.75rem / 2 - 8px) * -1);
+    @apply text-sm;
+  }
+
+  .select--md {
+    --select-label-translate: calc(calc(50% + 0.875rem / 2 - 10px) * -1);
+    @apply text-sm;
+  }
+
+  .select--lg {
+    --select-label-translate: calc(calc(50% + 0.875rem / 2 - 8px) * -1);
+    @apply text-base;
+  }
+
+  .select-wrapper {
+    @apply relative w-full inline-flex tap-highlight-transparent;
+    @apply outline-none shadow-small;
+    @apply flex-col items-start justify-center gap-0 cursor-text;
+    @apply transition-colors motion-reduce:transition-none;
+    @apply border-2 border-default/50;
+    @apply hover:border-default;
+  }
+
+  .select-content {
+    @apply flex items-center justify-center;
+  }
+
+  .select[data-js-focus='true'] .select-wrapper {
+    @apply border-foreground;
+  }
+
+  .select-el-wrapper {
+    @apply inline-flex w-full items-center h-full box-border relative gap-1.5;
+  }
+
+  .select-label {
+    @apply subpixel-antialiased text-neutral2-foreground;
+    @apply pe-2 max-w-full inline-flex items-center gap-1;
+  }
+
+  .select[data-js-focus='true'] .select-label {
+    @apply text-foreground;
+  }
+
+  .select-el {
+    @apply w-full font-normal bg-transparent outline-none placeholder:text-neutral1-foreground;
+    @apply text-foreground focus-visible:outline-none;
+  }
+
+  .select-helper {
+    @apply p-1 text-xs text-neutral2-foreground;
+    @apply flex items-center gap-1;
+  }
+
+  .select-wrapper--invalid {
+    @apply border-danger hover:border-danger;
+  }
+
+  .select[data-js-focus='true'] .select-wrapper--invalid {
+    @apply border-danger;
+  }
+
+  .select[data-js-focus='true'] .select-label--invalid {
+    @apply text-danger;
+  }
+
+  .select-label--invalid {
+    @apply text-danger;
+  }
+
+  .select-helper--invalid {
+    @apply text-danger;
+  }
+
+  .select-wrapper--disabled {
+    @apply pointer-events-none opacity-disabled;
+  }
+
+  .select-label--inside {
+    @apply absolute justify-center text-ellipsis overflow-hidden pointer-events-none;
+    @apply origin-top-left will-change-auto !duration-200 !ease-out;
+    @apply motion-reduce:transition-none transition-[transform,color,left,opacity];
+  }
+
+  .select[data-js-focus='true'] .select-label--inside,
+  .select[data-js-has-placeholder='true'] .select-label--inside,
+  .select[data-js-has-value='true'] .select-label--inside {
+    @apply scale-[0.85] translate-y-[--select-label-translate];
+  }
+
+  .select[data-js-has-label='true'] .select-el-wrapper--inside {
+    @apply items-end;
+  }
+
+  .select-wrapper--inside-sm {
+    @apply py-1.5 h-12;
+  }
+
+  .select-wrapper--inside-md {
+    @apply py-2 h-14;
+  }
+
+  .select-wrapper--inside-lg {
+    @apply py-2.5 h-16;
+  }
+
+  .select--outside {
+    @apply flex flex-col;
+  }
+
+  .select-label--outside {
+    @apply mb-1;
+  }
+
+  .select--outside-left {
+    @apply flex flex-row gap-2;
+  }
+
+  .select-label--outside-left {
+    @apply shrink self-start;
+  }
+
+  .select-label--outside-left-sm {
+    @apply mt-3;
+  }
+
+  .select-label--outside-left-md {
+    @apply mt-3.5;
+  }
+
+  .select-label--outside-left-lg {
+    @apply mt-4;
+  }
+
+  .select-wrapper--outside-left {
+    @apply grow;
+  }
+}

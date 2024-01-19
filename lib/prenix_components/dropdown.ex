@@ -30,7 +30,7 @@ defmodule PrenixComponents.Dropdown do
   attr :auto_close, :string, default: "outside", values: ~w(true inside outside false)
   attr :placement, :string, default: "dropdown", values: Map.keys(@placements)
   attr :offset, :string, default: nil
-  slot :toggle, required: true
+  slot :toggle
   slot :inner_block
 
   def dropdown(%{submenu: true} = assigns) do

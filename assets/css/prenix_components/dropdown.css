@@ -111,7 +111,7 @@
   }
 
   .dropdown--submenu .dropdown-toggle {
-    @apply block;
+    @apply block w-full;
   }
 
   .dropdown-submenu-content {

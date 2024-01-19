@@ -45,4 +45,4 @@ const initThemeSwitcher = () => {
   })
 }
 
-export { initThemeSwitcher }
+export { initThemeSwitcher, setDarkTheme, setLightTheme, currentTheme }
