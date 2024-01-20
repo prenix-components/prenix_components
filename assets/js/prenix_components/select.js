@@ -1,5 +1,45 @@
-import { setHasValue, debounce } from './utils'
+import { setHasValue } from './utils'
 import bootstrap from '../../../vendors/bootstrap/bootstrap.min'
+
+let query = ''
+let typingTimer //timer identifier
+const doneTypingInterval = 500 //time in ms
+
+const doneTyping = () => {
+  if (query.length > 0) {
+    const $dropdownMenu = document.querySelector(
+      '[data-select] .dropdown-menu.show',
+    )
+
+    if ($dropdownMenu) {
+      const $options = $dropdownMenu.querySelectorAll('[data-select-option]')
+
+      const found = Array.from($options).find(($o) =>
+        $o.innerText.toLowerCase().startsWith(query),
+      )
+
+      if (found) {
+        found.focus()
+      }
+    }
+
+    setTimeout(() => {
+      query = ''
+    }, 500)
+  }
+}
+
+const keyUp = (e) => {
+  const key = e.key.toLowerCase()
+
+  const re = new RegExp(/[a-zA-Z0-9]/g)
+
+  if (key.length === 1 && key.match(re)) {
+    query = query += key
+  }
+
+  typingTimer = setTimeout(doneTyping, doneTypingInterval)
+}
 
 const initSelect = () => {
   document.querySelectorAll('[data-select]').forEach(($baseEl) => {
@@ -7,16 +47,19 @@ const initSelect = () => {
     const $toggle = $baseEl.querySelector('[data-bs-toggle]')
     const $input = $baseEl.querySelector('[data-select-el]')
     const $value = $baseEl.querySelector('[data-select-value')
-    const width = $input.offsetWidth
+    const $selectWrapper = $baseEl.querySelector('.select-wrapper')
     const dropdownInstance = bootstrap.Dropdown.getInstance($toggle)
     const $dropdown = $baseEl.querySelector('.dropdown-menu')
+    const $option = $baseEl.querySelectorAll('[data-select-option]')
+
+    const computedStyle = window.getComputedStyle($selectWrapper)
+    const paddingX =
+      parseFloat(computedStyle.paddingLeft) +
+      parseFloat(computedStyle.paddingRight)
+    const width = $selectWrapper.offsetWidth - paddingX
+
     $dropdown.style.width = `${width}px`
-    // $dropdown.style
-    console.log('dropdownInstance', dropdownInstance)
 
-    // console.log('dropdownInstance')
-
-    // console.log({ $select })
     if ($input.placeholder && $input.placeholder.length > 0) {
       $baseEl.dataset.jsHasPlaceholder = true
     }
@@ -30,70 +73,65 @@ const initSelect = () => {
       }
     }
 
-    setHasValue({ value: $input.value, $wrapper: $baseEl })
-
-    // $select.addEventListener('focus', () => {
-    //   $baseEl.dataset.jsFocus = true
-    // })
-
-    // $select.addEventListener('blur', () => {
-    //   $baseEl.dataset.jsFocus = false
-    // })
-
-    // $select.addEventListener('change', (e) => {
-    //   setHasValue({ value: e.target.value, $wrapper: $baseEl })
-    // })
-
-    const $selectWrapper = $baseEl.querySelector('.select-wrapper')
-
-    $selectWrapper.addEventListener('click', () => {
-      console.log('wrapper clicked')
-      // if ()
+    const handleDropdown = (e) => {
       if (!dropdownInstance._isShown()) {
         setTimeout(() => {
           dropdownInstance.show()
-        }, 100)
+        }, 150)
       }
-    })
+    }
 
-    $selectWrapper.addEventListener('focus', () => {
-      console.log('focus')
+    setHasValue({ value: $input.value, $wrapper: $baseEl })
+
+    $selectWrapper.addEventListener('click', handleDropdown)
+    $selectWrapper.addEventListener('focus', handleDropdown)
+
+    dropdownInstance._parent.addEventListener('show.bs.dropdown', (e) => {
+      window.addEventListener('keyup', keyUp)
 
       $baseEl.dataset.jsFocus = true
-      // $selectWrapper.click()
-    })
 
-    $selectWrapper.addEventListener('blur', () => {
-      console.log('focus')
+      const value = $value.value
 
-      $baseEl.dataset.jsFocus = false
-      // $selectWrapper.click()
-    })
+      const selectedDropdownItem = $baseEl.querySelector(
+        `[data-select-option][data-value="${value}"]`,
+      )
 
-    dropdownInstance._parent.addEventListener('show.bs.dropdown', async (e) => {
-      $baseEl.dataset.jsFocus = true
-      // dropdownInstance.focus()
       setTimeout(() => {
-        // dropdownInstance._menu.focus()
-        $baseEl.querySelector('.dropdown-item').focus()
-        // $toggle.focus()
-        // $toggleBtn.click()
-      }, 100)
-      // dropdownInstance._parent.focus()
-      // dropdownInstance._parent.focus()
+        if (selectedDropdownItem) {
+          selectedDropdownItem.focus()
+        } else {
+          $baseEl.querySelector('.dropdown-item').focus()
+        }
+      })
     })
 
     dropdownInstance._parent.addEventListener('hide.bs.dropdown', (e) => {
+      window.removeEventListener('keyup', keyUp)
+
       $baseEl.dataset.jsFocus = false
     })
-  })
 
-  const onKeyDown = (x, y, z) => {
-    console.log({ x, y, z })
-  }
+    $option.forEach(($o) => {
+      $o.addEventListener('click', () => {
+        const value = $o.dataset.value
+        const name = $o.dataset.name
+        $input.value = name
+        $value.value = value
 
-  window.addEventListener('keyup', (e) => {
-    console.log({ e })
+        setHasValue({ value: name, $wrapper: $baseEl })
+
+        setTimeout(() => {
+          $o.closest('.dropdown-content')
+            .querySelectorAll('[data-select-option]')
+            .forEach(($o2) => {
+              $o2.dataset.selected = false
+            })
+
+          $o.dataset.selected = true
+        })
+      })
+    })
   })
 }
 

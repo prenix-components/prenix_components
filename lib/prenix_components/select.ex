@@ -118,12 +118,12 @@ defmodule PrenixComponents.Select do
     )
     |> assign(id: id)
     |> assign(
-      :calendar_icon,
-      Application.get_env(:prenix_components, :calendar_icon, "mdi-calendar-today")
+      :chevron_down_icon,
+      Application.get_env(:prenix_components, :chevron_down_icon, "mdi-expand-more")
     )
     |> assign(
-      :close_circle_icon,
-      Application.get_env(:prenix_components, :close_circle_icon, "mdi-cancel")
+      :checkmark_icon,
+      Application.get_env(:prenix_components, :checkmark_icon, "mdi-check")
     )
     |> assign(:value_name, if(selected_option, do: selected_option.name, else: ""))
   end
@@ -182,9 +182,15 @@ defmodule PrenixComponents.Select do
           :for={option <- @options}
           data-value={option.value}
           data-name={option.name}
+          data-select-option
           disabled={Map.get(option, :disabled)}
+          data-selected={if(option.value == @value, do: "true", else: "false")}
         >
           <%= option.name %>
+
+          <:end_content>
+            <.icon name={@checkmark_icon} class="select-checkmark-icon" />
+          </:end_content>
         </.dropdown_item>
       </.dropdown>
 
@@ -195,6 +201,7 @@ defmodule PrenixComponents.Select do
         class={@select_class}
         data-select-el
         placeholder={@placeholder}
+        tabindex="-1"
       />
       <input type="hidden" name={@name} value={@value} data-select-value />
 
@@ -213,6 +220,8 @@ defmodule PrenixComponents.Select do
       <%= render_label(assigns) %>
 
       <%= render_select(assigns) %>
+
+      <.icon name={@chevron_down_icon} class="select-dropdown-icon" />
     </div>
 
     <%= render_helper(assigns) %>
@@ -225,6 +234,7 @@ defmodule PrenixComponents.Select do
 
     <div class={@wrapper_class} tabindex="0">
       <%= render_select(assigns) %>
+      <.icon name={@chevron_down_icon} class="select-dropdown-icon" />
     </div>
 
     <%= render_helper(assigns) %>
@@ -238,6 +248,7 @@ defmodule PrenixComponents.Select do
     <div class="grow w-full">
       <div class={@wrapper_class} tabindex="0">
         <%= render_select(assigns) %>
+        <.icon name={@chevron_down_icon} class="select-dropdown-icon" />
       </div>
 
       <%= render_helper(assigns) %>
